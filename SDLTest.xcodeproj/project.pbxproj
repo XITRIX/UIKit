@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C07981C2993E916004E8EC8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C07981B2993E916004E8EC8 /* main.cpp */; };
+		7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
+		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
+		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
+		7CEB969B29941C94007483C0 /* main2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main2.cpp */; };
+		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
+		7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798242993F1E4004E8EC8 /* CALayer.cpp */; };
+		7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Utils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,20 @@
 /* Begin PBXFileReference section */
 		7C0798182993E916004E8EC8 /* SDLTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C07981B2993E916004E8EC8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7C0798222993EE53004E8EC8 /* SDLTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDLTest.entitlements; sourceTree = "<group>"; };
+		7C0798242993F1E4004E8EC8 /* CALayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CALayer.cpp; sourceTree = "<group>"; };
+		7C0798252993F1E4004E8EC8 /* CALayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CALayer.hpp; sourceTree = "<group>"; };
+		7C0798282993F25C004E8EC8 /* CGImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGImage.cpp; sourceTree = "<group>"; };
+		7C0798292993F25C004E8EC8 /* CGImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGImage.hpp; sourceTree = "<group>"; };
+		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
+		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
+		7CEB968C2993F799007483C0 /* UIColor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIColor.hpp; sourceTree = "<group>"; };
+		7CEB96922994037B007483C0 /* UIApplication.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIApplication.hpp; sourceTree = "<group>"; };
+		7CEB969329941288007483C0 /* main2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main2.cpp; sourceTree = "<group>"; };
+		7CEB969D29943993007483C0 /* UIApplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplication.cpp; sourceTree = "<group>"; };
+		7CEB96A1299509C5007483C0 /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		7CEB96A2299509C5007483C0 /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +77,71 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7CEB96A0299509B8007483C0 /* Utils */,
+				7CEB969C29943982007483C0 /* UIApplication */,
+				7CEB968A2993F78F007483C0 /* UIColor */,
+				7CEB96862993F5CB007483C0 /* Geometry */,
+				7C0798272993F251004E8EC8 /* CGImage */,
+				7C0798232993F1D4004E8EC8 /* CALayer */,
+				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
 				7C07981B2993E916004E8EC8 /* main.cpp */,
+				7CEB969329941288007483C0 /* main2.cpp */,
 			);
 			path = SDLTest;
+			sourceTree = "<group>";
+		};
+		7C0798232993F1D4004E8EC8 /* CALayer */ = {
+			isa = PBXGroup;
+			children = (
+				7C0798252993F1E4004E8EC8 /* CALayer.hpp */,
+				7C0798242993F1E4004E8EC8 /* CALayer.cpp */,
+			);
+			path = CALayer;
+			sourceTree = "<group>";
+		};
+		7C0798272993F251004E8EC8 /* CGImage */ = {
+			isa = PBXGroup;
+			children = (
+				7C0798292993F25C004E8EC8 /* CGImage.hpp */,
+				7C0798282993F25C004E8EC8 /* CGImage.cpp */,
+			);
+			path = CGImage;
+			sourceTree = "<group>";
+		};
+		7CEB96862993F5CB007483C0 /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				7CEB96882993F5DB007483C0 /* Geometry.hpp */,
+				7CEB96872993F5DB007483C0 /* Geometry.cpp */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		7CEB968A2993F78F007483C0 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				7CEB968C2993F799007483C0 /* UIColor.hpp */,
+				7CEB968B2993F799007483C0 /* UIColor.cpp */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		7CEB969C29943982007483C0 /* UIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				7CEB96922994037B007483C0 /* UIApplication.hpp */,
+				7CEB969D29943993007483C0 /* UIApplication.cpp */,
+			);
+			path = UIApplication;
+			sourceTree = "<group>";
+		};
+		7CEB96A0299509B8007483C0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7CEB96A2299509C5007483C0 /* Utils.hpp */,
+				7CEB96A1299509C5007483C0 /* Utils.cpp */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C07981C2993E916004E8EC8 /* main.cpp in Sources */,
+				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
+				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
+				7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */,
+				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
+				7CEB969B29941C94007483C0 /* main2.cpp in Sources */,
+				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
+				7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,10 +264,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/homebrew/include,
+					SDLTest,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lSDL2";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -228,9 +322,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/homebrew/include,
+					SDLTest,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lSDL2";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -238,6 +338,7 @@
 		7C0798202993E916004E8EC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SDLTest/SDLTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -248,6 +349,7 @@
 		7C0798212993E916004E8EC8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SDLTest/SDLTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
