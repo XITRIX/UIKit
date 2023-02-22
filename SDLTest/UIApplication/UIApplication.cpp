@@ -9,6 +9,6 @@
 
 namespace UIKit {
 
-SDL_Renderer* UIApplication::currentRenderer = nullptr;
+GPU_Target* UIApplication::currentRenderer = nullptr;
 
 }

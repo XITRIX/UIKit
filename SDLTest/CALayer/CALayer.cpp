@@ -7,56 +7,45 @@
 
 #include <CALayer/CALayer.hpp>
 #include <UIApplication/UIApplication.hpp>
+#include <algorithm>
 
 namespace UIKit {
 
 CALayer::CALayer() {
-    updateContents();
 }
 
-void CALayer::render(SDL_Renderer *renderer, Point globalOffset) {
-    auto frame = getFrame().offsetBy(globalOffset);
-    SDL_Rect rect;
-    rect.x = frame.minX();
-    rect.y = frame.minY();
-    rect.w = frame.width();
-    rect.h = frame.height();
+void CALayer::draw(GPU_Target *renderer) {}
 
-    SDL_RenderCopyEx(renderer, contents->pointee, NULL, &rect, 0, NULL, SDL_FLIP_VERTICAL);
+void CALayer::render(GPU_Target* renderer) {
+    auto image = GPU_CreateImage(renderer->w, renderer->h, GPU_FORMAT_RGBA);
+    auto localRenderer = GPU_LoadTarget(image);
+    GPU_SetActiveTarget(localRenderer);
 
-    for (auto layer : sublayers) {
-        layer->render(renderer, frame.origin);
-    }
-}
+    auto parentOriginTransform = NXTransform3D(GPU_GetCurrentMatrix());
+    auto translationToPosition = CATransform3DMakeTranslation(position.x, position.y, zPosition);
+    auto transformAtPositionInParentCoordinates = parentOriginTransform * translationToPosition;
 
-void CALayer::draw(SDL_Renderer *renderer) {
-    // Set renderer color red to draw the square
-    //    SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0x3F);
-    //
-    //    SDL_Rect rect;
-    //    rect.x = 10;
-    //    rect.y = 10;
-    //    rect.w = 30;
-    //    rect.h = 30;
-    //
-    //    // Draw filled square
-    //    SDL_RenderFillRect(renderer, &rect);
-}
+    auto modelViewTransform = transformAtPositionInParentCoordinates * transform;
 
-void CALayer::internalDraw(SDL_Renderer* renderer) {
-    updateContents();
+    modelViewTransform.setAsSDLgpuMatrix();
 
-    SDL_Texture* oldTarget = SDL_GetRenderTarget(renderer);
-
-    SDL_SetRenderTarget(renderer, contents->pointee);
-//    SDL_SetTextureAlphaMod(contents->pointee, opacity * 255);
-    SDL_SetRenderDrawColor(renderer, backgroundColor.color.r, backgroundColor.color.g, backgroundColor.color.b, backgroundColor.color.a);
-
-    SDL_RenderClear(renderer);
+    auto frame = getFrame();
+    GPU_RectangleFilled2(renderer, GPU_MakeRect(frame.minX(), frame.minY(), frame.width(), frame.height()), backgroundColor.color);
 
     draw(renderer);
 
-    SDL_SetRenderTarget(renderer, oldTarget);
+    for (auto sublayer: sublayers) {
+        sublayer->render(localRenderer);
+    }
+
+    parentOriginTransform.setAsSDLgpuMatrix();
+
+    GPU_SetActiveTarget(renderer);
+
+    GPU_Blit(image, nullptr, renderer, 0, 0);
+
+    GPU_FreeTarget(localRenderer);
+    GPU_FreeImage(image);
 }
 
 Rect CALayer::getFrame() {
@@ -89,11 +78,11 @@ void CALayer::insertSublayerAt(ptr<CALayer> layer, int index) {
 }
 
 void CALayer::insertSublayerAbove(ptr<CALayer> layer, ptr<CALayer> sibling) {
-
+    // TODO: Need to implement
 }
 
 void CALayer::insertSublayerBelow(ptr<CALayer> layer, ptr<CALayer> sibling) {
-
+    // TODO: Need to implement
 }
 
 void CALayer::removeFromSuperlayer() {
@@ -101,13 +90,6 @@ void CALayer::removeFromSuperlayer() {
     if (super == nullptr) return;
 
     super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
-}
-
-void CALayer::updateContents() {
-    if (contents == nullptr || bounds.size != contents->size()) {
-        if (bounds.size == Size()) return;
-        contents = std::make_shared<CGImage>(bounds.size);
-    }
 }
 
 }

@@ -8,6 +8,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL_gpu.h>
 #include <memory>
 #include <Geometry/Geometry.hpp>
 
@@ -15,7 +16,7 @@ namespace UIKit {
 
 class CGImage {
 public:
-    SDL_Texture* pointee;
+    GPU_Image* pointee;
 
     CGImage(Size size);
     ~CGImage();

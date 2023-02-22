@@ -8,9 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
+		7C20BD5229A4F08300646CD7 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C429A3D45F00A20694 /* glew.c */; };
+		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
+		7CB7F51E29A3D45F00A20694 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CA29A3D45F00A20694 /* stb_image.c */; };
+		7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7F52729A3D5F400A20694 /* OpenGL.framework */; };
+		7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */; };
+		7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4BA29A3D45F00A20694 /* SDL_gpu_renderer.c */; };
+		7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B929A3D45F00A20694 /* SDL_gpu_matrix.c */; };
+		7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D129A3D45F00A20694 /* renderer_OpenGL_1.c */; };
+		7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D329A3D45F00A20694 /* renderer_GLES_1.c */; };
+		7CB7F54A29A3D89C00A20694 /* renderer_OpenGL_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B729A3D45F00A20694 /* renderer_OpenGL_3.c */; };
+		7CB7F54B29A3D89C00A20694 /* renderer_OpenGL_4.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CD29A3D45F00A20694 /* renderer_OpenGL_4.c */; };
+		7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
+		7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CC29A3D45F00A20694 /* renderer_GLES_3.c */; };
+		7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CF29A3D45F00A20694 /* renderer_GLES_2.c */; };
+		7CB7F54F29A3D89C00A20694 /* SDL_gpu_shapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D029A3D45F00A20694 /* SDL_gpu_shapes.c */; };
+		7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B429A3D45F00A20694 /* renderer_OpenGL_1_BASE.c */; };
+		7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F55629A3F1B500A20694 /* NXAffineTransform.cpp */; };
+		7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F55929A3F1B500A20694 /* NXTransform3D.cpp */; };
+		7CB7F56229A43C8000A20694 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F56029A43C8000A20694 /* Runner.cpp */; };
 		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
-		7CEB969B29941C94007483C0 /* main2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main2.cpp */; };
+		7CEB969B29941C94007483C0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
 		7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798242993F1E4004E8EC8 /* CALayer.cpp */; };
 		7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Utils.cpp */; };
@@ -30,18 +49,76 @@
 
 /* Begin PBXFileReference section */
 		7C0798182993E916004E8EC8 /* SDLTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C07981B2993E916004E8EC8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7C0798222993EE53004E8EC8 /* SDLTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDLTest.entitlements; sourceTree = "<group>"; };
 		7C0798242993F1E4004E8EC8 /* CALayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CALayer.cpp; sourceTree = "<group>"; };
 		7C0798252993F1E4004E8EC8 /* CALayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CALayer.hpp; sourceTree = "<group>"; };
 		7C0798282993F25C004E8EC8 /* CGImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGImage.cpp; sourceTree = "<group>"; };
 		7C0798292993F25C004E8EC8 /* CGImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGImage.hpp; sourceTree = "<group>"; };
+		7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_RendererImpl.h; sourceTree = "<group>"; };
+		7CB7F3D929A3D45F00A20694 /* SDL_gpu_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_version.h; sourceTree = "<group>"; };
+		7CB7F3DA29A3D45F00A20694 /* SDL_gpu_OpenGL_1_BASE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_1_BASE.h; sourceTree = "<group>"; };
+		7CB7F3DB29A3D45F00A20694 /* SDL_gpu_OpenGL_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_2.h; sourceTree = "<group>"; };
+		7CB7F3DC29A3D45F00A20694 /* SDL_gpu_GLES_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_GLES_2.h; sourceTree = "<group>"; };
+		7CB7F3DD29A3D45F00A20694 /* SDL_gpu_OpenGL_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_1.h; sourceTree = "<group>"; };
+		7CB7F3DE29A3D45F00A20694 /* SDL_gpu_GLES_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_GLES_1.h; sourceTree = "<group>"; };
+		7CB7F3DF29A3D45F00A20694 /* SDL_gpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu.h; sourceTree = "<group>"; };
+		7CB7F3E029A3D45F00A20694 /* SDL_gpu_OpenGL_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_4.h; sourceTree = "<group>"; };
+		7CB7F3E129A3D45F00A20694 /* SDL_gpu_GLES_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_GLES_3.h; sourceTree = "<group>"; };
+		7CB7F3E229A3D45F00A20694 /* SDL_gpu_OpenGL_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_3.h; sourceTree = "<group>"; };
+		7CB7F48F29A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F49129A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F49229A3D45F00A20694 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		7CB7F49429A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F49629A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F49829A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F49A29A3D45F00A20694 /* test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = test.bmp; sourceTree = "<group>"; };
+		7CB7F49B29A3D45F00A20694 /* comic14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comic14.png; sourceTree = "<group>"; };
+		7CB7F49C29A3D45F00A20694 /* test3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test3.png; sourceTree = "<group>"; };
+		7CB7F49D29A3D45F00A20694 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2.png; sourceTree = "<group>"; };
+		7CB7F49F29A3D45F00A20694 /* color.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = color.frag; sourceTree = "<group>"; };
+		7CB7F4A029A3D45F00A20694 /* alpha_mask.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = alpha_mask.frag; sourceTree = "<group>"; };
+		7CB7F4A129A3D45F00A20694 /* untextured.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = untextured.vert; sourceTree = "<group>"; };
+		7CB7F4A229A3D45F00A20694 /* marching_ants.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = marching_ants.frag; sourceTree = "<group>"; };
+		7CB7F4A329A3D45F00A20694 /* common.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = common.frag; sourceTree = "<group>"; };
+		7CB7F4A429A3D45F00A20694 /* common.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = common.vert; sourceTree = "<group>"; };
+		7CB7F4A529A3D45F00A20694 /* untextured.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = untextured.frag; sourceTree = "<group>"; };
+		7CB7F4A729A3D45F00A20694 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
+		7CB7F4A929A3D45F00A20694 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		7CB7F4B429A3D45F00A20694 /* renderer_OpenGL_1_BASE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_OpenGL_1_BASE.c; sourceTree = "<group>"; };
+		7CB7F4B729A3D45F00A20694 /* renderer_OpenGL_3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_OpenGL_3.c; sourceTree = "<group>"; };
+		7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gpu.c; sourceTree = "<group>"; };
+		7CB7F4B929A3D45F00A20694 /* SDL_gpu_matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gpu_matrix.c; sourceTree = "<group>"; };
+		7CB7F4BA29A3D45F00A20694 /* SDL_gpu_renderer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gpu_renderer.c; sourceTree = "<group>"; };
+		7CB7F4C129A3D45F00A20694 /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
+		7CB7F4C229A3D45F00A20694 /* stb_image_write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image_write.c; sourceTree = "<group>"; };
+		7CB7F4C429A3D45F00A20694 /* glew.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glew.c; sourceTree = "<group>"; };
+		7CB7F4C629A3D45F00A20694 /* glxew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glxew.h; sourceTree = "<group>"; };
+		7CB7F4C729A3D45F00A20694 /* wglew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wglew.h; sourceTree = "<group>"; };
+		7CB7F4C829A3D45F00A20694 /* glew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glew.h; sourceTree = "<group>"; };
+		7CB7F4CA29A3D45F00A20694 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		7CB7F4CB29A3D45F00A20694 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		7CB7F4CC29A3D45F00A20694 /* renderer_GLES_3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_GLES_3.c; sourceTree = "<group>"; };
+		7CB7F4CD29A3D45F00A20694 /* renderer_OpenGL_4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_OpenGL_4.c; sourceTree = "<group>"; };
+		7CB7F4CF29A3D45F00A20694 /* renderer_GLES_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_GLES_2.c; sourceTree = "<group>"; };
+		7CB7F4D029A3D45F00A20694 /* SDL_gpu_shapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gpu_shapes.c; sourceTree = "<group>"; };
+		7CB7F4D129A3D45F00A20694 /* renderer_OpenGL_1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_OpenGL_1.c; sourceTree = "<group>"; };
+		7CB7F4D329A3D45F00A20694 /* renderer_GLES_1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_GLES_1.c; sourceTree = "<group>"; };
+		7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_OpenGL_2.c; sourceTree = "<group>"; };
+		7CB7F52729A3D5F400A20694 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7CB7F55629A3F1B500A20694 /* NXAffineTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NXAffineTransform.cpp; sourceTree = "<group>"; };
+		7CB7F55729A3F1B500A20694 /* NXAffineTransform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NXAffineTransform.hpp; sourceTree = "<group>"; };
+		7CB7F55929A3F1B500A20694 /* NXTransform3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NXTransform3D.cpp; sourceTree = "<group>"; };
+		7CB7F55A29A3F1B500A20694 /* NXTransform3D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NXTransform3D.hpp; sourceTree = "<group>"; };
+		7CB7F55D29A41C4F00A20694 /* renderer_shapes_GL_common.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renderer_shapes_GL_common.inl; sourceTree = "<group>"; };
+		7CB7F55E29A41C4F00A20694 /* renderer_GL_common.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renderer_GL_common.inl; sourceTree = "<group>"; };
+		7CB7F56029A43C8000A20694 /* Runner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
+		7CB7F56129A43C8000A20694 /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
 		7CEB968C2993F799007483C0 /* UIColor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIColor.hpp; sourceTree = "<group>"; };
 		7CEB96922994037B007483C0 /* UIApplication.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIApplication.hpp; sourceTree = "<group>"; };
-		7CEB969329941288007483C0 /* main2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main2.cpp; sourceTree = "<group>"; };
+		7CEB969329941288007483C0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7CEB969D29943993007483C0 /* UIApplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplication.cpp; sourceTree = "<group>"; };
 		7CEB96A1299509C5007483C0 /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		7CEB96A2299509C5007483C0 /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
@@ -52,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,8 +139,10 @@
 		7C07980F2993E916004E8EC8 = {
 			isa = PBXGroup;
 			children = (
+				7CB7F3CA29A3D45F00A20694 /* extern */,
 				7C07981A2993E916004E8EC8 /* SDLTest */,
 				7C0798192993E916004E8EC8 /* Products */,
+				7CB7F52629A3D5F400A20694 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +157,9 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7CB7F55F29A43C7400A20694 /* Runner */,
+				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
+				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
 				7CEB96A0299509B8007483C0 /* Utils */,
 				7CEB969C29943982007483C0 /* UIApplication */,
 				7CEB968A2993F78F007483C0 /* UIColor */,
@@ -84,8 +167,7 @@
 				7C0798272993F251004E8EC8 /* CGImage */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
 				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
-				7C07981B2993E916004E8EC8 /* main.cpp */,
-				7CEB969329941288007483C0 /* main2.cpp */,
+				7CEB969329941288007483C0 /* main.cpp */,
 			);
 			path = SDLTest;
 			sourceTree = "<group>";
@@ -106,6 +188,244 @@
 				7C0798282993F25C004E8EC8 /* CGImage.cpp */,
 			);
 			path = CGImage;
+			sourceTree = "<group>";
+		};
+		7CB7F3CA29A3D45F00A20694 /* extern */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F3CB29A3D45F00A20694 /* sdl-gpu */,
+			);
+			path = extern;
+			sourceTree = "<group>";
+		};
+		7CB7F3CB29A3D45F00A20694 /* sdl-gpu */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F3D729A3D45F00A20694 /* include */,
+				7CB7F48D29A3D45F00A20694 /* demos */,
+				7CB7F4B329A3D45F00A20694 /* src */,
+			);
+			path = "sdl-gpu";
+			sourceTree = "<group>";
+		};
+		7CB7F3D729A3D45F00A20694 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */,
+				7CB7F3D929A3D45F00A20694 /* SDL_gpu_version.h */,
+				7CB7F3DA29A3D45F00A20694 /* SDL_gpu_OpenGL_1_BASE.h */,
+				7CB7F3DB29A3D45F00A20694 /* SDL_gpu_OpenGL_2.h */,
+				7CB7F3DC29A3D45F00A20694 /* SDL_gpu_GLES_2.h */,
+				7CB7F3DD29A3D45F00A20694 /* SDL_gpu_OpenGL_1.h */,
+				7CB7F3DE29A3D45F00A20694 /* SDL_gpu_GLES_1.h */,
+				7CB7F3DF29A3D45F00A20694 /* SDL_gpu.h */,
+				7CB7F3E029A3D45F00A20694 /* SDL_gpu_OpenGL_4.h */,
+				7CB7F3E129A3D45F00A20694 /* SDL_gpu_GLES_3.h */,
+				7CB7F3E229A3D45F00A20694 /* SDL_gpu_OpenGL_3.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		7CB7F48D29A3D45F00A20694 /* demos */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F48E29A3D45F00A20694 /* init */,
+				7CB7F49029A3D45F00A20694 /* 3d */,
+				7CB7F49229A3D45F00A20694 /* CMakeLists.txt */,
+				7CB7F49329A3D45F00A20694 /* camera */,
+				7CB7F49529A3D45F00A20694 /* simple-shader */,
+				7CB7F49729A3D45F00A20694 /* tutorial-space */,
+				7CB7F49929A3D45F00A20694 /* data */,
+				7CB7F4A829A3D45F00A20694 /* nanovg */,
+			);
+			path = demos;
+			sourceTree = "<group>";
+		};
+		7CB7F48E29A3D45F00A20694 /* init */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F48F29A3D45F00A20694 /* main.c */,
+			);
+			path = init;
+			sourceTree = "<group>";
+		};
+		7CB7F49029A3D45F00A20694 /* 3d */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49129A3D45F00A20694 /* main.c */,
+			);
+			path = 3d;
+			sourceTree = "<group>";
+		};
+		7CB7F49329A3D45F00A20694 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49429A3D45F00A20694 /* main.c */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
+		7CB7F49529A3D45F00A20694 /* simple-shader */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49629A3D45F00A20694 /* main.c */,
+			);
+			path = "simple-shader";
+			sourceTree = "<group>";
+		};
+		7CB7F49729A3D45F00A20694 /* tutorial-space */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49829A3D45F00A20694 /* main.c */,
+			);
+			path = "tutorial-space";
+			sourceTree = "<group>";
+		};
+		7CB7F49929A3D45F00A20694 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49A29A3D45F00A20694 /* test.bmp */,
+				7CB7F49B29A3D45F00A20694 /* comic14.png */,
+				7CB7F49C29A3D45F00A20694 /* test3.png */,
+				7CB7F49D29A3D45F00A20694 /* test2.png */,
+				7CB7F49E29A3D45F00A20694 /* shaders */,
+				7CB7F4A629A3D45F00A20694 /* tutorial-space */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		7CB7F49E29A3D45F00A20694 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F49F29A3D45F00A20694 /* color.frag */,
+				7CB7F4A029A3D45F00A20694 /* alpha_mask.frag */,
+				7CB7F4A129A3D45F00A20694 /* untextured.vert */,
+				7CB7F4A229A3D45F00A20694 /* marching_ants.frag */,
+				7CB7F4A329A3D45F00A20694 /* common.frag */,
+				7CB7F4A429A3D45F00A20694 /* common.vert */,
+				7CB7F4A529A3D45F00A20694 /* untextured.frag */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		7CB7F4A629A3D45F00A20694 /* tutorial-space */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4A729A3D45F00A20694 /* ship.png */,
+			);
+			path = "tutorial-space";
+			sourceTree = "<group>";
+		};
+		7CB7F4A829A3D45F00A20694 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4A929A3D45F00A20694 /* main.c */,
+			);
+			path = nanovg;
+			sourceTree = "<group>";
+		};
+		7CB7F4B329A3D45F00A20694 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F55E29A41C4F00A20694 /* renderer_GL_common.inl */,
+				7CB7F55D29A41C4F00A20694 /* renderer_shapes_GL_common.inl */,
+				7CB7F4B429A3D45F00A20694 /* renderer_OpenGL_1_BASE.c */,
+				7CB7F4B729A3D45F00A20694 /* renderer_OpenGL_3.c */,
+				7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */,
+				7CB7F4B929A3D45F00A20694 /* SDL_gpu_matrix.c */,
+				7CB7F4BA29A3D45F00A20694 /* SDL_gpu_renderer.c */,
+				7CB7F4BC29A3D45F00A20694 /* externals */,
+				7CB7F4CC29A3D45F00A20694 /* renderer_GLES_3.c */,
+				7CB7F4CD29A3D45F00A20694 /* renderer_OpenGL_4.c */,
+				7CB7F4CF29A3D45F00A20694 /* renderer_GLES_2.c */,
+				7CB7F4D029A3D45F00A20694 /* SDL_gpu_shapes.c */,
+				7CB7F4D129A3D45F00A20694 /* renderer_OpenGL_1.c */,
+				7CB7F4D329A3D45F00A20694 /* renderer_GLES_1.c */,
+				7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		7CB7F4BC29A3D45F00A20694 /* externals */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4C029A3D45F00A20694 /* stb_image_write */,
+				7CB7F4C329A3D45F00A20694 /* glew */,
+				7CB7F4C929A3D45F00A20694 /* stb_image */,
+			);
+			path = externals;
+			sourceTree = "<group>";
+		};
+		7CB7F4C029A3D45F00A20694 /* stb_image_write */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4C129A3D45F00A20694 /* stb_image_write.h */,
+				7CB7F4C229A3D45F00A20694 /* stb_image_write.c */,
+			);
+			path = stb_image_write;
+			sourceTree = "<group>";
+		};
+		7CB7F4C329A3D45F00A20694 /* glew */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4C429A3D45F00A20694 /* glew.c */,
+				7CB7F4C529A3D45F00A20694 /* GL */,
+			);
+			path = glew;
+			sourceTree = "<group>";
+		};
+		7CB7F4C529A3D45F00A20694 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4C629A3D45F00A20694 /* glxew.h */,
+				7CB7F4C729A3D45F00A20694 /* wglew.h */,
+				7CB7F4C829A3D45F00A20694 /* glew.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		7CB7F4C929A3D45F00A20694 /* stb_image */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F4CA29A3D45F00A20694 /* stb_image.c */,
+				7CB7F4CB29A3D45F00A20694 /* stb_image.h */,
+			);
+			path = stb_image;
+			sourceTree = "<group>";
+		};
+		7CB7F52629A3D5F400A20694 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F52729A3D5F400A20694 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CB7F55529A3F1B500A20694 /* NXAffineTransform */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F55729A3F1B500A20694 /* NXAffineTransform.hpp */,
+				7CB7F55629A3F1B500A20694 /* NXAffineTransform.cpp */,
+			);
+			path = NXAffineTransform;
+			sourceTree = "<group>";
+		};
+		7CB7F55829A3F1B500A20694 /* NXTransform3D */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F55A29A3F1B500A20694 /* NXTransform3D.hpp */,
+				7CB7F55929A3F1B500A20694 /* NXTransform3D.cpp */,
+			);
+			path = NXTransform3D;
+			sourceTree = "<group>";
+		};
+		7CB7F55F29A43C7400A20694 /* Runner */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7F56129A43C8000A20694 /* Runner.hpp */,
+				7CB7F56029A43C8000A20694 /* Runner.cpp */,
+			);
+			path = Runner;
 			sourceTree = "<group>";
 		};
 		7CEB96862993F5CB007483C0 /* Geometry */ = {
@@ -202,12 +522,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
+				7CB7F54A29A3D89C00A20694 /* renderer_OpenGL_3.c in Sources */,
+				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
+				7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */,
+				7CB7F54B29A3D89C00A20694 /* renderer_OpenGL_4.c in Sources */,
+				7CB7F56229A43C8000A20694 /* Runner.cpp in Sources */,
 				7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */,
+				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
+				7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */,
+				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
-				7CEB969B29941C94007483C0 /* main2.cpp in Sources */,
+				7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */,
+				7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */,
+				7CEB969B29941C94007483C0 /* main.cpp in Sources */,
+				7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */,
+				7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */,
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
+				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
+				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
+				7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */,
 				7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */,
+				7CB7F51E29A3D45F00A20694 /* stb_image.c in Sources */,
+				7CB7F54F29A3D89C00A20694 /* SDL_gpu_shapes.c in Sources */,
+				7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +559,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -267,6 +604,8 @@
 				HEADER_SEARCH_PATHS = (
 					/opt/homebrew/include,
 					SDLTest,
+					"extern/sdl-gpu/include",
+					"extern/sdl-gpu/src/externals/glew/GL",
 				);
 				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -285,7 +624,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -325,6 +663,8 @@
 				HEADER_SEARCH_PATHS = (
 					/opt/homebrew/include,
 					SDLTest,
+					"extern/sdl-gpu/include",
+					"extern/sdl-gpu/src/externals/glew/GL",
 				);
 				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -342,6 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
+				OTHER_CFLAGS = "-DSDL_GPU_DISABLE_GLES";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -353,6 +694,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
+				OTHER_CFLAGS = "-DSDL_GPU_DISABLE_GLES";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

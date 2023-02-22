@@ -8,12 +8,13 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL_gpu.h>
 
 namespace UIKit {
 
 class UIApplication {
 public:
-    static SDL_Renderer* currentRenderer;
+    static GPU_Target* currentRenderer;
 };
 
 }
