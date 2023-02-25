@@ -113,6 +113,7 @@
 		7CB7F55E29A41C4F00A20694 /* renderer_GL_common.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renderer_GL_common.inl; sourceTree = "<group>"; };
 		7CB7F56029A43C8000A20694 /* Runner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
 		7CB7F56129A43C8000A20694 /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
+		7CD13F0D29AA437200D0FFF5 /* Start.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Start.h; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
@@ -424,6 +425,7 @@
 			children = (
 				7CB7F56129A43C8000A20694 /* Runner.hpp */,
 				7CB7F56029A43C8000A20694 /* Runner.cpp */,
+				7CD13F0D29AA437200D0FFF5 /* Start.h */,
 			);
 			path = Runner;
 			sourceTree = "<group>";

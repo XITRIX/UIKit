@@ -29,7 +29,7 @@ void CALayer::render(GPU_Target* renderer) {
         localRenderer = groupingFBO->target;
         GPU_SetActiveTarget(localRenderer);
     } else {
-        
+        // TODO: Add alpha if groupingFBO is disabled
     }
 
 
@@ -41,7 +41,6 @@ void CALayer::render(GPU_Target* renderer) {
     auto translationToPosition = CATransform3DMakeTranslation(position.x, position.y, zPosition);
     auto transformAtPositionInParentCoordinates = parentOriginTransform * translationToPosition;
 
-    // TODO: transform applies incorrect
     auto modelViewTransform = transformAtPositionInParentCoordinates * transform;
 
     // Now that we're in our own coordinate system based around `anchorPoint` (which is generally the middle of
@@ -49,13 +48,11 @@ void CALayer::render(GPU_Target* renderer) {
     // Since we have already applied our own `transform`, we can work in our own (`bounds.size`) units.
     auto deltaFromAnchorPointToOrigin = Point(-(bounds.width() * anchorPoint.x),
                                               -(bounds.height() * anchorPoint.y));
-
-    modelViewTransform = modelViewTransform * NXTransform3D::translationBy(deltaFromAnchorPointToOrigin.x, deltaFromAnchorPointToOrigin.y, 0);
-//    auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, bounds.size);
+    auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, bounds.size);
 
     modelViewTransform.setAsSDLgpuMatrix();
 
-    GPU_RectangleFilled2(localRenderer, GPU_MakeRect(0, 0, bounds.width(), bounds.height()), backgroundColor.color);
+    GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
 
     draw(localRenderer);
 
@@ -64,15 +61,15 @@ void CALayer::render(GPU_Target* renderer) {
     // We need to be at `origin` here though so we can translate to the next `position` in each sublayer.
     //
     // We also subtract `bounds` to get the strange but useful scrolling effect as on iOS.
-//    auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
-//        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
-//        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
-//        0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
-//    );
-//
-//    // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
-//    auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
-//    transformAtSelfOrigin.setAsSDLgpuMatrix();
+    auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
+        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
+        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
+        0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
+    );
+
+    // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
+    auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
+    transformAtSelfOrigin.setAsSDLgpuMatrix();
 
     for (auto sublayer: sublayers) {
         sublayer->render(localRenderer);

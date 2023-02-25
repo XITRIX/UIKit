@@ -33,6 +33,7 @@ public:
     static NXTransform3D translationBy(float x, float y, float z);
     static NXTransform3D scaleBy(float x, float y, float z);
     static NXTransform3D scale(float factor);
+    static NXTransform3D rotationBy(float angle, float x, float y, float z);
 
     NXTransform3D concat(const NXTransform3D& other) const;
     bool operator==(const NXTransform3D& rhs) const;
@@ -55,6 +56,7 @@ bool NXTransform3DEqualToTransform(const NXTransform3D& a, const NXTransform3D& 
 NXTransform3D NXTransform3DMakeAffineTransform(NXAffineTransform transform);
 NXTransform3D CATransform3DMakeTranslation(float tx, float ty, float tz);
 NXTransform3D CATransform3DMakeScale(float sx, float sy, float sz);
+NXTransform3D CATransform3DMakeRotation(float angle, float x, float y, float z);
 NXTransform3D CATransform3DConcat(const NXTransform3D& a, const NXTransform3D& b);
 NXAffineTransform NXTransform3DGetAffineTransform(NXTransform3D t);
 

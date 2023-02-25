@@ -5,6 +5,8 @@
 //  Created by Даниил Виноградов on 21.02.2023.
 //
 
+#pragma once
+
 #include <SDL2/SDL.h>
 #include <SDL_gpu.h>
 

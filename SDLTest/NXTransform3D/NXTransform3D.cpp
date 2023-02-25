@@ -7,6 +7,8 @@
 
 #include "NXTransform3D.hpp"
 
+#define RAD_PER_DEG 0.017453293f
+
 namespace UIKit {
 
 const NXTransform3D NXTransform3D::identity = NXTransform3DIdentity;
@@ -47,7 +49,7 @@ bool NXTransform3D::operator==(const NXTransform3D& rhs) const {
 }
 
 NXTransform3D NXTransform3D::operator*(const NXTransform3D& first) const {
-    return first.concat(*this);
+    return (*this).concat(first);
 }
 
 Vector3 NXTransform3D::transformingVector(float x, float y, float z) const {
@@ -89,6 +91,31 @@ NXTransform3D CATransform3DMakeScale(float tx, float ty, float tz) {
         0,    ty,     0,    0,
         0,     0,    tz,    0,
         0,     0,     0,    1);
+}
+
+NXTransform3D CATransform3DMakeRotation(float angle, float x, float y, float z) {
+    float p, radians, c, s, c_, zc_, yc_, xzc_, xyc_, yzc_, xs, ys, zs;
+
+    p = 1/sqrtf(x*x + y*y + z*z);
+    x *= p; y *= p; z *= p;
+    radians = angle * RAD_PER_DEG;
+    c = cosf(radians);
+    s = sinf(radians);
+    c_ = 1 - c;
+    zc_ = z*c_;
+    yc_ = y*c_;
+    xzc_ = x*zc_;
+    xyc_ = x*y*c_;
+    yzc_ = y*zc_;
+    xs = x*s;
+    ys = y*s;
+    zs = z*s;
+
+    return NXTransform3D(
+        x*x*c_ + c, xyc_ + zs, xzc_ - ys, 0,
+        xyc_ - zs, y*yc_ + c, yzc_ + xs, 0,
+        xzc_ + ys, yzc_ - xs, z*zc_ + c, 0,
+        0, 0, 0, 1);
 }
 
 NXTransform3D CATransform3DConcat(const NXTransform3D& a, const NXTransform3D& b) {
@@ -162,6 +189,10 @@ NXTransform3D NXTransform3D::scaleBy(float x, float y, float z) {
 
 NXTransform3D NXTransform3D::scale(float factor) {
     return CATransform3DMakeScale(factor, factor, factor);
+}
+
+NXTransform3D NXTransform3D::rotationBy(float angle, float x, float y, float z) {
+    return CATransform3DMakeRotation(angle, x, y, z);
 }
 
 }

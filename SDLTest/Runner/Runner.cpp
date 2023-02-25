@@ -42,19 +42,21 @@ int Runner::startApp() {
 
     auto layer1 = std::make_shared<UIKit::CALayer>();
 //    layer1->anchorPoint = Point(0, 0);
-    layer1->setFrame(Rect(20, 20, 280, 280));
+    layer1->setFrame(Rect(120, 120, 280, 280));
     layer1->backgroundColor = UIColor::orange;
-//    layer1->setOpacity(0.1f);
-    layer1->transform = NXTransform3D::translationBy(0, 0, 0);
+    layer1->setOpacity(0.5f);
+//    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
+    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
-    layer2->anchorPoint = Point(0.5f, 0.5f);
-    layer2->setFrame(Rect(0, 40, 80, 80));
+//    layer2->anchorPoint = Point(0.5f, 0.5f);
+    layer2->setFrame(Rect(40, 40, 80, 80));
     layer2->backgroundColor = UIColor::red;
 //    layer2->setOpacity(0.5f);
-    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
-//    layer2->transform = NXTransform3D::translationBy(0, 40, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
+    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
+//    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
+//    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
     rootLayer->addSublayer(layer1);
     layer1->addSublayer(layer2);

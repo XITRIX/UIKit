@@ -8,8 +8,11 @@
 #include <stdio.h>
 #include <Runner/Runner.hpp>
 
+void startApp() {
+    Runner().startApp();
+}
 
 int main(int argc, char* argv[]) {
-    Runner().startApp();
+    startApp();
     return 0;
 }
