@@ -73,6 +73,12 @@ Point Point::operator*(const float& rhs) {
     return res;
 }
 
+Point Point::applying(NXAffineTransform t) {
+    return Point(x * t.m11 + y * t.m21 + t.tX,
+                 x * t.m12 + y * t.m22 + t.tY);
+
+}
+
 // MARK: - SIZE -
 Size::Size(): width(0), height(0) { }
 Size::Size(float width, float height): width(width), height(height) { }
@@ -143,6 +149,49 @@ bool Rect::operator==(const Rect& rhs) const {
     return
     this->origin.x == rhs.origin.x && this->origin.y == rhs.origin.y &&
     this->size.width == rhs.size.width && this->size.height == rhs.size.height;
+}
+
+Rect Rect::applying(NXAffineTransform t) {
+    if (t.isIdentity()) { return *this; }
+
+    auto newTopLeft = Point(minX(), minY()).applying(t);
+    auto newTopRight = Point(maxX(), minY()).applying(t);
+    auto newBottomLeft = Point(minX(), maxY()).applying(t);
+    auto newBottomRight = Point(maxX(), maxY()).applying(t);
+
+    auto newMinX = min(newTopLeft.x, newTopRight.x, newBottomLeft.x, newBottomRight.x);
+    auto newMaxX = max(newTopLeft.x, newTopRight.x, newBottomLeft.x, newBottomRight.x);
+
+    auto newMinY = min(newTopLeft.y, newTopRight.y, newBottomLeft.y, newBottomRight.y);
+    auto newMaxY = max(newTopLeft.y, newTopRight.y, newBottomLeft.y, newBottomRight.y);
+
+    // XXX: What happens if the point that was furthest left is now on the right (because of a rotation)?
+    // i.e. Should do we return a normalised rect or one with a negative width?
+    return Rect(newMinX,
+                newMinY,
+                newMaxX - newMinX,
+                newMaxY - newMinY);
+}
+
+Rect Rect::applying(NXTransform3D t) {
+    if (t == NXTransform3DIdentity) { return *this; }
+
+    auto topLeft = t.transformingVector(minX(), minY(), 0);
+    auto topRight = t.transformingVector(maxX(), minY(), 0);
+    auto bottomLeft = t.transformingVector(minX(), maxY(), 0);
+    auto bottomRight = t.transformingVector(maxX(), maxY(), 0);
+
+    auto newMinX = min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
+    auto newMaxX = max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
+
+    auto newMinY = min(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
+    auto newMaxY = max(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
+
+    return Rect(newMinX, newMinY, newMaxX - newMinX, newMaxY - newMinY);
+}
+
+GPU_Rect Rect::gpuRect() const {
+    return GPU_MakeRect(origin.x, origin.y, size.width, size.height);
 }
 
 }

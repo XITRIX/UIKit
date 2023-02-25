@@ -10,6 +10,6 @@
 
 
 int main(int argc, char* argv[]) {
-    startApp();
+    Runner().startApp();
     return 0;
 }

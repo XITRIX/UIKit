@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <SDL_gpu.h>
+#include <NXAffineTransform/NXAffineTransform.hpp>
+#include <NXTransform3D/NXTransform3D.hpp>
+
 namespace UIKit {
 
 struct Point {
@@ -22,6 +26,8 @@ struct Point {
     Point& operator-=(const Point& rhs);
     Point operator/(const float& rhs);
     Point operator*(const float& rhs);
+
+    Point applying(NXAffineTransform transform);
 };
 
 struct Size {
@@ -62,6 +68,11 @@ struct Rect {
     Rect& offsetBy(const float& offsetX, const float& offsetY);
 
     bool operator==(const Rect& rhs) const;
+
+    Rect applying(NXAffineTransform transform);
+    Rect applying(NXTransform3D transform);
+
+    GPU_Rect gpuRect() const;
 };
 
 }

@@ -16,14 +16,17 @@
 #include <CGImage/CGImage.hpp>
 #include <Geometry/Geometry.hpp>
 #include <NXTransform3D/NXTransform3D.hpp>
+#include <NXAffineTransform/NXAffineTransform.hpp>
 
 namespace UIKit {
 
 class CALayer: public std::enable_shared_from_this<CALayer> {
 public:
     float zPosition = 0;
+    Point anchorPoint = Point(0.5f, 0.5f);
     Point position;
     Rect bounds;
+    bool allowsGroupOpacity = true;
 
     UIColor backgroundColor;
     ptr<UIKit::CGImage> contents;
@@ -49,10 +52,16 @@ public:
 
     void removeFromSuperlayer();
 
+    NXAffineTransform affineTransform();
+    void setAffineTransform(NXAffineTransform transform);
+
 private:
     float opacity = 1;
     wptr<CALayer> superlayer;
     std::vector<ptr<CALayer>> sublayers;
+    GPU_Image* groupingFBO = nullptr;
+
+    void refreshGroupingFBO();
 };
 
 }

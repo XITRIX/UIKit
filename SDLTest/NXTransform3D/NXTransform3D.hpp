@@ -42,7 +42,7 @@ public:
 
     static const NXTransform3D identity;
 
-    void setAsSDLgpuMatrix();
+    void setAsSDLgpuMatrix() const;
 };
 
 const NXTransform3D NXTransform3DIdentity = NXTransform3D(1, 0, 0, 0,

@@ -14,25 +14,65 @@ namespace UIKit {
 CALayer::CALayer() {
 }
 
-void CALayer::draw(GPU_Target *renderer) {}
+void CALayer::draw(GPU_Target *renderer) {
+    
+}
 
 void CALayer::render(GPU_Target* renderer) {
-    auto image = GPU_CreateImage(renderer->w, renderer->h, GPU_FORMAT_RGBA);
-    auto localRenderer = GPU_LoadTarget(image);
-    GPU_SetActiveTarget(localRenderer);
+    refreshGroupingFBO();
 
+    if (opacity < 0.001f) { return; }
+
+
+    auto localRenderer = renderer;
+    if (groupingFBO) {
+        localRenderer = groupingFBO->target;
+        GPU_SetActiveTarget(localRenderer);
+    } else {
+        
+    }
+
+
+    // The basis for all our transformations is `position` (in parent coordinates), which in this layer's
+    // coordinates is `anchorPoint`. To make this happen, we translate (in our parent's coordinate system
+    // – which may in turn be affected by its parents, and so on) to `position`, and then render rectangles
+    // which may (and often do) start at a negative `origin` based on our (bounds) `size` and `anchorPoint`:
     auto parentOriginTransform = NXTransform3D(GPU_GetCurrentMatrix());
     auto translationToPosition = CATransform3DMakeTranslation(position.x, position.y, zPosition);
     auto transformAtPositionInParentCoordinates = parentOriginTransform * translationToPosition;
 
+    // TODO: transform applies incorrect
     auto modelViewTransform = transformAtPositionInParentCoordinates * transform;
+
+    // Now that we're in our own coordinate system based around `anchorPoint` (which is generally the middle of
+    // bounds.size), we need to find the top left of the rectangle in order to be able to render rectangles.
+    // Since we have already applied our own `transform`, we can work in our own (`bounds.size`) units.
+    auto deltaFromAnchorPointToOrigin = Point(-(bounds.width() * anchorPoint.x),
+                                              -(bounds.height() * anchorPoint.y));
+
+    modelViewTransform = modelViewTransform * NXTransform3D::translationBy(deltaFromAnchorPointToOrigin.x, deltaFromAnchorPointToOrigin.y, 0);
+//    auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, bounds.size);
 
     modelViewTransform.setAsSDLgpuMatrix();
 
-    auto frame = getFrame();
-    GPU_RectangleFilled2(renderer, GPU_MakeRect(frame.minX(), frame.minY(), frame.width(), frame.height()), backgroundColor.color);
+    GPU_RectangleFilled2(localRenderer, GPU_MakeRect(0, 0, bounds.width(), bounds.height()), backgroundColor.color);
 
-    draw(renderer);
+    draw(localRenderer);
+
+    // `position` is always relative from the parent's origin, but the global GPU matrix is currently
+    // focused on `self.position` rather than the `origin` we calculated to render rectangles.
+    // We need to be at `origin` here though so we can translate to the next `position` in each sublayer.
+    //
+    // We also subtract `bounds` to get the strange but useful scrolling effect as on iOS.
+//    auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
+//        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
+//        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
+//        0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
+//    );
+//
+//    // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
+//    auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
+//    transformAtSelfOrigin.setAsSDLgpuMatrix();
 
     for (auto sublayer: sublayers) {
         sublayer->render(localRenderer);
@@ -40,21 +80,46 @@ void CALayer::render(GPU_Target* renderer) {
 
     parentOriginTransform.setAsSDLgpuMatrix();
 
-    GPU_SetActiveTarget(renderer);
+    if (groupingFBO) {
+        GPU_SetActiveTarget(renderer);
+        GPU_SetRGBA(groupingFBO, 255, 255, 255, opacity * 255);
+        GPU_Blit(groupingFBO, nullptr, renderer, 0, 0);
+    }
 
-    GPU_Blit(image, nullptr, renderer, 0, 0);
 
-    GPU_FreeTarget(localRenderer);
-    GPU_FreeImage(image);
 }
 
 Rect CALayer::getFrame() {
-    return Rect(position, bounds.size);
+    // Create a rectangle based on `bounds.size` * `transform` at `position` offset by `anchorPoint`
+    auto transformedBounds = bounds.applying(transform);
+
+    auto anchorPointOffset = Point(
+        transformedBounds.width() * anchorPoint.x,
+        transformedBounds.height() * anchorPoint.y
+                                   );
+
+    return Rect(position.x - anchorPointOffset.x,
+                position.y - anchorPointOffset.y,
+                transformedBounds.width(),
+                transformedBounds.height());
 }
 
 void CALayer::setFrame(Rect frame) {
-    position = frame.origin;
-    bounds.size = frame.size;
+    position = Point(frame.origin.x + (frame.width() * anchorPoint.x),
+                     frame.origin.y + (frame.height() * anchorPoint.y));
+
+    auto inverseTransformOpt = affineTransform().inverted();
+    if (!inverseTransformOpt.has_value()) {
+//        assertionFailure("You tried to set the frame of a CALayer whose transform cannot be inverted. This is undefined behaviour.");
+        return;
+    }
+    auto inverseTransform = inverseTransformOpt.value();
+
+
+    // If we are shrinking the view with a transform and then setting a
+    // new frame, the layer's actual `bounds` is bigger (and vice-versa):
+    auto nonTransformedBoundSize = frame.applying(inverseTransform).size;
+    bounds.size = nonTransformedBoundSize;
 }
 
 float CALayer::getOpacity() const {
@@ -90,6 +155,39 @@ void CALayer::removeFromSuperlayer() {
     if (super == nullptr) return;
 
     super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
+}
+
+void CALayer::refreshGroupingFBO() {
+    if (!allowsGroupOpacity || opacity >= 1 || opacity < 0.001f) {
+        GPU_FreeImage(groupingFBO);
+        groupingFBO = nullptr;
+        return;
+    }
+
+    auto currentTarget = GPU_GetActiveTarget();
+    if (!groupingFBO) {
+        groupingFBO = GPU_CreateImage(currentTarget->w, currentTarget->h, GPU_FORMAT_RGBA);
+        GPU_SetAnchor(groupingFBO, 0, 0);
+        GPU_GetTarget(groupingFBO);
+        return;
+    }
+
+    if (groupingFBO->w != currentTarget->w || groupingFBO->h != currentTarget->h) {
+        GPU_FreeImage(groupingFBO);
+        groupingFBO = GPU_CreateImage(currentTarget->w, currentTarget->h, GPU_FORMAT_RGBA);
+        GPU_SetAnchor(groupingFBO, 0, 0);
+        GPU_GetTarget(groupingFBO);
+        return;
+    }
+}
+
+
+NXAffineTransform CALayer::affineTransform() {
+    return NXTransform3DGetAffineTransform(transform);
+}
+
+void CALayer::setAffineTransform(NXAffineTransform transform) {
+    this->transform = NXTransform3DMakeAffineTransform(transform);
 }
 
 }

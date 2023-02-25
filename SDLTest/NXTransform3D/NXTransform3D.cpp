@@ -127,7 +127,7 @@ NXAffineTransform NXTransform3DGetAffineTransform(NXTransform3D t) {
         t.m41, t.m42);
 }
 
-void NXTransform3D::setAsSDLgpuMatrix() {
+void NXTransform3D::setAsSDLgpuMatrix() const {
     auto currentMatrix = GPU_GetCurrentMatrix();
 
     // We could copy currentMatrix to a CATransform3D and save some code here,

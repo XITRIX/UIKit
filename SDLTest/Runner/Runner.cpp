@@ -8,8 +8,6 @@
 #include <Runner/Runner.hpp>
 
 #include <algorithm>
-#include <SDL2/SDL.h>
-#include <SDL_gpu.h>
 #include <CALayer/CALayer.hpp>
 #include <UIApplication/UIApplication.hpp>
 
@@ -18,9 +16,15 @@
 
 using namespace UIKit;
 
-int startApp() {
+void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
+    GPU_SetWindowResolution(width, height);
+    GPU_SetVirtualResolution(renderer, width, height);
+}
+
+int Runner::startApp() {
 //    SDL_Init(SDL_INIT_EVERYTHING);
-    GPU_Target* renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
+    renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
     UIApplication::currentRenderer = renderer;
@@ -32,18 +36,25 @@ int startApp() {
     bool quit = false;
 
     auto rootLayer = std::make_shared<UIKit::CALayer>();
+    rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
     rootLayer->backgroundColor = UIColor::systemBackground;
 //    layer->setOpacity(1);
 
     auto layer1 = std::make_shared<UIKit::CALayer>();
-    layer1->setFrame(Rect(120, 100, 280, 280));
+//    layer1->anchorPoint = Point(0, 0);
+    layer1->setFrame(Rect(20, 20, 280, 280));
     layer1->backgroundColor = UIColor::orange;
+//    layer1->setOpacity(0.1f);
+    layer1->transform = NXTransform3D::translationBy(0, 0, 0);
 
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
-    layer2->setFrame(Rect(90, 90, 80, 80));
+    layer2->anchorPoint = Point(0.5f, 0.5f);
+    layer2->setFrame(Rect(0, 40, 80, 80));
     layer2->backgroundColor = UIColor::red;
-//    layer2->transform = NXTransform3D::translationBy(100, 150, 0).concat(NXTransform3D::scaleBy(1.5f, 1, 0));
+//    layer2->setOpacity(0.5f);
+    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
+//    layer2->transform = NXTransform3D::translationBy(0, 40, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
     rootLayer->addSublayer(layer1);
     layer1->addSublayer(layer2);
@@ -76,7 +87,8 @@ int startApp() {
                 switch (event.window.event)
                 {
                 case SDL_WINDOWEVENT_RESIZED:
-                    GPU_SetWindowResolution(event.window.data1, event.window.data2);
+                    refreshScreenResolution(event.window.data1, event.window.data2);
+                    rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
                     break;
                 default:
                     break;
@@ -87,15 +99,10 @@ int startApp() {
             }
         }
 
-        GPU_SetActiveTarget(renderer);
-
-
-        rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
-        rootLayer->render(renderer);
-
         GPU_Clear(renderer);
 
         rootLayer->render(renderer);
+
 
         // Update screen
         GPU_Flip(renderer);

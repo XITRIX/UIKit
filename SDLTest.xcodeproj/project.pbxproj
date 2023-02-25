@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
 		7C20BD5229A4F08300646CD7 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C429A3D45F00A20694 /* glew.c */; };
+		7C20BD5829A67D6000646CD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main.cpp */; };
 		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
 		7CB7F51E29A3D45F00A20694 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CA29A3D45F00A20694 /* stb_image.c */; };
 		7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7F52729A3D5F400A20694 /* OpenGL.framework */; };
@@ -29,7 +30,6 @@
 		7CB7F56229A43C8000A20694 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F56029A43C8000A20694 /* Runner.cpp */; };
 		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
-		7CEB969B29941C94007483C0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
 		7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798242993F1E4004E8EC8 /* CALayer.cpp */; };
 		7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Utils.cpp */; };
@@ -535,11 +535,11 @@
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
 				7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */,
 				7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */,
-				7CEB969B29941C94007483C0 /* main.cpp in Sources */,
 				7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */,
 				7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */,
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
+				7C20BD5829A67D6000646CD7 /* main.cpp in Sources */,
 				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
 				7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */,
 				7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */,
