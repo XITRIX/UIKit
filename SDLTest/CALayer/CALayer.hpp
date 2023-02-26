@@ -17,6 +17,7 @@
 #include <Geometry/Geometry.hpp>
 #include <NXTransform3D/NXTransform3D.hpp>
 #include <NXAffineTransform/NXAffineTransform.hpp>
+#include <ContentsGravityTransformation/ContentsGravityTransformation.hpp>
 
 namespace UIKit {
 
@@ -28,12 +29,19 @@ public:
     Rect bounds;
     bool allowsGroupOpacity = true;
 
+    /// Defaults to 1.0 but if the layer is associated with a view,
+    /// the view sets this value to match the screen.
+    float contentsScale = 1.0f;
+
+    CALayerContentsGravity contentsGravity = CALayerContentsGravity::resize;
+
     UIColor backgroundColor;
-    ptr<UIKit::CGImage> contents;
+    ptr<CGImage> contents;
 
     NXTransform3D transform = NXTransform3D::identity;
 
     CALayer();
+    ~CALayer();
 
     virtual void draw(GPU_Target* renderer);
     void render(GPU_Target* renderer);

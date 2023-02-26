@@ -79,6 +79,8 @@ Point Point::applying(NXAffineTransform t) {
 
 }
 
+Point Point::zero = Point();
+
 // MARK: - SIZE -
 Size::Size(): width(0), height(0) { }
 Size::Size(float width, float height): width(width), height(height) { }

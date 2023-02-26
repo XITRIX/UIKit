@@ -28,6 +28,8 @@ struct Point {
     Point operator*(const float& rhs);
 
     Point applying(NXAffineTransform transform);
+
+    static Point zero;
 };
 
 struct Size {

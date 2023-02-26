@@ -10,12 +10,23 @@
 
 namespace UIKit {
 
-CGImage::CGImage(Size size) {
-//    pointee = SDL_CreateTexture(UIApplication::currentRenderer, SDL_PIXELFORMAT_RGBA8888,
-//                                SDL_TEXTUREACCESS_TARGET, (int)size.width, (int)size.height);
-    pointee = GPU_CreateImage(size.width, size.width, GPU_FORMAT_RGBA);
-//    SDL_SetTextureBlendMode(pointee, SDL_BLENDMODE_BLEND);
-    GPU_SetBlendMode(pointee, GPU_BLEND_NORMAL);
+CGImage::CGImage(GPU_Image* image, ptr<Data> sourceData) {
+    this->sourceData = sourceData;
+    pointee = image;
+
+    GPU_SetSnapMode(pointee, GPU_SNAP_POSITION_AND_DIMENSIONS);
+    GPU_SetBlendMode(pointee, GPU_BLEND_NORMAL_FACTOR_ALPHA);
+    GPU_SetImageFilter(pointee, GPU_FILTER_LINEAR);
+}
+
+CGImage::CGImage(ptr<Data> sourceData) {
+    auto data = sourceData;
+    auto dataCount = data->count();
+
+    auto rw = SDL_RWFromMem(data->data(), dataCount);
+    auto gpuImagePtr = GPU_LoadImage_RW(rw, true);
+
+    new (this) CGImage(gpuImagePtr, data);
 }
 
 CGImage::~CGImage() {

@@ -19,6 +19,9 @@ using namespace UIKit;
 void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
     GPU_SetWindowResolution(width, height);
     GPU_SetVirtualResolution(renderer, width, height);
+    if (rootLayer) {
+        rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
+    }
 }
 
 int Runner::startApp() {
@@ -35,7 +38,7 @@ int Runner::startApp() {
     // Event loop exit flag
     bool quit = false;
 
-    auto rootLayer = std::make_shared<UIKit::CALayer>();
+    rootLayer = std::make_shared<UIKit::CALayer>();
     rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
     rootLayer->backgroundColor = UIColor::systemBackground;
 //    layer->setOpacity(1);
@@ -44,7 +47,7 @@ int Runner::startApp() {
 //    layer1->anchorPoint = Point(0, 0);
     layer1->setFrame(Rect(120, 120, 280, 280));
     layer1->backgroundColor = UIColor::orange;
-    layer1->setOpacity(0.5f);
+//    layer1->setOpacity(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
     layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
@@ -61,6 +64,11 @@ int Runner::startApp() {
     rootLayer->addSublayer(layer1);
     layer1->addSublayer(layer2);
 //    layer2->render(renderer);
+
+    auto imageData = Data::fromPath("data/test3.png");
+    auto image = std::make_shared<CGImage>(imageData);
+
+    layer2->contents = image;
 
     // Event loop
     while(!quit)
@@ -90,7 +98,6 @@ int Runner::startApp() {
                 {
                 case SDL_WINDOWEVENT_RESIZED:
                     refreshScreenResolution(event.window.data1, event.window.data2);
-                    rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
                     break;
                 default:
                     break;

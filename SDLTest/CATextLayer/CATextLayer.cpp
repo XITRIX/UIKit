@@ -1,10 +1,8 @@
 //
-//  Start.h
+//  CATextLayer.cpp
 //  SDLTest
 //
 //  Created by Даниил Виноградов on 25.02.2023.
 //
 
-#pragma once
-
-void start();
+#include <CATextLayer/CATextLayer.hpp>

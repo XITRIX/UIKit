@@ -11,12 +11,14 @@
 
 namespace UIKit {
 
-CALayer::CALayer() {
+CALayer::CALayer() { }
+
+CALayer::~CALayer() {
+    if (groupingFBO)
+        GPU_FreeImage(groupingFBO);
 }
 
-void CALayer::draw(GPU_Target *renderer) {
-    
-}
+void CALayer::draw(GPU_Target *renderer) { }
 
 void CALayer::render(GPU_Target* renderer) {
     refreshGroupingFBO();
@@ -53,6 +55,23 @@ void CALayer::render(GPU_Target* renderer) {
     modelViewTransform.setAsSDLgpuMatrix();
 
     GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
+
+    if (contents) {
+        auto contentsGravity = ContentsGravityTransformation(this);
+        GPU_SetAnchor(contents->pointee, anchorPoint.x, anchorPoint.y);
+        GPU_SetRGBA(contents->pointee, 255, 255, 255, opacity * 255);
+
+        GPU_BlitTransform(
+            contents->pointee,
+            NULL,
+            renderer,
+            contentsGravity.offset.x,
+            contentsGravity.offset.y,
+            0, // rotation in degrees
+            contentsGravity.scale.width / contentsScale,
+            contentsGravity.scale.height / contentsScale
+        );
+    }
 
     draw(localRenderer);
 

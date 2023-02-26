@@ -6,13 +6,9 @@
 //
 
 #include <stdio.h>
-#include <Runner/Runner.hpp>
-
-void startApp() {
-    Runner().startApp();
-}
+#include <Runner/Start.h>
 
 int main(int argc, char* argv[]) {
-    startApp();
+    start();
     return 0;
 }
