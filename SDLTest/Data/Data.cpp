@@ -5,7 +5,8 @@
 //  Created by Даниил Виноградов on 25.02.2023.
 //
 
-#include "Data.hpp"
+#include <Data/Data.hpp>
+#include <cstring>
 
 namespace UIKit {
 
@@ -29,12 +30,12 @@ Uint8* Data::data() const {
 }
 
 ptr<Data> Data::fromPath(std::string path) {
-    auto fileReader = SDL_RWFromFile(path.c_str(), "r");
+    auto fileReader = SDL_RWFromFile((Utils::resourcePath + path).c_str(), "r");
     auto fileSize = int(fileReader->size(fileReader));
 
     Uint8* buffer = new Uint8[fileSize];
 
-    auto bytesRead = fileReader->read(fileReader, buffer, 1, fileSize);
+    auto bytesRead = int(fileReader->read(fileReader, buffer, 1, fileSize));
 
     fileReader->close(fileReader);
 

@@ -42,29 +42,33 @@ BUILD		:=	build
 SOURCES		:=	SDLTest
 DATA		:=	data
 INCLUDES	:=	SDLTest
-#ROMFS	:=	romfs
+ROMFS		:=	resources
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 INCLUDES := $(INCLUDES) \
-			SDLTest/Runner \
 			SDLTest/CALayer \
 			SDLTest/CGImage \
+			SDLTest/ContentsGravityTransformation \
+			SDLTest/Data \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
+			SDLTest/Runner \
 			SDLTest/UIApplication \
 			SDLTest/UIColor \
 			SDLTest/Utils \
 
 SOURCES  := $(SOURCES) \
-			SDLTest/Runner \
 			SDLTest/CALayer \
 			SDLTest/CGImage \
+			SDLTest/ContentsGravityTransformation \
+			SDLTest/Data \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
+			SDLTest/Runner \
 			SDLTest/UIApplication \
 			SDLTest/UIColor \
 			SDLTest/Utils \

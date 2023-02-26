@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <CALayer/CALayer.hpp>
+#include <Utils/Utils.hpp>
 #include <UIApplication/UIApplication.hpp>
 
 #define SCREEN_WIDTH    1280
@@ -25,6 +26,10 @@ void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
 }
 
 int Runner::startApp() {
+#ifdef __SWITCH__
+    Utils::resourcePath = "romfs:/";
+#endif
+
 //    SDL_Init(SDL_INIT_EVERYTHING);
     renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -46,8 +51,8 @@ int Runner::startApp() {
     auto layer1 = std::make_shared<UIKit::CALayer>();
 //    layer1->anchorPoint = Point(0, 0);
     layer1->setFrame(Rect(120, 120, 280, 280));
-    layer1->backgroundColor = UIColor::orange;
-//    layer1->setOpacity(0.5f);
+    layer1->backgroundColor = UIColor::blue;
+    layer1->setOpacity(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
     layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
@@ -65,7 +70,7 @@ int Runner::startApp() {
     layer1->addSublayer(layer2);
 //    layer2->render(renderer);
 
-    auto imageData = Data::fromPath("data/test3.png");
+    auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
     layer2->contents = image;

@@ -125,6 +125,7 @@
 		7CD13F1629AA561B00D0FFF5 /* Data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Data.hpp; sourceTree = "<group>"; };
 		7CD13F1929AB6DD900D0FFF5 /* ContentsGravityTransformation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContentsGravityTransformation.cpp; sourceTree = "<group>"; };
 		7CD13F1A29AB6DD900D0FFF5 /* ContentsGravityTransformation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentsGravityTransformation.hpp; sourceTree = "<group>"; };
+		7CD13F1C29AB89F800D0FFF5 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = CMakeLists.txt; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 		7C07980F2993E916004E8EC8 = {
 			isa = PBXGroup;
 			children = (
+				7CD13F1C29AB89F800D0FFF5 /* CMakeLists.txt */,
 				7CB7F3CA29A3D45F00A20694 /* extern */,
 				7C07981A2993E916004E8EC8 /* SDLTest */,
 				7C0798192993E916004E8EC8 /* Products */,
@@ -169,20 +171,20 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
-				7CD13F1829AB6DCD00D0FFF5 /* ContentsGravityTransformation */,
-				7CD13F1429AA561300D0FFF5 /* Data */,
-				7CB7F55F29A43C7400A20694 /* Runner */,
-				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
-				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
-				7CEB96A0299509B8007483C0 /* Utils */,
-				7CEB969C29943982007483C0 /* UIApplication */,
-				7CEB968A2993F78F007483C0 /* UIColor */,
-				7CEB96862993F5CB007483C0 /* Geometry */,
-				7C0798272993F251004E8EC8 /* CGImage */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
 				7CD13F1029AA52BE00D0FFF5 /* CATextLayer */,
-				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
+				7C0798272993F251004E8EC8 /* CGImage */,
+				7CD13F1829AB6DCD00D0FFF5 /* ContentsGravityTransformation */,
+				7CD13F1429AA561300D0FFF5 /* Data */,
+				7CEB96862993F5CB007483C0 /* Geometry */,
+				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
+				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
+				7CB7F55F29A43C7400A20694 /* Runner */,
+				7CEB969C29943982007483C0 /* UIApplication */,
+				7CEB968A2993F78F007483C0 /* UIColor */,
+				7CEB96A0299509B8007483C0 /* Utils */,
 				7CEB969329941288007483C0 /* main.cpp */,
+				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
 			);
 			path = SDLTest;
 			sourceTree = "<group>";

@@ -9,4 +9,6 @@
 
 namespace UIKit {
 
+std::string Utils::resourcePath = "";
+
 }
