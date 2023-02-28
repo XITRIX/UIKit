@@ -56,6 +56,8 @@ INCLUDES := $(INCLUDES) \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
 			SDLTest/Runner \
+			SDLTest/Shader \
+			SDLTest/ShaderProgram \
 			SDLTest/UIApplication \
 			SDLTest/UIColor \
 			SDLTest/Utils \
@@ -69,6 +71,8 @@ SOURCES  := $(SOURCES) \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
 			SDLTest/Runner \
+			SDLTest/Shader \
+			SDLTest/ShaderProgram \
 			SDLTest/UIApplication \
 			SDLTest/UIColor \
 			SDLTest/Utils \

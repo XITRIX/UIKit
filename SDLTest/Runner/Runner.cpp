@@ -30,7 +30,6 @@ int Runner::startApp() {
     Utils::resourcePath = "romfs:/";
 #endif
 
-//    SDL_Init(SDL_INIT_EVERYTHING);
     renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
@@ -67,7 +66,8 @@ int Runner::startApp() {
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
     rootLayer->addSublayer(layer1);
-    layer1->addSublayer(layer2);
+    layer1->setMask(layer2);
+//    layer1->addSublayer(layer2);
 //    layer2->render(renderer);
 
     auto imageData = Data::fromPath("test3.png");

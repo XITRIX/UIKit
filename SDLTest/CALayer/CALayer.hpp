@@ -53,6 +53,9 @@ public:
     void setOpacity(float opacity);
     float getOpacity() const;
 
+    void setMask(ptr<CALayer> mask);
+    ptr<CALayer> getMask() const;
+
     void addSublayer(ptr<CALayer> layer);
     void insertSublayerAt(ptr<CALayer> layer, int index);
     void insertSublayerAbove(ptr<CALayer> layer, ptr<CALayer> sibling);
@@ -67,6 +70,7 @@ private:
     float opacity = 1;
     wptr<CALayer> superlayer;
     std::vector<ptr<CALayer>> sublayers;
+    ptr<CALayer> mask;
     GPU_Image* groupingFBO = nullptr;
 
     void refreshGroupingFBO();

@@ -7,6 +7,7 @@
 
 #include <CALayer/CALayer.hpp>
 #include <UIApplication/UIApplication.hpp>
+#include <ShaderProgram/ShaderProgram.hpp>
 #include <algorithm>
 
 namespace UIKit {
@@ -52,10 +53,33 @@ void CALayer::render(GPU_Target* renderer) {
                                               -(bounds.height() * anchorPoint.y));
     auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, bounds.size);
 
+    // Big performance optimization. Don't render anything that's entirely offscreen:
+    auto rendererBounds = Rect(0, 0, renderer->w, renderer->h);
+    auto absoluteFrame = renderedBoundsRelativeToAnchorPoint.applying(modelViewTransform);
+    if (!absoluteFrame.intersects(rendererBounds)) { return; }
+
     modelViewTransform.setAsSDLgpuMatrix();
 
+    if (mask) {
+//        auto maskFrame = (mask._presentation ?? mask).frame;
+        auto maskFrame = mask->getFrame();
+        auto maskAbsoluteFrame = maskFrame.offsetBy(absoluteFrame.origin);
+
+        // Don't intersect with previousClippingRect: in a case where both `masksToBounds` and `mask` are
+        // present, using previousClippingRect would not constrain the area as much as it might otherwise
+//        renderer.clippingRect =
+//            renderer.clippingRect?.intersection(maskAbsoluteFrame) ?? maskAbsoluteFrame
+
+        if (mask->contents) {
+            ShaderProgram::getMask()->activate(); // must activate before setting parameters (below)!
+            ShaderProgram::getMask()->setMaskImage(mask->contents, mask->bounds);
+        }
+    }
+
+    // Background color
     GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
 
+    // Contents
     if (contents) {
         auto contentsGravity = ContentsGravityTransformation(this);
         GPU_SetAnchor(contents->pointee, anchorPoint.x, anchorPoint.y);
@@ -71,6 +95,10 @@ void CALayer::render(GPU_Target* renderer) {
             contentsGravity.scale.width / contentsScale,
             contentsGravity.scale.height / contentsScale
         );
+    }
+
+    if (mask) {
+        ShaderProgram::deactivateAll();
     }
 
     draw(localRenderer);
@@ -144,6 +172,15 @@ float CALayer::getOpacity() const {
 
 void CALayer::setOpacity(float opacity) {
     this->opacity = opacity;
+}
+
+void CALayer::setMask(ptr<CALayer> mask) {
+    this->mask = mask;
+    if (mask) mask->superlayer = shared_from_this();
+}
+
+ptr<CALayer> CALayer::getMask() const {
+    return mask;
 }
 
 void CALayer::addSublayer(ptr<CALayer> layer) {
