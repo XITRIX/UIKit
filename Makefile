@@ -42,7 +42,7 @@ BUILD		:=	build
 SOURCES		:=	SDLTest
 DATA		:=	data
 INCLUDES	:=	SDLTest
-ROMFS		:=	resources
+ROMFS		:=	assets
 
 #---------------------------------------------------------------------------------
 # options for code generation

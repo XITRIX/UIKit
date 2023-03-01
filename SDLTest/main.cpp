@@ -5,6 +5,9 @@
 //  Created by Даниил Виноградов on 08.02.2023.
 //
 
+#ifndef __SWITCH__
+#include <SDL2/SDL.h>
+#endif
 #include <stdio.h>
 #include <Runner/Start.h>
 

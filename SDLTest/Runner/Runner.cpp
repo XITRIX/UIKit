@@ -28,6 +28,11 @@ void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
 int Runner::startApp() {
 #ifdef __SWITCH__
     Utils::resourcePath = "romfs:/";
+#elif __APPLE__
+#include <TargetConditionals.h>
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+    Utils::resourcePath = std::string(SDL_GetBasePath()) + "/assets/";
+#endif
 #endif
 
     renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
