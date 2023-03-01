@@ -25,5 +25,11 @@ UIColor UIColor::secondarySystemBackground = UIColor(240, 240, 240);
 UIColor UIColor::tetriarySystemBackground = UIColor(252, 255, 248);
 UIColor UIColor::systemTint = UIColor(49, 79, 235);
 
+UIColor UIColor::withAlphaComponent(float alpha) {
+    auto res = *this;
+    res.color.a *= alpha;
+    return res;
+}
+
 }
 

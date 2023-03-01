@@ -10,6 +10,12 @@
 
 namespace UIKit {
 
+CGImage::CGImage(Size size) {
+    pointee = GPU_CreateImage(size.width, size.height, GPU_FORMAT_RGBA);
+    GPU_SetAnchor(pointee, 0, 0);
+    GPU_SetBlendMode(pointee, GPU_BLEND_NORMAL_FACTOR_ALPHA);
+}
+
 CGImage::CGImage(GPU_Image* image, ptr<Data> sourceData) {
     this->sourceData = sourceData;
     pointee = image;
@@ -30,14 +36,10 @@ CGImage::CGImage(ptr<Data> sourceData) {
 }
 
 CGImage::~CGImage() {
-//    SDL_DestroyTexture(pointee);
     GPU_FreeImage(pointee);
 }
 
 Size CGImage::size() {
-//    int width, height;
-//    SDL_QueryTexture(pointee, NULL, NULL, &width, &height);
-
     return Size(pointee->w, pointee->h);
 }
 

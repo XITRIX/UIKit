@@ -20,6 +20,7 @@ class CGImage {
 public:
     GPU_Image* pointee;
 
+    CGImage(Size size);
     CGImage(ptr<Data> sourceData);
     ~CGImage();
 

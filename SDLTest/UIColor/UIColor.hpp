@@ -16,6 +16,8 @@ struct UIColor {
     UIColor(): UIColor(0, 0, 0, 0) {}
     UIColor(Uint8 r, Uint8 g, Uint8 b): color{r, g, b, 255} {}
     UIColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a): color{r, g, b, a} {}
+
+    UIColor withAlphaComponent(float alpha);
     
     static UIColor clear;
     static UIColor red;

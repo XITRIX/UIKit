@@ -35,6 +35,8 @@ int Runner::startApp() {
 #endif
 #endif
 
+    glEnable();
+
     renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
@@ -56,9 +58,10 @@ int Runner::startApp() {
 //    layer1->anchorPoint = Point(0, 0);
     layer1->setFrame(Rect(120, 120, 280, 280));
     layer1->backgroundColor = UIColor::blue;
-    layer1->setOpacity(0.5f);
+    layer1->cornerRadius = 16;
+//    layer1->setOpacity(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
-    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
+//    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
@@ -66,19 +69,26 @@ int Runner::startApp() {
     layer2->setFrame(Rect(40, 40, 80, 80));
     layer2->backgroundColor = UIColor::red;
 //    layer2->setOpacity(0.5f);
-    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
+//    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
 //    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
-    rootLayer->addSublayer(layer1);
-    layer1->setMask(layer2);
-//    layer1->addSublayer(layer2);
-//    layer2->render(renderer);
+
+    auto layer3 = std::make_shared<UIKit::CALayer>();
+    layer3->setFrame(Rect(0, 0, 80, 80));
+    layer3->backgroundColor = UIColor::black.withAlphaComponent(0.5f);
+    layer3->transform = NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f);
 
     auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
-    layer2->contents = image;
+//    layer3->contents = image;
+
+    rootLayer->addSublayer(layer1);
+//    layer1->setMask(layer2);
+    layer1->addSublayer(layer2);
+//    layer2->setMask(layer3);
+    layer2->addSublayer(layer3);
 
     // Event loop
     while(!quit)

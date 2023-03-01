@@ -60,24 +60,61 @@ void CALayer::render(GPU_Target* renderer) {
 
     modelViewTransform.setAsSDLgpuMatrix();
 
+    // `position` is always relative from the parent's origin, but the global GPU matrix is currently
+    // focused on `self.position` rather than the `origin` we calculated to render rectangles.
+    // We need to be at `origin` here though so we can translate to the next `position` in each sublayer.
+    //
+    // We also subtract `bounds` to get the strange but useful scrolling effect as on iOS.
+    auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
+        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
+        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
+        0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
+    );
+
+    // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
+    auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
+
     if (mask) {
 //        auto maskFrame = (mask._presentation ?? mask).frame;
-        auto maskFrame = mask->getFrame();
-        auto maskAbsoluteFrame = maskFrame.offsetBy(absoluteFrame.origin);
+//        auto maskFrame = mask->getFrame();
+//        auto maskAbsoluteFrame = maskFrame.offsetBy(absoluteFrame.origin);
 
         // Don't intersect with previousClippingRect: in a case where both `masksToBounds` and `mask` are
         // present, using previousClippingRect would not constrain the area as much as it might otherwise
 //        renderer.clippingRect =
 //            renderer.clippingRect?.intersection(maskAbsoluteFrame) ?? maskAbsoluteFrame
 
-        if (mask->contents) {
-            ShaderProgram::getMask()->activate(); // must activate before setting parameters (below)!
-            ShaderProgram::getMask()->setMaskImage(mask->contents, mask->bounds);
+        GPU_PushMatrix();
+        transformAtSelfOrigin.setAsSDLgpuMatrix();
+
+        // Create new FBO for mask texture
+        if (!maskFBO || maskFBO->size() != bounds.size) {
+            maskFBO = std::make_shared<CGImage>(bounds.size);
         }
-    }
+
+        // Setup FBO for mask texture
+        GPU_GetTarget(maskFBO->pointee);
+        GPU_SetActiveTarget(maskFBO->pointee->target);
+        GPU_Clear(maskFBO->pointee->target);
+
+        // Render mask texture
+        mask->render(maskFBO->pointee->target);
+
+        // Reset to old render target
+        GPU_SetActiveTarget(localRenderer);
+        GPU_PopMatrix();
+
+        // Apply mask
+        ShaderProgram::getMask()->activate(); // must activate before setting parameters (below)!
+        ShaderProgram::getMask()->setMaskImage(maskFBO, mask->getRenderedBoundsRelativeToAnchorPoint());
+    } else { maskFBO = nullptr; }
 
     // Background color
-    GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
+    if (cornerRadius <= 0.001f) {
+        GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
+    } else {
+        GPU_RectangleRoundFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), cornerRadius, backgroundColor.color);
+    }
 
     // Contents
     if (contents) {
@@ -103,21 +140,8 @@ void CALayer::render(GPU_Target* renderer) {
 
     draw(localRenderer);
 
-    // `position` is always relative from the parent's origin, but the global GPU matrix is currently
-    // focused on `self.position` rather than the `origin` we calculated to render rectangles.
-    // We need to be at `origin` here though so we can translate to the next `position` in each sublayer.
-    //
-    // We also subtract `bounds` to get the strange but useful scrolling effect as on iOS.
-    auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
-        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
-        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
-        0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
-    );
-
-    // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
-    auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
+    // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
-
     for (auto sublayer: sublayers) {
         sublayer->render(localRenderer);
     }
@@ -241,6 +265,12 @@ NXAffineTransform CALayer::affineTransform() {
 
 void CALayer::setAffineTransform(NXAffineTransform transform) {
     this->transform = NXTransform3DMakeAffineTransform(transform);
+}
+
+Rect CALayer::getRenderedBoundsRelativeToAnchorPoint() {
+    auto deltaFromAnchorPointToOrigin = Point(-(bounds.width() * anchorPoint.x),
+                                              -(bounds.height() * anchorPoint.y));
+    return Rect(deltaFromAnchorPointToOrigin, bounds.size);
 }
 
 }

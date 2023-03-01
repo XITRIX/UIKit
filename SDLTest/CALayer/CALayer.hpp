@@ -27,6 +27,7 @@ public:
     Point anchorPoint = Point(0.5f, 0.5f);
     Point position;
     Rect bounds;
+    float cornerRadius = 0;
     bool allowsGroupOpacity = true;
 
     /// Defaults to 1.0 but if the layer is associated with a view,
@@ -72,8 +73,11 @@ private:
     std::vector<ptr<CALayer>> sublayers;
     ptr<CALayer> mask;
     GPU_Image* groupingFBO = nullptr;
+    ptr<CGImage> maskFBO;
 
     void refreshGroupingFBO();
+
+    Rect getRenderedBoundsRelativeToAnchorPoint();
 };
 
 }
