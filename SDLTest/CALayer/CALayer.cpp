@@ -21,12 +21,12 @@ CALayer::~CALayer() {
 
 void CALayer::draw(GPU_Target *renderer) { }
 
-void CALayer::render(GPU_Target* renderer) {
+void CALayer::render() {
     refreshGroupingFBO();
 
     if (opacity < 0.001f) { return; }
 
-
+    auto renderer = GPU_GetActiveTarget();
     auto localRenderer = renderer;
     if (groupingFBO) {
         localRenderer = groupingFBO->target;
@@ -98,7 +98,7 @@ void CALayer::render(GPU_Target* renderer) {
         GPU_Clear(maskFBO->pointee->target);
 
         // Render mask texture
-        mask->render(maskFBO->pointee->target);
+        mask->render();
 
         // Reset to old render target
         GPU_SetActiveTarget(localRenderer);
@@ -143,7 +143,7 @@ void CALayer::render(GPU_Target* renderer) {
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
     for (auto sublayer: sublayers) {
-        sublayer->render(localRenderer);
+        sublayer->render();
     }
 
     parentOriginTransform.setAsSDLgpuMatrix();

@@ -45,7 +45,7 @@ public:
     ~CALayer();
 
     virtual void draw(GPU_Target* renderer);
-    void render(GPU_Target* renderer);
+    void render();
 //    void render(GPU_Target* renderer, Point globalOffset);
 
     Rect getFrame();
