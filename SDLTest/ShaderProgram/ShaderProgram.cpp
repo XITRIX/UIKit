@@ -6,6 +6,7 @@
 //
 
 #include "ShaderProgram.hpp"
+#include <Utils/Utils.hpp>
 
 namespace UIKit {
 
@@ -24,7 +25,7 @@ void ShaderProgramUniformVariable::set(Rect newValue) {
     GPU_SetUniformfv(location, 4, 1, vals);
 }
 
-void ShaderProgramUniformVariable::set(ptr<CGImage> newValue) {
+void ShaderProgramUniformVariable::set(std::shared_ptr<CGImage> newValue) {
     int textureUnit = 1; // Texture unit 0 is the one used internally for SDL_gpu's blitting funcs
     GPU_SetShaderImage(newValue->pointee, location, textureUnit);
 }

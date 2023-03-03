@@ -30,6 +30,8 @@ std::string string_sprintf( const char* format, Args... args ) {
   return str;
 }
 
+void setAntialiasing(bool enabled);
+
 struct Utils {
     static std::string resourcePath;
 };

@@ -14,8 +14,8 @@
             filePath = "SDLTest/CGImage/CGImage.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "CGImage::CGImage(sourceData)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "SDLTest/Data/Data.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "Data::fromPath(path)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "SDLTest/ShaderProgram/ShaderProgram.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "ShaderProgram::ShaderProgram(vertexShader, fragmentShader)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "SDLTest/ShaderProgram/ShaderProgram.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "ShaderProgram::ShaderProgram(vertexShader, fragmentShader)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,16 +119,173 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B4D144BF-3EB2-4434-8CB9-8916EB2C1634"
+            uuid = "F09E2C69-667A-4C6E-BC0A-656304FB6C58"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/ShaderProgram/ShaderProgram.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "MaskShaderProgram::setMaskImage(maskImage, frame)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03DAAC17-B992-43F7-A824-F712CC8C1FC3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SDLTest/Runner/Runner.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "Runner::refreshScreenResolution(width, height)"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "Runner::startApp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "808C0BD2-1B5D-4C10-902E-76AA57D58956"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "extern/sdl-gpu/demos/nanovg/main.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "drawNVG(_vg, _x, _y, _w, _h)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4523EF8-E745-4631-A631-A0DE726B6638"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "extern/sdl-gpu/demos/nanovg/main.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "generateFBO(_vg, _w, _h)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "extern/sdl-gpu/src/renderer_GL_common.inl"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2558"
+            endingLineNumber = "2558"
+            landmarkName = "CreateImageUsingTexture(renderer, handle, take_ownership)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateImageUsingTexture"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/extern/sdl-gpu/src/renderer_GL_common.inl"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2569"
+                  endingLineNumber = "2569"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateImageUsingTexture"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/extern/sdl-gpu/src/renderer_GL_common.inl"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2569"
+                  endingLineNumber = "2569"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateImageUsingTexture"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/extern/sdl-gpu/src/renderer_GL_common.inl"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2569"
+                  endingLineNumber = "2569"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateImageUsingTexture"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/extern/sdl-gpu/src/renderer_GL_common.inl"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2569"
+                  endingLineNumber = "2569"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateImageUsingTexture"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/extern/sdl-gpu/src/renderer_GL_common.inl"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2569"
+                  endingLineNumber = "2569"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "951E3F92-B9E6-4684-AEC0-B088DB4246AE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "CALayer::render(renderer)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -21,14 +21,14 @@ public:
     GPU_Image* pointee;
 
     CGImage(Size size);
-    CGImage(ptr<Data> sourceData);
+    CGImage(std::shared_ptr<Data> sourceData);
+    CGImage(GPU_Image* image, std::shared_ptr<Data> sourceData);
+    CGImage(GPU_Image* image): CGImage(image, nullptr) {}
     ~CGImage();
 
     Size size();
 private:
-    CGImage(GPU_Image* image, ptr<Data> sourceData);
-    
-    ptr<Data> sourceData;
+    std::shared_ptr<Data> sourceData;
 };
 
 }

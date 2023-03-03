@@ -8,6 +8,7 @@
 #include <CALayer/CALayer.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <ShaderProgram/ShaderProgram.hpp>
+#include <Renderer/Renderer.hpp>
 #include <algorithm>
 
 namespace UIKit {
@@ -21,12 +22,11 @@ CALayer::~CALayer() {
 
 void CALayer::draw(GPU_Target *renderer) { }
 
-void CALayer::render() {
+void CALayer::render(GPU_Target* renderer) {
     refreshGroupingFBO();
 
     if (opacity < 0.001f) { return; }
 
-    auto renderer = GPU_GetActiveTarget();
     auto localRenderer = renderer;
     if (groupingFBO) {
         localRenderer = groupingFBO->target;
@@ -98,7 +98,7 @@ void CALayer::render() {
         GPU_Clear(maskFBO->pointee->target);
 
         // Render mask texture
-        mask->render();
+        mask->render(maskFBO->pointee->target);
 
         // Reset to old render target
         GPU_SetActiveTarget(localRenderer);
@@ -113,7 +113,15 @@ void CALayer::render() {
     if (cornerRadius <= 0.001f) {
         GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.color);
     } else {
-        GPU_RectangleRoundFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), cornerRadius, backgroundColor.color);
+        GPU_PushMatrix();
+        Renderer::shared()->draw([this, renderedBoundsRelativeToAnchorPoint](auto context) {
+            auto color = backgroundColor.color;
+            nvgBeginPath(context);
+            nvgFillColor(context, nvgRGBA(color.r, color.g, color.b, color.a));
+            nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), cornerRadius);
+            nvgFill(context);
+        });
+        GPU_PopMatrix();
     }
 
     // Contents
@@ -143,7 +151,7 @@ void CALayer::render() {
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
     for (auto sublayer: sublayers) {
-        sublayer->render();
+        sublayer->render(localRenderer);
     }
 
     parentOriginTransform.setAsSDLgpuMatrix();
@@ -151,9 +159,10 @@ void CALayer::render() {
     if (groupingFBO) {
         GPU_SetActiveTarget(renderer);
         GPU_SetRGBA(groupingFBO, 255, 255, 255, opacity * 255);
-        GPU_Blit(groupingFBO, nullptr, renderer, 0, 0);
+//        GPU_Blit(groupingFBO, nullptr, renderer, 0, 0);
+        auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
+        GPU_BlitRect(groupingFBO, NULL, renderer, &rect);
     }
-
 
 }
 
@@ -198,32 +207,32 @@ void CALayer::setOpacity(float opacity) {
     this->opacity = opacity;
 }
 
-void CALayer::setMask(ptr<CALayer> mask) {
+void CALayer::setMask(std::shared_ptr<CALayer> mask) {
     this->mask = mask;
     if (mask) mask->superlayer = shared_from_this();
 }
 
-ptr<CALayer> CALayer::getMask() const {
+std::shared_ptr<CALayer> CALayer::getMask() const {
     return mask;
 }
 
-void CALayer::addSublayer(ptr<CALayer> layer) {
+void CALayer::addSublayer(std::shared_ptr<CALayer> layer) {
     layer->removeFromSuperlayer();
     sublayers.push_back(layer);
     layer->superlayer = this->shared_from_this();
 }
 
-void CALayer::insertSublayerAt(ptr<CALayer> layer, int index) {
+void CALayer::insertSublayerAt(std::shared_ptr<CALayer> layer, int index) {
     layer->removeFromSuperlayer();
     sublayers.insert(sublayers.begin() + index, layer);
     layer->superlayer = this->shared_from_this();
 }
 
-void CALayer::insertSublayerAbove(ptr<CALayer> layer, ptr<CALayer> sibling) {
+void CALayer::insertSublayerAbove(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling) {
     // TODO: Need to implement
 }
 
-void CALayer::insertSublayerBelow(ptr<CALayer> layer, ptr<CALayer> sibling) {
+void CALayer::insertSublayerBelow(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling) {
     // TODO: Need to implement
 }
 
@@ -242,18 +251,13 @@ void CALayer::refreshGroupingFBO() {
     }
 
     auto currentTarget = GPU_GetActiveTarget();
-    if (!groupingFBO) {
-        groupingFBO = GPU_CreateImage(currentTarget->w, currentTarget->h, GPU_FORMAT_RGBA);
-        GPU_SetAnchor(groupingFBO, 0, 0);
-        GPU_GetTarget(groupingFBO);
-        return;
-    }
 
-    if (groupingFBO->w != currentTarget->w || groupingFBO->h != currentTarget->h) {
-        GPU_FreeImage(groupingFBO);
-        groupingFBO = GPU_CreateImage(currentTarget->w, currentTarget->h, GPU_FORMAT_RGBA);
+    if (!groupingFBO || groupingFBO->w != currentTarget->w || groupingFBO->h != currentTarget->h) {
+        if (groupingFBO) { GPU_FreeImage(groupingFBO); }
+        groupingFBO = GPU_CreateImage(currentTarget->base_w, currentTarget->base_h, GPU_FORMAT_RGBA);
         GPU_SetAnchor(groupingFBO, 0, 0);
         GPU_GetTarget(groupingFBO);
+        GPU_SetVirtualResolution(groupingFBO->target, currentTarget->w, currentTarget->h);
         return;
     }
 }

@@ -6,6 +6,7 @@
 //
 
 #include <Data/Data.hpp>
+#include <Utils/Utils.hpp>
 #include <cstring>
 
 namespace UIKit {
@@ -29,7 +30,7 @@ Uint8* Data::data() const {
     return _data;
 }
 
-ptr<Data> Data::fromPath(std::string path) {
+std::shared_ptr<Data> Data::fromPath(std::string path) {
     auto fileReader = SDL_RWFromFile((Utils::resourcePath + path).c_str(), "r");
     auto fileSize = int(fileReader->size(fileReader));
 

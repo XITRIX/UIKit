@@ -22,7 +22,7 @@ struct ShaderProgramUniformVariable {
 
     void set(float newValue);
     void set(Rect newValue);
-    void set(ptr<CGImage> newValue);
+    void set(std::shared_ptr<CGImage> newValue);
 };
 
 class ShaderProgram {
@@ -45,7 +45,7 @@ private:
 class MaskShaderProgram: public ShaderProgram {
 public:
     MaskShaderProgram();
-    void setMaskImage(ptr<CGImage> maskImage, Rect frame);
+    void setMaskImage(std::shared_ptr<CGImage> maskImage, Rect frame);
 private:
     ShaderProgramUniformVariable maskFrame;
     ShaderProgramUniformVariable maskTexture;

@@ -4,3 +4,6 @@
 [submodule "extern/SDL"]
 	path = extern/SDL
 	url = https://github.com/libsdl-org/SDL.git
+[submodule "extern/nanovg"]
+	path = extern/nanovg
+	url = https://github.com/memononen/nanovg.git

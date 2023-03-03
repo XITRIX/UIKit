@@ -18,6 +18,7 @@
 using namespace UIKit;
 
 void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
+
     GPU_SetWindowResolution(width, height);
     GPU_SetVirtualResolution(renderer, width, height);
     if (rootLayer) {
@@ -34,8 +35,6 @@ int Runner::startApp() {
     Utils::resourcePath = std::string(SDL_GetBasePath()) + "/assets/";
 #endif
 #endif
-
-    glEnable();
 
     renderer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -66,7 +65,7 @@ int Runner::startApp() {
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
-    layer2->setFrame(Rect(40, 40, 80, 80));
+    layer2->setFrame(Rect(-40, 40, 80, 80));
     layer2->backgroundColor = UIColor::red;
 //    layer2->setOpacity(0.5f);
 //    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
@@ -130,8 +129,17 @@ int Runner::startApp() {
 
         GPU_Clear(renderer);
 
+//        auto ssfbo = std::make_shared<CGImage>(Size(renderer->base_w, renderer->base_h));
+//        GPU_GetTarget(ssfbo->pointee);
+//        GPU_SetActiveTarget(ssfbo->pointee->target);
+//        GPU_Clear(ssfbo->pointee->target);
+
         rootLayer->render(renderer);
 
+//        GPU_SetActiveTarget(renderer);
+//
+//        auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
+//        GPU_BlitRect(ssfbo->pointee, NULL, renderer, &rect);
 
         // Update screen
         GPU_Flip(renderer);

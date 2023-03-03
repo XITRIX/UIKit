@@ -8,10 +8,10 @@
 #pragma once
 
 #include <SDL_gpu.h>
+#include <memory>
 #include <vector>
 #include <string>
 #include <optional>
-#include <Utils/Utils.hpp>
 
 namespace UIKit {
 
@@ -23,7 +23,7 @@ public:
     Data(Uint8* bytes, int count);
     ~Data();
 
-    static ptr<Data> fromPath(std::string path);
+    static std::shared_ptr<Data> fromPath(std::string path);
 private:
     int _count;
     Uint8* _data = nullptr;

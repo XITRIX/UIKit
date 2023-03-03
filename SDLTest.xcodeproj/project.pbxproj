@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
 		7C20BD5229A4F08300646CD7 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C429A3D45F00A20694 /* glew.c */; };
-		7C20BD5829A67D6000646CD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -23,7 +22,6 @@
 		7C82D5B429AEC28B005079B8 /* renderer_GLES_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CC29A3D45F00A20694 /* renderer_GLES_3.c */; };
 		7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D329A3D45F00A20694 /* renderer_GLES_1.c */; };
 		7C82D5B629AEC28B005079B8 /* SDL_gpu_renderer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4BA29A3D45F00A20694 /* SDL_gpu_renderer.c */; };
-		7C82D5B729AEC28B005079B8 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CA29A3D45F00A20694 /* stb_image.c */; };
 		7C82D5B829AEC28B005079B8 /* renderer_OpenGL_1_BASE.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B429A3D45F00A20694 /* renderer_OpenGL_1_BASE.c */; };
 		7C82D5B929AEC28B005079B8 /* renderer_OpenGL_4.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CD29A3D45F00A20694 /* renderer_OpenGL_4.c */; };
 		7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D029A3D45F00A20694 /* SDL_gpu_shapes.c */; };
@@ -55,8 +53,14 @@
 		7C82D5E629AEC86A005079B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */; };
 		7C82D5E829AEC892005079B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E729AEC892005079B8 /* QuartzCore.framework */; };
 		7C82D5EC29AECC85005079B8 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D5E929AEC8C1005079B8 /* assets */; };
+		7C82D5EE29AFD874005079B8 /* Utils+Antialiasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */; };
+		7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
+		7C82D65029AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
+		7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D65229AFE13D005079B8 /* Renderer.cpp */; };
+		7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D65229AFE13D005079B8 /* Renderer.cpp */; };
+		7C82D65829AFF828005079B8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969329941288007483C0 /* main.cpp */; };
+		7C82D65A29B013FD005079B8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D65929B013FD005079B8 /* OpenGLES.framework */; };
 		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
-		7CB7F51E29A3D45F00A20694 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4CA29A3D45F00A20694 /* stb_image.c */; };
 		7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7F52729A3D5F400A20694 /* OpenGL.framework */; };
 		7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */; };
 		7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4BA29A3D45F00A20694 /* SDL_gpu_renderer.c */; };
@@ -213,6 +217,17 @@
 		7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E729AEC892005079B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E929AEC8C1005079B8 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Utils+Antialiasing.cpp"; sourceTree = "<group>"; };
+		7C82D61F29AFE08D005079B8 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl.h; sourceTree = "<group>"; };
+		7C82D62029AFE08D005079B8 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg.h; sourceTree = "<group>"; };
+		7C82D62129AFE08D005079B8 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		7C82D62229AFE08D005079B8 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		7C82D62329AFE08D005079B8 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontstash.h; sourceTree = "<group>"; };
+		7C82D62429AFE08D005079B8 /* nanovg_gl_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl_utils.h; sourceTree = "<group>"; };
+		7C82D62529AFE08D005079B8 /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanovg.c; sourceTree = "<group>"; };
+		7C82D65229AFE13D005079B8 /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		7C82D65329AFE13D005079B8 /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
+		7C82D65929B013FD005079B8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_RendererImpl.h; sourceTree = "<group>"; };
 		7CB7F3D929A3D45F00A20694 /* SDL_gpu_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_version.h; sourceTree = "<group>"; };
 		7CB7F3DA29A3D45F00A20694 /* SDL_gpu_OpenGL_1_BASE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_1_BASE.h; sourceTree = "<group>"; };
@@ -319,6 +334,7 @@
 				7C82D5E629AEC86A005079B8 /* AudioToolbox.framework in Frameworks */,
 				7C82D5DB29AEC7F6005079B8 /* UIKit.framework in Frameworks */,
 				7C82D5E129AEC822005079B8 /* CoreMotion.framework in Frameworks */,
+				7C82D65A29B013FD005079B8 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +365,7 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C82D65129AFE128005079B8 /* Renderer */,
 				7CD13F2329AE6AE000D0FFF5 /* Shader */,
 				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
@@ -415,9 +432,41 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7C82D5F129AFE08D005079B8 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D61E29AFE08D005079B8 /* src */,
+			);
+			path = nanovg;
+			sourceTree = "<group>";
+		};
+		7C82D61E29AFE08D005079B8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D61F29AFE08D005079B8 /* nanovg_gl.h */,
+				7C82D62029AFE08D005079B8 /* nanovg.h */,
+				7C82D62129AFE08D005079B8 /* stb_image.h */,
+				7C82D62229AFE08D005079B8 /* stb_truetype.h */,
+				7C82D62329AFE08D005079B8 /* fontstash.h */,
+				7C82D62429AFE08D005079B8 /* nanovg_gl_utils.h */,
+				7C82D62529AFE08D005079B8 /* nanovg.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		7C82D65129AFE128005079B8 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D65329AFE13D005079B8 /* Renderer.hpp */,
+				7C82D65229AFE13D005079B8 /* Renderer.cpp */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
 		7CB7F3CA29A3D45F00A20694 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				7C82D5F129AFE08D005079B8 /* nanovg */,
 				7C82D58529AEC253005079B8 /* SDL.xcodeproj */,
 				7CB7F3CB29A3D45F00A20694 /* sdl-gpu */,
 			);
@@ -622,6 +671,7 @@
 		7CB7F52629A3D5F400A20694 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C82D65929B013FD005079B8 /* OpenGLES.framework */,
 				7C82D5E729AEC892005079B8 /* QuartzCore.framework */,
 				7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */,
 				7C82D5E229AEC838005079B8 /* AVFoundation.framework */,
@@ -745,6 +795,7 @@
 			children = (
 				7CEB96A2299509C5007483C0 /* Utils.hpp */,
 				7CEB96A1299509C5007483C0 /* Utils.cpp */,
+				7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -929,6 +980,7 @@
 			files = (
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
 				7CB7F54A29A3D89C00A20694 /* renderer_OpenGL_3.c in Sources */,
+				7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */,
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
@@ -940,6 +992,7 @@
 				7CD13F0F29AA43B600D0FFF5 /* Start.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
 				7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */,
+				7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */,
 				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
 				7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */,
@@ -948,13 +1001,13 @@
 				7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */,
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
-				7C20BD5829A67D6000646CD7 /* main.cpp in Sources */,
 				7CD13F2229AE6A6E00D0FFF5 /* ShaderProgram.cpp in Sources */,
+				7C82D5EE29AFD874005079B8 /* Utils+Antialiasing.cpp in Sources */,
 				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
+				7C82D65829AFF828005079B8 /* main.cpp in Sources */,
 				7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */,
 				7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */,
 				7CD13F1729AA561B00D0FFF5 /* Data.cpp in Sources */,
-				7CB7F51E29A3D45F00A20694 /* stb_image.c in Sources */,
 				7CD13F1329AA52D600D0FFF5 /* CATextLayer.cpp in Sources */,
 				7CB7F54F29A3D89C00A20694 /* SDL_gpu_shapes.c in Sources */,
 				7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */,
@@ -971,6 +1024,7 @@
 				7C82D5CA29AEC422005079B8 /* Shader.cpp in Sources */,
 				7C82D5BB29AEC422005079B8 /* ContentsGravityTransformation.cpp in Sources */,
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
+				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,
 				7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */,
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
@@ -978,13 +1032,13 @@
 				7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
-				7C82D5B729AEC28B005079B8 /* stb_image.c in Sources */,
 				7C82D5AF29AEC28B005079B8 /* SDL_gpu_matrix.c in Sources */,
 				7C82D5CB29AEC442005079B8 /* main.cpp in Sources */,
 				7C82D5B629AEC28B005079B8 /* SDL_gpu_renderer.c in Sources */,
 				7C82D5C329AEC422005079B8 /* ShaderProgram.cpp in Sources */,
 				7C82D5B229AEC28B005079B8 /* stb_image_write.c in Sources */,
 				7C82D5B029AEC28B005079B8 /* glew.c in Sources */,
+				7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */,
 				7C82D5AE29AEC28B005079B8 /* renderer_GLES_2.c in Sources */,
 				7C82D5B929AEC28B005079B8 /* renderer_OpenGL_4.c in Sources */,
 				7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */,
@@ -1066,6 +1120,7 @@
 					SDLTest,
 					"extern/sdl-gpu/include",
 					"extern/sdl-gpu/src/externals/glew/GL",
+					extern/nanovg/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1122,6 +1177,7 @@
 					SDLTest,
 					"extern/sdl-gpu/include",
 					"extern/sdl-gpu/src/externals/glew/GL",
+					extern/nanovg/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1138,9 +1194,7 @@
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
-					SDLTest,
-					"extern/sdl-gpu/include",
-					"extern/sdl-gpu/src/externals/glew/GL",
+					"$(inherited)",
 					/opt/homebrew/include,
 				);
 				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
@@ -1161,9 +1215,7 @@
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
-					SDLTest,
-					"extern/sdl-gpu/include",
-					"extern/sdl-gpu/src/externals/glew/GL",
+					"$(inherited)",
 					/opt/homebrew/include,
 				);
 				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
@@ -1188,9 +1240,7 @@
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					SDLTest,
-					"extern/sdl-gpu/include",
-					"extern/sdl-gpu/src/externals/glew/GL",
+					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
 				INFOPLIST_FILE = "SDLTest-iOS/Info.plist";
@@ -1229,9 +1279,7 @@
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					SDLTest,
-					"extern/sdl-gpu/include",
-					"extern/sdl-gpu/src/externals/glew/GL",
+					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
 				INFOPLIST_FILE = "SDLTest-iOS/Info.plist";

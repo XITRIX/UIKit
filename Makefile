@@ -55,6 +55,7 @@ INCLUDES := $(INCLUDES) \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
+			SDLTest/Renderer \
 			SDLTest/Runner \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \
@@ -70,6 +71,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
+			SDLTest/Renderer \
 			SDLTest/Runner \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \
@@ -81,15 +83,15 @@ INCLUDES := $(INCLUDES) \
 			extern/sdl-gpu/include \
 			extern/sdl-gpu/src/externals/glew \
 			extern/sdl-gpu/src/externals/glew/GL \
-			extern/sdl-gpu/src/externals/stb_image \
 			extern/sdl-gpu/src/externals/stb_image_write \
+			extern/nanovg/src \
 
 SOURCES  := $(SOURCES) \
 			extern/Switch \
 			extern/sdl-gpu/src \
 			extern/sdl-gpu/src/externals/glew \
-			extern/sdl-gpu/src/externals/stb_image \
 			extern/sdl-gpu/src/externals/stb_image_write \
+			extern/nanovg/src \
 
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 
