@@ -89,11 +89,13 @@ void CALayer::render(GPU_Target* renderer) {
 
         // Create new FBO for mask texture
         if (!maskFBO || maskFBO->size() != bounds.size) {
-            maskFBO = std::make_shared<CGImage>(bounds.size);
+            maskFBO = std::make_shared<CGImage>(Size(localRenderer->base_w, localRenderer->base_h));
+            GPU_SetAnchor(maskFBO->pointee, 0, 0);
+            GPU_GetTarget(maskFBO->pointee);
+            GPU_SetVirtualResolution(maskFBO->pointee->target, localRenderer->w, localRenderer->h);
         }
 
         // Setup FBO for mask texture
-        GPU_GetTarget(maskFBO->pointee);
         GPU_SetActiveTarget(maskFBO->pointee->target);
         GPU_Clear(maskFBO->pointee->target);
 
@@ -104,9 +106,17 @@ void CALayer::render(GPU_Target* renderer) {
         GPU_SetActiveTarget(localRenderer);
         GPU_PopMatrix();
 
+        // Debug: - draw mask as image
+//        auto offset = mask->getRenderedBoundsRelativeToAnchorPoint();
+//        auto rect = Rect(offset.minX(), offset.minY(), localRenderer->w, localRenderer->h).gpuRect();
+//        GPU_BlitRect(maskFBO->pointee, NULL, localRenderer, &rect);
+        // Debug: - draw mask as image
+
         // Apply mask
+        auto offset = mask->getRenderedBoundsRelativeToAnchorPoint();
+        auto rect = Rect(offset.minX(), offset.minY(), localRenderer->w, localRenderer->h);
         ShaderProgram::getMask()->activate(); // must activate before setting parameters (below)!
-        ShaderProgram::getMask()->setMaskImage(maskFBO, mask->getRenderedBoundsRelativeToAnchorPoint());
+        ShaderProgram::getMask()->setMaskImage(maskFBO, rect);
     } else { maskFBO = nullptr; }
 
     // Background color
@@ -208,6 +218,9 @@ void CALayer::setOpacity(float opacity) {
 }
 
 void CALayer::setMask(std::shared_ptr<CALayer> mask) {
+    if (this->mask) {
+        this->mask->superlayer.reset();
+    }
     this->mask = mask;
     if (mask) mask->superlayer = shared_from_this();
 }
@@ -239,6 +252,12 @@ void CALayer::insertSublayerBelow(std::shared_ptr<CALayer> layer, std::shared_pt
 void CALayer::removeFromSuperlayer() {
     auto super = superlayer.lock();
     if (super == nullptr) return;
+
+    // If it's mask - remove
+    if (super->mask.get() == this) {
+        super->mask = nullptr;
+        return;
+    }
 
     super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
 }

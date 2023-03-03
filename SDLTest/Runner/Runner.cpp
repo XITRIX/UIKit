@@ -65,8 +65,8 @@ int Runner::startApp() {
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
-    layer2->setFrame(Rect(-40, 40, 80, 80));
-    layer2->backgroundColor = UIColor::red;
+    layer2->setFrame(Rect(40, 40, 80, 80));
+    layer2->backgroundColor = UIColor::red;//.withAlphaComponent(0.3f);
 //    layer2->setOpacity(0.5f);
 //    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
 //    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
@@ -75,19 +75,20 @@ int Runner::startApp() {
 
     auto layer3 = std::make_shared<UIKit::CALayer>();
     layer3->setFrame(Rect(0, 0, 80, 80));
-    layer3->backgroundColor = UIColor::black.withAlphaComponent(0.5f);
+    layer3->backgroundColor = UIColor::black;//.withAlphaComponent(0.5f);
+    layer3->cornerRadius = 16;
     layer3->transform = NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f);
 
     auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
-//    layer3->contents = image;
+    layer3->contents = image;
 
     rootLayer->addSublayer(layer1);
 //    layer1->setMask(layer2);
     layer1->addSublayer(layer2);
-//    layer2->setMask(layer3);
-    layer2->addSublayer(layer3);
+    layer2->setMask(layer3);
+//    layer2->addSublayer(layer3);
 
     // Event loop
     while(!quit)

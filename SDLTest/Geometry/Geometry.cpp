@@ -109,6 +109,10 @@ Size& Size::operator-=(const Size& rhs) {
     return *this;
 }
 
+Size Size::operator*(const float& rhs) const {
+    return Size(width * rhs, height * rhs);
+}
+
 // MARK: - RECT -
 Rect::Rect(): origin(), size() { }
 Rect::Rect(Point origin, Size size): origin(origin), size(size) { }

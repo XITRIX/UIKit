@@ -43,6 +43,8 @@ struct Size {
     Size operator-(const Size& first) const;
     Size& operator+=(const Size& rhs);
     Size& operator-=(const Size& rhs);
+
+    Size operator*(const float& rhs) const;
 };
 
 struct Rect {
