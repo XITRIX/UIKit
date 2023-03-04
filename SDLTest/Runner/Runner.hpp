@@ -20,6 +20,7 @@ private:
     GPU_Target* renderer;
     std::shared_ptr<CALayer> rootLayer = nullptr;
     void refreshScreenResolution(Uint16 width, Uint16 height);
+    int getFps();
 };
 
 }

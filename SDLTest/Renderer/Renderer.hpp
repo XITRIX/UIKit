@@ -18,6 +18,7 @@ namespace UIKit {
 
 class Renderer {
 public:
+    int primaryFont = 0;
     static Renderer* shared();
 
     void draw(std::function<void(NVGcontext*)> draw);

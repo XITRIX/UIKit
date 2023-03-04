@@ -31,5 +31,9 @@ UIColor UIColor::withAlphaComponent(float alpha) {
     return res;
 }
 
+NVGcolor UIColor::nvgColor() {
+    return nvgRGBA(color.r, color.g, color.b, color.a);
+}
+
 }
 

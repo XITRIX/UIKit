@@ -84,6 +84,7 @@ INCLUDES := $(INCLUDES) \
 			extern/sdl-gpu/src/externals/glew \
 			extern/sdl-gpu/src/externals/glew/GL \
 			extern/sdl-gpu/src/externals/stb_image_write \
+			extern/libretro/include \
 			extern/nanovg/src \
 
 SOURCES  := $(SOURCES) \
@@ -91,6 +92,9 @@ SOURCES  := $(SOURCES) \
 			extern/sdl-gpu/src \
 			extern/sdl-gpu/src/externals/glew \
 			extern/sdl-gpu/src/externals/stb_image_write \
+			extern/libretro/src/encodings \
+			extern/libretro/src/compat \
+			extern/libretro/src/features \
 			extern/nanovg/src \
 
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE

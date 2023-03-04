@@ -5,11 +5,13 @@
 //  Created by Даниил Виноградов on 08.02.2023.
 //
 
+#include <algorithm>
+#include <typeinfo>
+
 #include <CALayer/CALayer.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <ShaderProgram/ShaderProgram.hpp>
 #include <Renderer/Renderer.hpp>
-#include <algorithm>
 
 namespace UIKit {
 
@@ -20,7 +22,7 @@ CALayer::~CALayer() {
         GPU_FreeImage(groupingFBO);
 }
 
-void CALayer::draw(GPU_Target *renderer) { }
+void CALayer::draw(NVGcontext* context) { }
 
 void CALayer::render(GPU_Target* renderer) {
     refreshGroupingFBO();
@@ -88,8 +90,9 @@ void CALayer::render(GPU_Target* renderer) {
         transformAtSelfOrigin.setAsSDLgpuMatrix();
 
         // Create new FBO for mask texture
-        if (!maskFBO || maskFBO->size() != bounds.size) {
-            maskFBO = std::make_shared<CGImage>(Size(localRenderer->base_w, localRenderer->base_h));
+        auto maskSize = Size(localRenderer->base_w, localRenderer->base_h);
+        if (!maskFBO || maskFBO->size() != maskSize) {
+            maskFBO = std::make_shared<CGImage>(maskSize);
             GPU_SetAnchor(maskFBO->pointee, 0, 0);
             GPU_GetTarget(maskFBO->pointee);
             GPU_SetVirtualResolution(maskFBO->pointee->target, localRenderer->w, localRenderer->h);
@@ -155,8 +158,10 @@ void CALayer::render(GPU_Target* renderer) {
     if (mask) {
         ShaderProgram::deactivateAll();
     }
-
-    draw(localRenderer);
+    
+    Renderer::shared()->draw([this](auto context) {
+        draw(context);
+    });
 
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
@@ -259,6 +264,7 @@ void CALayer::removeFromSuperlayer() {
         return;
     }
 
+    // Find and remove this from superlayer
     super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
 }
 
@@ -271,7 +277,7 @@ void CALayer::refreshGroupingFBO() {
 
     auto currentTarget = GPU_GetActiveTarget();
 
-    if (!groupingFBO || groupingFBO->w != currentTarget->w || groupingFBO->h != currentTarget->h) {
+    if (!groupingFBO || groupingFBO->base_w != currentTarget->base_w || groupingFBO->base_h != currentTarget->base_h) {
         if (groupingFBO) { GPU_FreeImage(groupingFBO); }
         groupingFBO = GPU_CreateImage(currentTarget->base_w, currentTarget->base_h, GPU_FORMAT_RGBA);
         GPU_SetAnchor(groupingFBO, 0, 0);

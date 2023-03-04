@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <CALayer/CALayer.hpp>
+#include <Renderer/Renderer.hpp>
 #include <Utils/Utils.hpp>
 #include <UIApplication/UIApplication.hpp>
 
@@ -55,10 +56,10 @@ int Runner::startApp() {
 
     auto layer1 = std::make_shared<UIKit::CALayer>();
 //    layer1->anchorPoint = Point(0, 0);
-    layer1->setFrame(Rect(120, 120, 280, 280));
+    layer1->setFrame(Rect(44, 44, 280, 280));
     layer1->backgroundColor = UIColor::blue;
     layer1->cornerRadius = 16;
-//    layer1->setOpacity(0.5f);
+    layer1->setOpacity(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
@@ -137,6 +138,16 @@ int Runner::startApp() {
 
         rootLayer->render(renderer);
 
+        Renderer::shared()->draw([this](auto vg) {
+//            nvgFontSize(vg, 22);
+//            nvgFillColor(vg, UIColor::black.nvgColor());
+//            nvgText(vg, 20, 20, "Test text", nullptr);
+
+            nvgFontSize(vg, 21);
+            nvgFillColor(vg, UIColor::black.nvgColor());
+            nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
+        });
+
 //        GPU_SetActiveTarget(renderer);
 //
 //        auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
@@ -151,4 +162,26 @@ int Runner::startApp() {
     GPU_Quit();
 
     return 0;
+}
+
+int Runner::getFps() {
+    static double counter = 0;
+    static double res = 0;
+    static double prevres = 0;
+    static double prevt = getCPUTimeUsec();
+    double t = getCPUTimeUsec();
+    double dt = t - prevt;
+    prevt = t;
+
+    res += dt;
+    counter++;
+
+    if (counter >= 60) {
+        prevres = res;
+        res = 0;
+        counter = 0;
+    }
+
+    int fps = 1 / (prevres / 1000000.0 / 60.0);
+    return fps;
 }

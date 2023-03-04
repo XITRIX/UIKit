@@ -8,6 +8,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <nanovg.h>
 
 namespace UIKit {
 
@@ -34,6 +35,8 @@ struct UIColor {
     static UIColor secondarySystemBackground;
     static UIColor tetriarySystemBackground;
     static UIColor systemTint;
+
+    NVGcolor nvgColor();
 };
 
 }

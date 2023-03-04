@@ -45,7 +45,7 @@ public:
     CALayer();
     ~CALayer();
 
-    virtual void draw(GPU_Target* renderer);
+    virtual void draw(NVGcontext* context);
     void render(GPU_Target* renderer);
 //    void render(GPU_Target* renderer, Point globalOffset);
 

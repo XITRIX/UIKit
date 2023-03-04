@@ -10,12 +10,25 @@
 #include <string>
 #include <cassert>
 
+#include <libretro-common/features/features_cpu.h>
+#include <libretro-common/libretro.h>
+
 #pragma once
 
 namespace UIKit {
 
 #define ptr std::shared_ptr
 #define wptr std::weak_ptr
+
+typedef retro_time_t Time;
+
+/**
+ * Returns the current CPU time in microseconds.
+ */
+inline Time getCPUTimeUsec()
+{
+    return cpu_features_get_time_usec();
+}
 
 template< typename... Args >
 std::string string_sprintf( const char* format, Args... args ) {

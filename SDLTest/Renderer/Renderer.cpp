@@ -24,6 +24,8 @@
 #include <nanovg_gl.h>
 #include <nanovg_gl_utils.h>
 
+#include <Utils/Utils.hpp>
+
 namespace UIKit {
 
 Renderer* Renderer::_shared = nullptr;
@@ -46,6 +48,11 @@ Renderer::Renderer() {
 #elif SDL_GPU_DISABLE_OPENGL
     _vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
+    
+    auto path = Utils::resourcePath + "Fonts/switch_font.ttf";
+    printf("Path: -> %s\n", path.c_str());
+    primaryFont = nvgCreateFont(_vg, "regular", path.c_str());
+    nvgFontFaceId(_vg, primaryFont);
 }
 
 Renderer::~Renderer() {
