@@ -14,11 +14,11 @@ CALayer* UIView::initLayer() {
 }
 
 UIView::UIView(Rect frame) {
-    layer = std::shared_ptr<CALayer>(initLayer());
+    _layer = std::shared_ptr<CALayer>(initLayer());
 //    layer->contentsScale = UIScreen.main.scale
-    layer->contentsScale = 1; // TODO: Fix value
+    _layer->contentsScale = 1; // TODO: Fix value
 
-    layer->delegate = this;
+    _layer->delegate = this;
     setFrame(frame);
 }
 
@@ -26,14 +26,14 @@ void UIView::setFrame(Rect frame) {
     if (this->frame().size != frame.size) {
         setNeedsLayout();
     }
-    layer->setFrame(frame);
+    _layer->setFrame(frame);
 }
 
 void UIView::setBounds(Rect bounds) {
     if (this->bounds().size != bounds.size) {
         setNeedsLayout();
     }
-    layer->setBounds(bounds);
+    _layer->setBounds(bounds);
 }
 
 void UIView::setCenter(Point position) {
@@ -48,12 +48,37 @@ Point UIView::center() const {
     return Point(frame.midX(), frame.midY());
 }
 
+void UIView::addSubview(std::shared_ptr<UIView> view) {
+    setNeedsLayout();
+    _layer->addSublayer(view->_layer);
+
+    view->removeFromSuperview();
+    subviews.push_back(view);
+    view->superview = this->shared_from_this();
+}
+
+void UIView::insertSubviewAt(std::shared_ptr<UIView> view, int index) {
+ // TODO: Need to implement
+}
+
+void UIView::removeFromSuperview() {
+    auto superview = this->superview.lock();
+    if (!superview) return;
+
+    _layer->removeFromSuperlayer();
+
+    superview->subviews.erase(std::remove(superview->subviews.begin(), superview->subviews.end(), shared_from_this()), superview->subviews.end());
+    this->superview.reset();
+    superview->setNeedsLayout();
+}
+
 // Animations
 std::set<std::shared_ptr<CALayer>> UIView::layersWithAnimations;
 std::shared_ptr<CABasicAnimationPrototype> UIView::currentAnimationPrototype;
 
 void UIView::animateIfNeeded(Timer currentTime) {
-    for (auto& layer: layersWithAnimations) {
+    auto layersWithAnimationsCopy = layersWithAnimations;
+    for (auto& layer: layersWithAnimationsCopy) {
         layer->animateAt(currentTime);
     }
 }
@@ -75,11 +100,12 @@ std::shared_ptr<CABasicAnimation> UIView::actionForKey(std::string event) {
     auto keyPath = event;
     auto beginFromCurrentState = (prototype->animationGroup->options & UIViewAnimationOptions::beginFromCurrentState) == UIViewAnimationOptions::beginFromCurrentState;
 
-    auto state = beginFromCurrentState ? (layer->presentationOrSelf()) : layer;
+    auto state = beginFromCurrentState ? (_layer->presentationOrSelf()) : _layer;
 
     auto fromValue = state->value(keyPath);
+    
     if (fromValue.has_value()) {
-        return prototype->createAnimation(keyPath, fromValue);
+        return prototype->createAnimation(keyPath, fromValue.value());
     }
 
     return nullptr;

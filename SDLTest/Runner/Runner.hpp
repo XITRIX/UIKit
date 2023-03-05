@@ -9,7 +9,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL_gpu.h>
-#include <CALayer/CALayer.hpp>
+#include <UIView/UIView.hpp>
 
 namespace UIKit {
 
@@ -18,7 +18,7 @@ public:
     int startApp();
 private:
     GPU_Target* renderer;
-    std::shared_ptr<CALayer> rootLayer = nullptr;
+    std::shared_ptr<UIView> rootLayer = nullptr;
     void refreshScreenResolution(Uint16 width, Uint16 height);
     int getFps();
 };

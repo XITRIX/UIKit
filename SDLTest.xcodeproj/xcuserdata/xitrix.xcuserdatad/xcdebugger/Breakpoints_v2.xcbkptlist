@@ -142,8 +142,8 @@
             filePath = "SDLTest/Runner/Runner.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "Runner::startApp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -208,7 +208,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2569"
                   endingLineNumber = "2569"
-                  offsetFromSymbolStart = "48">
+                  offsetFromSymbolStart = "480">
                </Location>
                <Location
                   uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
@@ -223,7 +223,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2569"
                   endingLineNumber = "2569"
-                  offsetFromSymbolStart = "48">
+                  offsetFromSymbolStart = "480">
                </Location>
                <Location
                   uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
@@ -238,7 +238,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2569"
                   endingLineNumber = "2569"
-                  offsetFromSymbolStart = "48">
+                  offsetFromSymbolStart = "480">
                </Location>
                <Location
                   uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
@@ -253,7 +253,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2569"
                   endingLineNumber = "2569"
-                  offsetFromSymbolStart = "48">
+                  offsetFromSymbolStart = "480">
                </Location>
                <Location
                   uuid = "FE4C0DCC-031A-403E-93CC-DC86C5DA55E9 - 8b4632086a3c796b"
@@ -268,7 +268,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2569"
                   endingLineNumber = "2569"
-                  offsetFromSymbolStart = "48">
+                  offsetFromSymbolStart = "480">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -356,7 +356,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A8C11792-9FF5-4234-8695-1A19C16CD4A1"
+            uuid = "57565F3E-806B-496D-ABF5-AD8F61C78AAC"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -372,15 +372,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "944B98E9-0F8C-4D8E-B947-0836356BDBEB"
+            uuid = "5679DD0B-9328-454D-A0D8-55FC4173E90E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SDLTest/Runner/Runner.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "Runner::startApp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -388,16 +388,298 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "57565F3E-806B-496D-ABF5-AD8F61C78AAC"
+            uuid = "7032C936-FEC1-4B5D-9974-0DBFD66BBE77"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/UIView/UIView.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "UIView::animateIfNeeded(currentTime)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C33190C3-90A6-4EFA-9395-946D322B461F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SDLTest/CALayer/CALayer.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
-            landmarkName = "CALayer::onWillSet(keyPath)"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
+            landmarkName = "CALayer::onDidSetAnimations(wasEmpty)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEBDF297-0377-4A85-A414-D6E152510B72"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "CALayer::animateAt(currentTime)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "35EE901D-D120-4495-9766-7E6F487D11C7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "CALayer::update(presentation, animation, progress)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B8D2478-18EA-42F6-A71B-7EB91AB17382"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
+            landmarkName = "CALayer::update(presentation, animation, progress)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DADD5295-4B2C-4921-A2B1-EC6B45177D5A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "CALayer::update(presentation, animation, progress)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/Utils/Utils.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "any_optional_cast(obj)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9 - 21d3cd7340663f70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::UIColor&gt; UIKit::any_optional_cast&lt;UIKit::UIColor&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9 - 40e8a3c070833d13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::Point&gt; UIKit::any_optional_cast&lt;UIKit::Point&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9 - 3afd7f376c2b6e79"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::Rect&gt; UIKit::any_optional_cast&lt;UIKit::Rect&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "308">
+               </Location>
+               <Location
+                  uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9 - ab0a510aea7ddd48"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;float&gt; UIKit::any_optional_cast&lt;float&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "328">
+               </Location>
+               <Location
+                  uuid = "59F4D2BC-7D94-4FF2-9071-7BCC82F8D3C9 - a3356163c513d838"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::NXTransform3D&gt; UIKit::any_optional_cast&lt;UIKit::NXTransform3D&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "328">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/Utils/Utils.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "any_optional_cast(obj)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF - 21d3cd73406638d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::UIColor&gt; UIKit::any_optional_cast&lt;UIKit::UIColor&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "652">
+               </Location>
+               <Location
+                  uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF - 40e8a3c070833ab0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::Point&gt; UIKit::any_optional_cast&lt;UIKit::Point&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "660">
+               </Location>
+               <Location
+                  uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF - 3afd7f376c2b69da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::Rect&gt; UIKit::any_optional_cast&lt;UIKit::Rect&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "808">
+               </Location>
+               <Location
+                  uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF - ab0a510aea7ddaeb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;float&gt; UIKit::any_optional_cast&lt;float&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "556">
+               </Location>
+               <Location
+                  uuid = "5D753B8D-9AB8-4218-9D63-16D783F7A6FF - a3356163c513df9b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::optional&lt;UIKit::NXTransform3D&gt; UIKit::any_optional_cast&lt;UIKit::NXTransform3D&gt;(std::__1::optional&lt;std::__1::any&gt;)"
+                  moduleName = "SDLTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xitrix/Documents/Dev/iOS/SDLTest/SDLTest/Utils/Utils.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "468">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B5886862-F853-4266-BB84-70EA686D2594"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "CALayer::update(presentation, animation, progress)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

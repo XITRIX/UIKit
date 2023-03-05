@@ -199,7 +199,7 @@ void CALayer::render(GPU_Target* renderer) {
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
     for (auto sublayer: sublayers) {
-        sublayer->render(localRenderer);
+        sublayer->presentationOrSelf()->render(localRenderer);
     }
 
     parentOriginTransform.setAsSDLgpuMatrix();
@@ -404,16 +404,22 @@ void CALayer::add(std::shared_ptr<CABasicAnimation> animation, std::string keyPa
 
     if (animations.count(keyPath) && animations[keyPath]->animationGroup)
         animations[keyPath]->animationGroup->animationDidStop(false);
-    
+
+    auto isEmpty = animations.empty();
     animations[keyPath] = copy;
+    onDidSetAnimations(isEmpty);
 }
 
 void CALayer::removeAllAnimations() {
+    auto isEmpty = animations.empty();
     animations.clear();
+    onDidSetAnimations(isEmpty);
 }
 
 void CALayer::removeAnimation(std::string forKey) {
+    auto isEmpty = animations.empty();
     animations.erase(forKey);
+    onDidSetAnimations(isEmpty);
 }
 
 void CALayer::onWillSet(std::string keyPath) {
@@ -459,7 +465,8 @@ std::shared_ptr<CALayer> CALayer::presentationOrSelf() {
 void CALayer::animateAt(Timer currentTime) {
     auto presentation = createPresentation();
 
-    for (auto& animation: animations) {
+    auto animationsCopy = animations;
+    for (auto& animation: animationsCopy) {
         auto animationProgress = animation.second->progressFor(currentTime);
         update(presentation, animation.second, animationProgress);
 
@@ -475,21 +482,23 @@ void CALayer::animateAt(Timer currentTime) {
 
 // Writing into `presentation->_...` cause we don't need onWillSet to be triggered
 void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABasicAnimation> animation, float progress) {
-    auto keyPath = animation->keyPath;
-    if (!keyPath.has_value()) return;
+    if (!animation->keyPath.has_value() || !animation->fromValue.has_value()) return;
+
+    auto keyPath = animation->keyPath.value();
+    auto fromValue = animation->fromValue.value();
 
     if (keyPath == "backgroundColor") {
-        auto start = any_optional_cast<UIColor>(animation->fromValue);
+        auto start = any_optional_cast<UIColor>(fromValue);
         if (!start.has_value()) { return; }
 
-        auto end = any_optional_cast<UIColor>(animation->toValue);
+        auto end = any_optional_cast<UIColor>(animation->toValue.value());
         if (!end.has_value()) end = this->_backgroundColor;
         if (!end.has_value()) end = UIColor::clear;
 
         presentation->_backgroundColor = start->interpolationTo(end.value(), progress);
     }
     if (keyPath == "position") {
-        auto start = any_optional_cast<Point>(animation->fromValue);
+        auto start = any_optional_cast<Point>(fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Point>(animation->toValue);
@@ -498,7 +507,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         presentation->_position = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "anchorPoint") {
-        auto start = any_optional_cast<Point>(animation->fromValue);
+        auto start = any_optional_cast<Point>(fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Point>(animation->toValue);
@@ -507,7 +516,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         presentation->_anchorPoint = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "bounds") {
-        auto start = any_optional_cast<Rect>(animation->fromValue);
+        auto start = any_optional_cast<Rect>(fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Rect>(animation->toValue);
@@ -516,7 +525,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         presentation->_bounds = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "opacity") {
-        auto start = any_optional_cast<float>(animation->fromValue);
+        auto start = any_optional_cast<float>(fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<float>(animation->toValue);
@@ -525,7 +534,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         presentation->_opacity = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "transform") {
-        auto start = any_optional_cast<NXTransform3D>(animation->fromValue);
+        auto start = any_optional_cast<NXTransform3D>(fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<NXTransform3D>(animation->toValue);

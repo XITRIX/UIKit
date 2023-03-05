@@ -50,28 +50,30 @@ int Runner::startApp() {
     // Event loop exit flag
     bool quit = false;
 
-    rootLayer = std::make_shared<UIKit::CALayer>();
+    rootLayer = std::make_shared<UIView>();
     rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
     rootLayer->setBackgroundColor(UIColor::systemBackground);
 //    layer->setOpacity(1);
 
-    auto layer1 = std::make_shared<UIKit::CALayer>();
+    auto layer1 = std::make_shared<UIKit::UIView>();
 //    layer1->anchorPoint = Point(0, 0);
     layer1->setFrame(Rect(44, 44, 280, 280));
     layer1->setBackgroundColor(UIColor::blue);
-    layer1->cornerRadius = 16;
-    layer1->setOpacity(0.5f);
+    layer1->layer()->cornerRadius = 16;
+    layer1->setAlpha(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
     auto group = std::make_shared<UIViewAnimationGroup>(UIViewAnimationOptions::curveLinear, [](auto i){});
-    UIView::currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(4, 0, group);
-//    layer1->add(<#std::shared_ptr<CABasicAnimation> animation#>, <#std::string keyPath#>)
-    layer1->setPosition(Point(644, 480));
+    UIView::currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(4, 4, group);
+//    layer1->setPosition(Point(644, 480));
+    auto frame = layer1->frame();
+    frame.origin = Point(644, 480);
+    layer1->setFrame(frame);
     UIView::currentAnimationPrototype = nullptr;
 
 
-    auto layer2 = std::make_shared<UIKit::CALayer>();
+    auto layer2 = std::make_shared<UIKit::UIView>();
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
     layer2->setFrame(Rect(40, 40, 80, 80));
     layer2->setBackgroundColor(UIColor::red);//.withAlphaComponent(0.3f);
@@ -81,22 +83,22 @@ int Runner::startApp() {
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
 
-    auto layer3 = std::make_shared<UIKit::CALayer>();
+    auto layer3 = std::make_shared<UIKit::UIView>();
     layer3->setFrame(Rect(0, 0, 80, 80));
     layer3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
-    layer3->cornerRadius = 16;
-    layer3->setTransform(NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f));
+    layer3->layer()->cornerRadius = 16;
+//    layer3->setTransform(NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f));
 
     auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
-    layer3->contents = image;
+    layer3->layer()->contents = image;
 
-    rootLayer->addSublayer(layer1);
+    rootLayer->addSubview(layer1);
 //    layer1->setMask(layer2);
-    layer1->addSublayer(layer2);
-    layer2->setMask(layer3);
-//    layer2->addSublayer(layer3);
+    layer1->addSubview(layer2);
+//    layer2->setMask(layer3);
+    layer2->addSubview(layer3);
 
     // Event loop
     while(!quit)
@@ -146,7 +148,7 @@ int Runner::startApp() {
 //        GPU_SetActiveTarget(ssfbo->pointee->target);
 //        GPU_Clear(ssfbo->pointee->target);
 
-        rootLayer->render(renderer);
+        rootLayer->layer()->render(renderer);
 
         Renderer::shared()->draw([this](auto vg) {
 //            nvgFontSize(vg, 22);

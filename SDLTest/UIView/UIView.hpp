@@ -15,7 +15,7 @@
 
 namespace UIKit {
 
-class UIView: public CALayerDelegate {
+class UIView: public CALayerDelegate, public std::enable_shared_from_this<UIView> {
 public:
     bool isUserInteractionEnabled = true;
 
@@ -23,26 +23,31 @@ public:
     UIView(): UIView(Rect()) {}
 
     virtual CALayer* initLayer();
+    std::shared_ptr<CALayer> layer() { return _layer; }
 
     void setFrame(Rect frame);
-    Rect frame() const { return layer->getFrame(); }
+    Rect frame() const { return _layer->getFrame(); }
 
     void setBounds(Rect bounds);
-    Rect bounds() const { return layer->bounds(); }
+    Rect bounds() const { return _layer->bounds(); }
 
     void setCenter(Point position);
     Point center() const;
 
-    void setAlpha(float alpha) { layer->setOpacity(alpha); }
-    float alpha() const { return layer->opacity(); }
+    void setAlpha(float alpha) { _layer->setOpacity(alpha); }
+    float alpha() const { return _layer->opacity(); }
 
-    void setHidden(bool hidden) { layer->isHidden = hidden; }
-    bool isHidden() const { return layer->isHidden; }
+    void setHidden(bool hidden) { _layer->isHidden = hidden; }
+    bool isHidden() const { return _layer->isHidden; }
 
-    void setBackbroundColor(std::optional<UIColor> backbroundColor) { layer->setBackgroundColor(backbroundColor); }
-    std::optional<UIColor> backbroundColor() const { return layer->backgroundColor(); }
+    void setBackgroundColor(std::optional<UIColor> backbroundColor) { _layer->setBackgroundColor(backbroundColor); }
+    std::optional<UIColor> backgroundColor() const { return _layer->backgroundColor(); }
 
     void setNeedsLayout() { _needsLayout = true; }
+
+    void addSubview(std::shared_ptr<UIView> view);
+    void insertSubviewAt(std::shared_ptr<UIView> view, int index);
+    void removeFromSuperview();
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;
@@ -56,7 +61,8 @@ public:
 
 private:
     std::vector<std::shared_ptr<UIView>> subviews;
-    std::shared_ptr<CALayer> layer;
+    std::weak_ptr<UIView> superview;
+    std::shared_ptr<CALayer> _layer;
 
     bool _needsLayout = true;
 };

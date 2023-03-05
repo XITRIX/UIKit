@@ -48,9 +48,11 @@ std::string string_sprintf( const char* format, Args... args ) {
 void setAntialiasing(bool enabled);
 
 template< typename T >
-std::optional<T> any_optional_cast(std::any obj) {
+std::optional<T> any_optional_cast(std::optional<std::any> obj) {
+    if (!obj.has_value()) { return std::nullopt; }
+
     try {
-        return std::any_cast<T>(obj); // throws
+        return std::any_cast<T>(obj.value()); // throws
     }
     catch(const std::bad_any_cast& e) {
         return std::nullopt;
