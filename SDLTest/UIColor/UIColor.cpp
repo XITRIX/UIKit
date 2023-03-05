@@ -62,5 +62,12 @@ UIColor UIColor::interpolationTo(UIColor endResult, float progress) {
     );
 }
 
+bool UIColor::operator==(const UIColor& rhs) const {
+    return this->color.r == rhs.color.r &&
+            this->color.g == rhs.color.g &&
+            this->color.b == rhs.color.b &&
+            this->color.a == rhs.color.a;
+}
+
 }
 

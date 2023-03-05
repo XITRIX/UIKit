@@ -39,6 +39,8 @@ struct UIColor {
     NVGcolor nvgColor();
 
     UIColor interpolationTo(UIColor endResult, float progress);
+
+    bool operator==(const UIColor& rhs) const;
 };
 
 }

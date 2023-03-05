@@ -23,13 +23,13 @@ float CALayer::defaultAnimationDuration = 0.3f;
 CALayer::CALayer() { }
 
 CALayer::CALayer(CALayer* layer) {
-    bounds = layer->bounds;
     delegate = layer->delegate;
-    transform = layer->transform;
-    position = layer->position;
-    anchorPoint = layer->anchorPoint;
-    opacity = layer->opacity;
-    backgroundColor = layer->backgroundColor;
+    _bounds = layer->_bounds;
+    _transform = layer->_transform;
+    _position = layer->_position;
+    _anchorPoint = layer->_anchorPoint;
+    _opacity = layer->_opacity;
+    _backgroundColor = layer->_backgroundColor;
     isHidden = layer->isHidden;
     cornerRadius = layer->cornerRadius;
 //    borderWidth = layer->borderWidth;
@@ -58,7 +58,7 @@ void CALayer::draw(NVGcontext* context) { }
 void CALayer::render(GPU_Target* renderer) {
     refreshGroupingFBO();
 
-    if (isHidden || opacity < 0.001f) { return; }
+    if (isHidden || _opacity < 0.001f) { return; }
 
     auto localRenderer = renderer;
     if (groupingFBO) {
@@ -74,17 +74,17 @@ void CALayer::render(GPU_Target* renderer) {
     // – which may in turn be affected by its parents, and so on) to `position`, and then render rectangles
     // which may (and often do) start at a negative `origin` based on our (bounds) `size` and `anchorPoint`:
     auto parentOriginTransform = NXTransform3D(GPU_GetCurrentMatrix());
-    auto translationToPosition = CATransform3DMakeTranslation(position.x, position.y, zPosition);
+    auto translationToPosition = CATransform3DMakeTranslation(_position.x, _position.y, zPosition);
     auto transformAtPositionInParentCoordinates = parentOriginTransform * translationToPosition;
 
-    auto modelViewTransform = transformAtPositionInParentCoordinates * transform;
+    auto modelViewTransform = transformAtPositionInParentCoordinates * _transform;
 
     // Now that we're in our own coordinate system based around `anchorPoint` (which is generally the middle of
     // bounds.size), we need to find the top left of the rectangle in order to be able to render rectangles.
     // Since we have already applied our own `transform`, we can work in our own (`bounds.size`) units.
-    auto deltaFromAnchorPointToOrigin = Point(-(bounds.width() * anchorPoint.x),
-                                              -(bounds.height() * anchorPoint.y));
-    auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, bounds.size);
+    auto deltaFromAnchorPointToOrigin = Point(-(_bounds.width() * _anchorPoint.x),
+                                              -(_bounds.height() * _anchorPoint.y));
+    auto renderedBoundsRelativeToAnchorPoint = Rect(deltaFromAnchorPointToOrigin, _bounds.size);
 
     // Big performance optimization. Don't render anything that's entirely offscreen:
     auto rendererBounds = Rect(0, 0, renderer->w, renderer->h);
@@ -99,8 +99,8 @@ void CALayer::render(GPU_Target* renderer) {
     //
     // We also subtract `bounds` to get the strange but useful scrolling effect as on iOS.
     auto translationFromAnchorPointToOrigin = CATransform3DMakeTranslation(
-        deltaFromAnchorPointToOrigin.x - bounds.origin.x,
-        deltaFromAnchorPointToOrigin.y - bounds.origin.y,
+        deltaFromAnchorPointToOrigin.x - _bounds.origin.x,
+        deltaFromAnchorPointToOrigin.y - _bounds.origin.y,
         0 // If we moved (e.g.) forward to render `self`, all sublayers should start at that same zIndex
     );
 
@@ -154,13 +154,13 @@ void CALayer::render(GPU_Target* renderer) {
     } else { maskFBO = nullptr; }
 
     // Background color
-    if (backgroundColor.has_value()) {
+    if (_backgroundColor.has_value()) {
         if (cornerRadius <= 0.001f) {
-            GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), backgroundColor.value().color);
+            GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), _backgroundColor.value().color);
         } else {
             GPU_PushMatrix();
             Renderer::shared()->draw([this, renderedBoundsRelativeToAnchorPoint](auto context) {
-                auto color = backgroundColor.value().color;
+                auto color = _backgroundColor.value().color;
                 nvgBeginPath(context);
                 nvgFillColor(context, nvgRGBA(color.r, color.g, color.b, color.a));
                 nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), cornerRadius);
@@ -173,8 +173,8 @@ void CALayer::render(GPU_Target* renderer) {
     // Contents
     if (contents) {
         auto contentsGravity = ContentsGravityTransformation(this);
-        GPU_SetAnchor(contents->pointee, anchorPoint.x, anchorPoint.y);
-        GPU_SetRGBA(contents->pointee, 255, 255, 255, opacity * 255);
+        GPU_SetAnchor(contents->pointee, _anchorPoint.x, _anchorPoint.y);
+        GPU_SetRGBA(contents->pointee, 255, 255, 255, _opacity * 255);
 
         GPU_BlitTransform(
             contents->pointee,
@@ -206,7 +206,7 @@ void CALayer::render(GPU_Target* renderer) {
 
     if (groupingFBO) {
         GPU_SetActiveTarget(renderer);
-        GPU_SetRGBA(groupingFBO, 255, 255, 255, opacity * 255);
+        GPU_SetRGBA(groupingFBO, 255, 255, 255, _opacity * 255);
 //        GPU_Blit(groupingFBO, nullptr, renderer, 0, 0);
         auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
         GPU_BlitRect(groupingFBO, NULL, renderer, &rect);
@@ -216,22 +216,22 @@ void CALayer::render(GPU_Target* renderer) {
 
 Rect CALayer::getFrame() {
     // Create a rectangle based on `bounds.size` * `transform` at `position` offset by `anchorPoint`
-    auto transformedBounds = bounds.applying(transform);
+    auto transformedBounds = _bounds.applying(_transform);
 
     auto anchorPointOffset = Point(
-        transformedBounds.width() * anchorPoint.x,
-        transformedBounds.height() * anchorPoint.y
+        transformedBounds.width() * _anchorPoint.x,
+        transformedBounds.height() * _anchorPoint.y
                                    );
 
-    return Rect(position.x - anchorPointOffset.x,
-                position.y - anchorPointOffset.y,
+    return Rect(_position.x - anchorPointOffset.x,
+                _position.y - anchorPointOffset.y,
                 transformedBounds.width(),
                 transformedBounds.height());
 }
 
 void CALayer::setFrame(Rect frame) {
-    position = Point(frame.origin.x + (frame.width() * anchorPoint.x),
-                     frame.origin.y + (frame.height() * anchorPoint.y));
+    setPosition(Point(frame.origin.x + (frame.width() * _anchorPoint.x),
+                     frame.origin.y + (frame.height() * _anchorPoint.y)));
 
     auto inverseTransformOpt = affineTransform().inverted();
     if (!inverseTransformOpt.has_value()) {
@@ -244,15 +244,46 @@ void CALayer::setFrame(Rect frame) {
     // If we are shrinking the view with a transform and then setting a
     // new frame, the layer's actual `bounds` is bigger (and vice-versa):
     auto nonTransformedBoundSize = frame.applying(inverseTransform).size;
+
+    auto bounds = _bounds;
     bounds.size = nonTransformedBoundSize;
+    setBounds(bounds);
 }
 
-float CALayer::getOpacity() const {
-    return opacity;
+void CALayer::setAnchorPoint(Point anchorPoint) {
+    if (_anchorPoint == anchorPoint) return;
+    _anchorPoint = anchorPoint;
+    onWillSet("anchorPoint");
+}
+
+void CALayer::setPosition(Point position) {
+    if (_position == position) return;
+    _position = position;
+    onWillSet("position");
+}
+
+void CALayer::setBounds(Rect bounds) {
+    if (_bounds == bounds) return;
+    _bounds = bounds;
+    onWillSet("bounds");
 }
 
 void CALayer::setOpacity(float opacity) {
-    this->opacity = opacity;
+    if (_opacity == opacity) return;
+    _opacity = opacity;
+    onWillSet("opacity");
+}
+
+void CALayer::setTransform(NXTransform3D transform) {
+    if (_transform == transform) return;
+    _transform = transform;
+    onWillSet("transform");
+}
+
+void CALayer::setBackgroundColor(std::optional<UIColor> backgroundColor) {
+    if (_backgroundColor == backgroundColor) return;
+    _backgroundColor = backgroundColor;
+    onWillSet("backgroundColor");
 }
 
 void CALayer::setMask(std::shared_ptr<CALayer> mask) {
@@ -302,7 +333,7 @@ void CALayer::removeFromSuperlayer() {
 }
 
 void CALayer::refreshGroupingFBO() {
-    if (!allowsGroupOpacity || opacity >= 1 || opacity < 0.001f) {
+    if (!allowsGroupOpacity || _opacity >= 1 || _opacity < 0.001f) {
         GPU_FreeImage(groupingFBO);
         groupingFBO = nullptr;
         return;
@@ -321,11 +352,11 @@ void CALayer::refreshGroupingFBO() {
 }
 
 NXAffineTransform CALayer::affineTransform() {
-    return NXTransform3DGetAffineTransform(transform);
+    return NXTransform3DGetAffineTransform(_transform);
 }
 
 void CALayer::setAffineTransform(NXAffineTransform transform) {
-    this->transform = NXTransform3DMakeAffineTransform(transform);
+    this->setTransform(NXTransform3DMakeAffineTransform(transform));
 }
 
 CALayer* CALayer::copy() {
@@ -344,9 +375,9 @@ std::shared_ptr<CALayer> CALayer::createPresentation() {
 }
 
 Rect CALayer::getRenderedBoundsRelativeToAnchorPoint() {
-    auto deltaFromAnchorPointToOrigin = Point(-(bounds.width() * anchorPoint.x),
-                                              -(bounds.height() * anchorPoint.y));
-    return Rect(deltaFromAnchorPointToOrigin, bounds.size);
+    auto deltaFromAnchorPointToOrigin = Point(-(_bounds.width() * _anchorPoint.x),
+                                              -(_bounds.height() * _anchorPoint.y));
+    return Rect(deltaFromAnchorPointToOrigin, _bounds.size);
 }
 
 std::shared_ptr<CABasicAnimation> CALayer::defaultActionForKey(std::string event) {
@@ -412,12 +443,12 @@ void CALayer::onDidSetAnimations(bool wasEmpty) {
 }
 
 std::optional<AnimatableProperty> CALayer::value(std::string forKeyPath) {
-    if (forKeyPath == "backgroundColor") return backgroundColor;
-    if (forKeyPath == "opacity") return opacity;
-    if (forKeyPath == "bounds") return bounds;
-    if (forKeyPath == "transform") return transform;
-    if (forKeyPath == "position") return position;
-    if (forKeyPath == "anchorPoint") return anchorPoint;
+    if (forKeyPath == "backgroundColor") return _backgroundColor;
+    if (forKeyPath == "opacity") return _opacity;
+    if (forKeyPath == "bounds") return _bounds;
+    if (forKeyPath == "transform") return _transform;
+    if (forKeyPath == "position") return _position;
+    if (forKeyPath == "anchorPoint") return _anchorPoint;
     return std::nullopt;
 }
 
@@ -439,6 +470,7 @@ void CALayer::animateAt(Timer currentTime) {
     this->_presentation = animations.empty() ? nullptr : presentation;
 }
 
+// Writing into `presentation->_...` cause we don't need onWillSet to be triggered
 void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABasicAnimation> animation, float progress) {
     auto keyPath = animation->keyPath;
     if (!keyPath.has_value()) return;
@@ -448,55 +480,55 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<UIColor>(animation->toValue);
-        if (!end.has_value()) end = this->backgroundColor;
+        if (!end.has_value()) end = this->_backgroundColor;
         if (!end.has_value()) end = UIColor::clear;
 
-        presentation->backgroundColor = start->interpolationTo(end.value(), progress);
+        presentation->_backgroundColor = start->interpolationTo(end.value(), progress);
     }
     if (keyPath == "position") {
         auto start = any_optional_cast<Point>(animation->fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Point>(animation->toValue);
-        if (!end.has_value()) end = this->position;
+        if (!end.has_value()) end = this->_position;
 
-        presentation->position = start.value() + (end.value() - start.value()) * progress;
+        presentation->_position = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "anchorPoint") {
         auto start = any_optional_cast<Point>(animation->fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Point>(animation->toValue);
-        if (!end.has_value()) end = this->anchorPoint;
+        if (!end.has_value()) end = this->_anchorPoint;
 
-        presentation->anchorPoint = start.value() + (end.value() - start.value()) * progress;
+        presentation->_anchorPoint = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "bounds") {
         auto start = any_optional_cast<Rect>(animation->fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<Rect>(animation->toValue);
-        if (!end.has_value()) end = this->bounds;
+        if (!end.has_value()) end = this->_bounds;
 
-        presentation->bounds = start.value() + (end.value() - start.value()) * progress;
+        presentation->_bounds = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "opacity") {
         auto start = any_optional_cast<float>(animation->fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<float>(animation->toValue);
-        if (!end.has_value()) end = this->opacity;
+        if (!end.has_value()) end = this->_opacity;
 
-        presentation->opacity = start.value() + (end.value() - start.value()) * progress;
+        presentation->_opacity = start.value() + (end.value() - start.value()) * progress;
     }
     if (keyPath == "transform") {
         auto start = any_optional_cast<NXTransform3D>(animation->fromValue);
         if (!start.has_value()) { return; }
 
         auto end = any_optional_cast<NXTransform3D>(animation->toValue);
-        if (!end.has_value()) end = this->transform;
+        if (!end.has_value()) end = this->_transform;
 
-        presentation->transform = start.value() + (end.value() - start.value()) * progress;
+        presentation->_transform = start.value() + (end.value() - start.value()) * progress;
     }
 }
 

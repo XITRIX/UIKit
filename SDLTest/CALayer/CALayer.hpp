@@ -34,9 +34,7 @@ public:
 class CALayer: public std::enable_shared_from_this<CALayer> {
 public:
     float zPosition = 0;
-    Point anchorPoint = Point(0.5f, 0.5f);
-    Point position;
-    Rect bounds;
+
     float cornerRadius = 0;
     bool allowsGroupOpacity = true;
     bool isHidden = false;
@@ -48,10 +46,7 @@ public:
 
     CALayerContentsGravity contentsGravity = CALayerContentsGravity::resize;
 
-    std::optional<UIColor> backgroundColor;
     std::shared_ptr<CGImage> contents;
-
-    NXTransform3D transform = NXTransform3D::identity;
 
     CALayer();
     CALayer(CALayer* layer);
@@ -63,9 +58,6 @@ public:
 
     Rect getFrame();
     void setFrame(Rect frame);
-
-    void setOpacity(float opacity);
-    float getOpacity() const;
 
     void setMask(std::shared_ptr<CALayer> mask);
     std::shared_ptr<CALayer> getMask() const;
@@ -101,8 +93,33 @@ public:
 
     void animateAt(Timer currentTime);
 
+    void setAnchorPoint(Point anchorPoint);
+    Point anchorPoint() const { return _anchorPoint; }
+
+    void setPosition(Point position);
+    Point position() const { return _position; }
+
+    void setBounds(Rect bounds);
+    Rect bounds() const { return _bounds; }
+
+    void setOpacity(float opacity);
+    float opacity() const { return _opacity; }
+
+    void setTransform(NXTransform3D transform);
+    NXTransform3D transform() const { return _transform; }
+
+    void setBackgroundColor(std::optional<UIColor> backgroundColor);
+    std::optional<UIColor> backgroundColor() const { return _backgroundColor; }
+
 private:
-    float opacity = 1;
+    // Animatable
+    Point _anchorPoint = Point(0.5f, 0.5f);
+    Point _position;
+    Rect _bounds;
+    float _opacity = 1;
+    NXTransform3D _transform = NXTransform3D::identity;
+    std::optional<UIColor> _backgroundColor;
+
     std::weak_ptr<CALayer> superlayer;
     std::vector<std::shared_ptr<CALayer>> sublayers;
     std::shared_ptr<CALayer> mask;

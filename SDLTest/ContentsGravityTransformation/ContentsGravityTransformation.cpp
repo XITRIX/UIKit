@@ -16,15 +16,15 @@ ContentsGravityTransformation::ContentsGravityTransformation(CALayer* layer) {
         layer->contents->size().height / layer->contentsScale
     );
 
-    auto bounds = layer->bounds;
+    auto bounds = layer->bounds();
     
-    auto distanceToMinX = -((bounds.width() - scaledContents.width) * layer->anchorPoint.x);
+    auto distanceToMinX = -((bounds.width() - scaledContents.width) * layer->anchorPoint().x);
 
-    auto distanceToMinY = -((bounds.height() - scaledContents.height) * layer->anchorPoint.y);
+    auto distanceToMinY = -((bounds.height() - scaledContents.height) * layer->anchorPoint().y);
 
-    auto distanceToMaxX = (bounds.width() - scaledContents.width) * (1 - layer->anchorPoint.x);
+    auto distanceToMaxX = (bounds.width() - scaledContents.width) * (1 - layer->anchorPoint().x);
 
-    auto distanceToMaxY = (bounds.height() - scaledContents.height) * (1 - layer->anchorPoint.y);
+    auto distanceToMaxY = (bounds.height() - scaledContents.height) * (1 - layer->anchorPoint().y);
 
     switch (layer->contentsGravity) {
         case CALayerContentsGravity::resize: {
