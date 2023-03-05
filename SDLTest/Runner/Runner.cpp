@@ -8,6 +8,7 @@
 #include <Runner/Runner.hpp>
 
 #include <algorithm>
+#include <UIView/UIView.hpp>
 #include <CALayer/CALayer.hpp>
 #include <Renderer/Renderer.hpp>
 #include <Utils/Utils.hpp>
@@ -62,6 +63,12 @@ int Runner::startApp() {
     layer1->setOpacity(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
+
+    auto group = std::make_shared<UIViewAnimationGroup>(UIViewAnimationOptions::curveLinear, [](auto i){});
+    UIView::currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(4, 0, group);
+//    layer1->add(<#std::shared_ptr<CABasicAnimation> animation#>, <#std::string keyPath#>)
+    layer1->setPosition(Point(644, 480));
+    UIView::currentAnimationPrototype = nullptr;
 
 
     auto layer2 = std::make_shared<UIKit::CALayer>();
@@ -128,6 +135,9 @@ int Runner::startApp() {
                 break;
             }
         }
+
+        auto frameTimer = Timer();
+        UIView::animateIfNeeded(frameTimer);
 
         GPU_Clear(renderer);
 

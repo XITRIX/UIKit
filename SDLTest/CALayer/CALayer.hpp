@@ -38,7 +38,7 @@ public:
     float cornerRadius = 0;
     bool allowsGroupOpacity = true;
     bool isHidden = false;
-    std::shared_ptr<CALayerDelegate> delegate;
+    CALayerDelegate* delegate;
 
     /// Defaults to 1.0 but if the layer is associated with a view,
     /// the view sets this value to match the screen.
@@ -58,6 +58,24 @@ public:
 
     Rect getFrame();
     void setFrame(Rect frame);
+
+    void setBounds(Rect bounds);
+    Rect bounds() const { return _bounds; }
+
+    void setPosition(Point position);
+    Point position() const { return _position; }
+
+    void setOpacity(float opacity);
+    float opacity() const { return _opacity; }
+
+    void setAnchorPoint(Point anchorPoint);
+    Point anchorPoint() const { return _anchorPoint; }
+
+    void setTransform(NXTransform3D transform);
+    NXTransform3D transform() const { return _transform; }
+
+    void setBackgroundColor(std::optional<UIColor> backgroundColor);
+    std::optional<UIColor> backgroundColor() const { return _backgroundColor; }
 
     void setMask(std::shared_ptr<CALayer> mask);
     std::shared_ptr<CALayer> getMask() const;
@@ -93,24 +111,6 @@ public:
 
     void animateAt(Timer currentTime);
 
-    void setAnchorPoint(Point anchorPoint);
-    Point anchorPoint() const { return _anchorPoint; }
-
-    void setPosition(Point position);
-    Point position() const { return _position; }
-
-    void setBounds(Rect bounds);
-    Rect bounds() const { return _bounds; }
-
-    void setOpacity(float opacity);
-    float opacity() const { return _opacity; }
-
-    void setTransform(NXTransform3D transform);
-    NXTransform3D transform() const { return _transform; }
-
-    void setBackgroundColor(std::optional<UIColor> backgroundColor);
-    std::optional<UIColor> backgroundColor() const { return _backgroundColor; }
-
 private:
     // Animatable
     Point _anchorPoint = Point(0.5f, 0.5f);
@@ -129,6 +129,8 @@ private:
     std::shared_ptr<CALayer> _presentation;
     std::map<std::string, std::shared_ptr<CABasicAnimation>> animations;
 
+    std::shared_ptr<CALayer> presentationOrSelf();
+
     bool isPresentationForAnotherLayer = false;
 
     /// We disable animation on parameters of views / layers that haven't been rendered yet.
@@ -142,6 +144,8 @@ private:
     Rect getRenderedBoundsRelativeToAnchorPoint();
 
     void drawNVG(std::function<void(NVGcontext*)> draw);
+
+    friend class UIView;
 };
 
 }

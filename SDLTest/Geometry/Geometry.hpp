@@ -66,6 +66,17 @@ struct Rect {
     float midY() const;
     float maxY() const;
 
+    void setWidth(float newValue);
+    void setHeight(float newValue);
+
+    void setMinX(float newValue);
+    void setMidX(float newValue);
+    void setMaxX(float newValue);
+
+    void setMinY(float newValue);
+    void setMidY(float newValue);
+    void setMaxY(float newValue);
+
     bool contains(Point point);
     bool intersects(const Rect& other) const;
     Rect& offsetBy(const Point& offset);

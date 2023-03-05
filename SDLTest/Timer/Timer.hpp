@@ -11,6 +11,9 @@
 
 namespace UIKit {
 
+double timevalInMilliseconds(timeval time);
+double timevalInSeconds(timeval time);
+
 struct Timer {
     timeval startTime;
 

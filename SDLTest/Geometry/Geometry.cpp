@@ -129,6 +129,17 @@ float Rect::minY() const { return origin.y; }
 float Rect::midY() const { return origin.y + size.height / 2; }
 float Rect::maxY() const { return origin.y + size.height; }
 
+void Rect::setWidth(float newValue) { size.width = newValue; }
+void Rect::setHeight(float newValue) { size.height = newValue; }
+
+void Rect::setMinX(float newValue) { origin.x = newValue; }
+void Rect::setMidX(float newValue) { origin.x = newValue - (size.width / 2); }
+void Rect::setMaxX(float newValue) { origin.x = newValue - size.width; }
+
+void Rect::setMinY(float newValue) { origin.y = newValue; }
+void Rect::setMidY(float newValue) { origin.y = newValue - (size.height / 2); }
+void Rect::setMaxY(float newValue) { origin.y = newValue - size.height; }
+
 bool Rect::contains(Point point) {
     return
     (point.x >= minX()) && (point.x < maxX()) &&

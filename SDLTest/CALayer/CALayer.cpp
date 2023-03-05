@@ -420,7 +420,6 @@ void CALayer::onWillSet(std::string keyPath) {
 //    CALayer.layerTreeIsDirty = true
     auto animationKey = keyPath;
 
-
     auto animation = std::static_pointer_cast<CABasicAnimation>(actionForKey(animationKey));
     if (animation &&
         (this->hasBeenRenderedInThisPartOfOverallLayerHierarchy
@@ -452,6 +451,10 @@ std::optional<AnimatableProperty> CALayer::value(std::string forKeyPath) {
     return std::nullopt;
 }
 
+std::shared_ptr<CALayer> CALayer::presentationOrSelf() {
+    if (_presentation) return _presentation;
+    return shared_from_this();
+}
 
 void CALayer::animateAt(Timer currentTime) {
     auto presentation = createPresentation();

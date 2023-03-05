@@ -142,8 +142,8 @@
             filePath = "SDLTest/Runner/Runner.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "Runner::startApp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,6 +350,54 @@
             startingLineNumber = "126"
             endingLineNumber = "126"
             landmarkName = "CALayer::render(renderer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8C11792-9FF5-4234-8695-1A19C16CD4A1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
+            landmarkName = "CALayer::onWillSet(keyPath)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "944B98E9-0F8C-4D8E-B947-0836356BDBEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/Runner/Runner.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "Runner::startApp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57565F3E-806B-496D-ABF5-AD8F61C78AAC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SDLTest/CALayer/CALayer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "CALayer::onWillSet(keyPath)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
