@@ -157,6 +157,33 @@ bool Rect::operator==(const Rect& rhs) const {
     this->size.width == rhs.size.width && this->size.height == rhs.size.height;
 }
 
+Rect Rect::operator+(const Rect& rhs) const {
+    return Rect(
+        this->origin.x + rhs.origin.x,
+        this->origin.y + rhs.origin.y,
+        this->size.width + rhs.size.width,
+        this->size.height + rhs.size.height
+    );
+}
+
+Rect Rect::operator-(const Rect& rhs) const {
+    return Rect(
+        this->origin.x - rhs.origin.x,
+        this->origin.y - rhs.origin.y,
+        this->size.width - rhs.size.width,
+        this->size.height - rhs.size.height
+    );
+}
+
+Rect Rect::operator*(const float& rhs) const {
+    return Rect(
+        this->origin.x * rhs,
+        this->origin.y * rhs,
+        this->size.width * rhs,
+        this->size.height * rhs
+    );
+}
+
 Rect Rect::applying(NXAffineTransform t) {
     if (t.isIdentity()) { return *this; }
 

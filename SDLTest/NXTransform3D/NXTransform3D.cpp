@@ -48,8 +48,38 @@ bool NXTransform3D::operator==(const NXTransform3D& rhs) const {
     return NXTransform3DEqualToTransform(*this, rhs);
 }
 
+NXTransform3D NXTransform3D::operator+(const NXTransform3D& b) const {
+    NXTransform3D a = *this;
+    return NXTransform3D(
+        a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13, a.m14 + b.m14,
+        a.m21 + b.m21, a.m22 + b.m22, a.m23 + b.m23, a.m24 + b.m24,
+        a.m31 + b.m31, a.m32 + b.m32, a.m33 + b.m33, a.m34 + b.m34,
+        a.m41 + b.m41, a.m42 + b.m42, a.m43 + b.m43, a.m44 + b.m44
+    );
+}
+
+NXTransform3D NXTransform3D::operator-(const NXTransform3D& b) const {
+    NXTransform3D a = *this;
+    return NXTransform3D(
+        a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13, a.m14 - b.m14,
+        a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23, a.m24 - b.m24,
+        a.m31 - b.m31, a.m32 - b.m32, a.m33 - b.m33, a.m34 - b.m34,
+        a.m41 - b.m41, a.m42 - b.m42, a.m43 - b.m43, a.m44 - b.m44
+    );
+}
+
 NXTransform3D NXTransform3D::operator*(const NXTransform3D& first) const {
     return (*this).concat(first);
+}
+
+NXTransform3D NXTransform3D::operator*(const float& b) const {
+    NXTransform3D a = *this;
+    return NXTransform3D(
+        a.m11 * b, a.m12 * b, a.m13 * b, a.m14 * b,
+        a.m21 * b, a.m22 * b, a.m23 * b, a.m24 * b,
+        a.m31 * b, a.m32 * b, a.m33 * b, a.m34 * b,
+        a.m41 * b, a.m42 * b, a.m43 * b, a.m44 * b
+    );
 }
 
 Vector3 NXTransform3D::transformingVector(float x, float y, float z) const {

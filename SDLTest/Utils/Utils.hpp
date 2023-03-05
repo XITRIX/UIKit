@@ -5,10 +5,12 @@
 //  Created by Даниил Виноградов on 09.02.2023.
 //
 
+#include <any>
 #include <memory>
 #include <cstdio>
 #include <string>
 #include <cassert>
+#include <optional>
 
 #include <libretro-common/features/features_cpu.h>
 #include <libretro-common/libretro.h>
@@ -44,6 +46,16 @@ std::string string_sprintf( const char* format, Args... args ) {
 }
 
 void setAntialiasing(bool enabled);
+
+template< typename T >
+std::optional<T> any_optional_cast(std::any obj) {
+    try {
+        return std::any_cast<T>(obj); // throws
+    }
+    catch(const std::bad_any_cast& e) {
+        return std::nullopt;
+    }
+}
 
 struct Utils {
     static std::string resourcePath;

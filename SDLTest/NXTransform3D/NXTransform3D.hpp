@@ -37,13 +37,17 @@ public:
 
     NXTransform3D concat(const NXTransform3D& other) const;
     bool operator==(const NXTransform3D& rhs) const;
+    NXTransform3D operator+(const NXTransform3D& rhs) const;
+    NXTransform3D operator-(const NXTransform3D& rhs) const;
     NXTransform3D operator*(const NXTransform3D& first) const;
+    NXTransform3D operator*(const float& first) const;
 
     Vector3 transformingVector(float x, float y, float z) const;
 
     static const NXTransform3D identity;
 
     void setAsSDLgpuMatrix() const;
+
 };
 
 const NXTransform3D NXTransform3DIdentity = NXTransform3D(1, 0, 0, 0,

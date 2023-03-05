@@ -66,6 +66,22 @@
 		7C82D67A29B2B950005079B8 /* compat_strl.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D67429B2B94F005079B8 /* compat_strl.c */; };
 		7C82D67B29B2B950005079B8 /* features_cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D67629B2B94F005079B8 /* features_cpu.c */; };
 		7C82D67C29B2B950005079B8 /* features_cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D67629B2B94F005079B8 /* features_cpu.c */; };
+		7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D68A29B387C1005079B8 /* CABasicAnimation.cpp */; };
+		7C82D68D29B387C1005079B8 /* CABasicAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D68A29B387C1005079B8 /* CABasicAnimation.cpp */; };
+		7C82D69129B38DCA005079B8 /* CATransaction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D68F29B38DCA005079B8 /* CATransaction.cpp */; };
+		7C82D69229B38DCA005079B8 /* CATransaction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D68F29B38DCA005079B8 /* CATransaction.cpp */; };
+		7C82D69629B3ED4C005079B8 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69429B3ED4C005079B8 /* Timer.cpp */; };
+		7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69429B3ED4C005079B8 /* Timer.cpp */; };
+		7C82D69C29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69A29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp */; };
+		7C82D69D29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69A29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp */; };
+		7C82D6A129B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69F29B3F50D005079B8 /* UIViewAnimationGroup.cpp */; };
+		7C82D6A229B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D69F29B3F50D005079B8 /* UIViewAnimationGroup.cpp */; };
+		7C82D6A829B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6A629B3F971005079B8 /* CAMediaTimingFunction.cpp */; };
+		7C82D6A929B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6A629B3F971005079B8 /* CAMediaTimingFunction.cpp */; };
+		7C82D6AD29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6AB29B3FF35005079B8 /* UIViewAnimationOptions.cpp */; };
+		7C82D6AE29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6AB29B3FF35005079B8 /* UIViewAnimationOptions.cpp */; };
+		7C82D6B229B440F4005079B8 /* UIView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6B029B440F4005079B8 /* UIView.cpp */; };
+		7C82D6B329B440F4005079B8 /* UIView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6B029B440F4005079B8 /* UIView.cpp */; };
 		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
 		7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7F52729A3D5F400A20694 /* OpenGL.framework */; };
 		7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */; };
@@ -250,6 +266,24 @@
 		7C82D67229B2B94F005079B8 /* encoding_utf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encoding_utf.c; sourceTree = "<group>"; };
 		7C82D67429B2B94F005079B8 /* compat_strl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compat_strl.c; sourceTree = "<group>"; };
 		7C82D67629B2B94F005079B8 /* features_cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = features_cpu.c; sourceTree = "<group>"; };
+		7C82D68829B384FE005079B8 /* CAAction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAAction.hpp; sourceTree = "<group>"; };
+		7C82D68A29B387C1005079B8 /* CABasicAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CABasicAnimation.cpp; sourceTree = "<group>"; };
+		7C82D68B29B387C1005079B8 /* CABasicAnimation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CABasicAnimation.hpp; sourceTree = "<group>"; };
+		7C82D68F29B38DCA005079B8 /* CATransaction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CATransaction.cpp; sourceTree = "<group>"; };
+		7C82D69029B38DCA005079B8 /* CATransaction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CATransaction.hpp; sourceTree = "<group>"; };
+		7C82D69429B3ED4C005079B8 /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		7C82D69529B3ED4C005079B8 /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
+		7C82D69A29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CABasicAnimationPrototype.cpp; sourceTree = "<group>"; };
+		7C82D69B29B3F4E1005079B8 /* CABasicAnimationPrototype.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CABasicAnimationPrototype.hpp; sourceTree = "<group>"; };
+		7C82D69F29B3F50D005079B8 /* UIViewAnimationGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIViewAnimationGroup.cpp; sourceTree = "<group>"; };
+		7C82D6A029B3F50D005079B8 /* UIViewAnimationGroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIViewAnimationGroup.hpp; sourceTree = "<group>"; };
+		7C82D6A429B3F859005079B8 /* AnimatableProperty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimatableProperty.hpp; sourceTree = "<group>"; };
+		7C82D6A629B3F971005079B8 /* CAMediaTimingFunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAMediaTimingFunction.cpp; sourceTree = "<group>"; };
+		7C82D6A729B3F971005079B8 /* CAMediaTimingFunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAMediaTimingFunction.hpp; sourceTree = "<group>"; };
+		7C82D6AB29B3FF35005079B8 /* UIViewAnimationOptions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIViewAnimationOptions.cpp; sourceTree = "<group>"; };
+		7C82D6AC29B3FF35005079B8 /* UIViewAnimationOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIViewAnimationOptions.hpp; sourceTree = "<group>"; };
+		7C82D6B029B440F4005079B8 /* UIView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIView.cpp; sourceTree = "<group>"; };
+		7C82D6B129B440F4005079B8 /* UIView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIView.hpp; sourceTree = "<group>"; };
 		7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_RendererImpl.h; sourceTree = "<group>"; };
 		7CB7F3D929A3D45F00A20694 /* SDL_gpu_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_version.h; sourceTree = "<group>"; };
 		7CB7F3DA29A3D45F00A20694 /* SDL_gpu_OpenGL_1_BASE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_1_BASE.h; sourceTree = "<group>"; };
@@ -387,6 +421,11 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C82D6AF29B440EA005079B8 /* UIView */,
+				7C82D69829B3F4CF005079B8 /* Animations */,
+				7C82D69329B3ED42005079B8 /* Timer */,
+				7C82D68E29B38DBF005079B8 /* CATransaction */,
+				7C82D68729B384F5005079B8 /* CAAction */,
 				7C82D65129AFE128005079B8 /* Renderer */,
 				7CD13F2329AE6AE000D0FFF5 /* Shader */,
 				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
@@ -594,6 +633,107 @@
 				7C82D67629B2B94F005079B8 /* features_cpu.c */,
 			);
 			path = features;
+			sourceTree = "<group>";
+		};
+		7C82D68729B384F5005079B8 /* CAAction */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D68829B384FE005079B8 /* CAAction.hpp */,
+			);
+			path = CAAction;
+			sourceTree = "<group>";
+		};
+		7C82D68929B387AF005079B8 /* CABasicAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D68B29B387C1005079B8 /* CABasicAnimation.hpp */,
+				7C82D68A29B387C1005079B8 /* CABasicAnimation.cpp */,
+			);
+			path = CABasicAnimation;
+			sourceTree = "<group>";
+		};
+		7C82D68E29B38DBF005079B8 /* CATransaction */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D69029B38DCA005079B8 /* CATransaction.hpp */,
+				7C82D68F29B38DCA005079B8 /* CATransaction.cpp */,
+			);
+			path = CATransaction;
+			sourceTree = "<group>";
+		};
+		7C82D69329B3ED42005079B8 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D69529B3ED4C005079B8 /* Timer.hpp */,
+				7C82D69429B3ED4C005079B8 /* Timer.cpp */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		7C82D69829B3F4CF005079B8 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6A329B3F851005079B8 /* AnimatableProperty */,
+				7C82D68929B387AF005079B8 /* CABasicAnimation */,
+				7C82D69929B3F4D4005079B8 /* CABasicAnimationPrototype */,
+				7C82D6A529B3F96A005079B8 /* CAMediaTimingFunction */,
+				7C82D69E29B3F507005079B8 /* UIViewAnimationGroup */,
+				7C82D6AA29B3FF2A005079B8 /* UIViewAnimationOptions */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		7C82D69929B3F4D4005079B8 /* CABasicAnimationPrototype */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D69B29B3F4E1005079B8 /* CABasicAnimationPrototype.hpp */,
+				7C82D69A29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp */,
+			);
+			path = CABasicAnimationPrototype;
+			sourceTree = "<group>";
+		};
+		7C82D69E29B3F507005079B8 /* UIViewAnimationGroup */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6A029B3F50D005079B8 /* UIViewAnimationGroup.hpp */,
+				7C82D69F29B3F50D005079B8 /* UIViewAnimationGroup.cpp */,
+			);
+			path = UIViewAnimationGroup;
+			sourceTree = "<group>";
+		};
+		7C82D6A329B3F851005079B8 /* AnimatableProperty */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6A429B3F859005079B8 /* AnimatableProperty.hpp */,
+			);
+			path = AnimatableProperty;
+			sourceTree = "<group>";
+		};
+		7C82D6A529B3F96A005079B8 /* CAMediaTimingFunction */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6A729B3F971005079B8 /* CAMediaTimingFunction.hpp */,
+				7C82D6A629B3F971005079B8 /* CAMediaTimingFunction.cpp */,
+			);
+			path = CAMediaTimingFunction;
+			sourceTree = "<group>";
+		};
+		7C82D6AA29B3FF2A005079B8 /* UIViewAnimationOptions */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6AC29B3FF35005079B8 /* UIViewAnimationOptions.hpp */,
+				7C82D6AB29B3FF35005079B8 /* UIViewAnimationOptions.cpp */,
+			);
+			path = UIViewAnimationOptions;
+			sourceTree = "<group>";
+		};
+		7C82D6AF29B440EA005079B8 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				7C82D6B129B440F4005079B8 /* UIView.hpp */,
+				7C82D6B029B440F4005079B8 /* UIView.cpp */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		7CB7F3CA29A3D45F00A20694 /* extern */ = {
@@ -1113,24 +1253,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
+				7C82D6A129B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
 				7CB7F54A29A3D89C00A20694 /* renderer_OpenGL_3.c in Sources */,
 				7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */,
+				7C82D6AD29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
+				7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
 				7CD13F1B29AB6DD900D0FFF5 /* ContentsGravityTransformation.cpp in Sources */,
 				7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */,
 				7CB7F54B29A3D89C00A20694 /* renderer_OpenGL_4.c in Sources */,
+				7C82D6B229B440F4005079B8 /* UIView.cpp in Sources */,
 				7CB7F56229A43C8000A20694 /* Runner.cpp in Sources */,
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
 				7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */,
 				7CD13F0F29AA43B600D0FFF5 /* Start.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
+				7C82D69629B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */,
 				7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */,
+				7C82D69C29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
+				7C82D69129B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
 				7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */,
+				7C82D6A829B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,
 				7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */,
 				7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */,
 				7C82D67B29B2B950005079B8 /* features_cpu.c in Sources */,
@@ -1163,9 +1311,12 @@
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,
+				7C82D69D29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */,
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
 				7C82D5C129AEC422005079B8 /* Utils.cpp in Sources */,
+				7C82D6AE29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
+				7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
@@ -1173,6 +1324,7 @@
 				7C82D5CB29AEC442005079B8 /* main.cpp in Sources */,
 				7C82D67829B2B950005079B8 /* encoding_utf.c in Sources */,
 				7C82D5B629AEC28B005079B8 /* SDL_gpu_renderer.c in Sources */,
+				7C82D6A929B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,
 				7C82D67A29B2B950005079B8 /* compat_strl.c in Sources */,
 				7C82D67C29B2B950005079B8 /* features_cpu.c in Sources */,
 				7C82D5C329AEC422005079B8 /* ShaderProgram.cpp in Sources */,
@@ -1183,6 +1335,7 @@
 				7C82D5B929AEC28B005079B8 /* renderer_OpenGL_4.c in Sources */,
 				7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */,
 				7C82D5C729AEC422005079B8 /* UIColor.cpp in Sources */,
+				7C82D6B329B440F4005079B8 /* UIView.cpp in Sources */,
 				7C82D5B829AEC28B005079B8 /* renderer_OpenGL_1_BASE.c in Sources */,
 				7C82D5BF29AEC422005079B8 /* Runner.cpp in Sources */,
 				7C82D5BC29AEC422005079B8 /* NXTransform3D.cpp in Sources */,
@@ -1190,6 +1343,9 @@
 				7C82D5C229AEC422005079B8 /* NXAffineTransform.cpp in Sources */,
 				7C82D5AD29AEC28A005079B8 /* renderer_OpenGL_3.c in Sources */,
 				7C82D5C829AEC422005079B8 /* Start.cpp in Sources */,
+				7C82D68D29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
+				7C82D69229B38DCA005079B8 /* CATransaction.cpp in Sources */,
+				7C82D6A229B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1258,6 +1414,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					SDLTest,
+					SDLTest/Animations,
 					"extern/sdl-gpu/include",
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
@@ -1316,6 +1473,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					SDLTest,
+					SDLTest/Animations,
 					"extern/sdl-gpu/include",
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,

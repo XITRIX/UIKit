@@ -35,5 +35,32 @@ NVGcolor UIColor::nvgColor() {
     return nvgRGBA(color.r, color.g, color.b, color.a);
 }
 
+UIColor UIColor::interpolationTo(UIColor endResult, float progress) {
+    auto startR = color.r;
+    auto startG = color.g;
+    auto startB = color.b;
+    auto startA = color.a;
+
+    auto endR = endResult.color.r;
+    auto endG = endResult.color.g;
+    auto endB = endResult.color.b;
+    auto endA = endResult.color.a;
+
+    auto currentProgress = progress * 255;
+    auto maxProgress = UINT8_MAX;
+
+    auto resultR = startR + (endR - startR) * currentProgress / maxProgress;
+    auto resultG = startG + (endG - startG) * currentProgress / maxProgress;
+    auto resultB = startB + (endB - startB) * currentProgress / maxProgress;
+    auto resultA = startA + (endA - startA) * currentProgress / maxProgress;
+
+    return UIColor(
+        abs(resultR),
+        abs(resultG),
+        abs(resultB),
+        abs(resultA)
+    );
+}
+
 }
 

@@ -37,6 +37,8 @@ struct UIColor {
     static UIColor systemTint;
 
     NVGcolor nvgColor();
+
+    UIColor interpolationTo(UIColor endResult, float progress);
 };
 
 }

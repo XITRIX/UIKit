@@ -72,6 +72,9 @@ struct Rect {
     Rect& offsetBy(const float& offsetX, const float& offsetY);
 
     bool operator==(const Rect& rhs) const;
+    Rect operator+(const Rect& rhs) const;
+    Rect operator-(const Rect& rhs) const;
+    Rect operator*(const float& rhs) const;
 
     Rect applying(NXAffineTransform transform);
     Rect applying(NXTransform3D transform);
