@@ -681,12 +681,12 @@
 		7C82D69829B3F4CF005079B8 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				7C82D6B929B55F83005079B8 /* CASpringAnimation */,
-				7C82D6B429B55E40005079B8 /* CASpringAnimationPrototype */,
 				7C82D6A329B3F851005079B8 /* AnimatableProperty */,
 				7C82D68929B387AF005079B8 /* CABasicAnimation */,
 				7C82D69929B3F4D4005079B8 /* CABasicAnimationPrototype */,
 				7C82D6A529B3F96A005079B8 /* CAMediaTimingFunction */,
+				7C82D6B929B55F83005079B8 /* CASpringAnimation */,
+				7C82D6B429B55E40005079B8 /* CASpringAnimationPrototype */,
 				7C82D69E29B3F507005079B8 /* UIViewAnimationGroup */,
 				7C82D6AA29B3FF2A005079B8 /* UIViewAnimationOptions */,
 			);

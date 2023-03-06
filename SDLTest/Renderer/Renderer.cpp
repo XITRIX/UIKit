@@ -15,9 +15,9 @@
 #define NANOVG_GLES2_IMPLEMENTATION
 
 #if __APPLE__
-#import <OpenGLES/ES2/glext.h>
+#include <OpenGLES/ES2/glext.h>
 #else
-#import <GLES2/gl2.h>
+#include <GLES2/gl2.h>
 #endif
 #endif
 
@@ -48,7 +48,7 @@ Renderer::Renderer() {
 #elif SDL_GPU_DISABLE_OPENGL
     _vg = nvgCreateGLES2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 #endif
-    
+
     auto path = Utils::resourcePath + "Fonts/switch_font.ttf";
     printf("Path: -> %s\n", path.c_str());
     primaryFont = nvgCreateFont(_vg, "regular", path.c_str());

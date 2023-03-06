@@ -13,15 +13,15 @@ namespace UIKit {
 
 struct NXAffineTransform {
 public:
-    double m11, m12, m21, m22, tX, tY;
+    float m11, m12, m21, m22, tX, tY;
 
     NXAffineTransform();
-    NXAffineTransform(double m11, double m12, double m21, double m22, double tX, double tY);
+    NXAffineTransform(float m11, float m12, float m21, float m22, float tX, float tY);
 
-    static NXAffineTransform translationBy(double x, double y);
-    static NXAffineTransform scaleBy(double x, double y);
-    static NXAffineTransform scale(double factor);
-    static NXAffineTransform rotationBy(double angle);
+    static NXAffineTransform translationBy(float x, float y);
+    static NXAffineTransform scaleBy(float x, float y);
+    static NXAffineTransform scale(float factor);
+    static NXAffineTransform rotationBy(float angle);
 
     std::optional<NXAffineTransform> inverted() const;
     bool isIdentity() const;

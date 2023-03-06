@@ -69,6 +69,8 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Animations/CABasicAnimation \
 			SDLTest/Animations/CABasicAnimationPrototype \
 			SDLTest/Animations/CAMediaTimingFunction \
+			SDLTest/Animations/CASpringAnimation \
+			SDLTest/Animations/CASpringAnimationPrototype \
 			SDLTest/Animations/UIViewAnimationGroup \
 			SDLTest/Animations/UIViewAnimationOptions \
 			SDLTest/CALayer \

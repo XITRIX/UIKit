@@ -18,7 +18,7 @@ public:
     int startApp();
 private:
     GPU_Target* renderer;
-    std::shared_ptr<UIView> rootLayer = nullptr;
+    std::shared_ptr<UIView> window = nullptr;
     void refreshScreenResolution(Uint16 width, Uint16 height);
     int getFps();
 };

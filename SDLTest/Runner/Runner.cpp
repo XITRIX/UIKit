@@ -23,8 +23,8 @@ void Runner::refreshScreenResolution(Uint16 width, Uint16 height) {
 
     GPU_SetWindowResolution(width, height);
     GPU_SetVirtualResolution(renderer, width, height);
-    if (rootLayer) {
-        rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
+    if (window) {
+        window->setFrame(Rect(0, 0, renderer->w, renderer->h));
     }
 }
 
@@ -50,64 +50,68 @@ int Runner::startApp() {
     // Event loop exit flag
     bool quit = false;
 
-    rootLayer = std::make_shared<UIView>();
-    rootLayer->setFrame(Rect(0, 0, renderer->w, renderer->h));
-    rootLayer->setBackgroundColor(UIColor::systemBackground);
+    window = std::make_shared<UIView>();
+    window->setFrame(Rect(0, 0, renderer->w, renderer->h));
+    window->setBackgroundColor(UIColor::systemBackground);
 //    layer->setOpacity(1);
 
-    auto layer1 = std::make_shared<UIKit::UIView>();
+    auto view1 = std::make_shared<UIKit::UIView>();
 //    layer1->anchorPoint = Point(0, 0);
-    layer1->setFrame(Rect(44, 44, 280, 280));
-    layer1->setBackgroundColor(UIColor::blue);
-    layer1->layer()->cornerRadius = 16;
+    view1->setFrame(Rect(44, 44, 280, 280));
+    view1->setBackgroundColor(UIColor::blue);
+    view1->layer()->cornerRadius = 16;
 //    layer1->setAlpha(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
-    auto layer2 = std::make_shared<UIKit::UIView>();
+    auto view2 = std::make_shared<UIKit::UIView>();
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
-    layer2->setFrame(Rect(40, 40, 80, 80));
-    layer2->setBackgroundColor(UIColor::red);//.withAlphaComponent(0.3f);
+    view2->setFrame(Rect(40, 40, 80, 80));
+    view2->setBackgroundColor(UIColor::red);//.withAlphaComponent(0.3f);
 //    layer2->setOpacity(0.5f);
 //    layer2->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(0, 40, 0);
 //    layer2->transform = NXTransform3D::scaleBy(2.f, 1, 0); //* NXTransform3D::translationBy(0, 40, 0);
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
 
-    auto layer3 = std::make_shared<UIKit::UIView>();
-    layer3->setFrame(Rect(0, 0, 80, 80));
-    layer3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
-    layer3->layer()->cornerRadius = 16;
+    auto view3 = std::make_shared<UIKit::UIView>();
+    view3->setFrame(Rect(0, 0, 80, 80));
+    view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
+    view3->layer()->cornerRadius = 16;
 //    layer3->setTransform(NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f));
 
     auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
-    layer3->layer()->contents = image;
+    view3->layer()->contents = image;
 
-    rootLayer->addSubview(layer1);
+    window->addSubview(view1);
 //    layer1->setMask(layer2);
-    layer1->addSubview(layer2);
+    view1->addSubview(view2);
 //    layer2->setMask(layer3);
-    layer2->addSubview(layer3);
+    view2->addSubview(view3);
 
-    UIView::animate(4, 4, UIViewAnimationOptions::curveLinear, [layer1, layer3]() {
-//        auto frame = layer1->frame();
-//        frame.origin = Point(644, 480);
-//        layer1->setFrame(frame);
+    UIView::animate(4, 4, UIViewAnimationOptions::curveEaseOutElastic, [view1, view3]() {
+        view3->setBackgroundColor(UIColor::cyan);
+        view3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(2));
 
-        layer3->setTransform(NXAffineTransform::rotationBy(160));
+        auto frame = view1->frame();
+        frame.origin = Point(644, 280);
+        view1->setFrame(frame);
     });
 
 //    UIView::animate(4, 4, 0, 0, UIViewAnimationOptions::none, [layer1, layer3]() {
+//        layer3->setBackgroundColor(UIColor::cyan);
+//        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(2));
+//
 //        auto frame = layer1->frame();
-//        frame.origin = Point(644, 480);
+//        frame.origin = Point(644, 280);
 //        layer1->setFrame(frame);
-//
-//        layer1->setAlpha(0.3f);
-//        layer1->setBackgroundColor(UIColor::green);
-//
-//        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(0.5f));
+////
+////        layer1->setAlpha(0.3f);
+////        layer1->setBackgroundColor(UIColor::green);
+////
+////        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(0.5f));
 //    });
 
     // Event loop
@@ -158,7 +162,7 @@ int Runner::startApp() {
 //        GPU_SetActiveTarget(ssfbo->pointee->target);
 //        GPU_Clear(ssfbo->pointee->target);
 
-        rootLayer->layer()->render(renderer);
+        window->layer()->render(renderer);
 
         Renderer::shared()->draw([this](auto vg) {
 //            nvgFontSize(vg, 22);
