@@ -8,17 +8,17 @@
 #include <NXTransform3D/NXTransform3D.hpp>
 #include <Geometry/Geometry.hpp>
 
-#define RAD_PER_DEG 0.017453293f
+#define RAD_PER_DEG 0.017453293
 
 namespace UIKit {
 
 const NXTransform3D NXTransform3D::identity = NXTransform3DIdentity;
 
 NXTransform3D::NXTransform3D(
-    float m11, float m12, float m13, float m14,
-    float m21, float m22, float m23, float m24,
-    float m31, float m32, float m33, float m34,
-    float m41, float m42, float m43, float m44)
+    double m11, double m12, double m13, double m14,
+    double m21, double m22, double m23, double m24,
+    double m31, double m32, double m33, double m34,
+    double m41, double m42, double m43, double m44)
 :
     m11(m11), m12(m12), m13(m13), m14(m14),
     m21(m21), m22(m22), m23(m23), m24(m24),
@@ -73,7 +73,7 @@ NXTransform3D NXTransform3D::operator*(const NXTransform3D& first) const {
     return (*this).concat(first);
 }
 
-NXTransform3D NXTransform3D::operator*(const float& b) const {
+NXTransform3D NXTransform3D::operator*(const double& b) const {
     NXTransform3D a = *this;
     return NXTransform3D(
         a.m11 * b, a.m12 * b, a.m13 * b, a.m14 * b,
@@ -83,11 +83,45 @@ NXTransform3D NXTransform3D::operator*(const float& b) const {
     );
 }
 
-//NXTransform3D NXTransform3D::interpolate(const float& progress) const {
-//
-//}
+NXTransform3D NXTransform3D::interpolate(const double& progress) const {
+    auto affine = NXTransform3DGetAffineTransform(*this);
 
-Vector3 NXTransform3D::transformingVector(float x, float y, float z) const {
+    double test = asin(affine.m12) / RAD_PER_DEG;
+    double angle = 180 - test;
+
+    auto rotateInverce = NXAffineTransform::rotationBy(angle);
+//    auto affineInverce = affine.inverted();
+
+    affine = affine * rotateInverce;
+
+    angle *= progress;
+    auto res = NXTransform3DMakeAffineTransform(affine) * progress;
+
+    return res * NXTransform3D::rotationBy(angle, 0, 0, 1);
+}
+
+NXTransform3D NXTransform3D::interpolateTo(const NXTransform3D& matrix, const double& progress) const {
+    auto thisInverce = NXTransform3DGetAffineTransform(*this).inverted().value();
+    auto difference = NXTransform3DGetAffineTransform(matrix) * thisInverce;
+
+    double test = asin(double(difference.m12)) / 0.017453293;
+    double angle = 180 - test;
+
+    auto rotateInverce = NXAffineTransform::rotationBy(angle).inverted().value();
+
+    difference = difference * rotateInverce;
+
+    auto scale = Point(difference.m11, difference.m22);
+    auto translate = Point(difference.tX, difference.tY);
+
+    angle *= progress;
+    scale = (scale - Point(1, 1)) * progress + Point(1, 1);
+    translate = translate * progress;
+
+    return (*this) * NXTransform3D::translationBy(translate.x, translate.y, 0) * NXTransform3D::scaleBy(scale.x, scale.y, 1) * NXTransform3D::rotationBy(angle, 0, 0, 1);
+}
+
+Vector3 NXTransform3D::transformingVector(double x, double y, double z) const {
     auto newX = m11 * x + m21 * y + m31 * z + m41;
     auto newY = m12 * x + m22 * y + m32 * z + m42;
     auto newZ = m13 * x + m23 * y + m33 * z + m43;
@@ -112,7 +146,7 @@ NXTransform3D NXTransform3DMakeAffineTransform(NXAffineTransform m) {
         m.tX,  m.tY,  0,    1);
 }
 
-NXTransform3D CATransform3DMakeTranslation(float tx, float ty, float tz) {
+NXTransform3D CATransform3DMakeTranslation(double tx, double ty, double tz) {
     return NXTransform3D(
         1,     0,     0,    0,
         0,     1,     0,    0,
@@ -120,7 +154,7 @@ NXTransform3D CATransform3DMakeTranslation(float tx, float ty, float tz) {
         tx,    ty,    tz,   1);
 }
 
-NXTransform3D CATransform3DMakeScale(float tx, float ty, float tz) {
+NXTransform3D CATransform3DMakeScale(double tx, double ty, double tz) {
     return NXTransform3D(
        tx,     0,     0,    0,
         0,    ty,     0,    0,
@@ -128,14 +162,14 @@ NXTransform3D CATransform3DMakeScale(float tx, float ty, float tz) {
         0,     0,     0,    1);
 }
 
-NXTransform3D CATransform3DMakeRotation(float angle, float x, float y, float z) {
-    float p, radians, c, s, c_, zc_, yc_, xzc_, xyc_, yzc_, xs, ys, zs;
+NXTransform3D CATransform3DMakeRotation(double angle, double x, double y, double z) {
+    double p, radians, c, s, c_, zc_, yc_, xzc_, xyc_, yzc_, xs, ys, zs;
 
-    p = 1/sqrtf(x*x + y*y + z*z);
+    p = 1/sqrt(x*x + y*y + z*z);
     x *= p; y *= p; z *= p;
     radians = angle * RAD_PER_DEG;
-    c = cosf(radians);
-    s = sinf(radians);
+    c = cos(radians);
+    s = sin(radians);
     c_ = 1 - c;
     zc_ = z*c_;
     yc_ = y*c_;
@@ -214,19 +248,19 @@ void NXTransform3D::setAsSDLgpuMatrix() const {
     currentMatrix[12] = m41; currentMatrix[13] = m42; currentMatrix[14] = m43; currentMatrix[15] = m44;
 }
 
-NXTransform3D NXTransform3D::translationBy(float x, float y, float z) {
+NXTransform3D NXTransform3D::translationBy(double x, double y, double z) {
     return CATransform3DMakeTranslation(x, y, z);
 }
 
-NXTransform3D NXTransform3D::scaleBy(float x, float y, float z) {
+NXTransform3D NXTransform3D::scaleBy(double x, double y, double z) {
     return CATransform3DMakeScale(x, y, z);
 }
 
-NXTransform3D NXTransform3D::scale(float factor) {
+NXTransform3D NXTransform3D::scale(double factor) {
     return CATransform3DMakeScale(factor, factor, factor);
 }
 
-NXTransform3D NXTransform3D::rotationBy(float angle, float x, float y, float z) {
+NXTransform3D NXTransform3D::rotationBy(double angle, double x, double y, double z) {
     return CATransform3DMakeRotation(angle, x, y, z);
 }
 

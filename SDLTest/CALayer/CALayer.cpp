@@ -540,7 +540,9 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         auto end = any_optional_cast<NXTransform3D>(animation->toValue);
         if (!end.has_value()) end = this->_transform;
 
-        presentation->_transform = start.value() + (end.value() - start.value()) * progress;
+//        presentation->_transform = start.value() + (end.value() - start.value()) * progress;
+//        presentation->_transform = start.value() + (end.value() - start.value()).interpolate(progress);
+        presentation->_transform = start.value().interpolateTo(end.value(), progress);
     }
 }
 

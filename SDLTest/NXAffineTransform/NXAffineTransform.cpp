@@ -8,7 +8,7 @@
 #include <NXAffineTransform/NXAffineTransform.hpp>
 #include <NXTransform3D/NXTransform3D.hpp>
 
-#define RAD_PER_DEG 0.017453293f
+#define RAD_PER_DEG 0.017453293
 
 namespace UIKit {
 
@@ -16,32 +16,32 @@ const NXAffineTransform NXAffineTransform::identity = NXAffineTransform(1, 0, 0,
 
 NXAffineTransform::NXAffineTransform() {}
 
-NXAffineTransform::NXAffineTransform(float m11, float m12, float m21, float m22, float tX, float tY):
+NXAffineTransform::NXAffineTransform(double m11, double m12, double m21, double m22, double tX, double tY):
 m11(m11), m12(m12), m21(m21), m22(m22), tX(tX), tY(tY)
 { }
 
-NXAffineTransform NXAffineTransform::translationBy(float x, float y) {
+NXAffineTransform NXAffineTransform::translationBy(double x, double y) {
     return NXAffineTransform(0, 0,
                              0, 0,
                              x, y);
 }
 
-NXAffineTransform NXAffineTransform::scaleBy(float x, float y) {
+NXAffineTransform NXAffineTransform::scaleBy(double x, double y) {
     return NXAffineTransform(x, 0,
                              0, y,
                              0, 0);
 }
 
-NXAffineTransform NXAffineTransform::scale(float f) {
+NXAffineTransform NXAffineTransform::scale(double f) {
     return NXAffineTransform(f, 0,
                              0, f,
                              0, 0);
 }
 
-NXAffineTransform NXAffineTransform::rotationBy(float angle) {
-    float radians = angle * RAD_PER_DEG;
-    float c = cosf(radians);
-    float s = sinf(radians);
+NXAffineTransform NXAffineTransform::rotationBy(double angle) {
+    double radians = angle * RAD_PER_DEG;
+    double c = cos(radians);
+    double s = sin(radians);
 
     return NXAffineTransform(c,  s,
                              -s, c,
@@ -53,7 +53,7 @@ std::optional<NXAffineTransform> NXAffineTransform::inverted() const {
     if (d < 0) return std::nullopt;
 
     NXAffineTransform transform;
-    float multiplyer = 1 / d;
+    double multiplyer = 1 / d;
 
     transform.m11 = m22 * multiplyer;
     transform.m12 = -m12 * multiplyer;

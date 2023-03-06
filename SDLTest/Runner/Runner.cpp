@@ -91,24 +91,24 @@ int Runner::startApp() {
 //    layer2->setMask(layer3);
     layer2->addSubview(layer3);
 
-//    UIView::animate(4, 4, UIViewAnimationOptions::curveEaseOutElastic, [layer1, layer3]() {
+    UIView::animate(4, 4, UIViewAnimationOptions::curveLinear, [layer1, layer3]() {
+//        auto frame = layer1->frame();
+//        frame.origin = Point(644, 480);
+//        layer1->setFrame(frame);
+
+        layer3->setTransform(NXAffineTransform::rotationBy(160));
+    });
+
+//    UIView::animate(4, 4, 0, 0, UIViewAnimationOptions::none, [layer1, layer3]() {
 //        auto frame = layer1->frame();
 //        frame.origin = Point(644, 480);
 //        layer1->setFrame(frame);
 //
-//        layer3->setTransform(NXAffineTransform::rotationBy(160));
+//        layer1->setAlpha(0.3f);
+//        layer1->setBackgroundColor(UIColor::green);
+//
+//        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(0.5f));
 //    });
-
-    UIView::animate(4, 4, 0, 0, UIViewAnimationOptions::none, [layer1, layer3]() {
-        auto frame = layer1->frame();
-        frame.origin = Point(644, 480);
-        layer1->setFrame(frame);
-
-        layer1->setAlpha(0.3f);
-        layer1->setBackgroundColor(UIColor::green);
-
-        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(0.5f));
-    });
 
     // Event loop
     while(!quit)
