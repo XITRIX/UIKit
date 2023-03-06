@@ -17,6 +17,7 @@ std::shared_ptr<UIView> UIViewController::view() {
 void UIViewController::setView(std::shared_ptr<UIView> view) {
     _view = view;
     view->next = shared_from_this();
+    viewDidLoad();
 }
 
 bool UIViewController::viewIsLoaded() {

@@ -66,6 +66,50 @@ void UIView::setMask(std::shared_ptr<UIView> mask) {
     }
 }
 
+void UIView::setContentMode(UIViewContentMode mode) {
+    switch (mode) {
+        case UIViewContentMode::scaleToFill:
+            layer()->contentsGravity = CALayerContentsGravity::resize;
+            break;
+        case UIViewContentMode::scaleAspectFit:
+            layer()->contentsGravity = CALayerContentsGravity::resizeAspect;
+            break;
+        case UIViewContentMode::scaleAspectFill:
+            layer()->contentsGravity = CALayerContentsGravity::resizeAspectFill;
+            break;
+        case UIViewContentMode::redraw:
+            layer()->contentsGravity = CALayerContentsGravity::resize;
+            break;
+        case UIViewContentMode::center:
+            layer()->contentsGravity = CALayerContentsGravity::center;
+            break;
+        case UIViewContentMode::top:
+            layer()->contentsGravity = CALayerContentsGravity::top;
+            break;
+        case UIViewContentMode::bottom:
+            layer()->contentsGravity = CALayerContentsGravity::bottom;
+            break;
+        case UIViewContentMode::left:
+            layer()->contentsGravity = CALayerContentsGravity::left;
+            break;
+        case UIViewContentMode::right:
+            layer()->contentsGravity = CALayerContentsGravity::right;
+            break;
+        case UIViewContentMode::topLeft:
+            layer()->contentsGravity = CALayerContentsGravity::topLeft;
+            break;
+        case UIViewContentMode::topRight:
+            layer()->contentsGravity = CALayerContentsGravity::topRight;
+            break;
+        case UIViewContentMode::bottomLeft:
+            layer()->contentsGravity = CALayerContentsGravity::bottomLeft;
+            break;
+        case UIViewContentMode::bottomRight:
+            layer()->contentsGravity = CALayerContentsGravity::bottomRight;
+            break;
+    }
+}
+
 void UIView::addSubview(std::shared_ptr<UIView> view) {
     setNeedsLayout();
     _layer->addSublayer(view->_layer);
@@ -178,6 +222,16 @@ void UIView::layoutSubviews() {
     _needsLayout = false;
 //    parentViewController?.viewWillLayoutSubviews()
 //    parentViewController?.viewDidLayoutSubviews()
+}
+
+Size UIView::sizeThatFits(Size size) {
+    return bounds().size;
+}
+
+void UIView::sizeToFit() {
+    auto bounds = this->bounds();
+    bounds.size = sizeThatFits(bounds.size);
+    setBounds(bounds);
 }
 
 // MARK: - SDL

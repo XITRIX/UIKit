@@ -121,6 +121,12 @@
 		7CD7DB0F29B634A200C9637C /* UIRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB0C29B634A200C9637C /* UIRenderer.cpp */; };
 		7CD7DB1329B67C2500C9637C /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1129B67C2500C9637C /* Runner.cpp */; };
 		7CD7DB1429B67C2500C9637C /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1129B67C2500C9637C /* Runner.cpp */; };
+		7CD7DB1829B67E8F00C9637C /* TestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1629B67E8F00C9637C /* TestViewController.cpp */; };
+		7CD7DB1929B67E8F00C9637C /* TestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1629B67E8F00C9637C /* TestViewController.cpp */; };
+		7CD7DB1D29B686A800C9637C /* UIImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1B29B686A800C9637C /* UIImage.cpp */; };
+		7CD7DB1E29B686A800C9637C /* UIImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB1B29B686A800C9637C /* UIImage.cpp */; };
+		7CD7DB2329B6909E00C9637C /* UIImageView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB2129B6909E00C9637C /* UIImageView.cpp */; };
+		7CD7DB2429B6909E00C9637C /* UIImageView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB2129B6909E00C9637C /* UIImageView.cpp */; };
 		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
@@ -387,6 +393,13 @@
 		7CD7DB0D29B634A200C9637C /* UIRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIRenderer.hpp; sourceTree = "<group>"; };
 		7CD7DB1129B67C2500C9637C /* Runner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
 		7CD7DB1229B67C2500C9637C /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
+		7CD7DB1629B67E8F00C9637C /* TestViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestViewController.cpp; sourceTree = "<group>"; };
+		7CD7DB1729B67E8F00C9637C /* TestViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TestViewController.hpp; sourceTree = "<group>"; };
+		7CD7DB1B29B686A800C9637C /* UIImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIImage.cpp; sourceTree = "<group>"; };
+		7CD7DB1C29B686A800C9637C /* UIImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIImage.hpp; sourceTree = "<group>"; };
+		7CD7DB2129B6909E00C9637C /* UIImageView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIImageView.cpp; sourceTree = "<group>"; };
+		7CD7DB2229B6909E00C9637C /* UIImageView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIImageView.hpp; sourceTree = "<group>"; };
+		7CD7DB2729B6973100C9637C /* UIViewContentMode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIViewContentMode.hpp; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
@@ -453,32 +466,35 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7DB0B29B6349800C9637C /* UIRenderer */,
-				7CD7DAFF29B62E8300C9637C /* UIApplicationMain */,
-				7CD7DAF029B615D800C9637C /* UIResponder */,
-				7CD7DAEB29B615C900C9637C /* UIViewController */,
-				7CD7DAE629B6155B00C9637C /* UIWindow */,
-				7C82D6AF29B440EA005079B8 /* UIView */,
+				7CD7DB2529B6972800C9637C /* UIViewContentMode */,
+				7CD7DB2029B6909400C9637C /* UIImageView */,
+				7CD7DB1A29B6864A00C9637C /* UIImage */,
 				7C82D69829B3F4CF005079B8 /* Animations */,
-				7C82D69329B3ED42005079B8 /* Timer */,
-				7C82D68E29B38DBF005079B8 /* CATransaction */,
 				7C82D68729B384F5005079B8 /* CAAction */,
-				7C82D65129AFE128005079B8 /* Renderer */,
-				7CD13F2329AE6AE000D0FFF5 /* Shader */,
-				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
 				7CD13F1029AA52BE00D0FFF5 /* CATextLayer */,
+				7C82D68E29B38DBF005079B8 /* CATransaction */,
 				7C0798272993F251004E8EC8 /* CGImage */,
 				7CD13F1829AB6DCD00D0FFF5 /* ContentsGravityTransformation */,
 				7CD13F1429AA561300D0FFF5 /* Data */,
 				7CEB96862993F5CB007483C0 /* Geometry */,
 				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
 				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
-				7CD7DAF629B6270300C9637C /* UIApplicationDelegate */,
-				7CEB969C29943982007483C0 /* UIApplication */,
-				7CEB968A2993F78F007483C0 /* UIColor */,
-				7CEB96A0299509B8007483C0 /* Utils */,
+				7C82D65129AFE128005079B8 /* Renderer */,
 				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
+				7CD13F2329AE6AE000D0FFF5 /* Shader */,
+				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
+				7C82D69329B3ED42005079B8 /* Timer */,
+				7CEB969C29943982007483C0 /* UIApplication */,
+				7CD7DAF629B6270300C9637C /* UIApplicationDelegate */,
+				7CD7DAFF29B62E8300C9637C /* UIApplicationMain */,
+				7CEB968A2993F78F007483C0 /* UIColor */,
+				7CD7DB0B29B6349800C9637C /* UIRenderer */,
+				7CD7DAF029B615D800C9637C /* UIResponder */,
+				7C82D6AF29B440EA005079B8 /* UIView */,
+				7CD7DAEB29B615C900C9637C /* UIViewController */,
+				7CD7DAE629B6155B00C9637C /* UIWindow */,
+				7CEB96A0299509B8007483C0 /* Utils */,
 			);
 			path = SDLTest;
 			sourceTree = "<group>";
@@ -1121,6 +1137,7 @@
 		7CD7DAFB29B62DB600C9637C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				7CD7DB1529B67E8000C9637C /* TestViewController */,
 				7CD7DB1029B67C1300C9637C /* Runner */,
 				7CD7DAFC29B62DCD00C9637C /* UIApplicationDelegate.cpp */,
 				7CD7DB0429B632D400C9637C /* main.cpp */,
@@ -1153,6 +1170,41 @@
 				7CD7DB1129B67C2500C9637C /* Runner.cpp */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		7CD7DB1529B67E8000C9637C /* TestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB1629B67E8F00C9637C /* TestViewController.cpp */,
+				7CD7DB1729B67E8F00C9637C /* TestViewController.hpp */,
+			);
+			path = TestViewController;
+			sourceTree = "<group>";
+		};
+		7CD7DB1A29B6864A00C9637C /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB1C29B686A800C9637C /* UIImage.hpp */,
+				7CD7DB1B29B686A800C9637C /* UIImage.cpp */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		7CD7DB2029B6909400C9637C /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB2229B6909E00C9637C /* UIImageView.hpp */,
+				7CD7DB2129B6909E00C9637C /* UIImageView.cpp */,
+			);
+			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		7CD7DB2529B6972800C9637C /* UIViewContentMode */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB2729B6973100C9637C /* UIViewContentMode.hpp */,
+			);
+			path = UIViewContentMode;
 			sourceTree = "<group>";
 		};
 		7CEB96862993F5CB007483C0 /* Geometry */ = {
@@ -1372,6 +1424,7 @@
 			files = (
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
 				7C82D6A129B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
+				7CD7DB1829B67E8F00C9637C /* TestViewController.cpp in Sources */,
 				7CB7F54A29A3D89C00A20694 /* renderer_OpenGL_3.c in Sources */,
 				7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */,
 				7C82D6AD29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
@@ -1397,6 +1450,7 @@
 				7C82D69C29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7CD7DB1329B67C2500C9637C /* Runner.cpp in Sources */,
 				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
+				7CD7DB2329B6909E00C9637C /* UIImageView.cpp in Sources */,
 				7CD7DAF929B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7C82D69129B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
@@ -1408,6 +1462,7 @@
 				7C82D6B729B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */,
 				7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */,
 				7C82D67B29B2B950005079B8 /* features_cpu.c in Sources */,
+				7CD7DB1D29B686A800C9637C /* UIImage.cpp in Sources */,
 				7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */,
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
@@ -1431,10 +1486,12 @@
 			files = (
 				7C82D5C429AEC422005079B8 /* CATextLayer.cpp in Sources */,
 				7C82D5B429AEC28B005079B8 /* renderer_GLES_3.c in Sources */,
+				7CD7DB2429B6909E00C9637C /* UIImageView.cpp in Sources */,
 				7C82D5B329AEC28B005079B8 /* SDL_gpu.c in Sources */,
 				7C82D5CA29AEC422005079B8 /* Shader.cpp in Sources */,
 				7C82D5BB29AEC422005079B8 /* ContentsGravityTransformation.cpp in Sources */,
 				7CD7DAEF29B615D300C9637C /* UIViewController.cpp in Sources */,
+				7CD7DB1929B67E8F00C9637C /* TestViewController.cpp in Sources */,
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
 				7CD7DAFA29B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
@@ -1477,6 +1534,7 @@
 				7C82D5C229AEC422005079B8 /* NXAffineTransform.cpp in Sources */,
 				7C82D5AD29AEC28A005079B8 /* renderer_OpenGL_3.c in Sources */,
 				7C82D6B829B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */,
+				7CD7DB1E29B686A800C9637C /* UIImage.cpp in Sources */,
 				7C82D68D29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
 				7C82D69229B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C82D6A229B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
@@ -1553,6 +1611,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					Demo,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1612,6 +1671,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					Demo,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -12,25 +12,21 @@
 namespace UIKit {
 
 Data::Data(Uint8 bytes[], int count) {
-    _data = new Uint8[count];
-    std::memcpy(_data, bytes, count);
-//    _data = bytes;
-    _count = count;
+    for (int i = 0; i < count; i++)
+        _data.push_back(bytes[i]);
 }
 
-Data::~Data() {
-    if (_data) delete[] _data;
-}
+Data::~Data() {}
 
 int Data::count() const {
-    return _count;
+    return (int) _data.size();
 }
 
 Uint8* Data::data() const {
-    return _data;
+    return (Uint8*) _data.data();
 }
 
-std::shared_ptr<Data> Data::fromPath(std::string path) {
+std::optional<Data> Data::fromPath(std::string path) {
     auto fileReader = SDL_RWFromFile((Utils::resourcePath + path).c_str(), "r");
     auto fileSize = int(fileReader->size(fileReader));
 
@@ -41,9 +37,9 @@ std::shared_ptr<Data> Data::fromPath(std::string path) {
     fileReader->close(fileReader);
 
     if (bytesRead == fileSize) {
-        return std::make_shared<Data>(buffer, fileSize);
+        return Data(buffer, fileSize);
     } else {
-        return nullptr;
+        return std::nullopt;
     }
 }
 

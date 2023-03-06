@@ -15,7 +15,7 @@
 
 namespace UIKit {
 
-class Data {
+struct Data {
 public:
     int count() const;
     Uint8* data() const;
@@ -23,10 +23,9 @@ public:
     Data(Uint8* bytes, int count);
     ~Data();
 
-    static std::shared_ptr<Data> fromPath(std::string path);
+    static std::optional<Data> fromPath(std::string path);
 private:
-    int _count;
-    Uint8* _data = nullptr;
+    std::vector<Uint8> _data;
 };
 
 }

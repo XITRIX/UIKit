@@ -8,6 +8,8 @@
 #pragma once
 
 #include <CALayer/CALayer.hpp>
+#include <UIViewContentMode/UIViewContentMode.hpp>
+#include <UIRenderer/UIRenderer.hpp>
 #include <UIResponder/UIResponder.hpp>
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
 #include <functional>
@@ -51,17 +53,22 @@ public:
     void setMask(std::shared_ptr<UIView> mask);
     std::shared_ptr<UIView> mask() { return _mask; }
 
+    void setContentMode(UIViewContentMode mode);
+    UIViewContentMode contentMode() { return _contentMode; }
+
     void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
     void removeFromSuperview();
 
     // Layout
     void setNeedsDisplay() { _needsDisplay = true; }
-
     void setNeedsLayout() { _needsLayout = true; }
 
     void layoutIfNeeded();
     virtual void layoutSubviews();
+
+    virtual Size sizeThatFits(Size size);
+    virtual void sizeToFit();
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;
@@ -99,6 +106,7 @@ private:
     std::weak_ptr<UIView> superview;
     std::shared_ptr<CALayer> _layer;
     std::shared_ptr<UIView> _mask;
+    UIViewContentMode _contentMode;
 
     bool _needsLayout = true;
     bool _needsDisplay = true;

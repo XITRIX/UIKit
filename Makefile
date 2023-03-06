@@ -48,10 +48,16 @@ ROMFS		:=	assets
 # options for code generation
 #---------------------------------------------------------------------------------
 
+# - Demo
+INCLUDES := $(INCLUDES) \
+			Demo \
+
 SOURCES  := $(SOURCES) \
 			Demo \
 			Demo/Runner \
+			Demo/TestViewController \
 
+# - UIKit
 INCLUDES := $(INCLUDES) \
 			SDLTest/Animations \
 			SDLTest/CALayer \
@@ -100,6 +106,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIWindow \
 			SDLTest/Utils \
 
+# - Extern libs
 INCLUDES := $(INCLUDES) \
 			extern/sdl-gpu/include \
 			extern/sdl-gpu/src/externals/glew \

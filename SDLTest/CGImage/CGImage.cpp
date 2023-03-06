@@ -16,7 +16,7 @@ CGImage::CGImage(Size size) {
     GPU_SetBlendMode(pointee, GPU_BLEND_NORMAL_FACTOR_ALPHA);
 }
 
-CGImage::CGImage(GPU_Image* image, std::shared_ptr<Data> sourceData) {
+CGImage::CGImage(GPU_Image* image, std::optional<Data> sourceData) {
     this->sourceData = sourceData;
     pointee = image;
 
@@ -25,11 +25,11 @@ CGImage::CGImage(GPU_Image* image, std::shared_ptr<Data> sourceData) {
     GPU_SetImageFilter(pointee, GPU_FILTER_LINEAR);
 }
 
-CGImage::CGImage(std::shared_ptr<Data> sourceData) {
+CGImage::CGImage(Data sourceData) {
     auto data = sourceData;
-    auto dataCount = data->count();
+    auto dataCount = data.count();
 
-    auto rw = SDL_RWFromMem(data->data(), dataCount);
+    auto rw = SDL_RWFromMem(data.data(), dataCount);
     auto gpuImagePtr = GPU_LoadImage_RW(rw, true);
 
     new (this) CGImage(gpuImagePtr, data);

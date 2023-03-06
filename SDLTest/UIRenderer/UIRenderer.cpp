@@ -39,6 +39,9 @@ UIRenderer::UIRenderer() {
     _scale = float(rawPointer->base_h) / float(rawPointer->h);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
+//    SDL_GameController *joystick;
+//    joystick = SDL_GameControllerOpen(0);
+    SDL_GameControllerOpen(0); // TODO: Move to another place
 }
 
 void UIRenderer::render(std::shared_ptr<UIWindow> window, Timer frameTimer) {

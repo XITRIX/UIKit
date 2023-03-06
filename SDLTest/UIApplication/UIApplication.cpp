@@ -7,12 +7,23 @@
 
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <Utils/Utils.hpp>
 
 namespace UIKit {
 
 std::shared_ptr<UIApplication> UIApplication::shared = nullptr;
 
 UIApplication::UIApplication() {
+    // TODO: Replace with Bunbles
+#ifdef __SWITCH__
+    Utils::resourcePath = "romfs:/";
+#elif __APPLE__
+#include <TargetConditionals.h>
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+    Utils::resourcePath = std::string(SDL_GetBasePath()) + "/assets/";
+#endif
+#endif
+
 //    UIFont.loadSystemFonts();
 }
 
@@ -64,6 +75,12 @@ void UIApplication::handleEventsIfNeeded() {
 //                    touch.phase = .ended
 //                    sendEvent(event)
 //                }
+            }
+            case SDL_KEYDOWN: {
+                if (e.key.keysym.sym == SDLK_q) {
+                    handleSDLQuit();
+                }
+                break;
             }
             case SDL_KEYUP: {
 //#if DEBUG

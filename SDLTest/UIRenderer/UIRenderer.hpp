@@ -8,12 +8,12 @@
 #pragma once
 
 #include <SDL_gpu.h>
-#include <UIWindow/UIWindow.hpp>
 #include <Geometry/Geometry.hpp>
 #include <Timer/Timer.hpp>
 
 namespace UIKit {
 
+class UIWindow;
 class UIApplicationDelegate;
 class UIRenderer {
 public:
