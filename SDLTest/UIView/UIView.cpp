@@ -165,6 +165,44 @@ std::shared_ptr<CABasicAnimation> UIView::actionForKey(std::string event) {
     return nullptr;
 }
 
-void UIView::display(CALayer* layer) { }
+void UIView::display(std::shared_ptr<CALayer> layer) { }
+
+void UIView::layoutIfNeeded() {
+   if (_needsLayout) {
+       layoutSubviews();
+       _needsLayout = false;
+   }
+}
+
+void UIView::layoutSubviews() {
+    _needsLayout = false;
+//    parentViewController?.viewWillLayoutSubviews()
+//    parentViewController?.viewDidLayoutSubviews()
+}
+
+// MARK: - SDL
+
+void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
+    auto visibleLayer = layer()->presentationOrSelf();
+
+    auto alpha = visibleLayer->opacity() * parentAlpha;
+    if (visibleLayer->isHidden() || alpha < 0.01f) { return; }
+
+    if (visibleLayer->_needsDisplay) {
+        visibleLayer->display();
+        visibleLayer->_needsDisplay = false;
+    }
+
+    if (_needsDisplay) {
+        draw();
+        _needsDisplay = false;
+    }
+
+    layoutIfNeeded();
+
+    for (auto& subview: subviews) {
+        subview->sdlDrawAndLayoutTreeIfNeeded(alpha);
+    }
+}
 
 }

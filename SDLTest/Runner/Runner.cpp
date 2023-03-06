@@ -83,7 +83,7 @@ int Runner::startApp() {
     auto imageData = Data::fromPath("test3.png");
     auto image = std::make_shared<CGImage>(imageData);
 
-    view3->layer()->contents = image;
+    view3->layer()->setContents(image);
 
     window->addSubview(view1);
 //    layer1->setMask(layer2);
@@ -91,14 +91,28 @@ int Runner::startApp() {
 //    layer2->setMask(layer3);
     view2->addSubview(view3);
 
-    UIView::animate(4, 4, UIViewAnimationOptions::curveEaseOutElastic, [view1, view3]() {
+//    view3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(2));
+
+    UIView::animate(4, 24, UIViewAnimationOptions::curveEaseOutElastic, [view1, view3]() {
         view3->setBackgroundColor(UIColor::cyan);
         view3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(2));
+//        view3->setTransform(NXAffineTransform::identity);
 
         auto frame = view1->frame();
         frame.origin = Point(644, 280);
         view1->setFrame(frame);
+    }, [view1, view3](bool res) {
+        UIView::animate(4, 4, UIViewAnimationOptions::curveEaseOutElastic, [view1, view3]() {
+            view3->setBackgroundColor(UIColor::green);
+            view3->setTransform(NXAffineTransform::identity);
+
+            auto frame = view1->frame();
+            frame.origin = Point(40, 40);
+            view1->setFrame(frame);
+        });
     });
+
+
 
 //    UIView::animate(4, 4, 0, 0, UIViewAnimationOptions::none, [layer1, layer3]() {
 //        layer3->setBackgroundColor(UIColor::cyan);
@@ -155,29 +169,24 @@ int Runner::startApp() {
         auto frameTimer = Timer();
         UIView::animateIfNeeded(frameTimer);
 
-        GPU_Clear(renderer);
+        window->sdlDrawAndLayoutTreeIfNeeded();
 
-//        auto ssfbo = std::make_shared<CGImage>(Size(renderer->base_w, renderer->base_h));
-//        GPU_GetTarget(ssfbo->pointee);
-//        GPU_SetActiveTarget(ssfbo->pointee->target);
-//        GPU_Clear(ssfbo->pointee->target);
+        if (!CALayer::layerTreeIsDirty) {
+            SDL_Delay(1);
+            continue;
+        }
+
+        CALayer::layerTreeIsDirty = false;
+
+        GPU_Clear(renderer);
 
         window->layer()->render(renderer);
 
         Renderer::shared()->draw([this](auto vg) {
-//            nvgFontSize(vg, 22);
-//            nvgFillColor(vg, UIColor::black.nvgColor());
-//            nvgText(vg, 20, 20, "Test text", nullptr);
-
             nvgFontSize(vg, 21);
             nvgFillColor(vg, UIColor::black.nvgColor());
             nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
         });
-
-//        GPU_SetActiveTarget(renderer);
-//
-//        auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
-//        GPU_BlitRect(ssfbo->pointee, NULL, renderer, &rect);
 
         // Update screen
         GPU_Flip(renderer);

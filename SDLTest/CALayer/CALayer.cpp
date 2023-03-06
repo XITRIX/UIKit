@@ -19,6 +19,7 @@
 namespace UIKit {
 
 float CALayer::defaultAnimationDuration = 0.3f;
+bool CALayer::layerTreeIsDirty = true;
 
 CALayer::CALayer() { }
 
@@ -30,7 +31,7 @@ CALayer::CALayer(CALayer* layer) {
     _anchorPoint = layer->_anchorPoint;
     _opacity = layer->_opacity;
     _backgroundColor = layer->_backgroundColor;
-    isHidden = layer->isHidden;
+    _isHidden = layer->_isHidden;
     cornerRadius = layer->cornerRadius;
 //    borderWidth = layer->borderWidth;
 //    borderColor = layer->borderColor;
@@ -41,7 +42,7 @@ CALayer::CALayer(CALayer* layer) {
 //    shadowOpacity = layer->shadowOpacity;
     mask = layer->mask;
 //    masksToBounds = layer->masksToBounds;
-    contents = layer->contents; // XXX: we should make a copy here
+    _contents = layer->_contents; // XXX: we should make a copy here
     contentsScale = layer->contentsScale;
     superlayer = layer->superlayer;
     sublayers = layer->sublayers;
@@ -58,7 +59,7 @@ void CALayer::draw(NVGcontext* context) { }
 void CALayer::render(GPU_Target* renderer) {
     refreshGroupingFBO();
 
-    if (isHidden || _opacity < 0.001f) { return; }
+    if (_isHidden || _opacity < 0.001f) { return; }
 
     auto localRenderer = renderer;
     if (groupingFBO) {
@@ -171,13 +172,13 @@ void CALayer::render(GPU_Target* renderer) {
     }
 
     // Contents
-    if (contents) {
+    if (_contents) {
         auto contentsGravity = ContentsGravityTransformation(this);
-        GPU_SetAnchor(contents->pointee, _anchorPoint.x, _anchorPoint.y);
-        GPU_SetRGBA(contents->pointee, 255, 255, 255, _opacity * 255);
+        GPU_SetAnchor(_contents->pointee, _anchorPoint.x, _anchorPoint.y);
+        GPU_SetRGBA(_contents->pointee, 255, 255, 255, _opacity * 255);
 
         GPU_BlitTransform(
-            contents->pointee,
+            _contents->pointee,
             NULL,
             renderer,
             contentsGravity.offset.x,
@@ -294,6 +295,16 @@ void CALayer::setMask(std::shared_ptr<CALayer> mask) {
     if (mask) mask->superlayer = shared_from_this();
 }
 
+void CALayer::setHidden(bool hidden) {
+    _isHidden = hidden;
+    CALayer::layerTreeIsDirty = true;
+}
+
+void CALayer::setContents(std::shared_ptr<CGImage> contents) {
+    _contents = contents;
+    CALayer::layerTreeIsDirty = true;
+}
+
 std::shared_ptr<CALayer> CALayer::getMask() const {
     return mask;
 }
@@ -302,12 +313,14 @@ void CALayer::addSublayer(std::shared_ptr<CALayer> layer) {
     layer->removeFromSuperlayer();
     sublayers.push_back(layer);
     layer->superlayer = this->shared_from_this();
+    CALayer::layerTreeIsDirty = true;
 }
 
 void CALayer::insertSublayerAt(std::shared_ptr<CALayer> layer, int index) {
     layer->removeFromSuperlayer();
     sublayers.insert(sublayers.begin() + index, layer);
     layer->superlayer = this->shared_from_this();
+    CALayer::layerTreeIsDirty = true;
 }
 
 void CALayer::insertSublayerAbove(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling) {
@@ -330,6 +343,7 @@ void CALayer::removeFromSuperlayer() {
 
     // Find and remove this from superlayer
     super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
+    CALayer::layerTreeIsDirty = true;
 }
 
 void CALayer::refreshGroupingFBO() {
@@ -372,6 +386,10 @@ std::shared_ptr<CALayer> CALayer::createPresentation() {
     auto copy = std::make_shared<CALayer>(this);
     copy->isPresentationForAnotherLayer = true;
     return copy;
+}
+
+void CALayer::display() {
+    if (delegate) delegate->display(shared_from_this());
 }
 
 Rect CALayer::getRenderedBoundsRelativeToAnchorPoint() {
@@ -423,7 +441,7 @@ void CALayer::removeAnimation(std::string forKey) {
 }
 
 void CALayer::onWillSet(std::string keyPath) {
-//    CALayer.layerTreeIsDirty = true
+    CALayer::layerTreeIsDirty = true;
     auto animationKey = keyPath;
 
     auto animation = std::static_pointer_cast<CABasicAnimation>(actionForKey(animationKey));
@@ -471,9 +489,9 @@ void CALayer::animateAt(Timer currentTime) {
         update(presentation, animation.second, animationProgress);
 
         if (animationProgress == 1 && animation.second->isRemovedOnCompletion) {
+            removeAnimation(animation.first);
             if (animation.second->animationGroup)
                 animation.second->animationGroup->animationDidStop(true);
-            removeAnimation(animation.first);
         }
     }
 
@@ -495,7 +513,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         if (!end.has_value()) end = this->_backgroundColor;
         if (!end.has_value()) end = UIColor::clear;
 
-        presentation->_backgroundColor = start.value()->interpolationTo(end.value().value(), progress);
+        presentation->setBackgroundColor(start.value()->interpolationTo(end.value().value(), progress));
     }
     if (keyPath == "position") {
         auto start = any_optional_cast<Point>(fromValue);
@@ -504,7 +522,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         auto end = any_optional_cast<Point>(animation->toValue);
         if (!end.has_value()) end = this->_position;
 
-        presentation->_position = start.value() + (end.value() - start.value()) * progress;
+        presentation->setPosition(start.value() + (end.value() - start.value()) * progress);
     }
     if (keyPath == "anchorPoint") {
         auto start = any_optional_cast<Point>(fromValue);
@@ -513,7 +531,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         auto end = any_optional_cast<Point>(animation->toValue);
         if (!end.has_value()) end = this->_anchorPoint;
 
-        presentation->_anchorPoint = start.value() + (end.value() - start.value()) * progress;
+        presentation->setAnchorPoint(start.value() + (end.value() - start.value()) * progress);
     }
     if (keyPath == "bounds") {
         auto start = any_optional_cast<Rect>(fromValue);
@@ -522,7 +540,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         auto end = any_optional_cast<Rect>(animation->toValue);
         if (!end.has_value()) end = this->_bounds;
 
-        presentation->_bounds = start.value() + (end.value() - start.value()) * progress;
+        presentation->setBounds(start.value() + (end.value() - start.value()) * progress);
     }
     if (keyPath == "opacity") {
         auto start = any_optional_cast<float>(fromValue);
@@ -531,7 +549,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         auto end = any_optional_cast<float>(animation->toValue);
         if (!end.has_value()) end = this->_opacity;
 
-        presentation->_opacity = start.value() + (end.value() - start.value()) * progress;
+        presentation->setOpacity(start.value() + (end.value() - start.value()) * progress);
     }
     if (keyPath == "transform") {
         auto start = any_optional_cast<NXTransform3D>(fromValue);
@@ -542,7 +560,7 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
 
 //        presentation->_transform = start.value() + (end.value() - start.value()) * progress;
 //        presentation->_transform = start.value() + (end.value() - start.value()).interpolate(progress);
-        presentation->_transform = start.value().interpolateTo(end.value(), progress);
+        presentation->setTransform(start.value().interpolateTo(end.value(), progress));
     }
 }
 

@@ -38,8 +38,8 @@ public:
     void setAlpha(float alpha) { _layer->setOpacity(alpha); }
     float alpha() const { return _layer->opacity(); }
 
-    void setHidden(bool hidden) { _layer->isHidden = hidden; }
-    bool isHidden() const { return _layer->isHidden; }
+    void setHidden(bool hidden) { _layer->_isHidden = hidden; }
+    bool isHidden() const { return _layer->_isHidden; }
 
     void setTransform(NXAffineTransform transform);
     NXAffineTransform transform() const { return _layer->affineTransform(); }
@@ -50,11 +50,17 @@ public:
     void setMask(std::shared_ptr<UIView> mask);
     std::shared_ptr<UIView> mask() { return _mask; }
 
-    void setNeedsLayout() { _needsLayout = true; }
-
     void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
     void removeFromSuperview();
+
+    // Layout
+    void setNeedsDisplay() { _needsDisplay = true; }
+
+    void setNeedsLayout() { _needsLayout = true; }
+
+    void layoutIfNeeded();
+    virtual void layoutSubviews();
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;
@@ -81,7 +87,11 @@ public:
     static void completePendingAnimations();
 
     std::shared_ptr<CABasicAnimation> actionForKey(std::string event) override;
-    void display(CALayer* layer) override;
+    virtual void draw() {}
+    void display(std::shared_ptr<CALayer> layer) override;
+
+    // SDL
+    void sdlDrawAndLayoutTreeIfNeeded(float parentAlpha = 1);
 
 private:
     std::vector<std::shared_ptr<UIView>> subviews;
@@ -90,6 +100,7 @@ private:
     std::shared_ptr<UIView> _mask;
 
     bool _needsLayout = true;
+    bool _needsDisplay = true;
 };
 
 }

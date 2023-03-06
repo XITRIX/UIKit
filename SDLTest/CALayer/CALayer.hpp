@@ -28,7 +28,7 @@ namespace UIKit {
 class CALayerDelegate {
 public:
     virtual std::shared_ptr<CABasicAnimation> actionForKey(std::string event) = 0;
-    virtual void display(CALayer* layer) = 0;
+    virtual void display(std::shared_ptr<CALayer> layer) = 0;
 };
 
 class CALayer: public std::enable_shared_from_this<CALayer> {
@@ -37,7 +37,6 @@ public:
 
     float cornerRadius = 0;
     bool allowsGroupOpacity = true;
-    bool isHidden = false;
     CALayerDelegate* delegate;
 
     /// Defaults to 1.0 but if the layer is associated with a view,
@@ -45,8 +44,6 @@ public:
     float contentsScale = 1.0f;
 
     CALayerContentsGravity contentsGravity = CALayerContentsGravity::resize;
-
-    std::shared_ptr<CGImage> contents;
 
     CALayer();
     CALayer(CALayer* layer);
@@ -80,6 +77,12 @@ public:
     void setMask(std::shared_ptr<CALayer> mask);
     std::shared_ptr<CALayer> getMask() const;
 
+    void setHidden(bool hidden);
+    bool isHidden() const { return _isHidden; }
+
+    void setContents(std::shared_ptr<CGImage> contents);
+    std::shared_ptr<CGImage> contents() { return _contents; }
+
     void addSublayer(std::shared_ptr<CALayer> layer);
     void insertSublayerAt(std::shared_ptr<CALayer> layer, int index);
     void insertSublayerAbove(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling);
@@ -101,6 +104,10 @@ public:
 
     std::shared_ptr<CALayer> presentation() { return _presentation; }
 
+    bool needsDisplay() { return _needsDisplay; }
+    void setNeedsDisplay() { _needsDisplay = true; }
+    void display();
+
     // Animations
     void add(std::shared_ptr<CABasicAnimation> animation, std::string keyPath);
     void removeAnimation(std::string forKey);
@@ -111,6 +118,16 @@ public:
 
     void animateAt(Timer currentTime);
 
+    /**
+     Indicates whether a layer somewhere has changed since the last render pass.
+
+     The current implementation of this is quite simple and doesn't check whether the layer is actually in
+     the layer hierarchy or not. In theory this means that we're wasting render passes if users frequently
+     update layers that aren't in the tree. In practice it's not expected that UIKit users would do that
+     often enough for us to care about it.
+    **/
+    static bool layerTreeIsDirty;
+
 private:
     // Animatable
     Point _anchorPoint = Point(0.5f, 0.5f);
@@ -119,6 +136,11 @@ private:
     float _opacity = 1;
     NXTransform3D _transform = NXTransform3D::identity;
     std::optional<UIColor> _backgroundColor;
+
+    bool _isHidden = false;
+    bool _needsDisplay = true;
+
+    std::shared_ptr<CGImage> _contents;
 
     std::weak_ptr<CALayer> superlayer;
     std::vector<std::shared_ptr<CALayer>> sublayers;

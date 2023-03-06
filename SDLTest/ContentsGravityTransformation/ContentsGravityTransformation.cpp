@@ -12,8 +12,8 @@ namespace UIKit {
 
 ContentsGravityTransformation::ContentsGravityTransformation(CALayer* layer) {
     auto scaledContents = Size(
-        layer->contents->size().width / layer->contentsScale,
-        layer->contents->size().height / layer->contentsScale
+        layer->contents()->size().width / layer->contentsScale,
+        layer->contents()->size().height / layer->contentsScale
     );
 
     auto bounds = layer->bounds();
