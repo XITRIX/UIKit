@@ -6,6 +6,7 @@
 //
 
 #include <UIView/UIView.hpp>
+#include <UIRenderer/UIRenderer.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
 
 namespace UIKit {
@@ -16,8 +17,7 @@ CALayer* UIView::initLayer() {
 
 UIView::UIView(Rect frame) {
     _layer = std::shared_ptr<CALayer>(initLayer());
-//    layer->contentsScale = UIScreen.main.scale
-    _layer->contentsScale = 1; // TODO: Fix value
+    _layer->contentsScale = UIRenderer::main()->scale();
 
     _layer->delegate = this;
     setFrame(frame);

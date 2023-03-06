@@ -10,11 +10,32 @@
 #include <SDL2/SDL.h>
 #include <SDL_gpu.h>
 
+#include <UIApplicationDelegate/UIApplicationDelegate.hpp>
+#include <UIWindow/UIWindow.hpp>
+
 namespace UIKit {
 
 class UIApplication {
 public:
-    static GPU_Target* currentRenderer;
+    static std::shared_ptr<UIApplication> shared;
+
+    UIApplication();
+
+    std::shared_ptr<UIApplicationDelegate> delegate;
+    std::weak_ptr<UIWindow> keyWindow;
+
+    void handleEventsIfNeeded();
+    void handleSDLQuit();
+
+
+// TODO: Need to remove
+//    static GPU_Target* currentRenderer;
+    
+private:
+    static void onWillEnterForeground();
+    static void onDidEnterForeground();
+    static void onWillEnterBackground();
+    static void onDidEnterBackground();
 };
 
 }

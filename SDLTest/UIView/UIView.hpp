@@ -8,6 +8,7 @@
 #pragma once
 
 #include <CALayer/CALayer.hpp>
+#include <UIResponder/UIResponder.hpp>
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
 #include <functional>
 #include <vector>
@@ -16,7 +17,7 @@
 
 namespace UIKit {
 
-class UIView: public CALayerDelegate, public std::enable_shared_from_this<UIView> {
+class UIView: public UIResponder, public CALayerDelegate, public std::enable_shared_from_this<UIView> {
 public:
     bool isUserInteractionEnabled = true;
 

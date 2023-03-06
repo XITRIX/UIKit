@@ -47,6 +47,11 @@ ROMFS		:=	assets
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
+
+SOURCES  := $(SOURCES) \
+			Demo \
+			Demo/Runner \
+
 INCLUDES := $(INCLUDES) \
 			SDLTest/Animations \
 			SDLTest/CALayer \
@@ -82,13 +87,17 @@ SOURCES  := $(SOURCES) \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
 			SDLTest/Renderer \
-			SDLTest/Runner \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \
 			SDLTest/Timer \
 			SDLTest/UIApplication \
+			SDLTest/UIApplicationMain \
 			SDLTest/UIColor \
+			SDLTest/UIRenderer \
+			SDLTest/UIResponder \
 			SDLTest/UIView \
+			SDLTest/UIViewController \
+			SDLTest/UIWindow \
 			SDLTest/Utils \
 
 INCLUDES := $(INCLUDES) \

@@ -6,6 +6,7 @@
 //
 
 #include <Renderer/Renderer.hpp>
+#include <UIRenderer/UIRenderer.hpp>
 #include <UIApplication/UIApplication.hpp>
 
 #ifdef SDL_GPU_DISABLE_GLES
@@ -66,7 +67,7 @@ Renderer::~Renderer() {
 // Create a GPU_Image from a NanoVG Framebuffer
 void Renderer::draw(std::function<void(NVGcontext*)> draw) {
     auto renderer = GPU_GetActiveTarget();
-    bool needHFlip = renderer != UIApplication::currentRenderer;
+    bool needHFlip = renderer != UIRenderer::main()->rawPointer;;
 
     auto size = renderer->base_h / renderer->h;
     GPU_FlushBlitBuffer(); // IMPORTANT: run GPU_FlushBlitBuffer before nvgBeginFrame
