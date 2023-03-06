@@ -21,6 +21,7 @@ public:
     static NXAffineTransform translationBy(float x, float y);
     static NXAffineTransform scaleBy(float x, float y);
     static NXAffineTransform scale(float factor);
+    static NXAffineTransform rotationBy(float angle);
 
     std::optional<NXAffineTransform> inverted() const;
     bool isIdentity() const;
@@ -28,6 +29,7 @@ public:
     static const NXAffineTransform identity;
 
     bool operator==(const NXAffineTransform& rhs) const;
+    NXAffineTransform operator*(const NXAffineTransform& rhs) const;
 };
 
 }

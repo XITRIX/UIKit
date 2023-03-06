@@ -5,7 +5,8 @@
 //  Created by Даниил Виноградов on 19.08.2022.
 //
 
-#include "NXTransform3D.hpp"
+#include <NXTransform3D/NXTransform3D.hpp>
+#include <Geometry/Geometry.hpp>
 
 #define RAD_PER_DEG 0.017453293f
 
@@ -81,6 +82,10 @@ NXTransform3D NXTransform3D::operator*(const float& b) const {
         a.m41 * b, a.m42 * b, a.m43 * b, a.m44 * b
     );
 }
+
+//NXTransform3D NXTransform3D::interpolate(const float& progress) const {
+//
+//}
 
 Vector3 NXTransform3D::transformingVector(float x, float y, float z) const {
     auto newX = m11 * x + m21 * y + m31 * z + m41;

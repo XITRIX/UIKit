@@ -9,6 +9,7 @@
 
 #include <CALayer/CALayer.hpp>
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
+#include <functional>
 #include <vector>
 #include <memory>
 #include <set>
@@ -40,6 +41,9 @@ public:
     void setHidden(bool hidden) { _layer->isHidden = hidden; }
     bool isHidden() const { return _layer->isHidden; }
 
+    void setTransform(NXAffineTransform transform);
+    NXAffineTransform transform() const { return _layer->affineTransform(); }
+
     void setBackgroundColor(std::optional<UIColor> backbroundColor) { _layer->setBackgroundColor(backbroundColor); }
     std::optional<UIColor> backgroundColor() const { return _layer->backgroundColor(); }
 
@@ -52,6 +56,23 @@ public:
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;
     static std::shared_ptr<CABasicAnimationPrototype> currentAnimationPrototype;
+
+    static void animate(double duration,
+                        double delay = 0.0,
+                        UIViewAnimationOptions options = UIViewAnimationOptions::none,
+                        std::function<void()> animations = [](){},
+                        std::function<void(bool)> completion = [](bool res){});
+
+    static void animate(double duration,
+                        std::function<void()> animations = [](){});
+
+    static void animate(double duration,
+                        double delay,
+                        double usingSpringWithDamping,
+                        double initialSpringVelocity,
+                        UIViewAnimationOptions options = UIViewAnimationOptions::none,
+                        std::function<void()> animations = [](){},
+                        std::function<void(bool)> completion = [](bool res){});
 
     static void animateIfNeeded(Timer currentTime);
     static void completePendingAnimations();

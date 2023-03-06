@@ -8,6 +8,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 #include <functional>
 #include <UIViewAnimationOptions/UIViewAnimationOptions.hpp>
 
@@ -23,10 +24,12 @@ const std::string kCAMediaTimingFunctionEaseOut = "easeOut";
 const std::string kCAMediaTimingFunctionEaseInEaseOut = "easeInEaseOut";
 const std::string kCAMediaTimingFunctionDefault = "default";
 const std::string kCAMediaTimingFunctionCustomEaseOut = "customEaseOut";
+const std::string kCAMediaTimingFunctionEaseOutElastic = "easeOutElastic";
 
 class CAMediaTimingFunction {
 public:
     CAMediaTimingFunction(std::string name);
+    CAMediaTimingFunction(std::function<double(double)> timing);
 
     static double linear(double x);
     static double easeInCubic(double x);
@@ -34,6 +37,7 @@ public:
     static double easeInQuad(double x);
     static double easeOutQuad(double x);
     static double easeInOutCubic(double x);
+    static double easeOutElastic(double x);
 
     // from CubicBezier1D optimising away constant terms
     static double customEaseOut(double x);

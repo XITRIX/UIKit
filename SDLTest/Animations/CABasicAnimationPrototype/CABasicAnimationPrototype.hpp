@@ -22,7 +22,7 @@ public:
 
     CABasicAnimationPrototype(double duration, double delay, std::shared_ptr<UIViewAnimationGroup> animationGroup);
 
-    std::shared_ptr<CABasicAnimation> createAnimation(std::string keyPath, AnimatableProperty fromValue);
+    virtual std::shared_ptr<CABasicAnimation> createAnimation(std::string keyPath, AnimatableProperty fromValue);
 };
 
 }

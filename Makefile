@@ -48,6 +48,7 @@ ROMFS		:=	assets
 # options for code generation
 #---------------------------------------------------------------------------------
 INCLUDES := $(INCLUDES) \
+			SDLTest/Animations \
 			SDLTest/CALayer \
 			SDLTest/CGImage \
 			SDLTest/ContentsGravityTransformation \
@@ -64,7 +65,14 @@ INCLUDES := $(INCLUDES) \
 			SDLTest/Utils \
 
 SOURCES  := $(SOURCES) \
+			SDLTest/Animations/AnimatableProperty \
+			SDLTest/Animations/CABasicAnimation \
+			SDLTest/Animations/CABasicAnimationPrototype \
+			SDLTest/Animations/CAMediaTimingFunction \
+			SDLTest/Animations/UIViewAnimationGroup \
+			SDLTest/Animations/UIViewAnimationOptions \
 			SDLTest/CALayer \
+			SDLTest/CATransaction \
 			SDLTest/CGImage \
 			SDLTest/ContentsGravityTransformation \
 			SDLTest/Data \
@@ -75,8 +83,10 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Runner \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \
+			SDLTest/Timer \
 			SDLTest/UIApplication \
 			SDLTest/UIColor \
+			SDLTest/UIView \
 			SDLTest/Utils \
 
 INCLUDES := $(INCLUDES) \
@@ -104,7 +114,7 @@ CFLAGS	:=	-g -Wall -O2 -ffunction-sections \
 
 CFLAGS	+=	$(INCLUDE) -DGL_GLEXT_PROTOTYPES -DSDL_GPU_DISABLE_OPENGL -DSDL_GPU_DISABLE_GLES_1 -DSDL_GPU_DISABLE_GLES_3 -D__native_client__ -DGLEW_NO_GLU -D__SWITCH__
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20 -O2
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fexceptions -std=gnu++20 -O2
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)

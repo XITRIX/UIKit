@@ -5,7 +5,10 @@
 //  Created by Даниил Виноградов on 19.07.2022.
 //
 
-#include "NXAffineTransform.hpp"
+#include <NXAffineTransform/NXAffineTransform.hpp>
+#include <NXTransform3D/NXTransform3D.hpp>
+
+#define RAD_PER_DEG 0.017453293f
 
 namespace UIKit {
 
@@ -18,7 +21,31 @@ m11(m11), m12(m12), m21(m21), m22(m22), tX(tX), tY(tY)
 { }
 
 NXAffineTransform NXAffineTransform::translationBy(float x, float y) {
-    return NXAffineTransform();
+    return NXAffineTransform(0, 0,
+                             0, 0,
+                             x, y);
+}
+
+NXAffineTransform NXAffineTransform::scaleBy(float x, float y) {
+    return NXAffineTransform(x, 0,
+                             0, y,
+                             0, 0);
+}
+
+NXAffineTransform NXAffineTransform::scale(float f) {
+    return NXAffineTransform(f, 0,
+                             0, f,
+                             0, 0);
+}
+
+NXAffineTransform NXAffineTransform::rotationBy(float angle) {
+    float radians = angle * RAD_PER_DEG;
+    float c = cosf(radians);
+    float s = sinf(radians);
+
+    return NXAffineTransform(c,  s,
+                             -s, c,
+                             0,  0);
 }
 
 std::optional<NXAffineTransform> NXAffineTransform::inverted() const {
@@ -47,6 +74,12 @@ bool NXAffineTransform::operator==(const NXAffineTransform& rhs) const {
             m22 == rhs.m22 &&
             tX == rhs.tX &&
             tY == rhs.tY;
+}
+
+NXAffineTransform NXAffineTransform::operator*(const NXAffineTransform& rhb) const {
+    auto a = NXTransform3DMakeAffineTransform(*this);
+    auto b = NXTransform3DMakeAffineTransform(rhb);
+    return NXTransform3DGetAffineTransform(a * b);
 }
 
 }

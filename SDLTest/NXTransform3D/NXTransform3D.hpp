@@ -41,6 +41,7 @@ public:
     NXTransform3D operator-(const NXTransform3D& rhs) const;
     NXTransform3D operator*(const NXTransform3D& first) const;
     NXTransform3D operator*(const float& first) const;
+    NXTransform3D interpolate(const float& progress) const;
 
     Vector3 transformingVector(float x, float y, float z) const;
 

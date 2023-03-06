@@ -252,38 +252,38 @@ void CALayer::setFrame(Rect frame) {
 
 void CALayer::setAnchorPoint(Point anchorPoint) {
     if (_anchorPoint == anchorPoint) return;
-    _anchorPoint = anchorPoint;
     onWillSet("anchorPoint");
+    _anchorPoint = anchorPoint;
 }
 
 void CALayer::setPosition(Point position) {
     if (_position == position) return;
-    _position = position;
     onWillSet("position");
+    _position = position;
 }
 
 void CALayer::setBounds(Rect bounds) {
     if (_bounds == bounds) return;
-    _bounds = bounds;
     onWillSet("bounds");
+    _bounds = bounds;
 }
 
 void CALayer::setOpacity(float opacity) {
     if (_opacity == opacity) return;
-    _opacity = opacity;
     onWillSet("opacity");
+    _opacity = opacity;
 }
 
 void CALayer::setTransform(NXTransform3D transform) {
     if (_transform == transform) return;
-    _transform = transform;
     onWillSet("transform");
+    _transform = transform;
 }
 
 void CALayer::setBackgroundColor(std::optional<UIColor> backgroundColor) {
     if (_backgroundColor == backgroundColor) return;
-    _backgroundColor = backgroundColor;
     onWillSet("backgroundColor");
+    _backgroundColor = backgroundColor;
 }
 
 void CALayer::setMask(std::shared_ptr<CALayer> mask) {

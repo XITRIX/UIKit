@@ -64,15 +64,6 @@ int Runner::startApp() {
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
-    auto group = std::make_shared<UIViewAnimationGroup>(UIViewAnimationOptions::curveLinear, [](auto i){});
-    UIView::currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(4, 4, group);
-//    layer1->setPosition(Point(644, 480));
-    auto frame = layer1->frame();
-    frame.origin = Point(644, 480);
-    layer1->setFrame(frame);
-    UIView::currentAnimationPrototype = nullptr;
-
-
     auto layer2 = std::make_shared<UIKit::UIView>();
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
     layer2->setFrame(Rect(40, 40, 80, 80));
@@ -99,6 +90,22 @@ int Runner::startApp() {
     layer1->addSubview(layer2);
 //    layer2->setMask(layer3);
     layer2->addSubview(layer3);
+
+//    UIView::animate(4, 4, UIViewAnimationOptions::curveEaseOutElastic, [layer1, layer3]() {
+//        auto frame = layer1->frame();
+//        frame.origin = Point(644, 480);
+//        layer1->setFrame(frame);
+//
+//        layer3->setTransform(NXAffineTransform::rotationBy(160));
+//    });
+
+    UIView::animate(4, 4, 0, 0, UIViewAnimationOptions::none, [layer1, layer3]() {
+        auto frame = layer1->frame();
+        frame.origin = Point(644, 480);
+        layer1->setFrame(frame);
+
+        layer3->setTransform(NXAffineTransform::rotationBy(160));
+    });
 
     // Event loop
     while(!quit)

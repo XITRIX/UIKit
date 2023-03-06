@@ -28,6 +28,15 @@ double CAMediaTimingFunction::customEaseOut(double x) {
 
     return term1 + term2 + term3;
 }
+double CAMediaTimingFunction::easeOutElastic(double x) {
+    auto c4 = (2 * M_PI) / 3;
+
+    return x == 0
+      ? 0
+      : x == 1
+      ? 1
+      : pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1;
+}
 
 CAMediaTimingFunction::CAMediaTimingFunction(std::string name) {
     if (name == kCAMediaTimingFunctionDefault)
@@ -42,9 +51,15 @@ CAMediaTimingFunction::CAMediaTimingFunction(std::string name) {
         timing = CAMediaTimingFunction::customEaseOut;
     else if (name == kCAMediaTimingFunctionEaseInEaseOut)
         timing = CAMediaTimingFunction::easeInOutCubic;
+    else if (name == kCAMediaTimingFunctionEaseOutElastic)
+        timing = CAMediaTimingFunction::easeOutElastic;
     else
         throw -1;
 //        fatalError("invalid name in CAMediaTimingFunction init");
+}
+
+CAMediaTimingFunction::CAMediaTimingFunction(std::function<double(double)> timing) {
+    this->timing = timing;
 }
 
 std::shared_ptr<CAMediaTimingFunction> CAMediaTimingFunction::timingFunctionFrom(UIViewAnimationOptions options) {
@@ -58,6 +73,8 @@ std::shared_ptr<CAMediaTimingFunction> CAMediaTimingFunction::timingFunctionFrom
         return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionCustomEaseOut);
     } else if ((options & UIViewAnimationOptions::curveLinear) == UIViewAnimationOptions::curveLinear) {
         return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionLinear);
+    } else if ((options & UIViewAnimationOptions::curveEaseOutElastic) == UIViewAnimationOptions::curveEaseOutElastic) {
+        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseOutElastic);
     }
 
     return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionDefault);

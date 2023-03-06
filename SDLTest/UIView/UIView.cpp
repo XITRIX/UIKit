@@ -6,6 +6,7 @@
 //
 
 #include <UIView/UIView.hpp>
+#include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
 
 namespace UIKit {
 
@@ -48,6 +49,10 @@ Point UIView::center() const {
     return Point(frame.midX(), frame.midY());
 }
 
+void UIView::setTransform(NXAffineTransform transform) {
+    _layer->setAffineTransform(transform);
+}
+
 void UIView::addSubview(std::shared_ptr<UIView> view) {
     setNeedsLayout();
     _layer->addSublayer(view->_layer);
@@ -72,9 +77,39 @@ void UIView::removeFromSuperview() {
     superview->setNeedsLayout();
 }
 
-// Animations
+// MARK: - Animations
 std::set<std::shared_ptr<CALayer>> UIView::layersWithAnimations;
 std::shared_ptr<CABasicAnimationPrototype> UIView::currentAnimationPrototype;
+
+void UIView::animate(double duration, double delay, UIViewAnimationOptions options, std::function<void()> animations, std::function<void(bool)> completion) {
+    auto group = std::make_shared<UIViewAnimationGroup>(options, completion);
+    currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(duration, delay, group);
+
+    animations();
+
+    if (currentAnimationPrototype && currentAnimationPrototype->animationGroup->queuedAnimations == 0) {
+        completion(true);
+    }
+    
+    currentAnimationPrototype = nullptr;
+}
+
+
+void UIView::animate(double duration, std::function<void()> animations) {
+    UIView::animate( duration, 0, UIViewAnimationOptions::none, animations);
+}
+
+void UIView::animate(double duration, double delay, double damping, double initialSpringVelocity, UIViewAnimationOptions options, std::function<void()> animations, std::function<void(bool)> completion) {
+    auto group = std::make_shared<UIViewAnimationGroup>(options, completion);
+    currentAnimationPrototype = std::make_shared<CASpringAnimationPrototype>( duration, delay, damping, initialSpringVelocity, group);
+
+    animations();
+
+    if (currentAnimationPrototype && currentAnimationPrototype->animationGroup->queuedAnimations == 0) {
+        completion(true);
+    }
+    currentAnimationPrototype = nullptr;
+}
 
 void UIView::animateIfNeeded(Timer currentTime) {
     auto layersWithAnimationsCopy = layersWithAnimations;
