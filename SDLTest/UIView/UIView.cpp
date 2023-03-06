@@ -53,6 +53,19 @@ void UIView::setTransform(NXAffineTransform transform) {
     _layer->setAffineTransform(transform);
 }
 
+void UIView::setMask(std::shared_ptr<UIView> mask) {
+    if (_mask == mask) { return; }
+    if (_mask) { _mask->removeFromSuperview(); }
+
+    _mask = mask;
+    if (mask) {
+        _layer->setMask(mask->_layer);
+        mask->superview = shared_from_this();
+    } else {
+        _layer->setMask(nullptr);
+    }
+}
+
 void UIView::addSubview(std::shared_ptr<UIView> view) {
     setNeedsLayout();
     _layer->addSublayer(view->_layer);
@@ -72,7 +85,13 @@ void UIView::removeFromSuperview() {
 
     _layer->removeFromSuperlayer();
 
-    superview->subviews.erase(std::remove(superview->subviews.begin(), superview->subviews.end(), shared_from_this()), superview->subviews.end());
+    // If it's mask - remove
+    if (superview->_mask.get() == this) {
+        superview->_mask = nullptr;
+    }
+    else {
+        superview->subviews.erase(std::remove(superview->subviews.begin(), superview->subviews.end(), shared_from_this()), superview->subviews.end());
+    }
     this->superview.reset();
     superview->setNeedsLayout();
 }

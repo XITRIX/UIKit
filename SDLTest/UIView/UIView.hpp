@@ -47,6 +47,9 @@ public:
     void setBackgroundColor(std::optional<UIColor> backbroundColor) { _layer->setBackgroundColor(backbroundColor); }
     std::optional<UIColor> backgroundColor() const { return _layer->backgroundColor(); }
 
+    void setMask(std::shared_ptr<UIView> mask);
+    std::shared_ptr<UIView> mask() { return _mask; }
+
     void setNeedsLayout() { _needsLayout = true; }
 
     void addSubview(std::shared_ptr<UIView> view);
@@ -84,6 +87,7 @@ private:
     std::vector<std::shared_ptr<UIView>> subviews;
     std::weak_ptr<UIView> superview;
     std::shared_ptr<CALayer> _layer;
+    std::shared_ptr<UIView> _mask;
 
     bool _needsLayout = true;
 };

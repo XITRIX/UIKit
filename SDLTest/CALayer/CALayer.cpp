@@ -134,7 +134,7 @@ void CALayer::render(GPU_Target* renderer) {
         GPU_Clear(maskFBO->pointee->target);
 
         // Render mask texture
-        mask->render(maskFBO->pointee->target);
+        mask->presentationOrSelf()->render(maskFBO->pointee->target);
 
         // Reset to old render target
         GPU_SetActiveTarget(localRenderer);
@@ -488,14 +488,14 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
     auto fromValue = animation->fromValue.value();
 
     if (keyPath == "backgroundColor") {
-        auto start = any_optional_cast<UIColor>(fromValue);
+        auto start = any_optional_cast<std::optional<UIColor>>(fromValue);
         if (!start.has_value()) { return; }
 
-        auto end = any_optional_cast<UIColor>(animation->toValue.value());
+        auto end = any_optional_cast<std::optional<UIColor>>(animation->toValue);
         if (!end.has_value()) end = this->_backgroundColor;
         if (!end.has_value()) end = UIColor::clear;
 
-        presentation->_backgroundColor = start->interpolationTo(end.value(), progress);
+        presentation->_backgroundColor = start.value()->interpolationTo(end.value().value(), progress);
     }
     if (keyPath == "position") {
         auto start = any_optional_cast<Point>(fromValue);

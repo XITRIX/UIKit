@@ -54,11 +54,13 @@ UIColor UIColor::interpolationTo(UIColor endResult, float progress) {
     auto resultB = startB + (endB - startB) * currentProgress / maxProgress;
     auto resultA = startA + (endA - startA) * currentProgress / maxProgress;
 
+#define res(x) fmaxf(0, fminf(255, abs(x)))
+
     return UIColor(
-        abs(resultR),
-        abs(resultG),
-        abs(resultB),
-        abs(resultA)
+        res(resultR),
+        res(resultG),
+        res(resultB),
+        res(resultA)
     );
 }
 

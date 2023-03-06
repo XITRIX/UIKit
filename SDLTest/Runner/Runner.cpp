@@ -60,7 +60,7 @@ int Runner::startApp() {
     layer1->setFrame(Rect(44, 44, 280, 280));
     layer1->setBackgroundColor(UIColor::blue);
     layer1->layer()->cornerRadius = 16;
-    layer1->setAlpha(0.5f);
+//    layer1->setAlpha(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
@@ -104,7 +104,10 @@ int Runner::startApp() {
         frame.origin = Point(644, 480);
         layer1->setFrame(frame);
 
-        layer3->setTransform(NXAffineTransform::rotationBy(160));
+        layer1->setAlpha(0.3f);
+        layer1->setBackgroundColor(UIColor::green);
+
+        layer3->setTransform(NXAffineTransform::rotationBy(160) * NXAffineTransform::scale(0.5f));
     });
 
     // Event loop
