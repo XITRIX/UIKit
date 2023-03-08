@@ -22,6 +22,7 @@ public:
     static Renderer* shared();
 
     void draw(std::function<void(NVGcontext*)> draw);
+    std::shared_ptr<CGImage> drawFBO(Size size, float scale, std::function<void(NVGcontext*)> draw);
 
     NVGcontext* getContext() const { return _vg; }
 private:

@@ -35,12 +35,15 @@ UIRenderer::UIRenderer() {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
 
     rawPointer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    if (!rawPointer) {
+        printf("%s\n", GPU_PopErrorCode().details);
+        printf("%s\n", SDL_GetError());
+        exit(-1);
+    }
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
     _scale = float(rawPointer->base_h) / float(rawPointer->h);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
-//    SDL_GameController *joystick;
-//    joystick = SDL_GameControllerOpen(0);
     SDL_GameControllerOpen(0); // TODO: Move to another place
 }
 
@@ -63,11 +66,11 @@ void UIRenderer::render(std::shared_ptr<UIWindow> window, Timer frameTimer) {
 
     window->layer()->render(rawPointer);
 
-    Renderer::shared()->draw([this](auto vg) {
-        nvgFontSize(vg, 21);
-        nvgFillColor(vg, UIColor::black.nvgColor());
-        nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
-    });
+//    Renderer::shared()->draw([this](auto vg) {
+//        nvgFontSize(vg, 21);
+//        nvgFillColor(vg, UIColor::black.nvgColor());
+//        nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
+//    });
 
     // Update screen
     GPU_Flip(rawPointer);

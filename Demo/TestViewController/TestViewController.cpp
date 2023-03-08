@@ -6,6 +6,7 @@
 //
 
 #include <TestViewController/TestViewController.hpp>
+#include <UILabel/UILabel.hpp>
 
 using namespace UIKit;
 
@@ -33,7 +34,7 @@ void TestViewController::loadView() {
     view3 = std::make_shared<UIKit::UIImageView>(UIImage::fromPath("test3.png"));
     view3->setFrame(Rect(0, 0, 80, 80));
     view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
-    view3->layer()->cornerRadius = 16;
+//    view3->layer()->cornerRadius = 16;
 //    layer3->setTransform(NXTransform3D::rotationBy(45, 0, 0, 1) * NXTransform3D::scale(0.5f));
 
     view->addSubview(view1);
@@ -41,12 +42,20 @@ void TestViewController::loadView() {
     view1->addSubview(view2);
 //    layer2->setMask(layer3);
     view2->addSubview(view3);
+
+    auto label = std::make_shared<UILabel>();
+    label->setFrame(Rect(480, 90, 300, 44));
+    label->setBackgroundColor(UIColor::green);
+    label->setText("Helloooo!\nHelloooo!\nHell!");
+    label->sizeToFit();
+
+    view->addSubview(label);
     
     setView(view);
 }
 
 void TestViewController::viewDidLoad() {
-    view3->setTransform(NXAffineTransform::rotationBy(-45) * NXAffineTransform::scale(2));
+//    view3->setTransform(NXAffineTransform::rotationBy(-45) * NXAffineTransform::scale(2));
 
     UIView::animate(4, 2, UIViewAnimationOptions::curveEaseOutElastic, [this]() {
         view3->setBackgroundColor(UIColor::cyan);

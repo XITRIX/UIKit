@@ -96,7 +96,7 @@ public:
 
     std::shared_ptr<CABasicAnimation> actionForKey(std::string event) override;
     virtual void draw() {}
-    void display(std::shared_ptr<CALayer> layer) override;
+    virtual void display(std::shared_ptr<CALayer> layer) override;
 
     // SDL
     void sdlDrawAndLayoutTreeIfNeeded(float parentAlpha = 1);

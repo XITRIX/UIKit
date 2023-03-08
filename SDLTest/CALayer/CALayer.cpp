@@ -159,7 +159,6 @@ void CALayer::render(GPU_Target* renderer) {
         if (cornerRadius <= 0.001f) {
             GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), _backgroundColor.value().color);
         } else {
-            GPU_PushMatrix();
             Renderer::shared()->draw([this, renderedBoundsRelativeToAnchorPoint](auto context) {
                 auto color = _backgroundColor.value().color;
                 nvgBeginPath(context);
@@ -167,7 +166,6 @@ void CALayer::render(GPU_Target* renderer) {
                 nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), cornerRadius);
                 nvgFill(context);
             });
-            GPU_PopMatrix();
         }
     }
 
@@ -193,9 +191,9 @@ void CALayer::render(GPU_Target* renderer) {
         ShaderProgram::deactivateAll();
     }
     
-    Renderer::shared()->draw([this](auto context) {
-        draw(context);
-    });
+//    Renderer::shared()->draw([this](auto context) {
+//        draw(context);
+//    });
 
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();

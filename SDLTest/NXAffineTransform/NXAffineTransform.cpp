@@ -21,8 +21,8 @@ m11(m11), m12(m12), m21(m21), m22(m22), tX(tX), tY(tY)
 { }
 
 NXAffineTransform NXAffineTransform::translationBy(float x, float y) {
-    return NXAffineTransform(0, 0,
-                             0, 0,
+    return NXAffineTransform(1, 0,
+                             0, 1,
                              x, y);
 }
 
