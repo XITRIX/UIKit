@@ -89,6 +89,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/CGImage \
 			SDLTest/ContentsGravityTransformation \
 			SDLTest/Data \
+			SDLTest/FontRenderer \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
@@ -99,8 +100,14 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIApplication \
 			SDLTest/UIApplicationMain \
 			SDLTest/UIColor \
+			SDLTest/UIEvent \
+			SDLTest/UIFont \
+			SDLTest/UIImage \
+			SDLTest/UIImageView \
+			SDLTest/UILabel \
 			SDLTest/UIRenderer \
 			SDLTest/UIResponder \
+			SDLTest/UITouch \
 			SDLTest/UIView \
 			SDLTest/UIViewController \
 			SDLTest/UIWindow \

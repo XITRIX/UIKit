@@ -130,6 +130,7 @@ private:
     bool _needsDisplay = true;
 
     void setSuperview(std::shared_ptr<UIView> superview);
+    bool anyCurrentlyRunningAnimationsAllowUserInteraction();
 
     friend class UIViewController;
 };

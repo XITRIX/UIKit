@@ -17,6 +17,7 @@ public:
     void viewDidLoad() override;
 
     void touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
+    void touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
     
 private:
     std::shared_ptr<UIKit::UIView> view1;

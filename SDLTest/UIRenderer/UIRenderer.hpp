@@ -10,6 +10,7 @@
 #include <SDL_gpu.h>
 #include <Geometry/Geometry.hpp>
 #include <Timer/Timer.hpp>
+#include <memory>
 
 namespace UIKit {
 

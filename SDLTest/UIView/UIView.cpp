@@ -178,7 +178,7 @@ Point UIView::convert(Point point, std::shared_ptr<UIView> toView) {
 }
 
 std::shared_ptr<UIView> UIView::hitTest(Point point, UIEvent* withEvent) {
-    if (isHidden() || !isUserInteractionEnabled || alpha() == 0)
+    if (isHidden() || !isUserInteractionEnabled || alpha() == 0 || !anyCurrentlyRunningAnimationsAllowUserInteraction())
         return nullptr;
 
     if (!this->point(point, withEvent))
@@ -201,6 +201,19 @@ bool UIView::point(Point insidePoint, UIEvent* withEvent) {
 // MARK: - Animations
 std::set<std::shared_ptr<CALayer>> UIView::layersWithAnimations;
 std::shared_ptr<CABasicAnimationPrototype> UIView::currentAnimationPrototype;
+
+bool UIView::anyCurrentlyRunningAnimationsAllowUserInteraction() {
+    if (layer()->animations.empty()) return true;
+
+    for (auto& animation: layer()->animations) {
+        auto animationGroup = animation.second->animationGroup;
+        if (animationGroup && (animationGroup->options & UIViewAnimationOptions::allowUserInteraction) == UIViewAnimationOptions::allowUserInteraction) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 void UIView::animate(double duration, double delay, UIViewAnimationOptions options, std::function<void()> animations, std::function<void(bool)> completion) {
     auto group = std::make_shared<UIViewAnimationGroup>(options, completion);

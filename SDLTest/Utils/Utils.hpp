@@ -13,6 +13,7 @@
 #include <string>
 #include <cassert>
 #include <optional>
+#include <functional>
 
 #include <libretro-common/features/features_cpu.h>
 #include <libretro-common/libretro.h>

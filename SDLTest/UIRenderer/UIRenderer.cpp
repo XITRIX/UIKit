@@ -66,11 +66,11 @@ void UIRenderer::render(std::shared_ptr<UIWindow> window, Timer frameTimer) {
 
     window->layer()->render(rawPointer);
 
-//    Renderer::shared()->draw([this](auto vg) {
-//        nvgFontSize(vg, 21);
-//        nvgFillColor(vg, UIColor::black.nvgColor());
-//        nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
-//    });
+    Renderer::shared()->draw([this](auto vg) {
+        nvgFontSize(vg, 21);
+        nvgFillColor(vg, UIColor::black.nvgColor());
+        nvgText(vg, 20, 20, ("FPS: " + std::to_string(getFps())).c_str(), nullptr);
+    });
 
     // Update screen
     GPU_Flip(rawPointer);

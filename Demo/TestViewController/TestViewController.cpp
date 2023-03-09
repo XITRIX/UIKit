@@ -60,7 +60,8 @@ void TestViewController::loadView() {
 void TestViewController::viewDidLoad() {
 //    view3->setTransform(NXAffineTransform::rotationBy(-45) * NXAffineTransform::scale(2));
 
-    UIView::animate(4, 2, UIViewAnimationOptions::curveEaseOutElastic, [this]() {
+    auto options = UIViewAnimationOptions(curveEaseOutElastic | allowUserInteraction);
+    UIView::animate(4, 2, options, [this]() {
         view3->setBackgroundColor(UIColor::cyan);
         view3->setTransform(NXAffineTransform::rotationBy(45) * NXAffineTransform::scale(2));
 //        view3->setTransform(NXAffineTransform::identity);
@@ -72,8 +73,8 @@ void TestViewController::viewDidLoad() {
         view1->setBackgroundColor(UIColor::orange);
 
 //        view1->setTransform(NXAffineTransform::rotationBy(-125) * NXAffineTransform::scale(0.5f));
-    }, [this](bool res) {
-        UIView::animate(4, 0, UIViewAnimationOptions::curveEaseOutElastic, [this]() {
+    }, [this, options](bool res) {
+        UIView::animate(4, 0, options, [this]() {
             view3->setBackgroundColor(UIColor::green);
             view3->setTransform(NXAffineTransform::identity);
 
@@ -95,5 +96,23 @@ void TestViewController::touchesBegan(std::set<std::shared_ptr<UITouch>> touches
         if (!touch->view().expired()) {
             printf("Touched %s\n", touch->view().lock()->tag.c_str());
         }
+    }
+}
+
+void TestViewController::touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
+    UIViewController::touchesMoved(touches, event);
+
+    for (auto& touch: touches) {
+        auto wview = touch->view();
+        if (wview.expired()) continue;
+
+        auto view = wview.lock();
+        if (view != view1) continue;
+
+        auto frame = view->frame();
+        auto touchDelta = touch->previousLocationIn(this->view()) - touch->locationIn(this->view());
+        frame.origin.x -= touchDelta.x;
+        frame.origin.y -= touchDelta.y;
+        view->setFrame(frame);
     }
 }

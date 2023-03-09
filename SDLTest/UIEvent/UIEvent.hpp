@@ -16,7 +16,7 @@ class UITouch;
 class UIEvent {
 public:
     std::set<std::shared_ptr<UITouch>> allTouches() { return _allTouches; }
-    std::time_t timestamp() { return _timestamp; }
+    Time timestamp() { return _timestamp; }
 
     UIEvent();
 private:
@@ -24,7 +24,7 @@ private:
 
     static std::vector<std::shared_ptr<UIEvent>> activeEvents;
     std::set<std::shared_ptr<UITouch>> _allTouches;
-    std::time_t _timestamp = getCPUTimeUsec();
+    Time _timestamp = getCPUTimeUsec();
 
     friend class UIApplication;
     friend class UIWindow;

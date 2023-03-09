@@ -32,7 +32,7 @@ private:
     std::string _text;
     UIColor _textColor = UIColor::black;
     NSTextAlignment _textAlignment = NSTextAlignment::left;
-    std::shared_ptr<UIFont> font = UIFont::systemFont(44);
+    std::shared_ptr<UIFont> font = UIFont::systemFont(17);
 
     friend class FontRenderer;
 };

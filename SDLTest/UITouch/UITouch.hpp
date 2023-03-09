@@ -11,6 +11,7 @@
 #include <Geometry/Geometry.hpp>
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <vector>
+#include <time.h>
 
 namespace UIKit {
 
@@ -25,13 +26,13 @@ public:
     UITouch(): UITouch(0, Point(), getCPUTimeUsec()) {}
     UITouch(unsigned long touchId, Point point, Time timestamp);
 
-    unsigned long touchId() const { return _touchId; }
+    constexpr unsigned long touchId() const { return _touchId; }
 
     std::weak_ptr<UIView> view() const { return _view; }
     std::weak_ptr<UIWindow> window() const { return _window; }
 
     UITouchPhase phase() const { return _phase; }
-    std::time_t timestamp() const { return _timestamp; }
+    Time timestamp() const { return _timestamp; }
 
     Point absoluteLocation() const { return _absoluteLocation; }
     Point previousAbsoluteLocation() const { return _previousAbsoluteLocation; }
@@ -54,7 +55,7 @@ private:
     std::weak_ptr<UIWindow> _window;
 
     UITouchPhase _phase = UITouchPhase::began;
-    std::time_t _timestamp;
+    Time _timestamp;
 
     Point _absoluteLocation;
     Point _previousAbsoluteLocation;

@@ -37,6 +37,8 @@ private:
     static void onDidEnterForeground();
     static void onWillEnterBackground();
     static void onDidEnterBackground();
+
+    void handleSDLEvent(SDL_Event e);
 };
 
 }
