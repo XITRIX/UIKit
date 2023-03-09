@@ -6,13 +6,13 @@
 //
 
 #include <TestViewController/TestViewController.hpp>
-#include <UILabel/UILabel.hpp>
 
 using namespace UIKit;
 
 void TestViewController::loadView() {
     auto view = std::make_shared<UIView>();
     view1 = std::make_shared<UIKit::UIView>();
+    view1->tag = "View 1";
 //    layer1->anchorPoint = Point(0, 0);
     view1->setFrame(Rect(44, 44, 280, 280));
     view1->setBackgroundColor(UIColor::blue);
@@ -22,6 +22,7 @@ void TestViewController::loadView() {
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
     view2 = std::make_shared<UIKit::UIView>();
+    view2->tag = "View 2";
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
     view2->setFrame(Rect(40, 40, 80, 80));
     view2->setBackgroundColor(UIColor::red);//.withAlphaComponent(0.3f);
@@ -32,6 +33,7 @@ void TestViewController::loadView() {
 
 
     view3 = std::make_shared<UIKit::UIImageView>(UIImage::fromPath("test3.png"));
+    view3->tag = "View 3";
     view3->setFrame(Rect(0, 0, 80, 80));
     view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
 //    view3->layer()->cornerRadius = 16;
@@ -44,6 +46,7 @@ void TestViewController::loadView() {
     view2->addSubview(view3);
 
     auto label = std::make_shared<UILabel>();
+    label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
     label->setText("Helloooo!\nHelloooo!\nHell!");
@@ -83,4 +86,14 @@ void TestViewController::viewDidLoad() {
 
         });
     });
+}
+
+void TestViewController::touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
+    UIViewController::touchesBegan(touches, event);
+
+    for (auto& touch: touches) {
+        if (!touch->view().expired()) {
+            printf("Touched %s\n", touch->view().lock()->tag.c_str());
+        }
+    }
 }

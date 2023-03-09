@@ -8,10 +8,12 @@
 #pragma once
 
 #include <CALayer/CALayer.hpp>
+#include <UIEvent/UIEvent.hpp>
 #include <UIViewContentMode/UIViewContentMode.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UIResponder/UIResponder.hpp>
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
+#include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <functional>
 #include <vector>
 #include <memory>
@@ -19,8 +21,10 @@
 
 namespace UIKit {
 
+class UIViewController;
 class UIView: public UIResponder, public CALayerDelegate, public std::enable_shared_from_this<UIView> {
 public:
+    std::string tag;
     bool isUserInteractionEnabled = true;
 
     UIView(Rect frame);
@@ -28,6 +32,8 @@ public:
 
     virtual CALayer* initLayer();
     std::shared_ptr<CALayer> layer() { return _layer; }
+
+    std::shared_ptr<UIResponder> next() override;
 
     void setFrame(Rect frame);
     Rect frame() const { return _layer->getFrame(); }
@@ -51,14 +57,19 @@ public:
     std::optional<UIColor> backgroundColor() const { return _layer->backgroundColor(); }
 
     void setMask(std::shared_ptr<UIView> mask);
-    std::shared_ptr<UIView> mask() { return _mask; }
+    std::shared_ptr<UIView> mask() const { return _mask; }
 
     void setContentMode(UIViewContentMode mode);
-    UIViewContentMode contentMode() { return _contentMode; }
+    UIViewContentMode contentMode() const { return _contentMode; }
+
+    std::vector<std::shared_ptr<UIGestureRecognizer>> gestureRecognizers() const { return _gestureRecognizers; }
 
     void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
     void removeFromSuperview();
+
+    std::vector<std::shared_ptr<UIView>> subviews() const { return _subviews; }
+    std::weak_ptr<UIView> superview() const { return _superview; }
 
     // Layout
     void setNeedsDisplay() { _needsDisplay = true; }
@@ -69,6 +80,11 @@ public:
 
     virtual Size sizeThatFits(Size size);
     virtual void sizeToFit();
+
+    // Touch
+    Point convert(Point point, std::shared_ptr<UIView> toView);
+    virtual std::shared_ptr<UIView> hitTest(Point point, UIEvent* withEvent);
+    virtual bool point(Point insidePoint, UIEvent* withEvent);
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;
@@ -102,14 +118,20 @@ public:
     void sdlDrawAndLayoutTreeIfNeeded(float parentAlpha = 1);
 
 private:
-    std::vector<std::shared_ptr<UIView>> subviews;
-    std::weak_ptr<UIView> superview;
+    std::vector<std::shared_ptr<UIGestureRecognizer>> _gestureRecognizers;
+    std::vector<std::shared_ptr<UIView>> _subviews;
+    std::weak_ptr<UIView> _superview;
     std::shared_ptr<CALayer> _layer;
     std::shared_ptr<UIView> _mask;
     UIViewContentMode _contentMode;
+    std::weak_ptr<UIViewController> _parentController;
 
     bool _needsLayout = true;
     bool _needsDisplay = true;
+
+    void setSuperview(std::shared_ptr<UIView> superview);
+
+    friend class UIViewController;
 };
 
 }

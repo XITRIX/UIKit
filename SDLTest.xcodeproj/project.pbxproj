@@ -131,6 +131,12 @@
 		7CD7DB2E29B6ACE000C9637C /* UIFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB2B29B6ACE000C9637C /* UIFont.cpp */; };
 		7CD7DB3229B6AD3700C9637C /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3029B6AD3700C9637C /* FontRenderer.cpp */; };
 		7CD7DB3329B6AD3700C9637C /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3029B6AD3700C9637C /* FontRenderer.cpp */; };
+		7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3829B8E23300C9637C /* UITouch.cpp */; };
+		7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3829B8E23300C9637C /* UITouch.cpp */; };
+		7CD7DB3F29B8E74F00C9637C /* UIEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3D29B8E74F00C9637C /* UIEvent.cpp */; };
+		7CD7DB4029B8E74F00C9637C /* UIEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB3D29B8E74F00C9637C /* UIEvent.cpp */; };
+		7CD7DB4429B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB4229B8F46D00C9637C /* UIGestureRecognizer.cpp */; };
+		7CD7DB4529B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB4229B8F46D00C9637C /* UIGestureRecognizer.cpp */; };
 		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
@@ -247,6 +253,7 @@
 		7C0798252993F1E4004E8EC8 /* CALayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CALayer.hpp; sourceTree = "<group>"; };
 		7C0798282993F25C004E8EC8 /* CGImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGImage.cpp; sourceTree = "<group>"; };
 		7C0798292993F25C004E8EC8 /* CGImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGImage.hpp; sourceTree = "<group>"; };
+		7C4DC81229BA2C9500F13A6D /* UIKit.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIKit.hpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -408,6 +415,12 @@
 		7CD7DB2C29B6ACE000C9637C /* UIFont.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFont.hpp; sourceTree = "<group>"; };
 		7CD7DB3029B6AD3700C9637C /* FontRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FontRenderer.cpp; sourceTree = "<group>"; };
 		7CD7DB3129B6AD3700C9637C /* FontRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FontRenderer.hpp; sourceTree = "<group>"; };
+		7CD7DB3829B8E23300C9637C /* UITouch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UITouch.cpp; sourceTree = "<group>"; };
+		7CD7DB3929B8E23300C9637C /* UITouch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UITouch.hpp; sourceTree = "<group>"; };
+		7CD7DB3D29B8E74F00C9637C /* UIEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIEvent.cpp; sourceTree = "<group>"; };
+		7CD7DB3E29B8E74F00C9637C /* UIEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIEvent.hpp; sourceTree = "<group>"; };
+		7CD7DB4229B8F46D00C9637C /* UIGestureRecognizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIGestureRecognizer.cpp; sourceTree = "<group>"; };
+		7CD7DB4329B8F46D00C9637C /* UIGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIGestureRecognizer.hpp; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
@@ -474,9 +487,9 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7DB2F29B6AD3000C9637C /* FontRenderer */,
-				7CD7DB2A29B6ACD500C9637C /* UIFont */,
-				7CD13F1029AA52BE00D0FFF5 /* UILabel */,
+				7CD7DB4129B8F46600C9637C /* UIGestureRecognizer */,
+				7CD7DB3C29B8E74600C9637C /* UIEvent */,
+				7CD7DB3729B8E22400C9637C /* UITouch */,
 				7C82D69829B3F4CF005079B8 /* Animations */,
 				7C82D68729B384F5005079B8 /* CAAction */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
@@ -484,6 +497,7 @@
 				7C0798272993F251004E8EC8 /* CGImage */,
 				7CD13F1829AB6DCD00D0FFF5 /* ContentsGravityTransformation */,
 				7CD13F1429AA561300D0FFF5 /* Data */,
+				7CD7DB2F29B6AD3000C9637C /* FontRenderer */,
 				7CEB96862993F5CB007483C0 /* Geometry */,
 				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
 				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
@@ -496,8 +510,10 @@
 				7CD7DAF629B6270300C9637C /* UIApplicationDelegate */,
 				7CD7DAFF29B62E8300C9637C /* UIApplicationMain */,
 				7CEB968A2993F78F007483C0 /* UIColor */,
+				7CD7DB2A29B6ACD500C9637C /* UIFont */,
 				7CD7DB1A29B6864A00C9637C /* UIImage */,
 				7CD7DB2029B6909400C9637C /* UIImageView */,
+				7CD13F1029AA52BE00D0FFF5 /* UILabel */,
 				7CD7DB0B29B6349800C9637C /* UIRenderer */,
 				7CD7DAF029B615D800C9637C /* UIResponder */,
 				7C82D6AF29B440EA005079B8 /* UIView */,
@@ -505,6 +521,7 @@
 				7CD7DAEB29B615C900C9637C /* UIViewController */,
 				7CD7DAE629B6155B00C9637C /* UIWindow */,
 				7CEB96A0299509B8007483C0 /* Utils */,
+				7C4DC81229BA2C9500F13A6D /* UIKit.hpp */,
 			);
 			path = SDLTest;
 			sourceTree = "<group>";
@@ -1235,6 +1252,33 @@
 			path = FontRenderer;
 			sourceTree = "<group>";
 		};
+		7CD7DB3729B8E22400C9637C /* UITouch */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB3929B8E23300C9637C /* UITouch.hpp */,
+				7CD7DB3829B8E23300C9637C /* UITouch.cpp */,
+			);
+			path = UITouch;
+			sourceTree = "<group>";
+		};
+		7CD7DB3C29B8E74600C9637C /* UIEvent */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB3E29B8E74F00C9637C /* UIEvent.hpp */,
+				7CD7DB3D29B8E74F00C9637C /* UIEvent.cpp */,
+			);
+			path = UIEvent;
+			sourceTree = "<group>";
+		};
+		7CD7DB4129B8F46600C9637C /* UIGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7DB4329B8F46D00C9637C /* UIGestureRecognizer.hpp */,
+				7CD7DB4229B8F46D00C9637C /* UIGestureRecognizer.cpp */,
+			);
+			path = UIGestureRecognizer;
+			sourceTree = "<group>";
+		};
 		7CEB96862993F5CB007483C0 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -1459,6 +1503,7 @@
 				7C82D6AD29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
+				7CD7DB4429B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
 				7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
 				7CD13F1B29AB6DD900D0FFF5 /* ContentsGravityTransformation.cpp in Sources */,
@@ -1471,6 +1516,7 @@
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
 				7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */,
 				7CD7DB0E29B634A200C9637C /* UIRenderer.cpp in Sources */,
+				7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7CD7DAEE29B615D300C9637C /* UIViewController.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
 				7CD7DB0229B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
@@ -1498,6 +1544,7 @@
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
 				7CD13F2229AE6A6E00D0FFF5 /* ShaderProgram.cpp in Sources */,
 				7C82D6BC29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
+				7CD7DB3F29B8E74F00C9637C /* UIEvent.cpp in Sources */,
 				7C82D5EE29AFD874005079B8 /* Utils+Antialiasing.cpp in Sources */,
 				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
 				7C82D67929B2B950005079B8 /* compat_strl.c in Sources */,
@@ -1528,6 +1575,7 @@
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7CD7DB0829B6332400C9637C /* main.cpp in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,
+				7CD7DB4029B8E74F00C9637C /* UIEvent.cpp in Sources */,
 				7C82D69D29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */,
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
@@ -1537,6 +1585,7 @@
 				7CD7DB0329B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
 				7CD7DAF429B615E200C9637C /* UIResponder.cpp in Sources */,
 				7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */,
+				7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
 				7C82D5AF29AEC28B005079B8 /* SDL_gpu_matrix.c in Sources */,
@@ -1556,6 +1605,7 @@
 				7C82D5B929AEC28B005079B8 /* renderer_OpenGL_4.c in Sources */,
 				7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */,
 				7CD7DB1429B67C2500C9637C /* Runner.cpp in Sources */,
+				7CD7DB4529B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
 				7C82D5C729AEC422005079B8 /* UIColor.cpp in Sources */,
 				7C82D6B329B440F4005079B8 /* UIView.cpp in Sources */,
 				7C82D5B829AEC28B005079B8 /* renderer_OpenGL_1_BASE.c in Sources */,

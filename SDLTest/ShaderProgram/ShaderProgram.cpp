@@ -83,7 +83,7 @@ MaskShaderProgram::MaskShaderProgram() :
     maskTexture("maskTexture", programRef)
 { }
 
-void MaskShaderProgram::setMaskImage(ptr<CGImage> maskImage, Rect frame) {
+void MaskShaderProgram::setMaskImage(std::shared_ptr<CGImage> maskImage, Rect frame) {
     maskFrame.set(frame);
     maskTexture.set(maskImage);
 }

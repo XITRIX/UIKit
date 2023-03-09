@@ -18,6 +18,8 @@ public:
     bool viewIsLoaded();
     void loadViewIfNeeded();
 
+    std::shared_ptr<UIResponder> next() override;
+
     // Most of these methods are designed to be overriden in `UIViewController` subclasses
     virtual void loadView();
     virtual void viewDidLoad() {}

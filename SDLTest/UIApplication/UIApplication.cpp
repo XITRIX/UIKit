@@ -7,6 +7,7 @@
 
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <UITouch/UITouch.hpp>
 #include <Utils/Utils.hpp>
 
 namespace UIKit {
@@ -42,12 +43,86 @@ void UIApplication::handleEventsIfNeeded() {
                 }
                 break;
             }
+            case SDL_FINGERDOWN: {
+                auto renderSize = UIRenderer::_main->bounds().size;
+                auto fingerPoint = Point(renderSize.width * e.tfinger.x, renderSize.height * e.tfinger.y);
+                printf("Touch id: %lld Begin, X:%f - Y:%f\n", e.tfinger.fingerId, fingerPoint.x, fingerPoint.y);
+                auto touch = std::make_shared<UITouch>(e.tfinger.fingerId, fingerPoint, getCPUTimeUsec());
+                auto event = std::shared_ptr<UIEvent>(new UIEvent(touch));
+                UIEvent::activeEvents.push_back(event);
+                sendEvent(event);
+                break;
+            }
+            case SDL_FINGERMOTION: {
+                auto renderSize = UIRenderer::_main->bounds().size;
+                auto fingerPoint = Point(renderSize.width * e.tfinger.x, renderSize.height * e.tfinger.y);
+                printf("Touch id: %lld Moved, X:%f - Y:%f\n", e.tfinger.fingerId, fingerPoint.x, fingerPoint.y);
+
+                std::shared_ptr<UIEvent> event;
+                std::shared_ptr<UITouch> touch;
+
+                for (auto& levent: UIEvent::activeEvents) {
+                    for (auto& ltouch: levent->allTouches()) {
+                        if (ltouch->touchId() == e.tfinger.fingerId) {
+                            event = levent;
+                            touch = ltouch;
+                        }
+                    }
+                }
+
+                if (!event || !touch) return;
+
+                auto previousTimestamp = touch->timestamp();
+                auto newTimestamp = getCPUTimeUsec();
+
+                touch->updateAbsoluteLocation(fingerPoint);
+                touch->_timestamp = newTimestamp;
+                touch->_phase = UITouchPhase::moved;
+
+                // SDL adds timestamps on send which could be quite different to when the event actually occurred.
+                // It's common to get two events with an unrealistically small time between them; don't send those.
+                if ((newTimestamp - previousTimestamp) > (5 / 1000)) {
+                    sendEvent(event);
+                }
+
+                break;
+            }
+            case SDL_FINGERUP: {
+                printf("Touch id: %lld Ended\n", e.tfinger.fingerId);
+
+                std::shared_ptr<UIEvent> event;
+                std::shared_ptr<UITouch> touch;
+
+                for (auto& levent: UIEvent::activeEvents) {
+                    for (auto& ltouch: levent->allTouches()) {
+                        if (ltouch->touchId() == e.tfinger.fingerId) {
+                            event = levent;
+                            touch = ltouch;
+                        }
+                    }
+                }
+
+                if (!event || !touch) return;
+
+                touch->_timestamp = getCPUTimeUsec();
+                touch->_phase = UITouchPhase::ended;
+
+                sendEvent(event);
+                UIEvent::activeEvents.erase(std::remove(UIEvent::activeEvents.begin(), UIEvent::activeEvents.end(), event), UIEvent::activeEvents.end());
+
+                break;
+            }
             case SDL_MOUSEBUTTONDOWN: {
-//                let touch = UITouch(touchId: 0, at: .from(e.button), timestamp: e.timestampInSeconds)
-//                let event = UIEvent(touch: touch)
-//                sendEvent(event)
+//                printf("Mouse click Begin, X:%d - Y:%d\n", e.button.x, e.button.y);
+//                auto touch = std::make_shared<UITouch>(0, Point(e.button.x, e.button.y), getCPUTimeUsec());
+//                auto event = std::shared_ptr<UIEvent>(new UIEvent(touch));
+//                sendEvent(event);
+//                break;
             }
             case SDL_MOUSEMOTION: {
+//                printf("Mouse click Move, X:%d - Y:%d\n", e.button.x, e.button.y);
+
+//                auto event = UIEvent::activeEvents;
 //                if
 //                    let event = UIEvent.activeEvents.first,
 //                    let touch = event.allTouches?.first(where: { $0.touchId == 0 })
@@ -65,8 +140,10 @@ void UIApplication::handleEventsIfNeeded() {
 //                        sendEvent(event)
 //                    }
 //                }
+                break;
             }
             case SDL_MOUSEBUTTONUP: {
+//                printf("Mouse click Ended, X:%d - Y:%d\n", e.button.x, e.button.y);
 //                if
 //                    let event = UIEvent.activeEvents.first,
 //                    let touch = event.allTouches?.first(where: { $0.touchId == 0 })
@@ -75,6 +152,7 @@ void UIApplication::handleEventsIfNeeded() {
 //                    touch.phase = .ended
 //                    sendEvent(event)
 //                }
+                break;
             }
             case SDL_KEYDOWN: {
                 if (e.key.keysym.sym == SDLK_q) {
@@ -112,15 +190,19 @@ void UIApplication::handleEventsIfNeeded() {
             }
             case SDL_APP_WILLENTERBACKGROUND: {
                 UIApplication::onWillEnterBackground();
+                break;
             }
             case SDL_APP_DIDENTERBACKGROUND: {
                 UIApplication::onDidEnterBackground();
+                break;
             }
             case SDL_APP_WILLENTERFOREGROUND: {
                 UIApplication::onWillEnterForeground();
+                break;
             }
             case SDL_APP_DIDENTERFOREGROUND: {
                 UIApplication::onDidEnterForeground();
+                break;
             }
             case SDL_WINDOWEVENT: {
                 switch (e.window.event)
@@ -144,6 +226,15 @@ void UIApplication::handleSDLQuit() {
     UIApplication::shared = nullptr;
     SDL_Quit();
     exit(0);
+}
+
+void UIApplication::sendEvent(std::shared_ptr<UIEvent> event) {
+    for (auto& touch: event->allTouches()) {
+        touch->_window = keyWindow;
+    }
+
+    if (!keyWindow.expired())
+        keyWindow.lock()->sendEvent(event);
 }
 
 void UIApplication::onWillEnterForeground() {

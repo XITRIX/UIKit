@@ -6,6 +6,8 @@
 //
 
 #include <any>
+#include <set>
+#include <vector>
 #include <memory>
 #include <cstdio>
 #include <string>
@@ -19,8 +21,8 @@
 
 namespace UIKit {
 
-#define ptr std::shared_ptr
-#define wptr std::weak_ptr
+//#define ptr std::shared_ptr
+//#define wptr std::weak_ptr
 
 typedef retro_time_t Time;
 
@@ -57,6 +59,30 @@ std::optional<T> any_optional_cast(std::optional<std::any> obj) {
     catch(const std::bad_any_cast& e) {
         return std::nullopt;
     }
+}
+
+template< typename T >
+std::optional<T> firstWhere(std::vector<T> array, std::function<bool(T)> condition) {
+    for (auto& item: array) {
+        if (condition(item)) return item;
+    }
+    return std::nullopt;
+}
+
+template< typename T >
+bool containsWhere(std::vector<T> array, std::function<bool(T)> condition) {
+    for (auto& item: array) {
+        if (condition(item)) return true;
+    }
+    return false;
+}
+
+template< typename T >
+bool containsWhere(std::set<T> array, std::function<bool(T)> condition) {
+    for (auto& item: array) {
+        if (condition(item)) return true;
+    }
+    return false;
 }
 
 struct Utils {

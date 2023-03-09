@@ -7,6 +7,7 @@
 
 #include <UIView/UIView.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <UIViewController/UIViewController.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
 
 namespace UIKit {
@@ -21,6 +22,12 @@ UIView::UIView(Rect frame) {
 
     _layer->delegate = this;
     setFrame(frame);
+}
+
+std::shared_ptr<UIResponder> UIView::next() {
+    if (!_parentController.expired()) return _parentController.lock();
+    if (!_superview.expired()) return _superview.lock();
+    return nullptr;
 }
 
 void UIView::setFrame(Rect frame) {
@@ -60,7 +67,7 @@ void UIView::setMask(std::shared_ptr<UIView> mask) {
     _mask = mask;
     if (mask) {
         _layer->setMask(mask->_layer);
-        mask->superview = shared_from_this();
+        mask->setSuperview(shared_from_this());
     } else {
         _layer->setMask(nullptr);
     }
@@ -115,8 +122,12 @@ void UIView::addSubview(std::shared_ptr<UIView> view) {
     _layer->addSublayer(view->_layer);
 
     view->removeFromSuperview();
-    subviews.push_back(view);
-    view->superview = this->shared_from_this();
+    _subviews.push_back(view);
+    view->setSuperview(this->shared_from_this());
+}
+
+void UIView::setSuperview(std::shared_ptr<UIView> superview) {
+    _superview = superview;
 }
 
 void UIView::insertSubviewAt(std::shared_ptr<UIView> view, int index) {
@@ -124,7 +135,7 @@ void UIView::insertSubviewAt(std::shared_ptr<UIView> view, int index) {
 }
 
 void UIView::removeFromSuperview() {
-    auto superview = this->superview.lock();
+    auto superview = this->_superview.lock();
     if (!superview) return;
 
     _layer->removeFromSuperlayer();
@@ -134,10 +145,57 @@ void UIView::removeFromSuperview() {
         superview->_mask = nullptr;
     }
     else {
-        superview->subviews.erase(std::remove(superview->subviews.begin(), superview->subviews.end(), shared_from_this()), superview->subviews.end());
+        superview->_subviews.erase(std::remove(superview->_subviews.begin(), superview->_subviews.end(), shared_from_this()), superview->_subviews.end());
     }
-    this->superview.reset();
+    this->setSuperview(nullptr);
     superview->setNeedsLayout();
+}
+
+// MARK: - Touch
+Point UIView::convert(Point point, std::shared_ptr<UIView> toView) {
+    Point selfAbsoluteOrigin;
+    Point otherAbsoluteOrigin;
+
+    std::shared_ptr<UIView> current = shared_from_this();
+    while (current) {
+        if (current == toView) {
+            return point + selfAbsoluteOrigin;
+        }
+        selfAbsoluteOrigin += current->frame().origin;
+        selfAbsoluteOrigin -= current->bounds().origin;
+        current = current->_superview.lock();
+    }
+
+    current = toView;
+    while (current) {
+        otherAbsoluteOrigin += current->frame().origin;
+        otherAbsoluteOrigin -= current->bounds().origin;
+        current = current->_superview.lock();
+    }
+
+    Point originDifference = otherAbsoluteOrigin - selfAbsoluteOrigin;
+    return point - originDifference;
+}
+
+std::shared_ptr<UIView> UIView::hitTest(Point point, UIEvent* withEvent) {
+    if (isHidden() || !isUserInteractionEnabled || alpha() == 0)
+        return nullptr;
+
+    if (!this->point(point, withEvent))
+        return nullptr;
+
+    auto subviews = _subviews;
+    for (int i = (int) subviews.size() - 1; i >= 0; i--) {
+        Point convertedPoint = shared_from_this()->convert(point, subviews[i]);
+        std::shared_ptr<UIView> test = subviews[i]->hitTest(convertedPoint, withEvent);
+        if (test) return test;
+    }
+
+    return shared_from_this();
+}
+
+bool UIView::point(Point insidePoint, UIEvent* withEvent) {
+    return bounds().contains(insidePoint);
 }
 
 // MARK: - Animations
@@ -254,7 +312,7 @@ void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
 
     layoutIfNeeded();
 
-    for (auto& subview: subviews) {
+    for (auto& subview: _subviews) {
         subview->sdlDrawAndLayoutTreeIfNeeded(alpha);
     }
 }

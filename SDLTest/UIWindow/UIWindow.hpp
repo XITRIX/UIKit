@@ -19,6 +19,7 @@ public:
     std::shared_ptr<UIViewController> rootViewController() { return _rootViewController; }
 
     void makeKeyAndVisible();
+    void sendEvent(std::shared_ptr<UIEvent> event);
 private:
     std::shared_ptr<UIViewController> _rootViewController;
 };

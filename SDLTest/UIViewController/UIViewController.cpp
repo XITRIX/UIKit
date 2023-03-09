@@ -9,14 +9,22 @@
 
 namespace UIKit {
 
+std::shared_ptr<UIResponder> UIViewController::next() {
+    if (!_view->_superview.expired()) {
+        return _view->_superview.lock();
+    }
+    return nullptr;
+}
+
 std::shared_ptr<UIView> UIViewController::view() {
     loadViewIfNeeded();
     return _view;
 }
 
 void UIViewController::setView(std::shared_ptr<UIView> view) {
+    if (_view) _view->_parentController.reset();
     _view = view;
-    view->next = shared_from_this();
+    _view->_parentController = shared_from_this();
     viewDidLoad();
 }
 
