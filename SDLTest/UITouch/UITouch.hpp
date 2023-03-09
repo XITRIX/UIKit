@@ -65,6 +65,7 @@ private:
 
     friend class UIApplication;
     friend class UIWindow;
+    friend class UIGestureRecognizer;
 };
 
 constexpr bool operator==(const UITouch& lhs, const UITouch& rhs) {

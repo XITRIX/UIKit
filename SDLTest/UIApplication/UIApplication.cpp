@@ -119,45 +119,42 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             break;
         }
         case SDL_MOUSEBUTTONDOWN: {
-//                printf("Mouse click Begin, X:%d - Y:%d\n", e.button.x, e.button.y);
-//                auto touch = std::make_shared<UITouch>(0, Point(e.button.x, e.button.y), getCPUTimeUsec());
-//                auto event = std::shared_ptr<UIEvent>(new UIEvent(touch));
-//                sendEvent(event);
-//                break;
+            // Simulate touch
+            auto touchEvent = SDL_Event();
+            touchEvent.type = SDL_FINGERDOWN;
+
+            auto renderSize = UIRenderer::_main->bounds().size;
+            touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
+            touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
+            touchEvent.tfinger.fingerId = 0;
+
+            handleSDLEvent(touchEvent);
+            break;
         }
         case SDL_MOUSEMOTION: {
-//                printf("Mouse click Move, X:%d - Y:%d\n", e.button.x, e.button.y);
+            // Simulate touch
+            auto touchEvent = SDL_Event();
+            touchEvent.type = SDL_FINGERMOTION;
 
-//                auto event = UIEvent::activeEvents;
-//                if
-//                    let event = UIEvent.activeEvents.first,
-//                    let touch = event.allTouches?.first(where: { $0.touchId == 0 })
-//                {
-//                    let previousTimestamp = touch.timestamp
-//                    let newTimestamp = e.timestampInSeconds
-//
-//                    touch.updateAbsoluteLocation(.from(e.motion))
-//                    touch.timestamp = newTimestamp
-//                    touch.phase = .moved
-//
-//                    // SDL adds timestamps on send which could be quite different to when the event actually occurred.
-//                    // It's common to get two events with an unrealistically small time between them; don't send those.
-//                    if (newTimestamp - previousTimestamp) > (5 / 1000) {
-//                        sendEvent(event)
-//                    }
-//                }
+            auto renderSize = UIRenderer::_main->bounds().size;
+            touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
+            touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
+            touchEvent.tfinger.fingerId = 0;
+
+            handleSDLEvent(touchEvent);
             break;
         }
         case SDL_MOUSEBUTTONUP: {
-//                printf("Mouse click Ended, X:%d - Y:%d\n", e.button.x, e.button.y);
-//                if
-//                    let event = UIEvent.activeEvents.first,
-//                    let touch = event.allTouches?.first(where: { $0.touchId == 0 })
-//                {
-//                    touch.timestamp = e.timestampInSeconds
-//                    touch.phase = .ended
-//                    sendEvent(event)
-//                }
+            // Simulate touch
+            auto touchEvent = SDL_Event();
+            touchEvent.type = SDL_FINGERUP;
+
+            auto renderSize = UIRenderer::_main->bounds().size;
+            touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
+            touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
+            touchEvent.tfinger.fingerId = 0;
+
+            handleSDLEvent(touchEvent);
             break;
         }
         case SDL_KEYDOWN: {

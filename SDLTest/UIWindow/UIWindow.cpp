@@ -48,54 +48,45 @@ void UIWindow::makeKeyAndVisible() {
 }
 
 void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
-//    guard
-//        let allTouches = event.allTouches,
-//        let currentTouch = allTouches.first,
-//        let hitView = currentTouch.view ?? hitTest(currentTouch.location(in: nil), with: nil)
-//    else { return }
-
-    for (auto& currentTouch: event->allTouches()) {
-        auto wHitView = currentTouch->view();
-        if (wHitView.expired()) wHitView = hitTest(currentTouch->locationIn(nullptr), nullptr);
+    for (auto& touch: event->allTouches()) {
+        auto wHitView = touch->view();
+        if (wHitView.expired()) wHitView = hitTest(touch->locationIn(nullptr), nullptr);
         if (wHitView.expired()) continue;
         auto hitView = wHitView.lock();
 
-        switch (currentTouch->phase()) {
+        switch (touch->phase()) {
             case UITouchPhase::began: {
-//                UIEvent::activeEvents.push_back(event);
-                currentTouch->_view = hitView;
-                currentTouch->_gestureRecognizers = getRecognizerHierachyFromView(hitView);
+                touch->_view = hitView;
+                touch->_gestureRecognizers = getRecognizerHierachyFromView(hitView);
 
-                currentTouch->runTouchActionOnRecognizerHierachy([](auto gestureRecognizer) {
-//                gestureRecognizer->touchesBegan(allTouches, with: event);
+                touch->runTouchActionOnRecognizerHierachy([touch, event](auto gestureRecognizer) {
+                    gestureRecognizer->touchesBegan({ touch }, event);
                 });
 
-                if (!currentTouch->hasBeenCancelledByAGestureRecognizer()) {
+                if (!touch->hasBeenCancelledByAGestureRecognizer()) {
                     hitView->touchesBegan(event->allTouches(), event);
                 }
             }
             case UITouchPhase::moved: {
-                currentTouch->runTouchActionOnRecognizerHierachy([](auto gestureRecognizer) {
-//                gestureRecognizer->touchesMoved(allTouches, event);
+                touch->runTouchActionOnRecognizerHierachy([touch, event](auto gestureRecognizer) {
+                    gestureRecognizer->touchesMoved({ touch }, event);
                 });
-                if (!currentTouch->hasBeenCancelledByAGestureRecognizer()) {
+                if (!touch->hasBeenCancelledByAGestureRecognizer()) {
                     hitView->touchesMoved(event->allTouches(), event);
                 }
             }
             case UITouchPhase::ended: {
                 // compute the value before ending the touch on the recognizer hierachy
                 // otherwise `hasBeenCancelledByAGestureRecognizer` will be false because the state was reset already
-                auto hasBeenCancelledByAGestureRecognizer = currentTouch->hasBeenCancelledByAGestureRecognizer();
+                auto hasBeenCancelledByAGestureRecognizer = touch->hasBeenCancelledByAGestureRecognizer();
 
-                currentTouch->runTouchActionOnRecognizerHierachy([](auto gestureRecognizer) {
-//                gestureRecognizer->touchesEnded(allTouches, with: event);
+                touch->runTouchActionOnRecognizerHierachy([touch, event](auto gestureRecognizer) {
+                    gestureRecognizer->touchesEnded({ touch }, event);
                 });
 
                 if (!hasBeenCancelledByAGestureRecognizer) {
                     hitView->touchesEnded(event->allTouches(), event);
                 }
-
-//                UIEvent::activeEvents.erase(event);
             }
         }
     }
