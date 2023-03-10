@@ -41,7 +41,7 @@ CALayer::CALayer(CALayer* layer) {
 //    shadowRadius = layer->shadowRadius;
 //    shadowOpacity = layer->shadowOpacity;
     mask = layer->mask;
-//    masksToBounds = layer->masksToBounds;
+    _masksToBounds = layer->_masksToBounds;
     _contents = layer->_contents; // XXX: we should make a copy here
     contentsScale = layer->contentsScale;
     superlayer = layer->superlayer;
@@ -107,6 +107,19 @@ void CALayer::render(GPU_Target* renderer) {
 
     // This transform is referred to as the `parentOriginTransform` in our sublayers (see above):
     auto transformAtSelfOrigin = modelViewTransform * translationFromAnchorPointToOrigin;
+
+    // MARK: Masking / clipping rect
+    auto screenRenderer = UIRenderer::main();
+    auto previousClippingRect = screenRenderer->clippingRect();
+
+    if (_masksToBounds) {
+        // If a previous clippingRect exists restrict it further, otherwise just set it:
+        if (previousClippingRect.has_value()) {
+            screenRenderer->setClippingRect(previousClippingRect.value().intersection(absoluteFrame));
+        } else {
+            screenRenderer->setClippingRect(absoluteFrame);
+        }
+    }
 
     if (mask) {
 //        auto maskFrame = (mask._presentation ?? mask).frame;
@@ -210,6 +223,8 @@ void CALayer::render(GPU_Target* renderer) {
         auto rect = GPU_MakeRect(0, 0, renderer->w, renderer->h);
         GPU_BlitRect(groupingFBO, NULL, renderer, &rect);
     }
+
+    screenRenderer->setClippingRect(previousClippingRect);
 
 }
 

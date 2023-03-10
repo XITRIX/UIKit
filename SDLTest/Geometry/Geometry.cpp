@@ -234,8 +234,32 @@ Rect Rect::applying(NXTransform3D t) {
     return Rect(newMinX, newMinY, newMaxX - newMinX, newMaxY - newMinY);
 }
 
+Rect Rect::intersection(Rect other) const {
+    auto largestMinX = fmaxf(minX(), other.minX());
+    auto largestMinY = fmaxf(minY(), other.minY());
+
+    auto smallestMaxX = fmaxf(maxX(), other.maxX());
+    auto smallestMaxY = fmaxf(maxY(), other.maxY());
+
+    auto width = smallestMaxX - largestMinX;
+    auto height = smallestMaxY - largestMinY;
+
+    if (width > 0 && height > 0) {
+        // The intersection rectangle has dimensions, i.e. there is an intersection:
+        return Rect(largestMinX, largestMinY, width, height);
+    } else {
+        return null;
+    }
+}
+
 GPU_Rect Rect::gpuRect() const {
     return GPU_MakeRect(origin.x, origin.y, size.width, size.height);
 }
+
+bool Rect::isNull() const {
+    return *this == null;
+}
+
+Rect Rect::null = Rect(INFINITY, INFINITY, 0, 0);
 
 }

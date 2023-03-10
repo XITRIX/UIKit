@@ -90,7 +90,12 @@ struct Rect {
     Rect applying(NXAffineTransform transform);
     Rect applying(NXTransform3D transform);
 
+    Rect intersection(Rect other) const;
+
     GPU_Rect gpuRect() const;
+
+    bool isNull() const;
+    static Rect null;
 };
 
 }

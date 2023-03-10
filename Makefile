@@ -102,6 +102,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIColor \
 			SDLTest/UIEvent \
 			SDLTest/UIFont \
+			SDLTest/UIGestureRecognizer \
 			SDLTest/UIImage \
 			SDLTest/UIImageView \
 			SDLTest/UILabel \

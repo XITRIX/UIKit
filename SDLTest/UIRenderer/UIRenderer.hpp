@@ -27,12 +27,15 @@ public:
 
     void render(std::shared_ptr<UIWindow> window, Timer frameTimer);
 
+    std::optional<Rect> clippingRect() { return _clippingRect; }
+    void setClippingRect(std::optional<Rect> newValue);
 
 private:
     GPU_Target* rawPointer;
 
     Rect _bounds;
     float _scale;
+    std::optional<Rect> _clippingRect;
 
     static std::shared_ptr<UIRenderer> _main;
 

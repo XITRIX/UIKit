@@ -50,6 +50,9 @@ public:
     void setHidden(bool hidden) { _layer->_isHidden = hidden; }
     bool isHidden() const { return _layer->_isHidden; }
 
+    void setClipsToBounds(bool clipsToBounds) { _layer->_masksToBounds = clipsToBounds; }
+    bool clipsToBounds() const { return _layer->_masksToBounds; }
+
     void setTransform(NXAffineTransform transform);
     NXAffineTransform transform() const { return _layer->affineTransform(); }
 

@@ -83,6 +83,9 @@ public:
     void setContents(std::shared_ptr<CGImage> contents);
     std::shared_ptr<CGImage> contents() { return _contents; }
 
+    bool masksToBounds() { return _masksToBounds; }
+    void setMasksToBounds(bool newValue) { _masksToBounds = newValue; }
+
     void addSublayer(std::shared_ptr<CALayer> layer);
     void insertSublayerAt(std::shared_ptr<CALayer> layer, int index);
     void insertSublayerAbove(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling);
@@ -140,6 +143,7 @@ private:
     bool _isHidden = false;
     bool _needsDisplay = true;
 
+    bool _masksToBounds = false;
     std::shared_ptr<CGImage> _contents;
 
     std::weak_ptr<CALayer> superlayer;

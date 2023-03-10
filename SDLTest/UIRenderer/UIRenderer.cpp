@@ -76,6 +76,16 @@ void UIRenderer::render(std::shared_ptr<UIWindow> window, Timer frameTimer) {
     GPU_Flip(rawPointer);
 }
 
+void UIRenderer::setClippingRect(std::optional<Rect> newValue) {
+    _clippingRect = newValue;
+
+    if (_clippingRect.has_value()) {
+        GPU_SetClipRect(rawPointer, _clippingRect.value().gpuRect());
+    } else {
+        GPU_UnsetClip(rawPointer);
+    }
+}
+
 int UIRenderer::getFps() {
     static double counter = 0;
     static double res = 0;
