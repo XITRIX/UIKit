@@ -12,8 +12,9 @@ using namespace UIKit;
 void TestViewController::loadView() {
     auto view = std::make_shared<UIView>();
 
-    rotationView = std::make_shared<UIView>(Rect(60, 200, 44, 44));
+    rotationView = std::make_shared<UIView>(Rect(60, 200, 188, 188));
     rotationView->setBackgroundColor(UIColor::orange);
+//    rotationView->layer()->setCornerRadius(8);
 
     view1 = std::make_shared<UIKit::UIView>();
     view1->tag = "View 1";
@@ -53,7 +54,8 @@ void TestViewController::loadView() {
     label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
-    label->setText("Helloooo!\nHelloooo!\nHell!");
+    label->setText("Helloooo!\nHelloooo!\nHelloooo!");
+    label->font()->pointSize = 24;
     label->setClipsToBounds(true);
     label->sizeToFit();
 
@@ -62,6 +64,7 @@ void TestViewController::loadView() {
     button->setFrame(Rect(300, 90, 300, 44));
     button->setBackgroundColor(UIColor::green);
     button->setText("Press me!");
+    button->font()->pointSize = 24;
     button->sizeToFit();
 
 
@@ -81,7 +84,7 @@ void TestViewController::viewDidLoad() {
         if (state == UIGestureRecognizerState::ended) {
             UIView::animate(0.3f, [this]() {
                 if (!scaled) {
-                    label->setText("Hi!");
+                    label->setText("Hell");
                     label->layer()->setCornerRadius(0);
                 } else {
                     label->setText("Helloooo!\nHelloooo!\nHell!");

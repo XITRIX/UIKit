@@ -12,6 +12,10 @@
 #include <Timer/Timer.hpp>
 #include <memory>
 
+#ifdef main
+#undef main
+#endif
+
 namespace UIKit {
 
 class UIWindow;

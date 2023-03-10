@@ -11,6 +11,7 @@
 #include <nanovg.h>
 #include <functional>
 #include <Geometry/Geometry.hpp>
+#include <UIColor/UIColor.hpp>
 #include <CGImage/CGImage.hpp>
 #include <memory>
 
@@ -23,6 +24,8 @@ public:
 
     void draw(std::function<void(NVGcontext*)> draw);
     std::shared_ptr<CGImage> drawFBO(Size size, float scale, std::function<void(NVGcontext*)> draw);
+
+    void drawRectangleFilled(Rect rect, UIColor color, float cornerRadius = 0);
 
     NVGcontext* getContext() const { return _vg; }
 private:

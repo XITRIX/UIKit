@@ -11,6 +11,10 @@
 #include <string>
 #include <functional>
 
+#ifdef main
+#undef main
+#endif
+
 namespace UIKit {
 
 class DispatchQueue {

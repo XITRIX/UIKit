@@ -31,7 +31,7 @@ void UILabel::draw() {
 
 //    auto wrapLength = (_numberOfLines != 1) ? bounds().width() : 0;
 
-    layer()->setContents(font->createContentsFor(std::static_pointer_cast<UILabel>(shared_from_this())));
+    layer()->setContents(_font->createContentsFor(std::static_pointer_cast<UILabel>(shared_from_this())));
 
 //    auto content = Renderer::shared()->drawFBO(Size(44, 44), 2, [](auto vg) {
 ////        nvgFillColor(vg, UIColor::orange.nvgColor());
@@ -50,7 +50,7 @@ void UILabel::display(std::shared_ptr<CALayer> layer) {
 }
 
 Size UILabel::sizeThatFits(Size size) {
-    return font->sizeForText(_text, 999);
+    return _font->sizeForText(_text, 999);
 }
 
 }

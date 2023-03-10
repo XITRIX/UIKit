@@ -89,6 +89,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/CGImage \
 			SDLTest/ContentsGravityTransformation \
 			SDLTest/Data \
+			SDLTest/DispatchQueue \
 			SDLTest/FontRenderer \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \

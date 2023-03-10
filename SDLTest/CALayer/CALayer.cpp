@@ -169,17 +169,7 @@ void CALayer::render(GPU_Target* renderer) {
 
     // Background color
     if (_backgroundColor.has_value()) {
-        if (_cornerRadius <= 0.001f) {
-            GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), _backgroundColor.value().color);
-        } else {
-            Renderer::shared()->draw([this, renderedBoundsRelativeToAnchorPoint](auto context) {
-                auto color = _backgroundColor.value().color;
-                nvgBeginPath(context);
-                nvgFillColor(context, nvgRGBA(color.r, color.g, color.b, color.a));
-                nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), _cornerRadius);
-                nvgFill(context);
-            });
-        }
+        Renderer::shared()->drawRectangleFilled(renderedBoundsRelativeToAnchorPoint, _backgroundColor.value(), _cornerRadius);
     }
 
     // Contents

@@ -113,28 +113,19 @@ std::shared_ptr<CGImage> Renderer::drawFBO(Size size, float scale, std::function
 
     GPU_SetActiveTarget(currentTarget);
     return fbo;
+}
 
-
-//    NVGLUframebuffer* fb = nvgluCreateFramebuffer(_vg, size.width, size.height, NVG_IMAGE_NODELETE); // IMPORTANT: NVG_IMAGE_NODELETE allows us to run nvgluDeleteFramebuffer without freeing the GPU_Image data
-//    nvgluBindFramebuffer(fb);
-//    glViewport(0, 0, size.width, size.height);
-//    glClearColor(0, 0, 0, 0);
-//    glClear(GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-//    nvgBeginFrame(_vg, size.width, size.height, scale);
-//    draw(_vg); // call the drawing function that was passed as parameter
-//    nvgEndFrame(_vg);
-//    /* nvgluBindFramebuffer(0); // official documentation says to unbind, but I haven't had issues not doing it */
-//    GPU_ResetRendererState(); // not calling GPU_ResetRendererState can cause problems with SDL_gpu depending on your order of operations
-//    // IMPORTANT: don't run nvgluDeleteFramebuffer, GPU_CreateImageUsingTexture takes the handle
-//    GPU_Image* return_image = GPU_CreateImageUsingTexture(fb->texture, false); // should take_ownership be true?
-//    if (!return_image) {
-//        printf("%s\n", GPU_PopErrorCode().details);
-//    }
-//    nvgluDeleteFramebuffer(fb);
-//
-//    GPU_Image a;
-//
-//    return std::make_shared<CGImage>(return_image);
+void Renderer::drawRectangleFilled(Rect rect, UIColor color, float cornerRadius) {
+    draw([rect, color, cornerRadius](auto _vg) {
+        nvgBeginPath(_vg);
+        nvgFillColor(_vg, nvgRGBA(color.color.r, color.color.g, color.color.b, color.color.a));
+        if (cornerRadius < 0.001f) {
+            nvgRect(_vg, rect.minX(), rect.minY(), rect.width(), rect.height());
+        } else {
+            nvgRoundedRect(_vg, rect.minX(), rect.minY(), rect.width(), rect.height(), cornerRadius);
+        }
+        nvgFill(_vg);
+    });
 }
 
 }

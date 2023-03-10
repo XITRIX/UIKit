@@ -30,17 +30,17 @@ FontRenderer::FontRenderer(std::string path) {
 FontRenderer::~FontRenderer() { }
 
 std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel> label) {
-    auto size = sizeForText(label->_text, label->font->pointSize, label->bounds().width(), label->font->lineHeight);
+    auto size = sizeForText(label->_text, label->_font->pointSize, label->bounds().width(), label->_font->lineHeight);
     float scale = UIRenderer::main()->scale();
 
     return Renderer::shared()->drawFBO(Size(size.width, std::min(label->bounds().height(), size.height)), scale, [this, size, label](auto vg) {
-        nvgFontSize(vg, label->font->pointSize);
+        nvgFontSize(vg, label->_font->pointSize);
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontFaceId(vg, fontFace);
-        nvgTextLineHeight(vg, label->font->lineHeight);
+        nvgTextLineHeight(vg, label->_font->lineHeight);
         nvgFillColor(vg, UIColor::black.nvgColor());
         
-        nvgTextBox(vg, 0, 0, size.width + 4, label->_text.c_str(), nullptr);
+        nvgTextBox(vg, 0, 0, size.width, label->_text.c_str(), nullptr);
     });
 }
 
@@ -76,7 +76,7 @@ Size FontRenderer::sizeForText(std::string text, float textSize, uint wrapLength
 
 
 
-    return Size(requiredWidth, requiredHeight);
+    return Size(requiredWidth + 2, requiredHeight);
 
 
 

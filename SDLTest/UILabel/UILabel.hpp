@@ -27,12 +27,16 @@ public:
     Size sizeThatFits(Size size) override;
 
     void setText(std::string text);
+    std::string text() const { return _text; }
+
+    std::shared_ptr<UIFont> font() const { return _font; }
+    void setFont(std::shared_ptr<UIFont> font) { _font = font; }
 private:
     int _numberOfLines = 1;
     std::string _text;
     UIColor _textColor = UIColor::black;
     NSTextAlignment _textAlignment = NSTextAlignment::left;
-    std::shared_ptr<UIFont> font = UIFont::systemFont(17);
+    std::shared_ptr<UIFont> _font = UIFont::systemFont(17);
 
     friend class FontRenderer;
 };
