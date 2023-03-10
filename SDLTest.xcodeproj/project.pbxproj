@@ -13,6 +13,8 @@
 		7C4DC82229BA960100F13A6D /* UITapGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC81F29BA95FF00F13A6D /* UITapGestureRecognizer.cpp */; };
 		7C4DC82629BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */; };
 		7C4DC82729BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */; };
+		7C4DC82B29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */; };
+		7C4DC82C29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -262,6 +264,8 @@
 		7C4DC82029BA95FF00F13A6D /* UITapGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UITapGestureRecognizer.hpp; sourceTree = "<group>"; };
 		7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIPanGestureRecognizer.cpp; sourceTree = "<group>"; };
 		7C4DC82529BA971000F13A6D /* UIPanGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIPanGestureRecognizer.hpp; sourceTree = "<group>"; };
+		7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
+		7C4DC82A29BB1D0F00F13A6D /* DispatchQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DispatchQueue.hpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DC82829BB1CFE00F13A6D /* DispatchQueue */,
 				7C4DC82329BA970600F13A6D /* UIPanGestureRecognizer */,
 				7C4DC81E29BA95F700F13A6D /* UITapGestureRecognizer */,
 				7CD7DB4129B8F46600C9637C /* UIGestureRecognizer */,
@@ -570,6 +575,15 @@
 				7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */,
 			);
 			path = UIPanGestureRecognizer;
+			sourceTree = "<group>";
+		};
+		7C4DC82829BB1CFE00F13A6D /* DispatchQueue */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DC82A29BB1D0F00F13A6D /* DispatchQueue.hpp */,
+				7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */,
+			);
+			path = DispatchQueue;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
@@ -1540,6 +1554,7 @@
 				7CD7DAE929B6156B00C9637C /* UIWindow.cpp in Sources */,
 				7CB7F54B29A3D89C00A20694 /* renderer_OpenGL_4.c in Sources */,
 				7C82D6B229B440F4005079B8 /* UIView.cpp in Sources */,
+				7C4DC82B29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */,
 				7CD7DAFD29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7CD7DB2D29B6ACE000C9637C /* UIFont.cpp in Sources */,
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
@@ -1604,6 +1619,7 @@
 				7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7CD7DB0829B6332400C9637C /* main.cpp in Sources */,
+				7C4DC82C29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,
 				7CD7DB4029B8E74F00C9637C /* UIEvent.cpp in Sources */,
 				7C82D69D29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,

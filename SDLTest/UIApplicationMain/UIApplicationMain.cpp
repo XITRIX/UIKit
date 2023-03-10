@@ -8,6 +8,7 @@
 #include <UIApplicationMain/UIApplicationMain.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <DispatchQueue/DispatchQueue.hpp>
 
 namespace UIKit {
 
@@ -15,6 +16,7 @@ void setupRenderAndRunLoop() {
     while (true) {
         auto currentTime = Timer();
         UIApplication::shared->handleEventsIfNeeded();
+        DispatchQueue::main()->performAll(); // TODO: May be need to be after rendering loop
         auto window = UIApplication::shared->keyWindow.lock();
         if (window)
             UIRenderer::main()->render(window, currentTime);

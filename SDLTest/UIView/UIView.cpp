@@ -9,6 +9,7 @@
 #include <UIRenderer/UIRenderer.hpp>
 #include <UIViewController/UIViewController.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
+#include <DispatchQueue/DispatchQueue.hpp>
 
 namespace UIKit {
 
@@ -232,7 +233,7 @@ void UIView::animate(double duration, double delay, UIViewAnimationOptions optio
     animations();
 
     if (currentAnimationPrototype && currentAnimationPrototype->animationGroup->queuedAnimations == 0) {
-        completion(true);
+        DispatchQueue::main()->async([completion]() { completion(true); });
     }
     
     currentAnimationPrototype = nullptr;
