@@ -42,4 +42,27 @@ void UIViewController::loadView() {
     setView(std::make_shared<UIView>());
 }
 
+void UIViewController::addChild(std::shared_ptr<UIViewController> child) {
+    _children.push_back(child);
+    child->willMoveToParent(weak_from_this().lock());
+    child->viewWillAppear(true);
+}
+
+void UIViewController::willMoveToParent(std::shared_ptr<UIViewController> parent) {
+    if (parent)
+        this->_parent = parent;
+}
+
+void UIViewController::didMoveToParent(std::shared_ptr<UIViewController> parent) {
+    viewDidAppear(true);
+}
+
+void UIViewController::removeFromParent() {
+    if (auto spt = _parent.lock()) {
+        spt->_children.erase(std::remove(spt->_children.begin(), spt->_children.end(), shared_from_this()));
+        this->_parent.reset();
+        viewDidDisappear(true);
+    }
+}
+
 }
