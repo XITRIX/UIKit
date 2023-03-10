@@ -29,7 +29,8 @@ std::shared_ptr<CGImage> UIFont::createContentsFor(std::shared_ptr<UILabel> labe
 }
 
 std::shared_ptr<UIFont> UIFont::systemFont(float size) {
-    return std::make_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
+//    return std::make_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
+    return std::make_shared<UIFont>(Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf", size);
 }
 
 }
