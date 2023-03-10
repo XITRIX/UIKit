@@ -15,7 +15,7 @@ namespace UIKit {
 std::vector<std::weak_ptr<UIGestureRecognizer>> getRecognizerHierachyFromView(std::shared_ptr<UIView> view) {
     std::vector<std::weak_ptr<UIGestureRecognizer>> recognizers;
     while (view) {
-        for (auto recognizer : view->gestureRecognizers())
+        for (auto recognizer : *view->gestureRecognizers())
             recognizers.push_back(recognizer);
         view = view->superview().lock();
     }
@@ -66,6 +66,7 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
                 if (!touch->hasBeenCancelledByAGestureRecognizer()) {
                     hitView->touchesBegan(event->allTouches(), event);
                 }
+                break;
             }
             case UITouchPhase::moved: {
                 touch->runTouchActionOnRecognizerHierachy([touch, event](auto gestureRecognizer) {
@@ -74,6 +75,7 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
                 if (!touch->hasBeenCancelledByAGestureRecognizer()) {
                     hitView->touchesMoved(event->allTouches(), event);
                 }
+                break;
             }
             case UITouchPhase::ended: {
                 // compute the value before ending the touch on the recognizer hierachy
@@ -87,6 +89,7 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
                 if (!hasBeenCancelledByAGestureRecognizer) {
                     hitView->touchesEnded(event->allTouches(), event);
                 }
+                break;
             }
         }
     }

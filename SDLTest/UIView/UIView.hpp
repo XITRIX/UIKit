@@ -62,7 +62,8 @@ public:
     void setContentMode(UIViewContentMode mode);
     UIViewContentMode contentMode() const { return _contentMode; }
 
-    std::vector<std::shared_ptr<UIGestureRecognizer>> gestureRecognizers() const { return _gestureRecognizers; }
+    std::vector<std::shared_ptr<UIGestureRecognizer>>* gestureRecognizers() { return &_gestureRecognizers; }
+    void addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer);
 
     void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
@@ -82,7 +83,8 @@ public:
     virtual void sizeToFit();
 
     // Touch
-    Point convert(Point point, std::shared_ptr<UIView> toView);
+    Point convertToView(Point point, std::shared_ptr<UIView> toView);
+    Point convertFromView(Point point, std::shared_ptr<UIView> fromView);
     virtual std::shared_ptr<UIView> hitTest(Point point, UIEvent* withEvent);
     virtual bool point(Point insidePoint, UIEvent* withEvent);
 

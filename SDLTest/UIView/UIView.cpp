@@ -126,6 +126,11 @@ void UIView::addSubview(std::shared_ptr<UIView> view) {
     view->setSuperview(this->shared_from_this());
 }
 
+void UIView::addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer) {
+    gestureRecognizer->_view = weak_from_this();
+    _gestureRecognizers.push_back(gestureRecognizer);
+}
+
 void UIView::setSuperview(std::shared_ptr<UIView> superview) {
     _superview = superview;
 }
@@ -152,7 +157,12 @@ void UIView::removeFromSuperview() {
 }
 
 // MARK: - Touch
-Point UIView::convert(Point point, std::shared_ptr<UIView> toView) {
+Point UIView::convertFromView(Point point, std::shared_ptr<UIView> fromView) {
+    if (!fromView) return point;
+    return fromView->convertToView(point, shared_from_this());
+}
+
+Point UIView::convertToView(Point point, std::shared_ptr<UIView> toView) {
     Point selfAbsoluteOrigin;
     Point otherAbsoluteOrigin;
 
@@ -186,7 +196,7 @@ std::shared_ptr<UIView> UIView::hitTest(Point point, UIEvent* withEvent) {
 
     auto subviews = _subviews;
     for (int i = (int) subviews.size() - 1; i >= 0; i--) {
-        Point convertedPoint = shared_from_this()->convert(point, subviews[i]);
+        Point convertedPoint = shared_from_this()->convertToView(point, subviews[i]);
         std::shared_ptr<UIView> test = subviews[i]->hitTest(convertedPoint, withEvent);
         if (test) return test;
     }

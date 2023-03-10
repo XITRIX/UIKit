@@ -16,11 +16,13 @@ public:
     void loadView() override;
     void viewDidLoad() override;
 
-    void touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
-    void touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
+//    void touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
+//    void touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) override;
     
 private:
     std::shared_ptr<UIKit::UIView> view1;
     std::shared_ptr<UIKit::UIView> view2;
     std::shared_ptr<UIKit::UIImageView> view3;
+
+    Point initial;
 };

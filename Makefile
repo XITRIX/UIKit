@@ -105,8 +105,10 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIImage \
 			SDLTest/UIImageView \
 			SDLTest/UILabel \
+			SDLTest/UIPanGestureRecognizer \
 			SDLTest/UIRenderer \
 			SDLTest/UIResponder \
+			SDLTest/UITapGestureRecognizer \
 			SDLTest/UITouch \
 			SDLTest/UIView \
 			SDLTest/UIViewController \

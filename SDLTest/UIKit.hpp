@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <UITapGestureRecognizer/UITapGestureRecognizer.hpp>
+#include <UIPanGestureRecognizer/UIPanGestureRecognizer.hpp>
 #include <UIViewController/UIViewController.hpp>
 #include <UIImageView/UIImageView.hpp>
 #include <UITouch/UITouch.hpp>

@@ -38,6 +38,7 @@ public:
     std::weak_ptr<UIGestureRecognizerDelegate> delegate;
     std::function<void(UIGestureRecognizerState)> onStateChanged = [](auto state){};
 
+    UIGestureRecognizer(std::function<void(UIGestureRecognizerState)> onStateChanged = [](auto) {});
     virtual ~UIGestureRecognizer();
 
     bool isEnabled() { return _isEnabled; }
@@ -69,6 +70,8 @@ private:
     void addTouch(std::shared_ptr<UITouch> touch);
     void removeTouch(std::shared_ptr<UITouch> touch);
     void cancelOtherGestureRecognizersThatShouldNotRecognizeSimultaneously();
+
+    friend class UIView;
 };
 
 }

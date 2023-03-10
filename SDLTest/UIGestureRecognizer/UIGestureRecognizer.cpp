@@ -10,6 +10,10 @@
 
 namespace UIKit {
 
+UIGestureRecognizer::UIGestureRecognizer(std::function<void(UIGestureRecognizerState)> onStateChanged):
+    onStateChanged(onStateChanged)
+{ }
+
 UIGestureRecognizer::~UIGestureRecognizer() {
     for (auto touch: _allTouches) {
         touch->_hasBeenCancelledByAGestureRecognizer = true;

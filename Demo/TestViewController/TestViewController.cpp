@@ -58,6 +58,30 @@ void TestViewController::loadView() {
 }
 
 void TestViewController::viewDidLoad() {
+    auto pan = std::make_shared<UIPanGestureRecognizer>();
+    pan->onStateChanged = [this, pan](auto state) {
+//        printf("%d\n", state);
+        switch (state) {
+            case UIGestureRecognizerState::began: {
+                initial = view1->frame().origin;
+                break;
+            }
+            case UIGestureRecognizerState::changed: {
+                auto translation = pan->translationInView(view());
+
+                auto frame = view1->frame();
+                frame.origin.x = initial.x + translation.x;
+                frame.origin.y = initial.y + translation.y;
+                view1->setFrame(frame);
+                break;
+            }
+            default:
+                break;
+        }
+    };
+    view1->addGestureRecognizer(pan);
+
+
 //    view3->setTransform(NXAffineTransform::rotationBy(-45) * NXAffineTransform::scale(2));
 
     auto options = UIViewAnimationOptions(curveEaseOutElastic | allowUserInteraction);
@@ -89,30 +113,30 @@ void TestViewController::viewDidLoad() {
     });
 }
 
-void TestViewController::touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
-    UIViewController::touchesBegan(touches, event);
-
-    for (auto& touch: touches) {
-        if (!touch->view().expired()) {
-            printf("Touched %s\n", touch->view().lock()->tag.c_str());
-        }
-    }
-}
-
-void TestViewController::touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
-    UIViewController::touchesMoved(touches, event);
-
-    for (auto& touch: touches) {
-        auto wview = touch->view();
-        if (wview.expired()) continue;
-
-        auto view = wview.lock();
-        if (view != view1) continue;
-
-        auto frame = view->frame();
-        auto touchDelta = touch->previousLocationIn(this->view()) - touch->locationIn(this->view());
-        frame.origin.x -= touchDelta.x;
-        frame.origin.y -= touchDelta.y;
-        view->setFrame(frame);
-    }
-}
+//void TestViewController::touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
+//    UIViewController::touchesBegan(touches, event);
+//
+//    for (auto& touch: touches) {
+//        if (!touch->view().expired()) {
+//            printf("Touched %s\n", touch->view().lock()->tag.c_str());
+//        }
+//    }
+//}
+//
+//void TestViewController::touchesMoved(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
+//    UIViewController::touchesMoved(touches, event);
+//
+//    for (auto& touch: touches) {
+//        auto wview = touch->view();
+//        if (wview.expired()) continue;
+//
+//        auto view = wview.lock();
+//        if (view != view1) continue;
+//
+//        auto frame = view->frame();
+//        auto touchDelta = touch->previousLocationIn(this->view()) - touch->locationIn(this->view());
+//        frame.origin.x -= touchDelta.x;
+//        frame.origin.y -= touchDelta.y;
+//        view->setFrame(frame);
+//    }
+//}
