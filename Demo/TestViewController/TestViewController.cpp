@@ -11,12 +11,16 @@ using namespace UIKit;
 
 void TestViewController::loadView() {
     auto view = std::make_shared<UIView>();
+
+    rotationView = std::make_shared<UIView>(Rect(60, 200, 44, 44));
+    rotationView->setBackgroundColor(UIColor::orange);
+
     view1 = std::make_shared<UIKit::UIView>();
     view1->tag = "View 1";
 //    layer1->anchorPoint = Point(0, 0);
     view1->setFrame(Rect(44, 44, 280, 280));
     view1->setBackgroundColor(UIColor::blue);
-    view1->layer()->cornerRadius = 16;
+    view1->layer()->setCornerRadius(16);
 //    layer1->setAlpha(0.5f);
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
@@ -45,19 +49,51 @@ void TestViewController::loadView() {
 //    layer2->setMask(layer3);
     view2->addSubview(view3);
 
-    auto label = std::make_shared<UILabel>();
+    label = std::make_shared<UILabel>();
     label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
     label->setText("Helloooo!\nHelloooo!\nHell!");
+    label->setClipsToBounds(true);
     label->sizeToFit();
 
+    button = std::make_shared<UILabel>();
+    button->tag = "Button";
+    button->setFrame(Rect(300, 90, 300, 44));
+    button->setBackgroundColor(UIColor::green);
+    button->setText("Press me!");
+    button->sizeToFit();
+
+
     view->addSubview(label);
+    view->addSubview(button);
+    view->addSubview(rotationView);
     
     setView(view);
 }
 
+bool scaled = false;
 void TestViewController::viewDidLoad() {
+    startRotate();
+
+    auto tap = std::make_shared<UITapGestureRecognizer>();
+    tap->onStateChanged = [this](auto state) {
+        if (state == UIGestureRecognizerState::ended) {
+            UIView::animate(0.3f, [this]() {
+                if (!scaled) {
+                    label->setText("Hi!");
+                    label->layer()->setCornerRadius(0);
+                } else {
+                    label->setText("Helloooo!\nHelloooo!\nHell!");
+                    label->layer()->setCornerRadius(16);
+                }
+                label->sizeToFit();
+            });
+            scaled = !scaled;
+        }
+    };
+    button->addGestureRecognizer(tap);
+
     auto pan = std::make_shared<UIPanGestureRecognizer>();
     pan->onStateChanged = [this, pan](auto state) {
 //        printf("%d\n", state);
@@ -80,6 +116,10 @@ void TestViewController::viewDidLoad() {
         }
     };
     view1->addGestureRecognizer(pan);
+
+    DispatchQueue::main()->async([]() {
+        printf("Test main dispatch\n");
+    });
 
 
 //    view3->setTransform(NXAffineTransform::rotationBy(-45) * NXAffineTransform::scale(2));
@@ -109,6 +149,28 @@ void TestViewController::viewDidLoad() {
             frame.origin = Point(550, 69);
             view1->setFrame(frame);
 
+        });
+    });
+}
+
+void TestViewController::startRotate() {
+//    UIView::animate(2, 0, UIViewAnimationOptions::curveLinear, [this]() {
+//        rotationView->setTransform(NXAffineTransform::identity);
+//    }, [this](bool res) {
+//        startRotate();
+//    });
+    UIView::animate(2, 0, UIViewAnimationOptions::curveLinear, [this]() {
+        rotationView->setTransform(NXAffineTransform::identity);
+        rotationView->setTransform(NXAffineTransform::rotationBy(360 / 3));
+    }, [this](bool res) {
+        UIView::animate(2, 0, UIViewAnimationOptions::curveLinear, [this]() {
+            rotationView->setTransform(NXAffineTransform::rotationBy(360 / 3 * 2));
+        }, [this](bool res) {
+            UIView::animate(2, 0, UIViewAnimationOptions::curveLinear, [this]() {
+                rotationView->setTransform(NXAffineTransform::rotationBy(360));
+            }, [this](bool res) {
+                startRotate();
+            });
         });
     });
 }

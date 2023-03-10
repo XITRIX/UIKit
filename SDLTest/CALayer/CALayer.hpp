@@ -35,7 +35,6 @@ class CALayer: public std::enable_shared_from_this<CALayer> {
 public:
     float zPosition = 0;
 
-    float cornerRadius = 0;
     bool allowsGroupOpacity = true;
     CALayerDelegate* delegate;
 
@@ -70,6 +69,9 @@ public:
 
     void setTransform(NXTransform3D transform);
     NXTransform3D transform() const { return _transform; }
+
+    void setCornerRadius(float cornerRadius);
+    float cornerRadius() const { return _cornerRadius; }
 
     void setBackgroundColor(std::optional<UIColor> backgroundColor);
     std::optional<UIColor> backgroundColor() const { return _backgroundColor; }
@@ -139,6 +141,7 @@ private:
     float _opacity = 1;
     NXTransform3D _transform = NXTransform3D::identity;
     std::optional<UIColor> _backgroundColor;
+    float _cornerRadius = 0;
 
     bool _isHidden = false;
     bool _needsDisplay = true;

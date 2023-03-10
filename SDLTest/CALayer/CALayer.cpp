@@ -32,7 +32,7 @@ CALayer::CALayer(CALayer* layer) {
     _opacity = layer->_opacity;
     _backgroundColor = layer->_backgroundColor;
     _isHidden = layer->_isHidden;
-    cornerRadius = layer->cornerRadius;
+    _cornerRadius = layer->_cornerRadius;
 //    borderWidth = layer->borderWidth;
 //    borderColor = layer->borderColor;
 //    shadowColor = layer->shadowColor;
@@ -169,14 +169,14 @@ void CALayer::render(GPU_Target* renderer) {
 
     // Background color
     if (_backgroundColor.has_value()) {
-        if (cornerRadius <= 0.001f) {
+        if (_cornerRadius <= 0.001f) {
             GPU_RectangleFilled2(localRenderer, renderedBoundsRelativeToAnchorPoint.gpuRect(), _backgroundColor.value().color);
         } else {
             Renderer::shared()->draw([this, renderedBoundsRelativeToAnchorPoint](auto context) {
                 auto color = _backgroundColor.value().color;
                 nvgBeginPath(context);
                 nvgFillColor(context, nvgRGBA(color.r, color.g, color.b, color.a));
-                nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), cornerRadius);
+                nvgRoundedRect(context, renderedBoundsRelativeToAnchorPoint.minX(), renderedBoundsRelativeToAnchorPoint.minY(), renderedBoundsRelativeToAnchorPoint.width(), renderedBoundsRelativeToAnchorPoint.height(), _cornerRadius);
                 nvgFill(context);
             });
         }
@@ -292,6 +292,12 @@ void CALayer::setTransform(NXTransform3D transform) {
     if (_transform == transform) return;
     onWillSet("transform");
     _transform = transform;
+}
+
+void CALayer::setCornerRadius(float cornerRadius) {
+    if (_cornerRadius == cornerRadius) return;
+    onWillSet("cornerRadius");
+    _cornerRadius = cornerRadius;
 }
 
 void CALayer::setBackgroundColor(std::optional<UIColor> backgroundColor) {
@@ -485,6 +491,7 @@ std::optional<AnimatableProperty> CALayer::value(std::string forKeyPath) {
     if (forKeyPath == "transform") return _transform;
     if (forKeyPath == "position") return _position;
     if (forKeyPath == "anchorPoint") return _anchorPoint;
+    if (forKeyPath == "cornerRadius") return _cornerRadius;
     return std::nullopt;
 }
 
@@ -563,6 +570,15 @@ void CALayer::update(std::shared_ptr<CALayer> presentation, std::shared_ptr<CABa
         if (!end.has_value()) end = this->_opacity;
 
         presentation->setOpacity(start.value() + (end.value() - start.value()) * progress);
+    }
+    if (keyPath == "cornerRadius") {
+        auto start = any_optional_cast<float>(fromValue);
+        if (!start.has_value()) { return; }
+
+        auto end = any_optional_cast<float>(animation->toValue);
+        if (!end.has_value()) end = this->_cornerRadius;
+
+        presentation->setCornerRadius(start.value() + (end.value() - start.value()) * progress);
     }
     if (keyPath == "transform") {
         auto start = any_optional_cast<NXTransform3D>(fromValue);
