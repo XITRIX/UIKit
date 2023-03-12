@@ -7,13 +7,15 @@
 
 #include <UIApplicationDelegate/UIApplicationDelegate.hpp>
 #include <TestViewController/TestViewController.hpp>
+#include <YogaTestViewController/YogaTestViewController.hpp>
 
 namespace UIKit {
 
 bool UIApplicationDelegate::applicationDidFinishLaunchingWithOptions(UIApplication* application, std::map<std::string, std::any> launchOptions) {
-    window = std::make_shared<UIWindow>();
+    window = new_shared<UIWindow>();
 
-    auto vc = std::make_shared<TestViewController>();
+//    auto vc = new_shared<TestViewController>();
+    auto vc = new_shared<YogaTestViewController>();
     window->setRootViewController(vc);
 
     window->makeKeyAndVisible();

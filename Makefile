@@ -56,6 +56,7 @@ SOURCES  := $(SOURCES) \
 			Demo \
 			Demo/Runner \
 			Demo/TestViewController \
+			Demo/YogaTestViewController \
 
 # - UIKit
 INCLUDES := $(INCLUDES) \
@@ -98,6 +99,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \
 			SDLTest/Timer \
+			SDLTest/Tools \
 			SDLTest/UIApplication \
 			SDLTest/UIApplicationMain \
 			SDLTest/UIColor \
@@ -115,7 +117,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIView \
 			SDLTest/UIViewController \
 			SDLTest/UIWindow \
-			SDLTest/Utils \
+			SDLTest/YogaExtensions \
 
 # - Extern libs
 INCLUDES := $(INCLUDES) \
@@ -125,6 +127,7 @@ INCLUDES := $(INCLUDES) \
 			extern/sdl-gpu/src/externals/stb_image_write \
 			extern/libretro/include \
 			extern/nanovg/src \
+			extern/yoga \
 
 SOURCES  := $(SOURCES) \
 			extern/Switch \
@@ -135,6 +138,8 @@ SOURCES  := $(SOURCES) \
 			extern/libretro/src/compat \
 			extern/libretro/src/features \
 			extern/nanovg/src \
+			extern/yoga/yoga \
+			extern/yoga/yoga/event \
 
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 
@@ -143,7 +148,7 @@ CFLAGS	:=	-g -Wall -O2 -ffunction-sections \
 
 CFLAGS	+=	$(INCLUDE) -DGL_GLEXT_PROTOTYPES -DSDL_GPU_DISABLE_OPENGL -DSDL_GPU_DISABLE_GLES_1 -DSDL_GPU_DISABLE_GLES_3 -D__native_client__ -DGLEW_NO_GLU -D__SWITCH__
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fexceptions -std=gnu++20 -O2
+CXXFLAGS	:= $(CFLAGS) -fexceptions -std=gnu++20 -O2
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)

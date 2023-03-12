@@ -18,6 +18,8 @@
 #include <libretro-common/features/features_cpu.h>
 #include <libretro-common/libretro.h>
 
+#include <Tools/SharedBase.hpp>
+
 #pragma once
 
 namespace UIKit {

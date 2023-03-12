@@ -6,6 +6,7 @@
 //
 
 #include <CAMediaTimingFunction/CAMediaTimingFunction.hpp>
+#include <Tools/Tools.hpp>
 #include <cmath>
 
 namespace UIKit {
@@ -64,20 +65,20 @@ CAMediaTimingFunction::CAMediaTimingFunction(std::function<double(double)> timin
 
 std::shared_ptr<CAMediaTimingFunction> CAMediaTimingFunction::timingFunctionFrom(UIViewAnimationOptions options) {
     if ((options & UIViewAnimationOptions::curveEaseIn) == UIViewAnimationOptions::curveEaseIn) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseIn);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseIn);
     } else if ((options & UIViewAnimationOptions::curveEaseOut) == UIViewAnimationOptions::curveEaseOut) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseOut);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseOut);
     } else if ((options & UIViewAnimationOptions::curveEaseInOut) == UIViewAnimationOptions::curveEaseInOut) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseInEaseOut);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseInEaseOut);
     } else if ((options & UIViewAnimationOptions::customEaseOut) == UIViewAnimationOptions::customEaseOut) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionCustomEaseOut);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionCustomEaseOut);
     } else if ((options & UIViewAnimationOptions::curveLinear) == UIViewAnimationOptions::curveLinear) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionLinear);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionLinear);
     } else if ((options & UIViewAnimationOptions::curveEaseOutElastic) == UIViewAnimationOptions::curveEaseOutElastic) {
-        return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseOutElastic);
+        return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionEaseOutElastic);
     }
 
-    return std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionDefault);
+    return new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionDefault);
 }
 float CAMediaTimingFunction::at(float x) {
     return timing(x);

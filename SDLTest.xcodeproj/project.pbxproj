@@ -15,6 +15,34 @@
 		7C4DC82729BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */; };
 		7C4DC82B29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */; };
 		7C4DC82C29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */; };
+		7C4DCE5029BB950B00F13A6D /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3829BB950B00F13A6D /* log.cpp */; };
+		7C4DCE5129BB950B00F13A6D /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3829BB950B00F13A6D /* log.cpp */; };
+		7C4DCE5229BB950B00F13A6D /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3929BB950B00F13A6D /* Utils.cpp */; };
+		7C4DCE5329BB950B00F13A6D /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3929BB950B00F13A6D /* Utils.cpp */; };
+		7C4DCE5529BB950B00F13A6D /* YGLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3D29BB950B00F13A6D /* YGLayout.cpp */; };
+		7C4DCE5629BB950B00F13A6D /* YGLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE3D29BB950B00F13A6D /* YGLayout.cpp */; };
+		7C4DCE5729BB950B00F13A6D /* Yoga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4029BB950B00F13A6D /* Yoga.cpp */; };
+		7C4DCE5829BB950B00F13A6D /* Yoga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4029BB950B00F13A6D /* Yoga.cpp */; };
+		7C4DCE5929BB950B00F13A6D /* YGStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4129BB950B00F13A6D /* YGStyle.cpp */; };
+		7C4DCE5A29BB950B00F13A6D /* YGStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4129BB950B00F13A6D /* YGStyle.cpp */; };
+		7C4DCE5B29BB950B00F13A6D /* YGNodePrint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4329BB950B00F13A6D /* YGNodePrint.cpp */; };
+		7C4DCE5C29BB950B00F13A6D /* YGNodePrint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4329BB950B00F13A6D /* YGNodePrint.cpp */; };
+		7C4DCE5D29BB950B00F13A6D /* YGEnums.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4529BB950B00F13A6D /* YGEnums.cpp */; };
+		7C4DCE5E29BB950B00F13A6D /* YGEnums.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4529BB950B00F13A6D /* YGEnums.cpp */; };
+		7C4DCE5F29BB950B00F13A6D /* YGValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4729BB950B00F13A6D /* YGValue.cpp */; };
+		7C4DCE6029BB950B00F13A6D /* YGValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4729BB950B00F13A6D /* YGValue.cpp */; };
+		7C4DCE6129BB950B00F13A6D /* YGConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4A29BB950B00F13A6D /* YGConfig.cpp */; };
+		7C4DCE6229BB950B00F13A6D /* YGConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4A29BB950B00F13A6D /* YGConfig.cpp */; };
+		7C4DCE6329BB950B00F13A6D /* YGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4B29BB950B00F13A6D /* YGNode.cpp */; };
+		7C4DCE6429BB950B00F13A6D /* YGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4B29BB950B00F13A6D /* YGNode.cpp */; };
+		7C4DCE6529BB950B00F13A6D /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4F29BB950B00F13A6D /* event.cpp */; };
+		7C4DCE6629BB950B00F13A6D /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE4F29BB950B00F13A6D /* event.cpp */; };
+		7C4DCE6B29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE6929BBB31E00F13A6D /* YogaExtensions.cpp */; };
+		7C4DCE6C29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE6929BBB31E00F13A6D /* YogaExtensions.cpp */; };
+		7C4DCE7129BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE6F29BBCE1F00F13A6D /* YGLayoutImpl.cpp */; };
+		7C4DCE7229BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE6F29BBCE1F00F13A6D /* YGLayoutImpl.cpp */; };
+		7C4DCE7729BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */; };
+		7C4DCE7829BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -36,7 +64,7 @@
 		7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
 		7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD13F1529AA561B00D0FFF5 /* Data.cpp */; };
 		7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
-		7C82D5C129AEC422005079B8 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Utils.cpp */; };
+		7C82D5C129AEC422005079B8 /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Tools.cpp */; };
 		7C82D5C229AEC422005079B8 /* NXAffineTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F55629A3F1B500A20694 /* NXAffineTransform.cpp */; };
 		7C82D5C329AEC422005079B8 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD13F2029AE6A6E00D0FFF5 /* ShaderProgram.cpp */; };
 		7C82D5C429AEC422005079B8 /* UILabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD13F1129AA52D600D0FFF5 /* UILabel.cpp */; };
@@ -56,7 +84,6 @@
 		7C82D5E629AEC86A005079B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */; };
 		7C82D5E829AEC892005079B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E729AEC892005079B8 /* QuartzCore.framework */; };
 		7C82D5EC29AECC85005079B8 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D5E929AEC8C1005079B8 /* assets */; };
-		7C82D5EE29AFD874005079B8 /* Utils+Antialiasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */; };
 		7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
 		7C82D65029AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
 		7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D65229AFE13D005079B8 /* Renderer.cpp */; };
@@ -147,7 +174,7 @@
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
 		7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798242993F1E4004E8EC8 /* CALayer.cpp */; };
-		7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Utils.cpp */; };
+		7CEB96A3299509C5007483C0 /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96A1299509C5007483C0 /* Tools.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +293,40 @@
 		7C4DC82529BA971000F13A6D /* UIPanGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIPanGestureRecognizer.hpp; sourceTree = "<group>"; };
 		7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
 		7C4DC82A29BB1D0F00F13A6D /* DispatchQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DispatchQueue.hpp; sourceTree = "<group>"; };
+		7C4DCE3329BB950B00F13A6D /* YGFloatOptional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGFloatOptional.h; sourceTree = "<group>"; };
+		7C4DCE3429BB950B00F13A6D /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		7C4DCE3529BB950B00F13A6D /* CompactValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompactValue.h; sourceTree = "<group>"; };
+		7C4DCE3629BB950B00F13A6D /* Yoga-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Yoga-internal.h"; sourceTree = "<group>"; };
+		7C4DCE3729BB950B00F13A6D /* YGLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGLayout.h; sourceTree = "<group>"; };
+		7C4DCE3829BB950B00F13A6D /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
+		7C4DCE3929BB950B00F13A6D /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		7C4DCE3B29BB950B00F13A6D /* YGNodePrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNodePrint.h; sourceTree = "<group>"; };
+		7C4DCE3C29BB950B00F13A6D /* YGEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGEnums.h; sourceTree = "<group>"; };
+		7C4DCE3D29BB950B00F13A6D /* YGLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGLayout.cpp; sourceTree = "<group>"; };
+		7C4DCE3E29BB950B00F13A6D /* YGNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNode.h; sourceTree = "<group>"; };
+		7C4DCE3F29BB950B00F13A6D /* YGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGMacros.h; sourceTree = "<group>"; };
+		7C4DCE4029BB950B00F13A6D /* Yoga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Yoga.cpp; sourceTree = "<group>"; };
+		7C4DCE4129BB950B00F13A6D /* YGStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGStyle.cpp; sourceTree = "<group>"; };
+		7C4DCE4229BB950B00F13A6D /* Yoga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yoga.h; sourceTree = "<group>"; };
+		7C4DCE4329BB950B00F13A6D /* YGNodePrint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGNodePrint.cpp; sourceTree = "<group>"; };
+		7C4DCE4429BB950B00F13A6D /* YGStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGStyle.h; sourceTree = "<group>"; };
+		7C4DCE4529BB950B00F13A6D /* YGEnums.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGEnums.cpp; sourceTree = "<group>"; };
+		7C4DCE4629BB950B00F13A6D /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		7C4DCE4729BB950B00F13A6D /* YGValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGValue.cpp; sourceTree = "<group>"; };
+		7C4DCE4829BB950B00F13A6D /* BitUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitUtils.h; sourceTree = "<group>"; };
+		7C4DCE4929BB950B00F13A6D /* YGConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGConfig.h; sourceTree = "<group>"; };
+		7C4DCE4A29BB950B00F13A6D /* YGConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGConfig.cpp; sourceTree = "<group>"; };
+		7C4DCE4B29BB950B00F13A6D /* YGNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YGNode.cpp; sourceTree = "<group>"; };
+		7C4DCE4C29BB950B00F13A6D /* YGValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGValue.h; sourceTree = "<group>"; };
+		7C4DCE4E29BB950B00F13A6D /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		7C4DCE4F29BB950B00F13A6D /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
+		7C4DCE6929BBB31E00F13A6D /* YogaExtensions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = YogaExtensions.cpp; sourceTree = "<group>"; };
+		7C4DCE6A29BBB31E00F13A6D /* YogaExtensions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = YogaExtensions.hpp; sourceTree = "<group>"; };
+		7C4DCE6F29BBCE1F00F13A6D /* YGLayoutImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = YGLayoutImpl.cpp; sourceTree = "<group>"; };
+		7C4DCE7029BBCE1F00F13A6D /* YGLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = YGLayout.hpp; sourceTree = "<group>"; };
+		7C4DCE7329BC8A4700F13A6D /* SharedBase.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SharedBase.hpp; sourceTree = "<group>"; };
+		7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = YogaTestViewController.cpp; sourceTree = "<group>"; };
+		7C4DCE7629BD3DB800F13A6D /* YogaTestViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = YogaTestViewController.hpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -284,7 +345,6 @@
 		7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E729AEC892005079B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E929AEC8C1005079B8 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
-		7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Utils+Antialiasing.cpp"; sourceTree = "<group>"; };
 		7C82D61F29AFE08D005079B8 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl.h; sourceTree = "<group>"; };
 		7C82D62029AFE08D005079B8 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg.h; sourceTree = "<group>"; };
 		7C82D62129AFE08D005079B8 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
@@ -439,8 +499,8 @@
 		7CEB968C2993F799007483C0 /* UIColor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIColor.hpp; sourceTree = "<group>"; };
 		7CEB96922994037B007483C0 /* UIApplication.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIApplication.hpp; sourceTree = "<group>"; };
 		7CEB969D29943993007483C0 /* UIApplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplication.cpp; sourceTree = "<group>"; };
-		7CEB96A1299509C5007483C0 /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		7CEB96A2299509C5007483C0 /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		7CEB96A1299509C5007483C0 /* Tools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tools.cpp; sourceTree = "<group>"; };
+		7CEB96A2299509C5007483C0 /* Tools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tools.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +559,7 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DCE6829BBB30400F13A6D /* YogaExtensions */,
 				7C4DC82829BB1CFE00F13A6D /* DispatchQueue */,
 				7C4DC82329BA970600F13A6D /* UIPanGestureRecognizer */,
 				7C4DC81E29BA95F700F13A6D /* UITapGestureRecognizer */,
@@ -535,7 +596,7 @@
 				7CD7DB2529B6972800C9637C /* UIViewContentMode */,
 				7CD7DAEB29B615C900C9637C /* UIViewController */,
 				7CD7DAE629B6155B00C9637C /* UIWindow */,
-				7CEB96A0299509B8007483C0 /* Utils */,
+				7CEB96A0299509B8007483C0 /* Tools */,
 				7C4DC81229BA2C9500F13A6D /* UIKit.hpp */,
 			);
 			path = SDLTest;
@@ -584,6 +645,69 @@
 				7C4DC82929BB1D0F00F13A6D /* DispatchQueue.cpp */,
 			);
 			path = DispatchQueue;
+			sourceTree = "<group>";
+		};
+		7C4DCE3229BB950B00F13A6D /* yoga */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE4829BB950B00F13A6D /* BitUtils.h */,
+				7C4DCE3529BB950B00F13A6D /* CompactValue.h */,
+				7C4DCE4D29BB950B00F13A6D /* event */,
+				7C4DCE3829BB950B00F13A6D /* log.cpp */,
+				7C4DCE4629BB950B00F13A6D /* log.h */,
+				7C4DCE3929BB950B00F13A6D /* Utils.cpp */,
+				7C4DCE3429BB950B00F13A6D /* Utils.h */,
+				7C4DCE4A29BB950B00F13A6D /* YGConfig.cpp */,
+				7C4DCE4929BB950B00F13A6D /* YGConfig.h */,
+				7C4DCE4529BB950B00F13A6D /* YGEnums.cpp */,
+				7C4DCE3C29BB950B00F13A6D /* YGEnums.h */,
+				7C4DCE3329BB950B00F13A6D /* YGFloatOptional.h */,
+				7C4DCE3D29BB950B00F13A6D /* YGLayout.cpp */,
+				7C4DCE3729BB950B00F13A6D /* YGLayout.h */,
+				7C4DCE3F29BB950B00F13A6D /* YGMacros.h */,
+				7C4DCE4B29BB950B00F13A6D /* YGNode.cpp */,
+				7C4DCE3E29BB950B00F13A6D /* YGNode.h */,
+				7C4DCE4329BB950B00F13A6D /* YGNodePrint.cpp */,
+				7C4DCE3B29BB950B00F13A6D /* YGNodePrint.h */,
+				7C4DCE4129BB950B00F13A6D /* YGStyle.cpp */,
+				7C4DCE4429BB950B00F13A6D /* YGStyle.h */,
+				7C4DCE4729BB950B00F13A6D /* YGValue.cpp */,
+				7C4DCE4C29BB950B00F13A6D /* YGValue.h */,
+				7C4DCE3629BB950B00F13A6D /* Yoga-internal.h */,
+				7C4DCE4029BB950B00F13A6D /* Yoga.cpp */,
+				7C4DCE4229BB950B00F13A6D /* Yoga.h */,
+			);
+			name = yoga;
+			path = yoga/yoga;
+			sourceTree = "<group>";
+		};
+		7C4DCE4D29BB950B00F13A6D /* event */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE4E29BB950B00F13A6D /* event.h */,
+				7C4DCE4F29BB950B00F13A6D /* event.cpp */,
+			);
+			path = event;
+			sourceTree = "<group>";
+		};
+		7C4DCE6829BBB30400F13A6D /* YogaExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE6A29BBB31E00F13A6D /* YogaExtensions.hpp */,
+				7C4DCE6929BBB31E00F13A6D /* YogaExtensions.cpp */,
+				7C4DCE7029BBCE1F00F13A6D /* YGLayout.hpp */,
+				7C4DCE6F29BBCE1F00F13A6D /* YGLayoutImpl.cpp */,
+			);
+			path = YogaExtensions;
+			sourceTree = "<group>";
+		};
+		7C4DCE7429BD3DA700F13A6D /* YogaTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE7629BD3DB800F13A6D /* YogaTestViewController.hpp */,
+				7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */,
+			);
+			path = YogaTestViewController;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
@@ -880,6 +1004,7 @@
 		7CB7F3CA29A3D45F00A20694 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DCE3229BB950B00F13A6D /* yoga */,
 				7C82D65B29B2B94F005079B8 /* libretro */,
 				7C82D5F129AFE08D005079B8 /* nanovg */,
 				7C82D58529AEC253005079B8 /* SDL.xcodeproj */,
@@ -1206,6 +1331,7 @@
 		7CD7DAFB29B62DB600C9637C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DCE7429BD3DA700F13A6D /* YogaTestViewController */,
 				7CD7DB1529B67E8000C9637C /* TestViewController */,
 				7CD7DB1029B67C1300C9637C /* Runner */,
 				7CD7DAFC29B62DCD00C9637C /* UIApplicationDelegate.cpp */,
@@ -1348,14 +1474,14 @@
 			path = UIApplication;
 			sourceTree = "<group>";
 		};
-		7CEB96A0299509B8007483C0 /* Utils */ = {
+		7CEB96A0299509B8007483C0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				7CEB96A2299509C5007483C0 /* Utils.hpp */,
-				7CEB96A1299509C5007483C0 /* Utils.cpp */,
-				7C82D5ED29AFD874005079B8 /* Utils+Antialiasing.cpp */,
+				7CEB96A2299509C5007483C0 /* Tools.hpp */,
+				7CEB96A1299509C5007483C0 /* Tools.cpp */,
+				7C4DCE7329BC8A4700F13A6D /* SharedBase.hpp */,
 			);
-			path = Utils;
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1545,6 +1671,7 @@
 				7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */,
 				7C82D6AD29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
+				7C4DCE5529BB950B00F13A6D /* YGLayout.cpp in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
 				7CD7DB4429B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
@@ -1558,17 +1685,22 @@
 				7CD7DAFD29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7CD7DB2D29B6ACE000C9637C /* UIFont.cpp in Sources */,
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
-				7CEB96A3299509C5007483C0 /* Utils.cpp in Sources */,
+				7CEB96A3299509C5007483C0 /* Tools.cpp in Sources */,
 				7CD7DB0E29B634A200C9637C /* UIRenderer.cpp in Sources */,
 				7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7CD7DAEE29B615D300C9637C /* UIViewController.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
 				7CD7DB0229B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
 				7C82D69629B3ED4C005079B8 /* Timer.cpp in Sources */,
+				7C4DCE7729BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,
 				7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */,
+				7C4DCE6B29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
+				7C4DCE6329BB950B00F13A6D /* YGNode.cpp in Sources */,
+				7C4DCE5B29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
 				7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */,
 				7C82D69C29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7CD7DB1329B67C2500C9637C /* Runner.cpp in Sources */,
+				7C4DCE6129BB950B00F13A6D /* YGConfig.cpp in Sources */,
 				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
 				7CD7DB2329B6909E00C9637C /* UIImageView.cpp in Sources */,
 				7CD7DAF929B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
@@ -1581,23 +1713,30 @@
 				7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */,
 				7C82D6B729B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */,
 				7CB7F54929A3D89C00A20694 /* renderer_GLES_1.c in Sources */,
+				7C4DCE5729BB950B00F13A6D /* Yoga.cpp in Sources */,
+				7C4DCE7129BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */,
 				7C82D67B29B2B950005079B8 /* features_cpu.c in Sources */,
 				7C4DC82629BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */,
+				7C4DCE5D29BB950B00F13A6D /* YGEnums.cpp in Sources */,
 				7CD7DB1D29B686A800C9637C /* UIImage.cpp in Sources */,
+				7C4DCE5229BB950B00F13A6D /* Utils.cpp in Sources */,
 				7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */,
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
 				7CD13F2229AE6A6E00D0FFF5 /* ShaderProgram.cpp in Sources */,
 				7C82D6BC29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7CD7DB3F29B8E74F00C9637C /* UIEvent.cpp in Sources */,
-				7C82D5EE29AFD874005079B8 /* Utils+Antialiasing.cpp in Sources */,
 				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
 				7C82D67929B2B950005079B8 /* compat_strl.c in Sources */,
 				7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */,
+				7C4DCE5929BB950B00F13A6D /* YGStyle.cpp in Sources */,
+				7C4DCE5029BB950B00F13A6D /* log.cpp in Sources */,
 				7CEB969F29943A95007483C0 /* CALayer.cpp in Sources */,
 				7CD13F1729AA561B00D0FFF5 /* Data.cpp in Sources */,
 				7CD13F1329AA52D600D0FFF5 /* UILabel.cpp in Sources */,
 				7CB7F54F29A3D89C00A20694 /* SDL_gpu_shapes.c in Sources */,
+				7C4DCE5F29BB950B00F13A6D /* YGValue.cpp in Sources */,
+				7C4DCE6529BB950B00F13A6D /* event.cpp in Sources */,
 				7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1615,7 +1754,9 @@
 				7CD7DAEF29B615D300C9637C /* UIViewController.cpp in Sources */,
 				7CD7DB1929B67E8F00C9637C /* TestViewController.cpp in Sources */,
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
+				7C4DCE5129BB950B00F13A6D /* log.cpp in Sources */,
 				7CD7DAFA29B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
+				7C4DCE5329BB950B00F13A6D /* Utils.cpp in Sources */,
 				7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7CD7DB0829B6332400C9637C /* main.cpp in Sources */,
@@ -1624,19 +1765,26 @@
 				7CD7DB4029B8E74F00C9637C /* UIEvent.cpp in Sources */,
 				7C82D69D29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */,
+				7C4DCE6629BB950B00F13A6D /* event.cpp in Sources */,
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
-				7C82D5C129AEC422005079B8 /* Utils.cpp in Sources */,
+				7C4DCE5629BB950B00F13A6D /* YGLayout.cpp in Sources */,
+				7C82D5C129AEC422005079B8 /* Tools.cpp in Sources */,
 				7C82D6AE29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
 				7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */,
+				7C4DCE6429BB950B00F13A6D /* YGNode.cpp in Sources */,
 				7CD7DB0329B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
 				7CD7DAF429B615E200C9637C /* UIResponder.cpp in Sources */,
+				7C4DCE5829BB950B00F13A6D /* Yoga.cpp in Sources */,
+				7C4DCE7829BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,
 				7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */,
+				7C4DCE6C29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
 				7C82D5AF29AEC28B005079B8 /* SDL_gpu_matrix.c in Sources */,
 				7C82D67829B2B950005079B8 /* encoding_utf.c in Sources */,
 				7C82D5B629AEC28B005079B8 /* SDL_gpu_renderer.c in Sources */,
+				7C4DCE5C29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
 				7CD7DAFE29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7C82D6A929B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,
 				7C82D67A29B2B950005079B8 /* compat_strl.c in Sources */,
@@ -1645,10 +1793,15 @@
 				7C82D5C329AEC422005079B8 /* ShaderProgram.cpp in Sources */,
 				7C82D5B229AEC28B005079B8 /* stb_image_write.c in Sources */,
 				7C4DC82729BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */,
+				7C4DCE6229BB950B00F13A6D /* YGConfig.cpp in Sources */,
 				7C4DC82229BA960100F13A6D /* UITapGestureRecognizer.cpp in Sources */,
+				7C4DCE6029BB950B00F13A6D /* YGValue.cpp in Sources */,
 				7CD7DB0F29B634A200C9637C /* UIRenderer.cpp in Sources */,
+				7C4DCE7229BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */,
+				7C4DCE5A29BB950B00F13A6D /* YGStyle.cpp in Sources */,
 				7C82D5B029AEC28B005079B8 /* glew.c in Sources */,
 				7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */,
+				7C4DCE5E29BB950B00F13A6D /* YGEnums.cpp in Sources */,
 				7C82D5AE29AEC28B005079B8 /* renderer_GLES_2.c in Sources */,
 				7C82D5B929AEC28B005079B8 /* renderer_OpenGL_4.c in Sources */,
 				7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */,
@@ -1741,6 +1894,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					extern/yoga,
 					Demo,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -1801,6 +1955,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					extern/yoga,
 					Demo,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;

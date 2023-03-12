@@ -14,6 +14,8 @@
 #include <UIResponder/UIResponder.hpp>
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
+#include <YogaExtensions/YogaExtensions.hpp>
+#include <Tools/Tools.hpp>
 #include <functional>
 #include <vector>
 #include <memory>
@@ -22,7 +24,7 @@
 namespace UIKit {
 
 class UIViewController;
-class UIView: public UIResponder, public CALayerDelegate, public std::enable_shared_from_this<UIView> {
+class UIView: public UIResponder, public CALayerDelegate, public enable_shared_from_this<UIView> {
 public:
     std::string tag;
     bool isUserInteractionEnabled = true;
@@ -30,7 +32,7 @@ public:
     UIView(Rect frame);
     UIView(): UIView(Rect()) {}
 
-    virtual CALayer* initLayer();
+    virtual std::shared_ptr<CALayer> initLayer();
     std::shared_ptr<CALayer> layer() { return _layer; }
 
     std::shared_ptr<UIResponder> next() override;
@@ -121,6 +123,10 @@ public:
 
     // SDL
     void sdlDrawAndLayoutTreeIfNeeded(float parentAlpha = 1);
+
+    // FlexLayout
+    std::shared_ptr<YGLayout> yoga;
+    void configureLayout(std::function<void(std::shared_ptr<YGLayout>)> block);
 
 private:
     std::vector<std::shared_ptr<UIGestureRecognizer>> _gestureRecognizers;

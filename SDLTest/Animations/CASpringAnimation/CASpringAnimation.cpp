@@ -18,7 +18,7 @@ CASpringAnimation::CASpringAnimation(CASpringAnimation* animation):
 CASpringAnimation::CASpringAnimation(std::shared_ptr<CASpringAnimationPrototype> prototype,
                                      std::string keyPath,
                                      AnimatableProperty fromValue):
-    CABasicAnimation(prototype, keyPath, fromValue, std::make_shared<CAMediaTimingFunction>(CAMediaTimingFunction::easeOutElastic)),
+    CABasicAnimation(prototype, keyPath, fromValue, new_shared<CAMediaTimingFunction>(CAMediaTimingFunction::easeOutElastic)),
     damping(prototype->damping),
     initialSpringVelocity(prototype->initialSpringVelocity)
 { }

@@ -7,3 +7,6 @@
 [submodule "extern/nanovg"]
 	path = extern/nanovg
 	url = https://github.com/memononen/nanovg.git
+[submodule "extern/yoga"]
+	path = extern/yoga
+	url = https://github.com/facebook/yoga.git

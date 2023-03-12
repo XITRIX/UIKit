@@ -31,7 +31,7 @@ public:
     virtual void display(std::shared_ptr<CALayer> layer) = 0;
 };
 
-class CALayer: public std::enable_shared_from_this<CALayer> {
+class CALayer: public enable_shared_from_this<CALayer> {
 public:
     float zPosition = 0;
 

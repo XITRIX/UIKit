@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 #include <functional>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -33,7 +34,7 @@ public:
     virtual bool gestureRecognizerShouldRecognizeSimultaneouslyWith(std::shared_ptr<UIGestureRecognizer> gestureRecognizer, std::shared_ptr<UIGestureRecognizer> otherGestureRecognizer) { return false; }
 };
 
-class UIGestureRecognizer: public std::enable_shared_from_this<UIGestureRecognizer> {
+class UIGestureRecognizer: public enable_shared_from_this<UIGestureRecognizer> {
 public:
     std::weak_ptr<UIGestureRecognizerDelegate> delegate;
     std::function<void(UIGestureRecognizerState)> onStateChanged = [](auto state){};

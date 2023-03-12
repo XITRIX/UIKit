@@ -9,12 +9,13 @@
 
 #include <UIViewAnimationGroup/UIViewAnimationGroup.hpp>
 #include <AnimatableProperty/AnimatableProperty.hpp>
+#include <Tools/Tools.hpp>
 #include <memory>
 
 namespace UIKit {
 
 class CABasicAnimation;
-class CABasicAnimationPrototype: public std::enable_shared_from_this<CABasicAnimationPrototype> {
+class CABasicAnimationPrototype: public enable_shared_from_this<CABasicAnimationPrototype> {
 public:
     const double duration;
     const double delay;

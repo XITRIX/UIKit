@@ -20,6 +20,8 @@ public:
 
     void makeKeyAndVisible();
     void sendEvent(std::shared_ptr<UIEvent> event);
+
+    void layoutSubviews() override;
 private:
     std::shared_ptr<UIViewController> _rootViewController;
 };

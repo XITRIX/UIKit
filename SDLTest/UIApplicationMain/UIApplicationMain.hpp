@@ -12,6 +12,6 @@
 namespace UIKit {
 
 class UIApplicationDelegate;
-int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate = std::make_shared<UIApplicationDelegate>());
+int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate = new_shared<UIApplicationDelegate>());
 
 }

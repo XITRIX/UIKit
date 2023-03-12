@@ -6,12 +6,13 @@
 //
 
 #include <CABasicAnimation/CABasicAnimation.hpp>
+#include <Tools/Tools.hpp>
 #include <cmath>
 
 namespace UIKit {
 
 CABasicAnimation::CABasicAnimation(std::string keyPath) {
-    timingFunction = std::make_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionDefault);
+    timingFunction = new_shared<CAMediaTimingFunction>(kCAMediaTimingFunctionDefault);
     this->keyPath = keyPath;
 }
 

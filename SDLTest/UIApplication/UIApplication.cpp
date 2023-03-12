@@ -8,7 +8,7 @@
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UITouch/UITouch.hpp>
-#include <Utils/Utils.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -53,7 +53,7 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             auto renderSize = UIRenderer::_main->bounds().size;
             auto fingerPoint = Point(renderSize.width * e.tfinger.x, renderSize.height * e.tfinger.y);
 //                printf("Touch id: %lld Begin, X:%f - Y:%f\n", e.tfinger.fingerId, fingerPoint.x, fingerPoint.y);
-            auto touch = std::make_shared<UITouch>(e.tfinger.fingerId, fingerPoint, getCPUTimeUsec());
+            auto touch = new_shared<UITouch>(e.tfinger.fingerId, fingerPoint, getCPUTimeUsec());
             auto event = std::shared_ptr<UIEvent>(new UIEvent(touch));
             UIEvent::activeEvents.push_back(event);
             sendEvent(event);

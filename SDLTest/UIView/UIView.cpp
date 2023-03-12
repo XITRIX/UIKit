@@ -6,6 +6,7 @@
 //
 
 #include <UIView/UIView.hpp>
+#include <Tools/Tools.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UIViewController/UIViewController.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
@@ -13,12 +14,14 @@
 
 namespace UIKit {
 
-CALayer* UIView::initLayer() {
-    return new CALayer();
+std::shared_ptr<CALayer> UIView::initLayer() {
+    return new_shared<CALayer>();
 }
 
 UIView::UIView(Rect frame) {
-    _layer = std::shared_ptr<CALayer>(initLayer());
+    yoga = new_shared<YGLayout>(shared_from_this());
+    
+    _layer = initLayer();
     _layer->contentsScale = UIRenderer::main()->scale();
 
     _layer->delegate = this;
@@ -227,8 +230,8 @@ bool UIView::anyCurrentlyRunningAnimationsAllowUserInteraction() {
 }
 
 void UIView::animate(double duration, double delay, UIViewAnimationOptions options, std::function<void()> animations, std::function<void(bool)> completion) {
-    auto group = std::make_shared<UIViewAnimationGroup>(options, completion);
-    currentAnimationPrototype = std::make_shared<CABasicAnimationPrototype>(duration, delay, group);
+    auto group = new_shared<UIViewAnimationGroup>(options, completion);
+    currentAnimationPrototype = new_shared<CABasicAnimationPrototype>(duration, delay, group);
 
     animations();
 
@@ -245,8 +248,8 @@ void UIView::animate(double duration, std::function<void()> animations) {
 }
 
 void UIView::animate(double duration, double delay, double damping, double initialSpringVelocity, UIViewAnimationOptions options, std::function<void()> animations, std::function<void(bool)> completion) {
-    auto group = std::make_shared<UIViewAnimationGroup>(options, completion);
-    currentAnimationPrototype = std::make_shared<CASpringAnimationPrototype>( duration, delay, damping, initialSpringVelocity, group);
+    auto group = new_shared<UIViewAnimationGroup>(options, completion);
+    currentAnimationPrototype = new_shared<CASpringAnimationPrototype>( duration, delay, damping, initialSpringVelocity, group);
 
     animations();
 
@@ -295,15 +298,22 @@ void UIView::display(std::shared_ptr<CALayer> layer) { }
 
 void UIView::layoutIfNeeded() {
    if (_needsLayout) {
-       layoutSubviews();
        _needsLayout = false;
+       layoutSubviews();
    }
 }
 
 void UIView::layoutSubviews() {
     _needsLayout = false;
-//    parentViewController?.viewWillLayoutSubviews()
-//    parentViewController?.viewDidLayoutSubviews()
+    if (!_parentController.expired()) {
+        _parentController.lock()->viewWillLayoutSubviews();
+    }
+
+    yoga->layoutIfNeeded();
+
+    if (!_parentController.expired()) {
+        _parentController.lock()->viewDidLayoutSubviews();
+    }
 }
 
 Size UIView::sizeThatFits(Size size) {
@@ -341,4 +351,9 @@ void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
     }
 }
 
+// MARK: - Yoga layout
+void UIView::configureLayout(std::function<void(std::shared_ptr<YGLayout>)> block) {
+    block(yoga);
+}
+    
 }

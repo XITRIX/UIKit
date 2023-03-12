@@ -14,7 +14,7 @@
 #include <UIApplication/UIApplication.hpp>
 #include <ShaderProgram/ShaderProgram.hpp>
 #include <Renderer/Renderer.hpp>
-#include <Utils/Utils.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -137,7 +137,7 @@ void CALayer::render(GPU_Target* renderer) {
         // Create new FBO for mask texture
         auto maskSize = Size(localRenderer->base_w, localRenderer->base_h);
         if (!maskFBO || maskFBO->size() != maskSize) {
-            maskFBO = std::make_shared<CGImage>(maskSize);
+            maskFBO = new_shared<CGImage>(maskSize);
             GPU_SetAnchor(maskFBO->pointee, 0, 0);
             GPU_GetTarget(maskFBO->pointee);
             GPU_SetVirtualResolution(maskFBO->pointee->target, localRenderer->w, localRenderer->h);
@@ -392,7 +392,7 @@ std::shared_ptr<CAAction> CALayer::actionForKey(std::string event) {
 }
 
 std::shared_ptr<CALayer> CALayer::createPresentation() {
-    auto copy = std::make_shared<CALayer>(this);
+    auto copy = new_shared<CALayer>(this);
     copy->isPresentationForAnotherLayer = true;
     return copy;
 }
@@ -408,14 +408,14 @@ Rect CALayer::getRenderedBoundsRelativeToAnchorPoint() {
 }
 
 std::shared_ptr<CABasicAnimation> CALayer::defaultActionForKey(std::string event) {
-    auto animation = std::make_shared<CABasicAnimation>(event);
+    auto animation = new_shared<CABasicAnimation>(event);
     animation->duration = CATransaction::animationDuration();
     return animation;
 }
 
 // MARK: - Animations
 void CALayer::add(std::shared_ptr<CABasicAnimation> animation, std::string keyPath) {
-    auto copy = std::make_shared<CABasicAnimation>(animation.get());
+    auto copy = new_shared<CABasicAnimation>(animation.get());
     copy->creationTime = Timer();
 
     // animation.fromValue is optional, set it to currently visible state if nil

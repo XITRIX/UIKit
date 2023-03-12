@@ -7,6 +7,7 @@
 
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
 #include <CABasicAnimation/CABasicAnimation.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -15,7 +16,7 @@ CABasicAnimationPrototype::CABasicAnimationPrototype(double duration, double del
 { }
 
 std::shared_ptr<CABasicAnimation> CABasicAnimationPrototype::createAnimation(std::string keyPath, AnimatableProperty fromValue) {
-    return std::make_shared<CABasicAnimation>(
+    return new_shared<CABasicAnimation>(
         shared_from_this(),
         keyPath,
         fromValue,

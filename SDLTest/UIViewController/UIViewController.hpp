@@ -11,7 +11,7 @@
 
 namespace UIKit {
 
-class UIViewController: public UIResponder, public std::enable_shared_from_this<UIViewController> {
+class UIViewController: public UIResponder, public enable_shared_from_this<UIViewController> {
 public:
     void setView(std::shared_ptr<UIView> view);
     std::shared_ptr<UIView> view();

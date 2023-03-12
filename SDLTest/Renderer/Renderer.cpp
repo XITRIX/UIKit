@@ -25,7 +25,7 @@
 #include <nanovg_gl.h>
 #include <nanovg_gl_utils.h>
 
-#include <Utils/Utils.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -90,7 +90,7 @@ void Renderer::draw(std::function<void(NVGcontext*)> draw) {
 }
 
 std::shared_ptr<CGImage> Renderer::drawFBO(Size size, float scale, std::function<void(NVGcontext*)> draw) {
-    auto fbo = std::make_shared<CGImage>(size * scale);
+    auto fbo = new_shared<CGImage>(size * scale);
     GPU_LoadTarget(fbo->pointee);
     GPU_SetVirtualResolution(fbo->pointee->target, size.width, size.height);
 

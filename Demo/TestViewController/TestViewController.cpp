@@ -10,13 +10,13 @@
 using namespace UIKit;
 
 void TestViewController::loadView() {
-    auto view = std::make_shared<UIView>();
+    auto view = new_shared<UIView>();
 
-    rotationView = std::make_shared<UIView>(Rect(60, 200, 188, 188));
+    rotationView = new_shared<UIView>(Rect(60, 200, 188, 188));
     rotationView->setBackgroundColor(UIColor::orange);
 //    rotationView->layer()->setCornerRadius(8);
 
-    view1 = std::make_shared<UIKit::UIView>();
+    view1 = new_shared<UIKit::UIView>();
     view1->tag = "View 1";
 //    layer1->anchorPoint = Point(0, 0);
     view1->setFrame(Rect(44, 44, 280, 280));
@@ -26,7 +26,7 @@ void TestViewController::loadView() {
 //    layer1->transform = NXTransform3D::translationBy(180, 180, 0);
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
-    view2 = std::make_shared<UIKit::UIView>();
+    view2 = new_shared<UIKit::UIView>();
     view2->tag = "View 2";
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
     view2->setFrame(Rect(40, 40, 80, 80));
@@ -37,7 +37,7 @@ void TestViewController::loadView() {
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
 
-    view3 = std::make_shared<UIKit::UIImageView>(UIImage::fromPath("test3.png"));
+    view3 = new_shared<UIKit::UIImageView>(UIImage::fromPath("test3.png"));
     view3->tag = "View 3";
     view3->setFrame(Rect(0, 0, 80, 80));
     view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
@@ -50,7 +50,7 @@ void TestViewController::loadView() {
 //    layer2->setMask(layer3);
     view2->addSubview(view3);
 
-    label = std::make_shared<UILabel>();
+    label = new_shared<UILabel>();
     label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
@@ -59,7 +59,7 @@ void TestViewController::loadView() {
     label->setClipsToBounds(true);
     label->sizeToFit();
 
-    button = std::make_shared<UILabel>();
+    button = new_shared<UILabel>();
     button->tag = "Button";
     button->setFrame(Rect(300, 90, 300, 44));
     button->setBackgroundColor(UIColor::green);
@@ -79,7 +79,7 @@ bool scaled = false;
 void TestViewController::viewDidLoad() {
     startRotate();
 
-    auto tap = std::make_shared<UITapGestureRecognizer>();
+    auto tap = new_shared<UITapGestureRecognizer>();
     tap->onStateChanged = [this](auto state) {
         if (state == UIGestureRecognizerState::ended) {
             UIView::animate(0.3f, [this]() {
@@ -97,7 +97,7 @@ void TestViewController::viewDidLoad() {
     };
     button->addGestureRecognizer(tap);
 
-    auto pan = std::make_shared<UIPanGestureRecognizer>();
+    auto pan = new_shared<UIPanGestureRecognizer>();
     pan->onStateChanged = [this, pan](auto state) {
 //        printf("%d\n", state);
         switch (state) {

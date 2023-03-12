@@ -6,6 +6,7 @@
 //
 
 #include <UIImage/UIImage.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -20,8 +21,8 @@ std::shared_ptr<UIImage> UIImage::fromPath(std::string path) {
 }
 
 std::shared_ptr<UIImage> UIImage::fromData(Data data, float scale) {
-    auto image = std::make_shared<CGImage>(data);
-    return std::make_shared<UIImage>(image, scale);
+    auto image = new_shared<CGImage>(data);
+    return new_shared<UIImage>(image, scale);
 }
 
 }

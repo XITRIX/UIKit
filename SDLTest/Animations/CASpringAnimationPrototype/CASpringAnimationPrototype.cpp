@@ -22,7 +22,7 @@ CASpringAnimationPrototype::CASpringAnimationPrototype(double duration,
 
 std::shared_ptr<CABasicAnimation> CASpringAnimationPrototype::createAnimation(std::string keyPath, AnimatableProperty fromValue) {
     auto self = std::static_pointer_cast<CASpringAnimationPrototype>(shared_from_this());
-    return std::make_shared<CASpringAnimation>(self, keyPath, fromValue);
+    return new_shared<CASpringAnimation>(self, keyPath, fromValue);
 }
 
 }

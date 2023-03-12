@@ -8,7 +8,7 @@
 #include <UIRenderer/UIRenderer.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <Renderer/Renderer.hpp>
-#include <Utils/Utils.hpp>
+#include <Tools/Tools.hpp>
 
 #define SCREEN_WIDTH    1280
 #define SCREEN_HEIGHT   720

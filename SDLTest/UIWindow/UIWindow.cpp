@@ -93,8 +93,14 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
             }
         }
     }
+}
 
+void UIWindow::layoutSubviews() {
+    UIView::layoutSubviews();
 
+    if (_rootViewController) {
+        _rootViewController->view()->setFrame(this->bounds());
+    }
 }
 
 }

@@ -39,7 +39,7 @@ void UIViewController::loadViewIfNeeded() {
 }
 
 void UIViewController::loadView() {
-    setView(std::make_shared<UIView>());
+    setView(new_shared<UIView>());
 }
 
 void UIViewController::addChild(std::shared_ptr<UIViewController> child) {

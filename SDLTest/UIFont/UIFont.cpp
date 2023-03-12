@@ -6,7 +6,7 @@
 //
 
 #include <UIFont/UIFont.hpp>
-#include <Utils/Utils.hpp>
+#include <Tools/Tools.hpp>
 
 namespace UIKit {
 
@@ -14,7 +14,7 @@ std::map<std::string, std::shared_ptr<FontRenderer>> UIFont::cachedFontFiles;
 
 UIFont::UIFont(std::string name, float size): fontName(name), pointSize(size) {
     if (!cachedFontFiles.count(name)) {
-        cachedFontFiles[name] = std::make_shared<FontRenderer>(name);
+        cachedFontFiles[name] = new_shared<FontRenderer>(name);
     }
 
     renderer = cachedFontFiles[name];
@@ -29,8 +29,8 @@ std::shared_ptr<CGImage> UIFont::createContentsFor(std::shared_ptr<UILabel> labe
 }
 
 std::shared_ptr<UIFont> UIFont::systemFont(float size) {
-//    return std::make_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
-    return std::make_shared<UIFont>(Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf", size);
+//    return new_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
+    return new_shared<UIFont>(Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf", size);
 }
 
 }

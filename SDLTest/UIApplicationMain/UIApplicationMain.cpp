@@ -24,9 +24,9 @@ void setupRenderAndRunLoop() {
 }
 
 int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate) {
-    auto application = std::make_shared<UIApplication>();
+    auto application = new_shared<UIApplication>();
     UIApplication::shared = application;
-    UIRenderer::_main = std::make_shared<UIRenderer>();
+    UIRenderer::_main = new_shared<UIRenderer>();
 
     application->delegate = appDelegate;
 
