@@ -43,6 +43,10 @@
 		7C4DCE7229BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE6F29BBCE1F00F13A6D /* YGLayoutImpl.cpp */; };
 		7C4DCE7729BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */; };
 		7C4DCE7829BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */; };
+		7C4DCE7C29BE70B900F13A6D /* UIScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7A29BE70B900F13A6D /* UIScrollView.cpp */; };
+		7C4DCE7D29BE70B900F13A6D /* UIScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7A29BE70B900F13A6D /* UIScrollView.cpp */; };
+		7C4DCE8129BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */; };
+		7C4DCE8229BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -327,6 +331,10 @@
 		7C4DCE7329BC8A4700F13A6D /* SharedBase.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SharedBase.hpp; sourceTree = "<group>"; };
 		7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = YogaTestViewController.cpp; sourceTree = "<group>"; };
 		7C4DCE7629BD3DB800F13A6D /* YogaTestViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = YogaTestViewController.hpp; sourceTree = "<group>"; };
+		7C4DCE7A29BE70B900F13A6D /* UIScrollView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIScrollView.cpp; sourceTree = "<group>"; };
+		7C4DCE7B29BE70B900F13A6D /* UIScrollView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIScrollView.hpp; sourceTree = "<group>"; };
+		7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIEdgeInsets.cpp; sourceTree = "<group>"; };
+		7C4DCE8029BE76B200F13A6D /* UIEdgeInsets.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIEdgeInsets.hpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -559,13 +567,8 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
-				7C4DCE6829BBB30400F13A6D /* YogaExtensions */,
-				7C4DC82829BB1CFE00F13A6D /* DispatchQueue */,
-				7C4DC82329BA970600F13A6D /* UIPanGestureRecognizer */,
-				7C4DC81E29BA95F700F13A6D /* UITapGestureRecognizer */,
-				7CD7DB4129B8F46600C9637C /* UIGestureRecognizer */,
-				7CD7DB3C29B8E74600C9637C /* UIEvent */,
-				7CD7DB3729B8E22400C9637C /* UITouch */,
+				7C4DCE7E29BE76AB00F13A6D /* UIEdgeInsets */,
+				7C4DCE7929BE70AC00F13A6D /* UIScrollView */,
 				7C82D69829B3F4CF005079B8 /* Animations */,
 				7C82D68729B384F5005079B8 /* CAAction */,
 				7C0798232993F1D4004E8EC8 /* CALayer */,
@@ -573,6 +576,7 @@
 				7C0798272993F251004E8EC8 /* CGImage */,
 				7CD13F1829AB6DCD00D0FFF5 /* ContentsGravityTransformation */,
 				7CD13F1429AA561300D0FFF5 /* Data */,
+				7C4DC82829BB1CFE00F13A6D /* DispatchQueue */,
 				7CD7DB2F29B6AD3000C9637C /* FontRenderer */,
 				7CEB96862993F5CB007483C0 /* Geometry */,
 				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
@@ -582,22 +586,28 @@
 				7CD13F2329AE6AE000D0FFF5 /* Shader */,
 				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
 				7C82D69329B3ED42005079B8 /* Timer */,
+				7CEB96A0299509B8007483C0 /* Tools */,
 				7CEB969C29943982007483C0 /* UIApplication */,
 				7CD7DAF629B6270300C9637C /* UIApplicationDelegate */,
 				7CD7DAFF29B62E8300C9637C /* UIApplicationMain */,
 				7CEB968A2993F78F007483C0 /* UIColor */,
+				7CD7DB3C29B8E74600C9637C /* UIEvent */,
 				7CD7DB2A29B6ACD500C9637C /* UIFont */,
+				7CD7DB4129B8F46600C9637C /* UIGestureRecognizer */,
 				7CD7DB1A29B6864A00C9637C /* UIImage */,
 				7CD7DB2029B6909400C9637C /* UIImageView */,
+				7C4DC81229BA2C9500F13A6D /* UIKit.hpp */,
 				7CD13F1029AA52BE00D0FFF5 /* UILabel */,
+				7C4DC82329BA970600F13A6D /* UIPanGestureRecognizer */,
 				7CD7DB0B29B6349800C9637C /* UIRenderer */,
 				7CD7DAF029B615D800C9637C /* UIResponder */,
+				7C4DC81E29BA95F700F13A6D /* UITapGestureRecognizer */,
+				7CD7DB3729B8E22400C9637C /* UITouch */,
 				7C82D6AF29B440EA005079B8 /* UIView */,
 				7CD7DB2529B6972800C9637C /* UIViewContentMode */,
 				7CD7DAEB29B615C900C9637C /* UIViewController */,
 				7CD7DAE629B6155B00C9637C /* UIWindow */,
-				7CEB96A0299509B8007483C0 /* Tools */,
-				7C4DC81229BA2C9500F13A6D /* UIKit.hpp */,
+				7C4DCE6829BBB30400F13A6D /* YogaExtensions */,
 			);
 			path = SDLTest;
 			sourceTree = "<group>";
@@ -708,6 +718,24 @@
 				7C4DCE7529BD3DB800F13A6D /* YogaTestViewController.cpp */,
 			);
 			path = YogaTestViewController;
+			sourceTree = "<group>";
+		};
+		7C4DCE7929BE70AC00F13A6D /* UIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE7B29BE70B900F13A6D /* UIScrollView.hpp */,
+				7C4DCE7A29BE70B900F13A6D /* UIScrollView.cpp */,
+			);
+			path = UIScrollView;
+			sourceTree = "<group>";
+		};
+		7C4DCE7E29BE76AB00F13A6D /* UIEdgeInsets */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE8029BE76B200F13A6D /* UIEdgeInsets.hpp */,
+				7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */,
+			);
+			path = UIEdgeInsets;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
@@ -1686,6 +1714,7 @@
 				7CD7DB2D29B6ACE000C9637C /* UIFont.cpp in Sources */,
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
 				7CEB96A3299509C5007483C0 /* Tools.cpp in Sources */,
+				7C4DCE8129BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
 				7CD7DB0E29B634A200C9637C /* UIRenderer.cpp in Sources */,
 				7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7CD7DAEE29B615D300C9637C /* UIViewController.cpp in Sources */,
@@ -1697,6 +1726,7 @@
 				7C4DCE6B29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7C4DCE6329BB950B00F13A6D /* YGNode.cpp in Sources */,
 				7C4DCE5B29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
+				7C4DCE7C29BE70B900F13A6D /* UIScrollView.cpp in Sources */,
 				7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */,
 				7C82D69C29B3F4E1005079B8 /* CABasicAnimationPrototype.cpp in Sources */,
 				7CD7DB1329B67C2500C9637C /* Runner.cpp in Sources */,
@@ -1769,6 +1799,7 @@
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
 				7C4DCE5629BB950B00F13A6D /* YGLayout.cpp in Sources */,
 				7C82D5C129AEC422005079B8 /* Tools.cpp in Sources */,
+				7C4DCE8229BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
 				7C82D6AE29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
 				7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C4DCE6429BB950B00F13A6D /* YGNode.cpp in Sources */,
@@ -1780,6 +1811,7 @@
 				7C4DCE6C29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
+				7C4DCE7D29BE70B900F13A6D /* UIScrollView.cpp in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
 				7C82D5AF29AEC28B005079B8 /* SDL_gpu_matrix.c in Sources */,
 				7C82D67829B2B950005079B8 /* encoding_utf.c in Sources */,

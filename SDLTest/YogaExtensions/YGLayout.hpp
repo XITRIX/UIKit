@@ -103,6 +103,22 @@ YG_VALUE_EDGE_PROPERTY(lowercased_name##Horizontal, capitalized_name##Horizontal
 YG_VALUE_EDGE_PROPERTY(lowercased_name##Vertical, capitalized_name##Vertical, capitalized_name, YGEdgeVertical)       \
 YG_VALUE_EDGE_PROPERTY(lowercased_name, capitalized_name, capitalized_name, YGEdgeAll)
 
+#define YG_GUTTER_PROPERTY_GETTER(type, lowercased_name, capitalized_name, property, gutter) \
+type lowercased_name()                                                                   \
+{                                                                                        \
+    return YGNodeStyleGet##property(_node, gutter);                                        \
+}
+
+#define YG_VALUE_GUTTER_PROPERTY_SETTER(objc_lowercased_name, objc_capitalized_name, c_name, gutter) \
+void set##objc_capitalized_name(float objc_lowercased_name)                                    \
+{                                                                                                \
+    YGNodeStyleSet##c_name(_node, gutter, objc_lowercased_name);                                 \
+}
+
+#define YG_VALUE_GUTTER_PROPERTY(lowercased_name, capitalized_name, property, gutter)   \
+YG_GUTTER_PROPERTY_GETTER(float, lowercased_name, capitalized_name, property, gutter) \
+YG_VALUE_GUTTER_PROPERTY_SETTER(lowercased_name, capitalized_name, property, gutter)
+
 class UIView;
 class YGLayout {
 public:
@@ -128,6 +144,10 @@ public:
     YG_PROPERTY(float, flexShrink, FlexShrink)
     YG_AUTO_VALUE_PROPERTY(flexBasis, FlexBasis)
 
+    YG_VALUE_GUTTER_PROPERTY(columnGap, ColumnGap, Gap, YGGutterColumn)
+    YG_VALUE_GUTTER_PROPERTY(rowGap, RowGap, Gap, YGGutterRow)
+    YG_VALUE_GUTTER_PROPERTY(allGap, AllGap, Gap, YGGutterAll)
+    
     YG_VALUE_EDGE_PROPERTY(left, Left, Position, YGEdgeLeft)
     YG_VALUE_EDGE_PROPERTY(top, Top, Position, YGEdgeTop)
     YG_VALUE_EDGE_PROPERTY(right, Right, Position, YGEdgeRight)

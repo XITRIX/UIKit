@@ -9,6 +9,7 @@
 
 #include <CALayer/CALayer.hpp>
 #include <UIEvent/UIEvent.hpp>
+#include <UIEdgeInsets/UIEdgeInsets.hpp>
 #include <UIViewContentMode/UIViewContentMode.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UIResponder/UIResponder.hpp>

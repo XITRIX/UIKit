@@ -79,6 +79,10 @@ Point Point::applying(NXAffineTransform t) {
 
 }
 
+float Point::magnitude() {
+    return sqrtf(x * x + y * y);
+}
+
 Point Point::zero = Point();
 
 // MARK: - SIZE -

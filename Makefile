@@ -103,6 +103,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIApplication \
 			SDLTest/UIApplicationMain \
 			SDLTest/UIColor \
+			SDLTest/UIEdgeInsets \
 			SDLTest/UIEvent \
 			SDLTest/UIFont \
 			SDLTest/UIGestureRecognizer \
@@ -112,6 +113,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIPanGestureRecognizer \
 			SDLTest/UIRenderer \
 			SDLTest/UIResponder \
+			SDLTest/UIScrollView \
 			SDLTest/UITapGestureRecognizer \
 			SDLTest/UITouch \
 			SDLTest/UIView \

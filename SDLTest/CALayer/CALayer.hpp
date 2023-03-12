@@ -102,12 +102,12 @@ public:
 
     std::shared_ptr<CAAction> actionForKey(std::string event);
 
-    std::shared_ptr<CALayer> createPresentation();
-
     static std::shared_ptr<CABasicAnimation> defaultActionForKey(std::string event);
     static float defaultAnimationDuration;
 
+    std::shared_ptr<CALayer> createPresentation();
     std::shared_ptr<CALayer> presentation() { return _presentation; }
+    std::shared_ptr<CALayer> presentationOrSelf();
 
     bool needsDisplay() { return _needsDisplay; }
     void setNeedsDisplay() { _needsDisplay = true; }
@@ -157,8 +157,6 @@ private:
 
     std::shared_ptr<CALayer> _presentation;
     std::map<std::string, std::shared_ptr<CABasicAnimation>> animations;
-
-    std::shared_ptr<CALayer> presentationOrSelf();
 
     bool isPresentationForAnotherLayer = false;
 
