@@ -36,7 +36,12 @@ void UILabel::display(std::shared_ptr<CALayer> layer) {
 }
 
 Size UILabel::sizeThatFits(Size size) {
-    return _font->sizeForText(_text, 999);
+    return _font->sizeForText(_text, size.width);
+}
+
+void UILabel::layoutSubviews() {
+    UIView::layoutSubviews();
+    setNeedsDisplay();
 }
 
 }

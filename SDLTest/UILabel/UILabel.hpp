@@ -26,6 +26,8 @@ public:
     void display(std::shared_ptr<CALayer> layer) override;
     Size sizeThatFits(Size size) override;
 
+    void layoutSubviews() override;
+
     void setText(std::string text);
     std::string text() const { return _text; }
 

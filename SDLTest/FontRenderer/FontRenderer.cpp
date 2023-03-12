@@ -33,7 +33,7 @@ std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel
     auto size = label->bounds().size;
     float scale = UIRenderer::main()->scale();
 
-    return Renderer::shared()->drawFBO(Size(size.width, std::min(label->bounds().height(), size.height)), scale, [this, size, label](auto vg) {
+    return Renderer::shared()->drawFBO(size, scale, [this, size, label](auto vg) {
         nvgFontSize(vg, label->_font->pointSize);
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontFaceId(vg, fontFace);
