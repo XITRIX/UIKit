@@ -28,21 +28,7 @@ void UILabel::setText(std::string text) {
 
 void UILabel::draw() {
     UIView::draw();
-
-//    auto wrapLength = (_numberOfLines != 1) ? bounds().width() : 0;
-
     layer()->setContents(_font->createContentsFor(std::static_pointer_cast<UILabel>(shared_from_this())));
-
-//    auto content = Renderer::shared()->drawFBO(Size(44, 44), 2, [](auto vg) {
-////        nvgFillColor(vg, UIColor::orange.nvgColor());
-////        nvgRect(vg, 0, 0, 88, 88);
-////        nvgFill(vg);
-//
-//        nvgFillColor(vg, UIColor::red.nvgColor());
-//        nvgRect(vg, 22, 0, 44, 44);
-//        nvgFill(vg);
-//    });
-//    layer()->setContents(content);
 }
 
 void UILabel::display(std::shared_ptr<CALayer> layer) {

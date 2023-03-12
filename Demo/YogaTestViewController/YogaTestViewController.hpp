@@ -15,11 +15,9 @@ class YogaTestViewController: public UIViewController {
 public:
     void loadView() override;
     void viewDidLoad() override;
-
-    void viewDidLayoutSubviews() override;
 private:
-    std::shared_ptr<UIView> view1;
-    std::shared_ptr<UIView> view2;
-    std::shared_ptr<UIView> view3;
+    std::shared_ptr<UIView> headerView;
+    std::shared_ptr<UIView> contentView;
+    std::shared_ptr<UIView> footerView;
     std::shared_ptr<UIView> blank;
 };

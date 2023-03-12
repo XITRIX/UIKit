@@ -37,6 +37,9 @@ public:
 
     std::shared_ptr<UIResponder> next() override;
 
+    void setFitSuperview(bool fitSuperview);
+    bool fitSuperview() { return _fitSuperview; }
+
     void setFrame(Rect frame);
     Rect frame() const { return _layer->getFrame(); }
 
@@ -139,6 +142,8 @@ private:
 
     bool _needsLayout = true;
     bool _needsDisplay = true;
+
+    bool _fitSuperview = false;
 
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();

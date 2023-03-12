@@ -109,7 +109,10 @@ YGLayout::YGLayout(std::shared_ptr<UIView> view):
 {
     YGNodeSetContext(_node, view.get());
     _isEnabled = false;
-    isUIView = typeid(view.get()) == typeid(UIView*);
+
+    // In case we've changed UIView's sizeToFit implementation, there is no need in this check anymore
+//    isUIView = strcmp(typeid(view.get()).name(), typeid(UIView*).name()) == 0;
+    isUIView = false;
 }
 
 void YGLayout::layoutIfNeeded() {
@@ -125,9 +128,9 @@ void YGLayout::applyLayoutPreservingOrigin(bool preserveOrigin) {
 void YGLayout::YGApplyLayoutToViewHierarchy(std::shared_ptr<UIView>view, bool preserveOrigin) {
     auto yoga = view->yoga;
 
-    if (!yoga->_isIncludedInLayout) {
-       return;
-    }
+    // We don't need it cause if it is not included in layout
+    // it still could contains it's own layout that needs to be calculated
+//    if (!yoga->_isIncludedInLayout) { return; }
 
     YGNodeRef node = yoga->_node;
     const Point topLeft = {

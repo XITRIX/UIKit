@@ -30,7 +30,7 @@ FontRenderer::FontRenderer(std::string path) {
 FontRenderer::~FontRenderer() { }
 
 std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel> label) {
-    auto size = sizeForText(label->_text, label->_font->pointSize, label->bounds().width(), label->_font->lineHeight);
+    auto size = label->bounds().size;
     float scale = UIRenderer::main()->scale();
 
     return Renderer::shared()->drawFBO(Size(size.width, std::min(label->bounds().height(), size.height)), scale, [this, size, label](auto vg) {

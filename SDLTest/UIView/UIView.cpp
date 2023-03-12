@@ -34,6 +34,13 @@ std::shared_ptr<UIResponder> UIView::next() {
     return nullptr;
 }
 
+void UIView::setFitSuperview(bool fitSuperview) {
+    if (_fitSuperview == fitSuperview) return;
+    _fitSuperview = fitSuperview;
+    yoga->setIncludedInLayout(!_fitSuperview);
+    setNeedsLayout();
+}
+
 void UIView::setFrame(Rect frame) {
     if (this->frame().size != frame.size) {
         setNeedsLayout();
@@ -309,7 +316,15 @@ void UIView::layoutSubviews() {
         _parentController.lock()->viewWillLayoutSubviews();
     }
 
+    if (_fitSuperview && !_superview.expired())
+        setFrame(_superview.lock()->bounds());
+    
     yoga->layoutIfNeeded();
+
+    for (auto& subview: _subviews) {
+        if (!subview->yoga->isIncludedInLayout())
+            subview->setNeedsLayout();
+    }
 
     if (!_parentController.expired()) {
         _parentController.lock()->viewDidLayoutSubviews();
@@ -317,7 +332,10 @@ void UIView::layoutSubviews() {
 }
 
 Size UIView::sizeThatFits(Size size) {
-    return bounds().size;
+    // Apple's implementation returns current view's bounds().size
+    // But in case we use Yoga's autolayout it will be better to replace it
+    // with zero Size value, to allow Yoga to work properly
+    return Size();
 }
 
 void UIView::sizeToFit() {
@@ -353,6 +371,7 @@ void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
 
 // MARK: - Yoga layout
 void UIView::configureLayout(std::function<void(std::shared_ptr<YGLayout>)> block) {
+    yoga->setEnabled(true);
     block(yoga);
 }
     

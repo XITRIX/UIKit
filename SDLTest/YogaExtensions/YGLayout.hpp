@@ -109,6 +109,9 @@ public:
     bool isEnabled() { return _isEnabled; }
     void setEnabled(bool enabled) { _isEnabled = enabled; }
 
+    bool isIncludedInLayout() { return _isIncludedInLayout; }
+    void setIncludedInLayout(bool isIncludedInLayout) { _isIncludedInLayout = isIncludedInLayout; }
+
     YG_PROPERTY(YGDirection, direction, Direction)
     YG_PROPERTY(YGFlexDirection, flexDirection, FlexDirection)
     YG_PROPERTY(YGJustify, justifyContent, JustifyContent)

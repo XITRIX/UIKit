@@ -11,57 +11,56 @@
 void YogaTestViewController::loadView() {
     auto root = new_shared<UIView>();
 
-    view1 = new_shared<UIView>();
-    view1->setBackgroundColor(UIColor::red.withAlphaComponent(0.7f));
-    view1->tag = "View1";
+    headerView = new_shared<UIView>();
+    headerView->setBackgroundColor(UIColor::red.withAlphaComponent(0.7f));
+    headerView->tag = "View1";
 
-    view2 = new_shared<UIView>();
-    view2->setBackgroundColor(UIColor::green);
-    view2->tag = "View2";
-
-    view2 = new_shared<UIView>();
-    view2->setBackgroundColor(UIColor::green);
-    view2->tag = "View2";
+    contentView = new_shared<UIView>();
+    contentView->setBackgroundColor(UIColor::green);
+    contentView->tag = "View2";
+    contentView->setFitSuperview(true);
 
     blank = new_shared<UIView>();
     blank->tag = "Blank";
 
-    view3 = new_shared<UIView>();
-    view3->setBackgroundColor(UIColor::blue.withAlphaComponent(0.7f));
-    view3->tag = "View3";
+    footerView = new_shared<UIView>();
+    footerView->setBackgroundColor(UIColor::blue.withAlphaComponent(0.7f));
+    footerView->tag = "View3";
 
-    root->addSubview(view2);
-    root->addSubview(view1);
+    auto label = new_shared<UILabel>();
+    label->yoga->setEnabled(true);
+    label->setText("Hello Mazafaka");
+
+    contentView->addSubview(label);
+
+    root->addSubview(contentView);
+    root->addSubview(headerView);
     root->addSubview(blank);
-    root->addSubview(view3);
+    root->addSubview(footerView);
 
     setView(root);
 }
 
 void YogaTestViewController::viewDidLoad() {
+    contentView->configureLayout([](std::shared_ptr<YGLayout> layout) {
+        layout->setIncludedInLayout(false);
+        layout->setAlignItems(YGAlignCenter);
+        layout->setJustifyContent(YGJustifyCenter);
+    });
+
     view()->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setEnabled(true);
         layout->setFlexDirection(YGFlexDirectionColumn);
     });
 
-    view1->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setEnabled(true);
+    headerView->configureLayout([](std::shared_ptr<YGLayout> layout) {
         layout->setHeight(44_pt);
     });
 
     blank->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setEnabled(true);
         layout->setFlexGrow(1);
     });
 
-    view3->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setEnabled(true);
+    footerView->configureLayout([](std::shared_ptr<YGLayout> layout) {
         layout->setHeight(44_pt);
     });
-
-//    view()->yoga->applyLayoutPreservingOrigin(false);
-}
-
-void YogaTestViewController::viewDidLayoutSubviews() {
-    view2->setFrame(view()->bounds());
 }
