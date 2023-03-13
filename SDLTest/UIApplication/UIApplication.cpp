@@ -126,7 +126,7 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             auto renderSize = UIRenderer::_main->bounds().size;
             touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
             touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
-            touchEvent.tfinger.fingerId = 0;
+            touchEvent.tfinger.fingerId = -1;
 
             handleSDLEvent(touchEvent);
             break;
@@ -139,7 +139,7 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             auto renderSize = UIRenderer::_main->bounds().size;
             touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
             touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
-            touchEvent.tfinger.fingerId = 0;
+            touchEvent.tfinger.fingerId = -1;
 
             handleSDLEvent(touchEvent);
             break;
@@ -152,7 +152,7 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             auto renderSize = UIRenderer::_main->bounds().size;
             touchEvent.tfinger.x = float(e.button.x) / renderSize.width;
             touchEvent.tfinger.y = float(e.button.y) / renderSize.height;
-            touchEvent.tfinger.fingerId = 0;
+            touchEvent.tfinger.fingerId = -1;
 
             handleSDLEvent(touchEvent);
             break;

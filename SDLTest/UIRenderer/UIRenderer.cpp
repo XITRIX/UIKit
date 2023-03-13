@@ -41,7 +41,8 @@ UIRenderer::UIRenderer() {
         exit(-1);
     }
     refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
-    _scale = float(rawPointer->base_h) / float(rawPointer->h);
+    // TODO: Remove int rounding when initial screen resolution will be fixed
+    _scale = int(float(rawPointer->base_h) / float(rawPointer->h));
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
     SDL_GameControllerOpen(0); // TODO: Move to another place

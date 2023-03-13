@@ -62,7 +62,7 @@ void YogaTestViewController::viewDidLoad() {
     });
 
     scrollView->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setWidth(80_pt);
+        layout->setWidth(88_pt);
         layout->setHeight(80_pt);
     });
 
@@ -71,7 +71,7 @@ void YogaTestViewController::viewDidLoad() {
     });
 
     headerView->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setHeight(44_pt);
+        layout->setHeight(88_pt);
     });
 
     blank->configureLayout([](std::shared_ptr<YGLayout> layout) {
@@ -79,6 +79,6 @@ void YogaTestViewController::viewDidLoad() {
     });
 
     footerView->configureLayout([](std::shared_ptr<YGLayout> layout) {
-        layout->setHeight(44_pt);
+        layout->setHeight(73_pt);
     });
 }
