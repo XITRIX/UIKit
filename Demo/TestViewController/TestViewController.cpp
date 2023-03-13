@@ -37,7 +37,7 @@ void TestViewController::loadView() {
 //    layer2->transform = NXTransform3D::translationBy(20, 0, 0);//.concat(NXTransform3D::scaleBy(1.5f, 1, 0));
 
 
-    view3 = new_shared<UIKit::UIImageView>(UIImage::fromPath("test3.png"));
+    view3 = new_shared<UIKit::UIImageView>(UIImage::fromPath("amogus.png"));
     view3->tag = "View 3";
     view3->setFrame(Rect(0, 0, 80, 80));
     view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
@@ -54,6 +54,7 @@ void TestViewController::loadView() {
     label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
+    label->setNumberOfLines(0);
     label->setText("Helloooo!\nHelloooo!\nHelloooo!");
     label->font()->pointSize = 24;
     label->setClipsToBounds(true);

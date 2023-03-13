@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <vector>
+#include <queue>
 #include <string>
 #include <functional>
 
@@ -26,7 +26,7 @@ public:
     void async(std::function<void()> task);
 private:
     static DispatchQueue* _main;
-    std::vector<std::function<void()>> _queue;
+    std::queue<std::function<void()>> _queue;
     std::string _tag;
 
     void performAll();

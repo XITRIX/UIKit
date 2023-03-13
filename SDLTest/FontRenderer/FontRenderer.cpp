@@ -65,10 +65,7 @@ Size FontRenderer::sizeForText(std::string text, float textSize, uint wrapLength
 
     // Measure the needed width for the fullText
     float bounds[4];
-    if (wrapLength == 0)
-        nvgTextBounds(vg, 0, 0, text.c_str(), nullptr, bounds);
-    else
-        nvgTextBoxBounds(vg, 0, 0, wrapLength, text.c_str(), nullptr, bounds);
+    nvgTextBoxBounds(vg, 0, 0, wrapLength == 0 ? MAXFLOAT : wrapLength, text.c_str(), nullptr, bounds);
 
 
     float requiredWidth = bounds[2] - bounds[0];

@@ -25,11 +25,15 @@ public:
     void draw() override;
     void display(std::shared_ptr<CALayer> layer) override;
     Size sizeThatFits(Size size) override;
+    void sizeToFit() override;
 
     void layoutSubviews() override;
 
     void setText(std::string text);
     std::string text() const { return _text; }
+
+    void setNumberOfLines(int numberOfLines);
+    int numberOfLines() { return _numberOfLines; }
 
     std::shared_ptr<UIFont> font() const { return _font; }
     void setFont(std::shared_ptr<UIFont> font) { _font = font; }

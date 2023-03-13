@@ -8,6 +8,7 @@
 #pragma once
 
 #include <CGImage/CGImage.hpp>
+#include <UIRenderer/UIRenderer.hpp>
 
 namespace UIKit {
 
@@ -16,7 +17,7 @@ public:
     UIImage(std::shared_ptr<CGImage> cgImage, float scale);
 
     static std::shared_ptr<UIImage> fromPath(std::string path);
-    static std::shared_ptr<UIImage> fromData(Data data, float scale = 1);
+    static std::shared_ptr<UIImage> fromData(Data data, float scale = UIRenderer::main()->scale());
 
     std::shared_ptr<CGImage> cgImage() { return _cgImage; }
     Size size() const { return _size; }

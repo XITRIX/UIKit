@@ -6,6 +6,7 @@
 //
 
 #include <UIImageView/UIImageView.hpp>
+#include <Renderer/Renderer.hpp>
 
 namespace UIKit {
 

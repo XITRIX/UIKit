@@ -19,16 +19,16 @@ DispatchQueue* DispatchQueue::main() {
 DispatchQueue::DispatchQueue(std::string tag): _tag(tag) { }
 
 void DispatchQueue::async(std::function<void()> task) {
-    _queue.push_back(task);
+    _queue.push(task);
 }
 
 void DispatchQueue::performAll() {
-    auto copy = _queue;
-    _queue.clear();
+    std::queue<std::function<void()>> copy;
+    std::swap( _queue, copy );
     
-    while (copy.size() > 0) {
-        auto task = copy.back();
-        copy.pop_back();
+    while (!copy.empty()) {
+        auto task = copy.front();
+        copy.pop();
         task();
     }
 }
