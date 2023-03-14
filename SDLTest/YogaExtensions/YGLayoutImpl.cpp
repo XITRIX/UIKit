@@ -160,6 +160,8 @@ void YGLayout::YGApplyLayoutToViewHierarchy(std::shared_ptr<UIView>view, bool pr
             YGApplyLayoutToViewHierarchy(view->subviews()[i], false);
         }
     }
+
+    view->_needsLayout = false;
 }
 
 float YGLayout::YGRoundPixelValue(float value) {

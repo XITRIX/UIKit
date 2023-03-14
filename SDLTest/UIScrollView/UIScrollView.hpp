@@ -22,9 +22,13 @@ public:
 
 class UIScrollView: public UIView {
 public:
+    static std::shared_ptr<UIScrollView> init();
+
     std::weak_ptr<UIScrollViewDelegate> delegate;
 
     UIScrollView(Rect frame = Rect());
+
+    virtual void addSubview(std::shared_ptr<UIView> view) override;
 
     Point contentOffset() { return bounds().origin; }
     void setContentOffset(Point offset, bool animated);

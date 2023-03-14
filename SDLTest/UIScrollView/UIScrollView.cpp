@@ -10,6 +10,10 @@
 
 namespace UIKit {
 
+std::shared_ptr<UIScrollView> UIScrollView::init() {
+    return new_shared<UIScrollView>();
+}
+
 UIScrollView::UIScrollView(Rect frame): UIView(frame) {
     _panGestureRecognizer = new_shared<UIPanGestureRecognizer>();
     _panGestureRecognizer->onStateChanged = [this](auto){ onPanGestureStateChanged(); };
@@ -21,6 +25,11 @@ UIScrollView::UIScrollView(Rect frame): UIView(frame) {
 //        $0.alpha = 0
 //        addSubview($0)
 //    }
+}
+
+void UIScrollView::addSubview(std::shared_ptr<UIView> view) {
+    UIView::addSubview(view);
+//    view->yoga->setIncludedInLayout(false);
 }
 
 void UIScrollView::setContentOffset(Point offset, bool animated) {

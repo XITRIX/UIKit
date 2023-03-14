@@ -10,6 +10,9 @@
 
 namespace UIKit {
 
+std::shared_ptr<UILabel> UILabel::init() {
+    return new_shared<UILabel>();
+}
 
 UILabel::UILabel(): UIView() {
 //    setContentMode(UIViewContentMode::center);
@@ -53,6 +56,16 @@ void UILabel::sizeToFit() {
 void UILabel::layoutSubviews() {
     UIView::layoutSubviews();
     setNeedsDisplay();
+}
+
+bool UILabel::applyXMLAttribute(std::string name, std::string value) {
+    if (UIView::applyXMLAttribute(name, value)) return true;
+
+    if (name == "text") {
+        setText(value);
+    }
+
+    return false;
 }
 
 }

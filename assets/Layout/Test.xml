@@ -1,0 +1,25 @@
+<UIView
+    backgroundColor="#FFFF00FF"
+    justifyContent="center"
+    alignItems="center"
+    gap="28">
+
+    <UIScrollView
+        width="80"
+        height="80"
+        backgroundColor="#FF0000FF">
+
+        <UIImageView
+            id="container"
+            width="180"
+            height="180"
+            image="@image/amogus.png"
+            contentMode="scaleAspectFit"
+            cornerRadius="12"/>
+
+    </UIScrollView>
+
+    <UILabel
+        text="Just some test text!!!"/>
+
+</UIView>

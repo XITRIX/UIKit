@@ -10,6 +10,10 @@
 
 namespace UIKit {
 
+std::shared_ptr<UIImageView> UIImageView::init() {
+    return new_shared<UIImageView>();
+}
+
 UIImageView::UIImageView(std::shared_ptr<UIImage> image): UIImageView(Rect()) {
     _image = image;
     updateTextureFromImage();
@@ -41,9 +45,26 @@ void UIImageView::updateTextureFromImage() {
     }
 }
 
+void UIImageView::sizeToFit() {
+    UIView::sizeToFit();
+}
+
 Size UIImageView::sizeThatFits(Size size) {
     if (!_image) return Size();
     return _image->size();
+}
+
+bool UIImageView::applyXMLAttribute(std::string name, std::string value) {
+    if (UIView::applyXMLAttribute(name, value)) return true;
+
+    if (name == "image") {
+        auto image = valueToImage(value);
+        if (!image.has_value()) return false;
+        setImage(image.value());
+        return true;
+    }
+
+    return false;
 }
 
 }

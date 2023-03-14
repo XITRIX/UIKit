@@ -11,8 +11,91 @@
 #include <UIViewController/UIViewController.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
+#include <UINib/UINib.hpp>
+#include <cxxabi.h>
 
 namespace UIKit {
+
+std::shared_ptr<UIView> UIView::init() {
+    return new_shared<UIView>();
+}
+
+std::shared_ptr<UIView> UIView::instantiateFromXib(tinyxml2::XMLElement* element) {
+    auto name = element->Name();
+    auto view = UINib::xibViewsRegister[name]();
+    view->yoga->setEnabled(true);
+    view->applyXMLAttributes(element);
+
+    for (tinyxml2::XMLElement* child = element->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
+        auto subview = instantiateFromXib(child);
+        subview->applyXMLAttributes(child);
+        view->addSubview(subview);
+    }
+
+    return view;
+}
+
+void UIView::applyXMLAttributes(tinyxml2::XMLElement* element) {
+    if (!element)
+        return;
+
+    for (const tinyxml2::XMLAttribute* attribute = element->FirstAttribute(); attribute != nullptr; attribute = attribute->Next())
+    {
+        std::string name  = attribute->Name();
+        std::string value = std::string(attribute->Value());
+
+        if (!this->applyXMLAttribute(name, value)) {
+//            this->printXMLAttributeErrorMessage(element, name, value);
+        }
+    }
+}
+
+bool UIView::applyXMLAttribute(std::string name, std::string value) {
+#define REGISTER_XIB_ATTRIBUTE(strname, parcer, setter) \
+if (name == #strname) { \
+auto strname = parcer(value); \
+    if (!strname.has_value()) return false; \
+    setter(strname.value()); \
+    return true;\
+}
+
+#define REGISTER_XIB_EDGE_ATTRIBUTE(strname, parcer, setter) \
+REGISTER_XIB_ATTRIBUTE(strname, parcer, setter) \
+REGISTER_XIB_ATTRIBUTE(strname##Left, parcer, setter##Left) \
+REGISTER_XIB_ATTRIBUTE(strname##Top, parcer, setter##Top) \
+REGISTER_XIB_ATTRIBUTE(strname##Right, parcer, setter##Right) \
+REGISTER_XIB_ATTRIBUTE(strname##Bottom, parcer, setter##Bottom) \
+REGISTER_XIB_ATTRIBUTE(strname##Start, parcer, setter##Start) \
+REGISTER_XIB_ATTRIBUTE(strname##End, parcer, setter##End) \
+REGISTER_XIB_ATTRIBUTE(strname##Horizontal, parcer, setter##Horizontal) \
+REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
+
+    REGISTER_XIB_ATTRIBUTE(contentMode, valueToContentMode, setContentMode)
+    REGISTER_XIB_ATTRIBUTE(clipsToBounds, valueToBool, setClipsToBounds)
+
+    REGISTER_XIB_ATTRIBUTE(cornerRadius, valueToFloat, layer()->setCornerRadius)
+    REGISTER_XIB_ATTRIBUTE(backgroundColor, valueToColor, setBackgroundColor)
+    REGISTER_XIB_ATTRIBUTE(alpha, valueToFloat, setAlpha)
+
+    REGISTER_XIB_ATTRIBUTE(width, valueToMetric, yoga->setWidth)
+    REGISTER_XIB_ATTRIBUTE(height, valueToMetric, yoga->setHeight)
+    REGISTER_XIB_ATTRIBUTE(direction, valueToDirection, yoga->setDirection)
+    REGISTER_XIB_ATTRIBUTE(flexDirection, valueToFlexDirection, yoga->setFlexDirection)
+    REGISTER_XIB_ATTRIBUTE(grow, valueToFloat, yoga->setFlexGrow)
+    REGISTER_XIB_ATTRIBUTE(shrink, valueToFloat, yoga->setFlexShrink)
+    REGISTER_XIB_ATTRIBUTE(wrap, valueToWrap, yoga->setFlexWrap)
+    REGISTER_XIB_ATTRIBUTE(justifyContent, valueToJustify, yoga->setJustifyContent)
+    REGISTER_XIB_ATTRIBUTE(alignItems, valueToAlign, yoga->setAlignItems)
+    REGISTER_XIB_ATTRIBUTE(alignSelf, valueToAlign, yoga->setAlignSelf)
+    REGISTER_XIB_ATTRIBUTE(alignContent, valueToAlign, yoga->setAlignContent)
+    REGISTER_XIB_ATTRIBUTE(aspectRatio, valueToFloat, yoga->setAspectRatio)
+    REGISTER_XIB_ATTRIBUTE(gap, valueToFloat, yoga->setAllGap)
+
+    REGISTER_XIB_EDGE_ATTRIBUTE(padding, valueToMetric, yoga->setPadding)
+    REGISTER_XIB_EDGE_ATTRIBUTE(margin, valueToMetric, yoga->setMargin)
+
+    return false;
+}
 
 std::shared_ptr<CALayer> UIView::initLayer() {
     return new_shared<CALayer>();
@@ -28,17 +111,23 @@ UIView::UIView(Rect frame) {
     setFrame(frame);
 }
 
+std::string UIView::getClassString() const {
+    // Taken from: https://stackoverflow.com/questions/281818/unmangling-the-result-of-stdtype-infoname/4541470#4541470
+    const char* name = typeid(*this).name();
+    int status       = 0;
+
+    std::unique_ptr<char, void (*)(void*)> res {
+        abi::__cxa_demangle(name, NULL, NULL, &status),
+        std::free
+    };
+
+    return (status == 0) ? res.get() : name;
+}
+
 std::shared_ptr<UIResponder> UIView::next() {
     if (!_parentController.expired()) return _parentController.lock();
     if (!_superview.expired()) return _superview.lock();
     return nullptr;
-}
-
-void UIView::setFitSuperview(bool fitSuperview) {
-    if (_fitSuperview == fitSuperview) return;
-    _fitSuperview = fitSuperview;
-    yoga->setIncludedInLayout(!_fitSuperview);
-    setNeedsLayout();
 }
 
 void UIView::setFrame(Rect frame) {
@@ -315,9 +404,6 @@ void UIView::layoutSubviews() {
     if (!_parentController.expired()) {
         _parentController.lock()->viewWillLayoutSubviews();
     }
-
-    if (_fitSuperview && !_superview.expired())
-        setFrame(_superview.lock()->bounds());
     
     yoga->layoutIfNeeded();
 

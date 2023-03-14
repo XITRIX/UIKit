@@ -8,6 +8,7 @@
 #include <UIApplicationDelegate/UIApplicationDelegate.hpp>
 #include <TestViewController/TestViewController.hpp>
 #include <YogaTestViewController/YogaTestViewController.hpp>
+#include <IBTestViewController/IBTestViewController.hpp>
 
 namespace UIKit {
 
@@ -15,7 +16,8 @@ bool UIApplicationDelegate::applicationDidFinishLaunchingWithOptions(UIApplicati
     window = new_shared<UIWindow>();
 
 //    auto vc = new_shared<TestViewController>();
-    auto vc = new_shared<YogaTestViewController>();
+//    auto vc = new_shared<YogaTestViewController>();
+    auto vc = new_shared<IBTestViewController>();
     window->setRootViewController(vc);
 
     window->makeKeyAndVisible();

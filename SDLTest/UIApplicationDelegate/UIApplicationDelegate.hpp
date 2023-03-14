@@ -9,6 +9,8 @@
 
 #include <UIWindow/UIWindow.hpp>
 
+#define REGISTER_NIB(n) UINib::registerXIB(#n, n::init);
+
 namespace UIKit {
 
 class UIApplication;
@@ -24,6 +26,8 @@ public:
 
     virtual void applicationWillResignActive(UIApplication* application) {}
     virtual void applicationDidEnterBackground(UIApplication* application) {}
+
+    virtual void applicationNeedsXIBRegistration(UIApplication* application);
 };
 
 }

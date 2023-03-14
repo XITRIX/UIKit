@@ -20,6 +20,8 @@ enum class NSTextAlignment {
 
 class UILabel: public UIView {
 public:
+    static std::shared_ptr<UILabel> init();
+
     UILabel();
 
     void draw() override;
@@ -37,6 +39,8 @@ public:
 
     std::shared_ptr<UIFont> font() const { return _font; }
     void setFont(std::shared_ptr<UIFont> font) { _font = font; }
+
+    bool applyXMLAttribute(std::string name, std::string value) override;
 private:
     int _numberOfLines = 1;
     std::string _text;

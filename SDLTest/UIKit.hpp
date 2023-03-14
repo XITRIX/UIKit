@@ -15,6 +15,7 @@
 #include <UITouch/UITouch.hpp>
 #include <UILabel/UILabel.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
+#include <UINib/UINib.hpp>
 
 using namespace facebook::yoga::literals;
 

@@ -19,6 +19,5 @@ private:
     std::shared_ptr<UIView> headerView;
     std::shared_ptr<UIView> contentView;
     std::shared_ptr<UIView> footerView;
-    std::shared_ptr<UIView> blank;
     std::shared_ptr<UIScrollView> scrollView;
 };

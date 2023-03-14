@@ -17,6 +17,7 @@
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <YogaExtensions/YogaExtensions.hpp>
 #include <Tools/Tools.hpp>
+#include <tinyxml2.h>
 #include <functional>
 #include <vector>
 #include <memory>
@@ -27,6 +28,12 @@ namespace UIKit {
 class UIViewController;
 class UIView: public UIResponder, public CALayerDelegate, public enable_shared_from_this<UIView> {
 public:
+    static std::shared_ptr<UIView> init();
+    std::string getClassString() const;
+    
+    virtual void applyXMLAttributes(tinyxml2::XMLElement* element);
+    virtual bool applyXMLAttribute(std::string name, std::string value);
+
     std::string tag;
     bool isUserInteractionEnabled = true;
 
@@ -37,9 +44,6 @@ public:
     std::shared_ptr<CALayer> layer() { return _layer; }
 
     std::shared_ptr<UIResponder> next() override;
-
-    void setFitSuperview(bool fitSuperview);
-    bool fitSuperview() { return _fitSuperview; }
 
     void setFrame(Rect frame);
     Rect frame() const { return _layer->getFrame(); }
@@ -74,7 +78,7 @@ public:
     std::vector<std::shared_ptr<UIGestureRecognizer>>* gestureRecognizers() { return &_gestureRecognizers; }
     void addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer);
 
-    void addSubview(std::shared_ptr<UIView> view);
+    virtual void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
     void removeFromSuperview();
 
@@ -144,12 +148,14 @@ private:
     bool _needsLayout = true;
     bool _needsDisplay = true;
 
-    bool _fitSuperview = false;
-
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();
 
+    static std::shared_ptr<UIView> instantiateFromXib(tinyxml2::XMLElement* element);
+
     friend class UIViewController;
+    friend class UINib;
+    friend class YGLayout;
 };
 
 }

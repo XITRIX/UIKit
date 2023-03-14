@@ -12,6 +12,16 @@
 
 namespace UIKit {
 
+bool startsWith(const std::string& data, const std::string& prefix)
+{
+    return data.rfind(prefix, 0) == 0;
+}
+
+bool endsWith(const std::string& data, const std::string& suffix)
+{
+    return data.find(suffix, data.size() - suffix.size()) != std::string::npos;
+}
+
 std::string Utils::resourcePath = "";
 
 

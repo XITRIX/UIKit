@@ -19,6 +19,8 @@
 #include <libretro-common/libretro.h>
 
 #include <Tools/SharedBase.hpp>
+#include <Tools/Fatal.hpp>
+#include <Tools/IBTools.hpp>
 
 #pragma once
 
@@ -87,6 +89,9 @@ bool containsWhere(std::set<T> array, std::function<bool(T)> condition) {
     }
     return false;
 }
+
+bool startsWith(const std::string& data, const std::string& prefix);
+bool endsWith(const std::string& data, const std::string& suffix);
 
 struct Utils {
     static std::string resourcePath;

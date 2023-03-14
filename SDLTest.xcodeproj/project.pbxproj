@@ -47,6 +47,10 @@
 		7C4DCE7D29BE70B900F13A6D /* UIScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7A29BE70B900F13A6D /* UIScrollView.cpp */; };
 		7C4DCE8129BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */; };
 		7C4DCE8229BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */; };
+		7C4DCE9229BFF1F500F13A6D /* ViewBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */; };
+		7C4DCE9329BFF1F500F13A6D /* ViewBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */; };
+		7C4DCE9729BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
+		7C4DCE9829BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -119,6 +123,14 @@
 		7C82D6B829B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6B529B55E4B005079B8 /* CASpringAnimationPrototype.cpp */; };
 		7C82D6BC29B55F89005079B8 /* CASpringAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6BA29B55F89005079B8 /* CASpringAnimation.cpp */; };
 		7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D6BA29B55F89005079B8 /* CASpringAnimation.cpp */; };
+		7CA6967A29C06DA1008DB110 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6957329C06DA0008DB110 /* tinyxml2.cpp */; };
+		7CA6967B29C06DA1008DB110 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6957329C06DA0008DB110 /* tinyxml2.cpp */; };
+		7CA6976F29C06E82008DB110 /* Fatal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6976D29C06E82008DB110 /* Fatal.cpp */; };
+		7CA6977029C06E82008DB110 /* Fatal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6976D29C06E82008DB110 /* Fatal.cpp */; };
+		7CA6977429C07886008DB110 /* IBTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* IBTestViewController.cpp */; };
+		7CA6977529C07886008DB110 /* IBTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* IBTestViewController.cpp */; };
+		7CA6977829C08F32008DB110 /* IBTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977629C08F32008DB110 /* IBTools.cpp */; };
+		7CA6977929C08F32008DB110 /* IBTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977629C08F32008DB110 /* IBTools.cpp */; };
 		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
 		7CB7F54029A3D79700A20694 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7F52729A3D5F400A20694 /* OpenGL.framework */; };
 		7CB7F54529A3D83400A20694 /* SDL_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4B829A3D45F00A20694 /* SDL_gpu.c */; };
@@ -146,8 +158,8 @@
 		7CD7DAEF29B615D300C9637C /* UIViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAEC29B615D300C9637C /* UIViewController.cpp */; };
 		7CD7DAF329B615E200C9637C /* UIResponder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF129B615E200C9637C /* UIResponder.cpp */; };
 		7CD7DAF429B615E200C9637C /* UIResponder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF129B615E200C9637C /* UIResponder.cpp */; };
-		7CD7DAF929B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF729B6270E00C9637C /* UIApplicationDelegate.cpp */; };
-		7CD7DAFA29B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF729B6270E00C9637C /* UIApplicationDelegate.cpp */; };
+		7CD7DAF929B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF729B6270E00C9637C /* UIApplicationDelegateImpl.cpp */; };
+		7CD7DAFA29B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAF729B6270E00C9637C /* UIApplicationDelegateImpl.cpp */; };
 		7CD7DAFD29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAFC29B62DCD00C9637C /* UIApplicationDelegate.cpp */; };
 		7CD7DAFE29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DAFC29B62DCD00C9637C /* UIApplicationDelegate.cpp */; };
 		7CD7DB0229B62E8E00C9637C /* UIApplicationMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7DB0029B62E8E00C9637C /* UIApplicationMain.cpp */; };
@@ -335,6 +347,10 @@
 		7C4DCE7B29BE70B900F13A6D /* UIScrollView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIScrollView.hpp; sourceTree = "<group>"; };
 		7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIEdgeInsets.cpp; sourceTree = "<group>"; };
 		7C4DCE8029BE76B200F13A6D /* UIEdgeInsets.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIEdgeInsets.hpp; sourceTree = "<group>"; };
+		7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViewBuilder.cpp; sourceTree = "<group>"; };
+		7C4DCE9129BFF1F500F13A6D /* ViewBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ViewBuilder.hpp; sourceTree = "<group>"; };
+		7C4DCE9529BFF36400F13A6D /* UINib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UINib.cpp; sourceTree = "<group>"; };
+		7C4DCE9629BFF36400F13A6D /* UINib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UINib.hpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -401,6 +417,14 @@
 		7C82D6B629B55E4B005079B8 /* CASpringAnimationPrototype.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CASpringAnimationPrototype.hpp; sourceTree = "<group>"; };
 		7C82D6BA29B55F89005079B8 /* CASpringAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CASpringAnimation.cpp; sourceTree = "<group>"; };
 		7C82D6BB29B55F89005079B8 /* CASpringAnimation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CASpringAnimation.hpp; sourceTree = "<group>"; };
+		7CA6957329C06DA0008DB110 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
+		7CA6966429C06DA1008DB110 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
+		7CA6976D29C06E82008DB110 /* Fatal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fatal.cpp; sourceTree = "<group>"; };
+		7CA6976E29C06E82008DB110 /* Fatal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fatal.hpp; sourceTree = "<group>"; };
+		7CA6977229C07886008DB110 /* IBTestViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IBTestViewController.cpp; sourceTree = "<group>"; };
+		7CA6977329C07886008DB110 /* IBTestViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBTestViewController.hpp; sourceTree = "<group>"; };
+		7CA6977629C08F32008DB110 /* IBTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IBTools.cpp; sourceTree = "<group>"; };
+		7CA6977729C08F32008DB110 /* IBTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBTools.hpp; sourceTree = "<group>"; };
 		7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_RendererImpl.h; sourceTree = "<group>"; };
 		7CB7F3D929A3D45F00A20694 /* SDL_gpu_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_version.h; sourceTree = "<group>"; };
 		7CB7F3DA29A3D45F00A20694 /* SDL_gpu_OpenGL_1_BASE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_OpenGL_1_BASE.h; sourceTree = "<group>"; };
@@ -474,7 +498,7 @@
 		7CD7DAED29B615D300C9637C /* UIViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIViewController.hpp; sourceTree = "<group>"; };
 		7CD7DAF129B615E200C9637C /* UIResponder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIResponder.cpp; sourceTree = "<group>"; };
 		7CD7DAF229B615E200C9637C /* UIResponder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIResponder.hpp; sourceTree = "<group>"; };
-		7CD7DAF729B6270E00C9637C /* UIApplicationDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplicationDelegate.cpp; sourceTree = "<group>"; };
+		7CD7DAF729B6270E00C9637C /* UIApplicationDelegateImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplicationDelegateImpl.cpp; sourceTree = "<group>"; };
 		7CD7DAF829B6270E00C9637C /* UIApplicationDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIApplicationDelegate.hpp; sourceTree = "<group>"; };
 		7CD7DAFC29B62DCD00C9637C /* UIApplicationDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplicationDelegate.cpp; sourceTree = "<group>"; };
 		7CD7DB0029B62E8E00C9637C /* UIApplicationMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIApplicationMain.cpp; sourceTree = "<group>"; };
@@ -567,6 +591,8 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DCE9429BFF35700F13A6D /* UINib */,
+				7C4DCE8F29BFF1E600F13A6D /* ViewBuilder */,
 				7C4DCE7E29BE76AB00F13A6D /* UIEdgeInsets */,
 				7C4DCE7929BE70AC00F13A6D /* UIScrollView */,
 				7C82D69829B3F4CF005079B8 /* Animations */,
@@ -736,6 +762,24 @@
 				7C4DCE7F29BE76B200F13A6D /* UIEdgeInsets.cpp */,
 			);
 			path = UIEdgeInsets;
+			sourceTree = "<group>";
+		};
+		7C4DCE8F29BFF1E600F13A6D /* ViewBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE9129BFF1F500F13A6D /* ViewBuilder.hpp */,
+				7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */,
+			);
+			path = ViewBuilder;
+			sourceTree = "<group>";
+		};
+		7C4DCE9429BFF35700F13A6D /* UINib */ = {
+			isa = PBXGroup;
+			children = (
+				7C4DCE9629BFF36400F13A6D /* UINib.hpp */,
+				7C4DCE9529BFF36400F13A6D /* UINib.cpp */,
+			);
+			path = UINib;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
@@ -1029,9 +1073,28 @@
 			path = CASpringAnimation;
 			sourceTree = "<group>";
 		};
+		7CA6956E29C06DA0008DB110 /* tinyxml2 */ = {
+			isa = PBXGroup;
+			children = (
+				7CA6957329C06DA0008DB110 /* tinyxml2.cpp */,
+				7CA6966429C06DA1008DB110 /* tinyxml2.h */,
+			);
+			path = tinyxml2;
+			sourceTree = "<group>";
+		};
+		7CA6977129C07876008DB110 /* IBTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7CA6977329C07886008DB110 /* IBTestViewController.hpp */,
+				7CA6977229C07886008DB110 /* IBTestViewController.cpp */,
+			);
+			path = IBTestViewController;
+			sourceTree = "<group>";
+		};
 		7CB7F3CA29A3D45F00A20694 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				7CA6956E29C06DA0008DB110 /* tinyxml2 */,
 				7C4DCE3229BB950B00F13A6D /* yoga */,
 				7C82D65B29B2B94F005079B8 /* libretro */,
 				7C82D5F129AFE08D005079B8 /* nanovg */,
@@ -1350,7 +1413,7 @@
 		7CD7DAF629B6270300C9637C /* UIApplicationDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7DAF729B6270E00C9637C /* UIApplicationDelegate.cpp */,
+				7CD7DAF729B6270E00C9637C /* UIApplicationDelegateImpl.cpp */,
 				7CD7DAF829B6270E00C9637C /* UIApplicationDelegate.hpp */,
 			);
 			path = UIApplicationDelegate;
@@ -1359,6 +1422,7 @@
 		7CD7DAFB29B62DB600C9637C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				7CA6977129C07876008DB110 /* IBTestViewController */,
 				7C4DCE7429BD3DA700F13A6D /* YogaTestViewController */,
 				7CD7DB1529B67E8000C9637C /* TestViewController */,
 				7CD7DB1029B67C1300C9637C /* Runner */,
@@ -1508,6 +1572,10 @@
 				7CEB96A2299509C5007483C0 /* Tools.hpp */,
 				7CEB96A1299509C5007483C0 /* Tools.cpp */,
 				7C4DCE7329BC8A4700F13A6D /* SharedBase.hpp */,
+				7CA6976E29C06E82008DB110 /* Fatal.hpp */,
+				7CA6976D29C06E82008DB110 /* Fatal.cpp */,
+				7CA6977729C08F32008DB110 /* IBTools.hpp */,
+				7CA6977629C08F32008DB110 /* IBTools.cpp */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1690,6 +1758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA6977829C08F32008DB110 /* IBTools.cpp in Sources */,
 				7CD7DB3229B6AD3700C9637C /* FontRenderer.cpp in Sources */,
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
 				7C82D6A129B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
@@ -1701,6 +1770,7 @@
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7C4DCE5529BB950B00F13A6D /* YGLayout.cpp in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
+				7CA6977429C07886008DB110 /* IBTestViewController.cpp in Sources */,
 				7CD7DB4429B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
 				7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
@@ -1716,6 +1786,7 @@
 				7CEB96A3299509C5007483C0 /* Tools.cpp in Sources */,
 				7C4DCE8129BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
 				7CD7DB0E29B634A200C9637C /* UIRenderer.cpp in Sources */,
+				7CA6976F29C06E82008DB110 /* Fatal.cpp in Sources */,
 				7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7CD7DAEE29B615D300C9637C /* UIViewController.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
@@ -1723,6 +1794,7 @@
 				7C82D69629B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C4DCE7729BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,
 				7CB7F54C29A3D89C00A20694 /* renderer_OpenGL_2.c in Sources */,
+				7C4DCE9729BFF36400F13A6D /* UINib.cpp in Sources */,
 				7C4DCE6B29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7C4DCE6329BB950B00F13A6D /* YGNode.cpp in Sources */,
 				7C4DCE5B29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
@@ -1733,7 +1805,8 @@
 				7C4DCE6129BB950B00F13A6D /* YGConfig.cpp in Sources */,
 				7C20BD5229A4F08300646CD7 /* glew.c in Sources */,
 				7CD7DB2329B6909E00C9637C /* UIImageView.cpp in Sources */,
-				7CD7DAF929B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
+				7CD7DAF929B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */,
+				7CA6967A29C06DA1008DB110 /* tinyxml2.cpp in Sources */,
 				7C82D69129B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
 				7CD7DAF329B615E200C9637C /* UIResponder.cpp in Sources */,
@@ -1766,6 +1839,7 @@
 				7CD13F1329AA52D600D0FFF5 /* UILabel.cpp in Sources */,
 				7CB7F54F29A3D89C00A20694 /* SDL_gpu_shapes.c in Sources */,
 				7C4DCE5F29BB950B00F13A6D /* YGValue.cpp in Sources */,
+				7C4DCE9229BFF1F500F13A6D /* ViewBuilder.cpp in Sources */,
 				7C4DCE6529BB950B00F13A6D /* event.cpp in Sources */,
 				7CB7F54629A3D83F00A20694 /* SDL_gpu_renderer.c in Sources */,
 			);
@@ -1775,6 +1849,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA6977929C08F32008DB110 /* IBTools.cpp in Sources */,
 				7C82D5C429AEC422005079B8 /* UILabel.cpp in Sources */,
 				7C82D5B429AEC28B005079B8 /* renderer_GLES_3.c in Sources */,
 				7CD7DB2429B6909E00C9637C /* UIImageView.cpp in Sources */,
@@ -1785,7 +1860,8 @@
 				7CD7DB1929B67E8F00C9637C /* TestViewController.cpp in Sources */,
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
 				7C4DCE5129BB950B00F13A6D /* log.cpp in Sources */,
-				7CD7DAFA29B6270E00C9637C /* UIApplicationDelegate.cpp in Sources */,
+				7CD7DAFA29B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */,
+				7CA6977529C07886008DB110 /* IBTestViewController.cpp in Sources */,
 				7C4DCE5329BB950B00F13A6D /* Utils.cpp in Sources */,
 				7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
@@ -1801,6 +1877,7 @@
 				7C82D5C129AEC422005079B8 /* Tools.cpp in Sources */,
 				7C4DCE8229BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
 				7C82D6AE29B3FF35005079B8 /* UIViewAnimationOptions.cpp in Sources */,
+				7CA6977029C06E82008DB110 /* Fatal.cpp in Sources */,
 				7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C4DCE6429BB950B00F13A6D /* YGNode.cpp in Sources */,
 				7CD7DB0329B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
@@ -1808,6 +1885,7 @@
 				7C4DCE5829BB950B00F13A6D /* Yoga.cpp in Sources */,
 				7C4DCE7829BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,
 				7C82D5C029AEC422005079B8 /* UIApplication.cpp in Sources */,
+				7C4DCE9829BFF36400F13A6D /* UINib.cpp in Sources */,
 				7C4DCE6C29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
@@ -1819,6 +1897,7 @@
 				7C4DCE5C29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
 				7CD7DAFE29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7C82D6A929B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,
+				7CA6967B29C06DA1008DB110 /* tinyxml2.cpp in Sources */,
 				7C82D67A29B2B950005079B8 /* compat_strl.c in Sources */,
 				7CD7DB3329B6AD3700C9637C /* FontRenderer.cpp in Sources */,
 				7C82D67C29B2B950005079B8 /* features_cpu.c in Sources */,
@@ -1851,6 +1930,7 @@
 				7C82D6B829B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */,
 				7CD7DB1E29B686A800C9637C /* UIImage.cpp in Sources */,
 				7C82D68D29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
+				7C4DCE9329BFF1F500F13A6D /* ViewBuilder.cpp in Sources */,
 				7C82D69229B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C82D6A229B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
 			);
@@ -1926,6 +2006,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					extern/tinyxml2,
 					extern/yoga,
 					Demo,
 				);
@@ -1987,6 +2068,7 @@
 					"extern/sdl-gpu/src/externals/glew/GL",
 					extern/libretro/include,
 					extern/nanovg/src,
+					extern/tinyxml2,
 					extern/yoga,
 					Demo,
 				);

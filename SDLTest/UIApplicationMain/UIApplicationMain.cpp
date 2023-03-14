@@ -30,6 +30,7 @@ int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate) {
 
     application->delegate = appDelegate;
 
+    appDelegate->applicationNeedsXIBRegistration(application.get());
     if (!appDelegate->applicationDidFinishLaunchingWithOptions(application.get(), {})) {
         return 1;
     }
