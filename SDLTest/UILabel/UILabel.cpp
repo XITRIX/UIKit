@@ -32,6 +32,19 @@ void UILabel::setText(std::string text) {
 void UILabel::setNumberOfLines(int numberOfLines) {
     if (_numberOfLines == numberOfLines) return;
     _numberOfLines = numberOfLines;
+    setNeedsDisplay();
+}
+
+void UILabel::setTextAlignment(NSTextAlignment textAlignment) {
+    if (_textAlignment == textAlignment) return;
+    _textAlignment = textAlignment;
+    setNeedsDisplay();
+}
+
+void UILabel::setFont(std::shared_ptr<UIFont> font) {
+    if (_font == font) return;
+    _font = font;
+    setNeedsDisplay();
 }
 
 void UILabel::draw() {
@@ -53,16 +66,26 @@ void UILabel::sizeToFit() {
     setBounds(bounds);
 }
 
-void UILabel::layoutSubviews() {
-    UIView::layoutSubviews();
-    setNeedsDisplay();
-}
-
 bool UILabel::applyXMLAttribute(std::string name, std::string value) {
     if (UIView::applyXMLAttribute(name, value)) return true;
 
     if (name == "text") {
         setText(value);
+        return true;
+    }
+
+    if (name == "fontSize") {
+        auto size = valueToFloat(value);
+        if (!size.has_value()) return false;
+        font()->pointSize = size.value();
+        return true;
+    }
+
+    if (name == "textAlignment") {
+        auto alignment = valueToTextAlignment(value);
+        if (!alignment.has_value()) return false;
+        setTextAlignment(alignment.value());
+        return true;
     }
 
     return false;

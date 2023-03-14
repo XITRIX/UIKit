@@ -8,6 +8,7 @@
 #include <Tools/IBTools.hpp>
 #include <Tools/Tools.hpp>
 #include <UIColor/UIColor.hpp>
+#include <UILabel/UILabel.hpp>
 
 namespace UIKit {
 
@@ -233,6 +234,32 @@ std::optional<UIViewContentMode> valueToContentMode(std::string value) {
     }
     if (value == "bottomRight") {
         return UIViewContentMode::bottomRight;
+    }
+    return std::nullopt;
+}
+
+std::optional<YGPositionType> valueToPositionType(std::string value) {
+    if (value == "static") {
+        return YGPositionTypeStatic;
+    }
+    if (value == "relative") {
+        return YGPositionTypeRelative;
+    }
+    if (value == "absolute") {
+        return YGPositionTypeAbsolute;
+    }
+    return std::nullopt;
+}
+
+std::optional<NSTextAlignment> valueToTextAlignment(std::string value) {
+    if (value == "center") {
+        return NSTextAlignment::center;
+    }
+    if (value == "left") {
+        return NSTextAlignment::left;
+    }
+    if (value == "right") {
+        return NSTextAlignment::right;
     }
     return std::nullopt;
 }

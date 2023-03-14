@@ -29,7 +29,7 @@ UIScrollView::UIScrollView(Rect frame): UIView(frame) {
 
 void UIScrollView::addSubview(std::shared_ptr<UIView> view) {
     UIView::addSubview(view);
-//    view->yoga->setIncludedInLayout(false);
+    view->yoga->setPositionType(YGPositionTypeAbsolute);
 }
 
 void UIScrollView::setContentOffset(Point offset, bool animated) {

@@ -29,16 +29,17 @@ public:
     Size sizeThatFits(Size size) override;
     void sizeToFit() override;
 
-    void layoutSubviews() override;
-
-    void setText(std::string text);
     std::string text() const { return _text; }
+    void setText(std::string text);
 
-    void setNumberOfLines(int numberOfLines);
     int numberOfLines() { return _numberOfLines; }
+    void setNumberOfLines(int numberOfLines);
 
     std::shared_ptr<UIFont> font() const { return _font; }
-    void setFont(std::shared_ptr<UIFont> font) { _font = font; }
+    void setFont(std::shared_ptr<UIFont> font);
+
+    NSTextAlignment textAlignment() { return _textAlignment; }
+    void setTextAlignment(NSTextAlignment textAlignment);
 
     bool applyXMLAttribute(std::string name, std::string value) override;
 private:

@@ -72,6 +72,7 @@ REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
 
     REGISTER_XIB_ATTRIBUTE(contentMode, valueToContentMode, setContentMode)
     REGISTER_XIB_ATTRIBUTE(clipsToBounds, valueToBool, setClipsToBounds)
+    REGISTER_XIB_ATTRIBUTE(positionType, valueToPositionType, yoga->setPositionType)
 
     REGISTER_XIB_ATTRIBUTE(cornerRadius, valueToFloat, layer()->setCornerRadius)
     REGISTER_XIB_ATTRIBUTE(backgroundColor, valueToColor, setBackgroundColor)

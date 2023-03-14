@@ -27,6 +27,11 @@ public:
     static void registerXIB(std::string name, XIBViewCreator creator);
 
     std::shared_ptr<UIView> instantiate();
+
+    template<class T>
+    std::shared_ptr<T> instantiate() {
+        return std::static_pointer_cast<T>(instantiate());
+    }
 private:
     std::string _rawXml;
 

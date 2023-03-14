@@ -87,7 +87,7 @@ public:
 
     // Layout
     void setNeedsDisplay() { _needsDisplay = true; }
-    void setNeedsLayout() { _needsLayout = true; }
+    void setNeedsLayout() { setNeedsDisplay(); _needsLayout = true; }
 
     void layoutIfNeeded();
     virtual void layoutSubviews();

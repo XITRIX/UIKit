@@ -73,20 +73,26 @@ void Renderer::draw(std::function<void(NVGcontext*)> draw) {
     auto size = renderer->base_h / renderer->h;
     GPU_FlushBlitBuffer(); // IMPORTANT: run GPU_FlushBlitBuffer before nvgBeginFrame
     nvgBeginFrame(_vg, renderer->w, renderer->h, size); // Do your normal NanoVG stuff
-//    nvgScale(_vg, size, size);
 
-    auto currentMatrix = NXTransform3D(GPU_GetCurrentMatrix());
+    auto currentAffineMatrix = NXAffineTransform::identity;
     if (needHFlip) {
-        currentMatrix = NXTransform3D::scaleBy(1, -1, 1) * NXTransform3D::translationBy(0, -renderer->h, 0) * currentMatrix;
+        currentAffineMatrix = NXAffineTransform::scaleBy(1, -1) * NXAffineTransform::translationBy(0, -renderer->h) * currentAffineMatrix;
+        nvgTransform(_vg, currentAffineMatrix.m11, currentAffineMatrix.m12, currentAffineMatrix.m21, currentAffineMatrix.m22, currentAffineMatrix.tX, currentAffineMatrix.tY);
     }
-    auto currentAffineMatrix = NXTransform3DGetAffineTransform(currentMatrix);
+
+    auto clippingRect = UIRenderer::main()->clippingRect();
+    if (clippingRect.has_value()) {
+        auto cr = clippingRect.value();
+        nvgScissor(_vg, cr.origin.x, cr.origin.y, cr.size.width, cr.size.height);
+    }
+
+    currentAffineMatrix = currentAffineMatrix * NXTransform3DGetAffineTransform(NXTransform3D(GPU_GetCurrentMatrix()));
     nvgTransform(_vg, currentAffineMatrix.m11, currentAffineMatrix.m12, currentAffineMatrix.m21, currentAffineMatrix.m22, currentAffineMatrix.tX, currentAffineMatrix.tY);
 
     draw(_vg);
 
     nvgEndFrame(_vg); // Finish our NanoVG pass
     GPU_ResetRendererState();
-//    GPU_SetCoordinateMode(false);
 }
 
 std::shared_ptr<CGImage> Renderer::drawFBO(Size size, float scale, std::function<void(NVGcontext*)> draw) {

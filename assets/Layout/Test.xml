@@ -19,7 +19,26 @@
 
     </UIScrollView>
 
-    <UILabel
-        text="Just some test text!!!"/>
+    <UIScrollView
+        width="280"
+        height="180"
+        backgroundColor="#FF0000FF">
+
+        <UILabel
+            width="280"
+            backgroundColor="#00FF00FF"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo enim a urna egestas venenatis. Aliquam ut urna eros. Integer aliquam elit sed ante molestie gravida. Nulla fermentum justo id augue facilisis sodales. Aenean nibh ipsum, porttitor eget magna eu, elementum congue lectus. Aenean vel ipsum eros. Integer mauris urna, tempor ac finibus at, malesuada at magna. Proin vel viverra enim.
+
+Aenean facilisis accumsan volutpat. Duis ut est sed augue egestas ornare. Quisque fermentum eget urna id consequat. Suspendisse lacinia elementum erat, eget feugiat tortor sagittis non. Pellentesque lobortis nunc ut tincidunt fringilla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec enim nisi, eleifend et velit ut, porttitor interdum sapien. Vivamus nisl leo, ullamcorper eget tortor vitae, auctor porttitor urna. Phasellus et pulvinar massa. Integer quis ultricies dolor, ac malesuada ligula. Donec varius nisl lacus. Duis mauris nunc, bibendum eu elementum quis, ultricies id nulla. Pellentesque molestie felis at laoreet consequat. Fusce sed libero tempor, egestas lectus ut, pulvinar turpis.
+
+Phasellus placerat ultricies erat suscipit vulputate. Curabitur efficitur sapien in finibus efficitur. Integer cursus condimentum felis vitae dapibus. Sed sit amet eros turpis. Vivamus efficitur mi eget condimentum vehicula. Maecenas eleifend, tellus a imperdiet semper, massa quam fermentum mauris, ac consequat ex ante at eros. Morbi nisi purus, ultrices nec tortor nec, tristique efficitur turpis. Aliquam aliquam maximus lacus, at semper purus dapibus a. Integer dapibus dignissim augue, dapibus imperdiet eros cursus ut. Quisque ac leo ante. Quisque lacinia tristique accumsan. Nunc lectus dui, auctor non volutpat non, pharetra quis purus.
+
+Nullam ut nisl ullamcorper, rutrum sapien id, consequat massa. Aliquam eget ante ac ligula ultricies porta. Mauris urna leo, volutpat id dolor eu, tincidunt tincidunt nisl. Nulla eget efficitur arcu. Vestibulum at erat nunc. Donec nibh elit, varius sed vehicula ac, dignissim quis mauris. Suspendisse ac nunc suscipit, venenatis libero viverra, elementum massa. Suspendisse potenti. Aliquam eu dolor faucibus, tempus nibh venenatis, finibus arcu. Pellentesque pharetra urna vitae ligula aliquet, et feugiat elit pulvinar. Integer est dolor, cursus eu dictum at, vestibulum vel nibh. Integer aliquam purus commodo nibh dictum tincidunt. Pellentesque elementum turpis at finibus consectetur. Curabitur sapien magna, egestas et justo ut, dapibus ultrices lectus.
+
+Cras a commodo orci. Quisque eget mollis massa. Sed sollicitudin ullamcorper tortor, et facilisis lorem tempus in. Mauris maximus nunc at nibh dignissim, id luctus purus pretium. Duis dapibus rutrum malesuada. Maecenas dignissim dignissim malesuada. Nullam ex ex, posuere vitae maximus sed, iaculis quis elit."
+            textAlignment="center"
+            fontSize="28"/>
+
+    </UIScrollView>
 
 </UIView>
