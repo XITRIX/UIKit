@@ -38,6 +38,9 @@ public:
     std::shared_ptr<UIFont> font() const { return _font; }
     void setFont(std::shared_ptr<UIFont> font);
 
+    UIColor textColor() { return _textColor; }
+    void setTextColor(UIColor color);
+
     NSTextAlignment textAlignment() { return _textAlignment; }
     void setTextAlignment(NSTextAlignment textAlignment);
 

@@ -51,4 +51,9 @@ std::shared_ptr<UIView> UINib::instantiate() {
     return UIView::instantiateFromXib(element);
 }
 
+bool UINib::isEqual(std::shared_ptr<UINib> other) const {
+    if (!other) return false;
+    return _rawXml == other->_rawXml;
+}
+
 }

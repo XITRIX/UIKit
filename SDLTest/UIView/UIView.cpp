@@ -23,7 +23,6 @@ std::shared_ptr<UIView> UIView::init() {
 std::shared_ptr<UIView> UIView::instantiateFromXib(tinyxml2::XMLElement* element) {
     auto name = element->Name();
     auto view = UINib::xibViewsRegister[name]();
-    view->yoga->setEnabled(true);
     view->applyXMLAttributes(element);
 
     for (tinyxml2::XMLElement* child = element->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
@@ -104,6 +103,7 @@ std::shared_ptr<CALayer> UIView::initLayer() {
 
 UIView::UIView(Rect frame) {
     yoga = new_shared<YGLayout>(shared_from_this());
+    yoga->setEnabled(true);
     
     _layer = initLayer();
     _layer->contentsScale = UIRenderer::main()->scale();

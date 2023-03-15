@@ -15,8 +15,9 @@
 #include <optional>
 #include <functional>
 
-#include <libretro-common/features/features_cpu.h>
 #include <libretro-common/libretro.h>
+#include <libretro-common/retro_timers.h>
+#include <libretro-common/features/features_cpu.h>
 
 #include <Tools/SharedBase.hpp>
 #include <Tools/Fatal.hpp>
@@ -37,6 +38,10 @@ typedef retro_time_t Time;
 inline Time getCPUTimeUsec()
 {
     return cpu_features_get_time_usec();
+}
+
+inline void sleep(int milliseconds) {
+    retro_sleep(500);
 }
 
 template< typename... Args >

@@ -1,0 +1,12 @@
+<UIView
+    width="100%"
+    height="100%"
+    backgroundColor="#FF0000FF"
+    justifyContent="center"
+    alignItems="center"
+    gap="128">
+
+    <UILabel
+        text="XML Error"/>
+
+</UIView>

@@ -47,6 +47,12 @@ void UILabel::setFont(std::shared_ptr<UIFont> font) {
     setNeedsDisplay();
 }
 
+void UILabel::setTextColor(UIColor color) {
+    if (_textColor == color) return;
+    _textColor = color;
+    setNeedsDisplay();
+}
+
 void UILabel::draw() {
     UIView::draw();
     layer()->setContents(_font->createContentsFor(std::static_pointer_cast<UILabel>(shared_from_this())));
@@ -71,6 +77,13 @@ bool UILabel::applyXMLAttribute(std::string name, std::string value) {
 
     if (name == "text") {
         setText(value);
+        return true;
+    }
+
+    if (name == "textColor") {
+        auto color = valueToColor(value);
+        if (!color.has_value()) return false;
+        setTextColor(color.value());
         return true;
     }
 

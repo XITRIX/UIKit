@@ -54,7 +54,7 @@ std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel
         nvgTextAlign(vg, align | NVG_ALIGN_TOP);
         nvgFontFaceId(vg, fontFace);
         nvgTextLineHeight(vg, label->_font->lineHeight);
-        nvgFillColor(vg, UIColor::black.nvgColor());
+        nvgFillColor(vg, label->textColor().nvgColor());
         
         nvgTextBox(vg, 0, 0, size.width, label->_text.c_str(), nullptr);
     });

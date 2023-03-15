@@ -32,6 +32,8 @@ public:
     std::shared_ptr<T> instantiate() {
         return std::static_pointer_cast<T>(instantiate());
     }
+
+    bool isEqual(std::shared_ptr<UINib> other) const;
 private:
     std::string _rawXml;
 

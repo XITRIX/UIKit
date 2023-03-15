@@ -25,6 +25,7 @@ std::vector<std::weak_ptr<UIGestureRecognizer>> getRecognizerHierachyFromView(st
 
 UIWindow::UIWindow() {
     setBackgroundColor(UIColor::systemBackground);
+    yoga->setEnabled(false);
 }
 
 void UIWindow::setRootViewController(std::shared_ptr<UIViewController> rootViewController) {
