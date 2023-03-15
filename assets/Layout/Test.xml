@@ -20,12 +20,13 @@
     </UIScrollView>
 
     <UIScrollView
-        width="280"
         height="180"
-        backgroundColor="#FF0000FF">
+        backgroundColor="#FF0000FF"
+        alignSelf="stretch"
+        marginLeft="28"
+        marginRight="28">
 
         <UILabel
-            width="280"
             backgroundColor="#00FF00FF"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo enim a urna egestas venenatis. Aliquam ut urna eros. Integer aliquam elit sed ante molestie gravida. Nulla fermentum justo id augue facilisis sodales. Aenean nibh ipsum, porttitor eget magna eu, elementum congue lectus. Aenean vel ipsum eros. Integer mauris urna, tempor ac finibus at, malesuada at magna. Proin vel viverra enim.
 

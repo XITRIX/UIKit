@@ -31,7 +31,7 @@ std::shared_ptr<UINib> UINib::fromString(std::string rawData) {
 }
 
 std::shared_ptr<UINib> UINib::fromData(Data data) {
-    auto rawData = std::string((char*)data.data());
+    auto rawData = std::string((char*)data.data(), data.count());
     return fromString(rawData);
 }
 
