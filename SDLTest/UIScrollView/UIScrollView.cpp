@@ -83,7 +83,7 @@ void UIScrollView::onPan() {
 
 void UIScrollView::onPanGestureStateChanged() {
     switch (_panGestureRecognizer->state()) {
-        case UIGestureRecognizerState::began: {
+        case UIGestureRecognizerState::possible: {
 //            showScrollIndicators();
             cancelDeceleratingIfNeccessary();
             break;
@@ -172,6 +172,7 @@ void UIScrollView::cancelDecelerationAnimations() {
 //        horizontalScrollIndicator.layer.removeAnimation(forKey: "position")
 //        verticalScrollIndicator.layer.removeAnimation(forKey: "position")
 //    }
+    layer()->removeAnimation("bounds");
 }
 
 }
