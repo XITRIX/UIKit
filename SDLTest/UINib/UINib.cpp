@@ -35,7 +35,7 @@ std::shared_ptr<UINib> UINib::fromData(Data data) {
     return fromString(rawData);
 }
 
-std::shared_ptr<UIView> UINib::instantiate() {
+std::shared_ptr<UIView> UINib::instantiate(std::map<std::string, std::shared_ptr<UIView>>* idStorage) {
     // Load XML
     tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();
     tinyxml2::XMLError error        = document->Parse(_rawXml.c_str());
@@ -48,7 +48,7 @@ std::shared_ptr<UIView> UINib::instantiate() {
     if (!element)
         fatal("Invalid XML: no element found");
 
-    return UIView::instantiateFromXib(element);
+    return UIView::instantiateFromXib(element, idStorage);
 }
 
 bool UINib::isEqual(std::shared_ptr<UINib> other) const {

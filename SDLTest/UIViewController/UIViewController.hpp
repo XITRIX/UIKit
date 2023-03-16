@@ -11,8 +11,15 @@
 
 namespace UIKit {
 
+#define IBOutlet(type, name)                                    \
+std::shared_ptr<type> name() {                                  \
+    return std::static_pointer_cast<type>(idStorage[#name]);    \
+}
+
 class UIViewController: public UIResponder, public enable_shared_from_this<UIViewController> {
 public:
+    std::map<std::string, std::shared_ptr<UIView>> idStorage;
+
     void setView(std::shared_ptr<UIView> view);
     std::shared_ptr<UIView> view();
     bool viewIsLoaded();

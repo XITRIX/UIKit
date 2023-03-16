@@ -1,0 +1,47 @@
+<UIView
+    width="100%"
+    height="100%"
+    backgroundColor="#FFFFFF">
+
+    <UIView
+        width="100%"
+        height="100%"
+        positionType="absolute"
+        backgroundColor="#00FFFF90">
+
+        <UIScrollView
+            width="100%"
+            height="100%">
+
+            <UILabel
+                id="title"
+                width="100%"
+                text="Test text"
+                fontSize="24"/>
+
+        </UIScrollView>
+
+    </UIView>
+
+    <UIView
+        width="100%"
+        height="100%"
+        flexDirection="column"
+        justifyContent="spaceBetween"
+        isTransparentTouch="true">
+        <UIView
+            width="100%"
+            height="88"
+            backgroundColor="#FF000090">
+
+        </UIView>
+        <UIView
+            width="100%"
+            height="73"
+            backgroundColor="#FF000090">
+
+        </UIView>
+
+    </UIView>
+
+</UIView>

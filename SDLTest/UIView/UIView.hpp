@@ -30,8 +30,7 @@ class UIView: public UIResponder, public CALayerDelegate, public enable_shared_f
 public:
     static std::shared_ptr<UIView> init();
     std::string getClassString() const;
-    
-    virtual void applyXMLAttributes(tinyxml2::XMLElement* element);
+
     virtual bool applyXMLAttribute(std::string name, std::string value);
 
     std::string tag;
@@ -74,6 +73,9 @@ public:
 
     void setContentMode(UIViewContentMode mode);
     UIViewContentMode contentMode() const { return _contentMode; }
+
+    bool isTransparentTouch() { return _isTransparentTouch; }
+    void setTransparentTouch(bool isTransparentTouch) { _isTransparentTouch = isTransparentTouch; }
 
     std::vector<std::shared_ptr<UIGestureRecognizer>>* gestureRecognizers() { return &_gestureRecognizers; }
     void addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer);
@@ -144,6 +146,7 @@ private:
     std::shared_ptr<UIView> _mask;
     UIViewContentMode _contentMode;
     std::weak_ptr<UIViewController> _parentController;
+    bool _isTransparentTouch = false;
 
     bool _needsLayout = true;
     bool _needsDisplay = true;
@@ -151,7 +154,8 @@ private:
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();
 
-    static std::shared_ptr<UIView> instantiateFromXib(tinyxml2::XMLElement* element);
+    virtual void applyXMLAttributes(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage);
+    static std::shared_ptr<UIView> instantiateFromXib(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage = nullptr);
 
     friend class UIViewController;
     friend class UINib;

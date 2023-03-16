@@ -11,6 +11,7 @@
 #include <string>
 #include <functional>
 #include <vector>
+#include <map>
 #include <unordered_map>
 
 namespace UIKit {
@@ -26,11 +27,11 @@ public:
 
     static void registerXIB(std::string name, XIBViewCreator creator);
 
-    std::shared_ptr<UIView> instantiate();
+    std::shared_ptr<UIView> instantiate(std::map<std::string, std::shared_ptr<UIView>>* idStorage = nullptr);
 
     template<class T>
-    std::shared_ptr<T> instantiate() {
-        return std::static_pointer_cast<T>(instantiate());
+    std::shared_ptr<T> instantiate(std::map<std::string, std::shared_ptr<UIView>>* idStorage = nullptr) {
+        return std::static_pointer_cast<T>(instantiate(idStorage));
     }
 
     bool isEqual(std::shared_ptr<UINib> other) const;

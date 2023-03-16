@@ -17,6 +17,8 @@ public:
 
     void loadView() override;
     void viewDidLoad() override;
+
+    IBOutlet(UILabel, title)
 private:
     std::shared_ptr<UINib> lastNib;
     std::shared_ptr<DispatchQueue> ibDispatch;

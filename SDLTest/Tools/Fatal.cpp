@@ -12,6 +12,7 @@ namespace UIKit {
 [[noreturn]] void fatal(std::string message)
 {
 //    brls::Logger::error("Fatal error: {}", message);
+    printf("%s\n", message.c_str());
     throw std::logic_error(message);
 }
 

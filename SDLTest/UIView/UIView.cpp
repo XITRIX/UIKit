@@ -20,21 +20,20 @@ std::shared_ptr<UIView> UIView::init() {
     return new_shared<UIView>();
 }
 
-std::shared_ptr<UIView> UIView::instantiateFromXib(tinyxml2::XMLElement* element) {
+std::shared_ptr<UIView> UIView::instantiateFromXib(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage) {
     auto name = element->Name();
     auto view = UINib::xibViewsRegister[name]();
-    view->applyXMLAttributes(element);
+    view->applyXMLAttributes(element, idStorage);
 
     for (tinyxml2::XMLElement* child = element->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
-        auto subview = instantiateFromXib(child);
-        subview->applyXMLAttributes(child);
+        auto subview = instantiateFromXib(child, idStorage);
         view->addSubview(subview);
     }
 
     return view;
 }
 
-void UIView::applyXMLAttributes(tinyxml2::XMLElement* element) {
+void UIView::applyXMLAttributes(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage) {
     if (!element)
         return;
 
@@ -43,7 +42,15 @@ void UIView::applyXMLAttributes(tinyxml2::XMLElement* element) {
         std::string name  = attribute->Name();
         std::string value = std::string(attribute->Value());
 
+        if (name == "id") {
+            tag = value;
+            if (!idStorage) continue;
+            idStorage->insert(std::pair<std::string, std::shared_ptr<UIView>>(value, shared_from_this()));
+            continue;
+        }
+
         if (!this->applyXMLAttribute(name, value)) {
+            printf("Error XML attribute parsing Name: %s with Value%s\n", name.c_str(), value.c_str());
 //            this->printXMLAttributeErrorMessage(element, name, value);
         }
     }
@@ -72,6 +79,7 @@ REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
     REGISTER_XIB_ATTRIBUTE(contentMode, valueToContentMode, setContentMode)
     REGISTER_XIB_ATTRIBUTE(clipsToBounds, valueToBool, setClipsToBounds)
     REGISTER_XIB_ATTRIBUTE(positionType, valueToPositionType, yoga->setPositionType)
+    REGISTER_XIB_ATTRIBUTE(isTransparentTouch, valueToBool, setTransparentTouch)
 
     REGISTER_XIB_ATTRIBUTE(cornerRadius, valueToFloat, layer()->setCornerRadius)
     REGISTER_XIB_ATTRIBUTE(backgroundColor, valueToColor, setBackgroundColor)
@@ -301,6 +309,9 @@ std::shared_ptr<UIView> UIView::hitTest(Point point, UIEvent* withEvent) {
         std::shared_ptr<UIView> test = subviews[i]->hitTest(convertedPoint, withEvent);
         if (test) return test;
     }
+
+    if (_isTransparentTouch && (backgroundColor() == std::nullopt || backgroundColor() == UIColor::clear))
+        return nullptr;
 
     return shared_from_this();
 }
