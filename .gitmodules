@@ -10,6 +10,3 @@
 [submodule "extern/yoga"]
 	path = extern/yoga
 	url = https://github.com/facebook/yoga.git
-[submodule "extern/tinyxml2"]
-	path = extern/tinyxml2
-	url = https://github.com/leethomason/tinyxml2.git

@@ -10,6 +10,7 @@
         backgroundColor="#00FFFF90">
 
         <UIScrollView
+            id="scrollView"
             width="100%"
             height="100%">
 

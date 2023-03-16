@@ -57,6 +57,7 @@ SOURCES  := $(SOURCES) \
 			Demo/Runner \
 			Demo/TestViewController \
 			Demo/YogaTestViewController \
+			Demo/IBTestViewController \
 
 # - UIKit
 INCLUDES := $(INCLUDES) \
@@ -101,6 +102,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Timer \
 			SDLTest/Tools \
 			SDLTest/UIApplication \
+			SDLTest/UIApplicationDelegate \
 			SDLTest/UIApplicationMain \
 			SDLTest/UIColor \
 			SDLTest/UIEdgeInsets \
@@ -110,6 +112,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/UIImage \
 			SDLTest/UIImageView \
 			SDLTest/UILabel \
+			SDLTest/UINib \
 			SDLTest/UIPanGestureRecognizer \
 			SDLTest/UIRenderer \
 			SDLTest/UIResponder \
@@ -130,6 +133,7 @@ INCLUDES := $(INCLUDES) \
 			extern/libretro/include \
 			extern/nanovg/src \
 			extern/yoga \
+			extern/tinyxml2 \
 
 SOURCES  := $(SOURCES) \
 			extern/Switch \
@@ -142,6 +146,7 @@ SOURCES  := $(SOURCES) \
 			extern/nanovg/src \
 			extern/yoga/yoga \
 			extern/yoga/yoga/event \
+			extern/tinyxml2 \
 
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 

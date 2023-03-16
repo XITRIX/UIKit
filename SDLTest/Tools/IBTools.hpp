@@ -11,6 +11,7 @@
 #include <string>
 #include <yoga/Yoga.h>
 #include <UIImage/UIImage.hpp>
+#include <UIEdgeInsets/UIEdgeInsets.hpp>
 #include <UIViewContentMode/UIViewContentMode.hpp>
 
 namespace UIKit {
@@ -32,5 +33,6 @@ std::optional<std::shared_ptr<UIImage>> valueToImage(std::string value);
 std::optional<UIViewContentMode> valueToContentMode(std::string value);
 std::optional<YGPositionType> valueToPositionType(std::string value);
 std::optional<NSTextAlignment> valueToTextAlignment(std::string value);
+std::optional<UIEdgeInsets> valueToEdgeInsets(std::string value);
 
 }

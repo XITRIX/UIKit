@@ -65,8 +65,8 @@ Point UIScrollView::getBoundsCheckedContentOffset(Point newContentOffset) {
     auto contentHeight = fmaxf(contentSize.height, bounds().height());
     auto contentWidth = fmaxf(contentSize.width, bounds().width());
     return Point(
-        fminf(fmaxf(newContentOffset.x, -contentInset.left), (contentWidth + contentInset.right) - bounds().width()),
-        fminf(fmaxf(newContentOffset.y, -contentInset.top), (contentHeight + contentInset.bottom) - bounds().height())
+        fminf(fmaxf(newContentOffset.x, -_contentInset.left), (contentWidth + _contentInset.right) - bounds().width()),
+        fminf(fmaxf(newContentOffset.y, -_contentInset.top), (contentHeight + _contentInset.bottom) - bounds().height())
     );
 }
 
@@ -100,8 +100,8 @@ void UIScrollView::onPanGestureStateChanged() {
         }
         // XXX: Spring back with animation:
         //case .ended, .cancelled:
-        //if contentOffset.x < contentInset.left {
-        //    setContentOffset(CGPoint(x: contentInset.left, y: contentOffset.y), animated: true)
+        //if contentOffset.x < _contentInset.left {
+        //    setContentOffset(CGPoint(x: _contentInset.left, y: contentOffset.y), animated: true)
         //}
         default: break;
     }
@@ -173,6 +173,12 @@ void UIScrollView::cancelDecelerationAnimations() {
 //        verticalScrollIndicator.layer.removeAnimation(forKey: "position")
 //    }
     layer()->removeAnimation("bounds");
+}
+
+bool UIScrollView::applyXMLAttribute(std::string name, std::string value) {
+    if (UIView::applyXMLAttribute(name, value)) { return true; }
+
+    return false;
 }
 
 }

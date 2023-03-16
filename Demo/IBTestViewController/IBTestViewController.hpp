@@ -19,6 +19,7 @@ public:
     void viewDidLoad() override;
 
     IBOutlet(UILabel, title)
+    IBOutlet(UIScrollView, scrollView)
 private:
     std::shared_ptr<UINib> lastNib;
     std::shared_ptr<DispatchQueue> ibDispatch;

@@ -29,18 +29,23 @@ public:
     UIScrollView(Rect frame = Rect());
 
     virtual void addSubview(std::shared_ptr<UIView> view) override;
+    bool applyXMLAttribute(std::string name, std::string value) override;
 
     Point contentOffset() { return bounds().origin; }
     void setContentOffset(Point offset, bool animated);
 
+    UIEdgeInsets contentInset() { return _contentInset; }
+    void setContentInset(UIEdgeInsets contentInset) { _contentInset = contentInset; }
+
     Size contentSize();
 //    void setContentSize(Size size) { _contentSize = size; }
+
 private:
     std::shared_ptr<UIPanGestureRecognizer> _panGestureRecognizer;
     bool _isDecelerating = false;
     Point weightedAverageVelocity;
 
-    UIEdgeInsets contentInset;
+    UIEdgeInsets _contentInset;
 //    Size _contentSize;
 
     void onPan();
