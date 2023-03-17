@@ -6,21 +6,27 @@
 //
 
 #include <DispatchQueue/DispatchQueue.hpp>
+#include <Tools/Tools.hpp>
 #include <libretro-common/retro_timers.h>
 
 namespace UIKit {
 
-DispatchQueue* DispatchQueue::_main = nullptr;
-DispatchQueue* DispatchQueue::_global = nullptr;
+std::shared_ptr<DispatchQueue> DispatchQueue::_main = nullptr;
+std::shared_ptr<DispatchQueue> DispatchQueue::_global = nullptr;
 
-DispatchQueue* DispatchQueue::main() {
-    if (!_main) _main = new DispatchQueue("main");
+std::shared_ptr<DispatchQueue> DispatchQueue::main() {
+    if (!_main) _main = new_shared<DispatchQueue>("main");
     return _main;
 }
 
-DispatchQueue* DispatchQueue::global() {
-    if (!_global) _global = new DispatchQueue("global");
+std::shared_ptr<DispatchQueue> DispatchQueue::global() {
+    if (!_global) _global = new_shared<DispatchQueue>("global");
     return _global;
+}
+
+void DispatchQueue::quit() {
+    _main = nullptr;
+    _global = nullptr;
 }
 
 DispatchQueue::DispatchQueue(std::string tag): _tag(tag) {
@@ -31,7 +37,9 @@ DispatchQueue::DispatchQueue(std::string tag): _tag(tag) {
 
 DispatchQueue::~DispatchQueue() {
     _task_loop_active = false;
-    pthread_join(_task_loop_thread, NULL);
+    if (_tag != "main") {
+        pthread_join(_task_loop_thread, NULL);
+    }
 }
 
 void DispatchQueue::async(std::function<void()> task) {

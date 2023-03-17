@@ -16,6 +16,7 @@ class UITouch;
 class UIEvent;
 class UIResponder {
 public:
+    virtual ~UIResponder() {}
     virtual std::shared_ptr<UIResponder> next() = 0;
 
     virtual void touchesBegan(std::set<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event);

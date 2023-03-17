@@ -16,8 +16,8 @@ bool UIApplicationDelegate::applicationDidFinishLaunchingWithOptions(UIApplicati
     window = new_shared<UIWindow>();
 
 //    auto vc = new_shared<TestViewController>();
-//    auto vc = new_shared<YogaTestViewController>();
-    auto vc = new_shared<IBTestViewController>();
+    auto vc = new_shared<YogaTestViewController>();
+//    auto vc = new_shared<IBTestViewController>();
     window->setRootViewController(vc);
 
     window->makeKeyAndVisible();

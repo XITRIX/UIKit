@@ -6,6 +6,7 @@
 //
 
 #include <UIApplication/UIApplication.hpp>
+#include <DispatchQueue/DispatchQueue.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UITouch/UITouch.hpp>
 #include <Tools/Tools.hpp>
@@ -225,9 +226,10 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
 
 void UIApplication::handleSDLQuit() {
     if (delegate) delegate->applicationWillTerminate(this);
+    UIEvent::activeEvents.clear();
     UIApplication::shared = nullptr;
     SDL_Quit();
-    exit(0);
+//    exit(0);
 }
 
 void UIApplication::sendEvent(std::shared_ptr<UIEvent> event) {

@@ -16,10 +16,11 @@ void setupRenderAndRunLoop() {
     while (true) {
         auto currentTime = Timer();
         UIApplication::shared->handleEventsIfNeeded();
+        if (!UIApplication::shared) break;
         DispatchQueue::main()->performAll(); // TODO: May be need to be after rendering loop
-        auto window = UIApplication::shared->keyWindow.lock();
-        if (window)
-            UIRenderer::main()->render(window, currentTime);
+        auto window = UIApplication::shared->keyWindow;
+        if (window.expired()) break;
+        UIRenderer::main()->render(window.lock(), currentTime);
     }
 }
 
@@ -37,6 +38,12 @@ int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate) {
 
     setupRenderAndRunLoop();
 
+    DispatchQueue::quit();
+    UIApplication::shared = nullptr;
+    UIRenderer::_main = nullptr;
+    application = nullptr;
+    appDelegate = nullptr;
+    
     return 0;
 };
 

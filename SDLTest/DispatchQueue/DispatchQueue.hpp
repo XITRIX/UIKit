@@ -24,14 +24,18 @@ public:
     DispatchQueue(std::string tag);
     ~DispatchQueue();
 
-    static DispatchQueue* main();
-    static DispatchQueue* global();
+    static std::shared_ptr<DispatchQueue> main();
+    static std::shared_ptr<DispatchQueue> global();
+
+    static void quit();
 
     std::string tag() const { return _tag; }
     void async(std::function<void()> task);
+
+    bool isActive() { return _task_loop_active; }
 private:
-    static DispatchQueue* _main;
-    static DispatchQueue* _global;
+    static std::shared_ptr<DispatchQueue> _main;
+    static std::shared_ptr<DispatchQueue> _global;
     std::queue<std::function<void()>> _queue;
     std::string _tag;
 

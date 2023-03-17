@@ -24,7 +24,7 @@ std::shared_ptr<UIView> UIViewController::view() {
 void UIViewController::setView(std::shared_ptr<UIView> view) {
     if (_view) _view->_parentController.reset();
     _view = view;
-    _view->_parentController = shared_from_this();
+    _view->_parentController = weak_from_this();
     viewDidLoad();
 }
 

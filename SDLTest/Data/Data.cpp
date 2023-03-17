@@ -11,9 +11,12 @@
 
 namespace UIKit {
 
-Data::Data(Uint8 bytes[], int count) {
+Data::Data(Uint8 bytes[], int count, bool freeSource) {
     for (int i = 0; i < count; i++)
         _data.push_back(bytes[i]);
+
+    if (freeSource)
+        delete[] bytes;
 }
 
 Data::~Data() {}
@@ -37,8 +40,9 @@ std::optional<Data> Data::fromPath(std::string path) {
     fileReader->close(fileReader);
 
     if (bytesRead == fileSize) {
-        return Data(buffer, fileSize);
+        return Data(buffer, fileSize, true);
     } else {
+        delete[] buffer;
         return std::nullopt;
     }
 }

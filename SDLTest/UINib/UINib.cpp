@@ -37,7 +37,7 @@ std::shared_ptr<UINib> UINib::fromData(Data data) {
 
 std::shared_ptr<UIView> UINib::instantiate(std::map<std::string, std::shared_ptr<UIView>>* idStorage) {
     // Load XML
-    tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();
+    std::shared_ptr<tinyxml2::XMLDocument> document = new_shared<tinyxml2::XMLDocument>();
     tinyxml2::XMLError error        = document->Parse(_rawXml.c_str());
 
     if (error != tinyxml2::XMLError::XML_SUCCESS)

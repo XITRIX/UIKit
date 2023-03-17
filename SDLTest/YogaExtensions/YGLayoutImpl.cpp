@@ -105,7 +105,7 @@ void YGLayout::YGRemoveAllChildren(const YGNodeRef node) {
 }
 
 YGLayout::YGLayout(std::shared_ptr<UIView> view):
-    _view(view), _node(YGNodeNewWithConfig(YGConfigNew()))
+    _view(view), _node(YGNodeNew())
 {
     YGNodeSetContext(_node, view.get());
     _isEnabled = false;
@@ -113,6 +113,10 @@ YGLayout::YGLayout(std::shared_ptr<UIView> view):
     // In case we've changed UIView's sizeToFit implementation, there is no need in this check anymore
 //    isUIView = strcmp(typeid(view.get()).name(), typeid(UIView*).name()) == 0;
     isUIView = false;
+}
+
+YGLayout::~YGLayout() {
+    YGNodeFree(_node);
 }
 
 void YGLayout::layoutIfNeeded() {

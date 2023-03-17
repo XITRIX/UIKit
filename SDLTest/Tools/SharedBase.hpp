@@ -51,26 +51,6 @@ protected:
     }
 };
 
-//template <typename T>
-//concept CanMakeSharedFromThis = requires(T* a)
-//{
-//    a->shared_from_this();
-//};
-//
-//template<CanMakeSharedFromThis T, class ..._Args>
-//std::shared_ptr<T> new_shared(_Args&& ...__args)
-//{
-//    std::allocator<_Tp> alloc;
-//    using traits_t = std::allocator_traits<decltype(alloc)>;
-//    auto obj = alloc.allocate(1);
-//    traits_t::construct(alloc, obj, std::forward<_Args>(__args)...);
-//
-//    auto ptr = std::static_pointer_cast<_Tp>(obj->__strong_this_ctor_);
-//    obj->__strong_this_ctor_ = nullptr;
-//    return ptr;
-//}
-
-
 template<class _Tp, class ..._Args>
 typename std::enable_if<std::is_base_of<enable_shared_from_this_pointer_holder, _Tp>::value, std::shared_ptr<_Tp>>::type new_shared(_Args&& ...__args) {
     std::allocator<_Tp> alloc;

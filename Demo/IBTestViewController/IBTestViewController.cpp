@@ -20,7 +20,7 @@ void IBTestViewController::viewDidLoad() {
 
     ibDispatch = new_shared<DispatchQueue>("IBDispatch");
     ibDispatch->async([this]() {
-        while(true) {
+        while(ibDispatch->isActive()) {
             sleep(1000);
             DispatchQueue::main()->async([this]() {
                 refreshXib();

@@ -15,10 +15,6 @@ void UIApplicationDelegate::applicationNeedsXIBRegistration(UIApplication* appli
     REGISTER_NIB(UILabel)
     REGISTER_NIB(UIImageView)
     REGISTER_NIB(UIScrollView)
-//    UINib::registerXIB("UIView", UIView::init);
-//    UINib::registerXIB("UILabel", UILabel::init);
-//    UINib::registerXIB("UIImageView", UIImageView::init);
-//    UINib::registerXIB("UIScrollView", UIScrollView::init);
 }
 
 }

@@ -174,6 +174,7 @@ public:
     YG_PROPERTY(float, aspectRatio, AspectRatio)
 
     YGLayout(std::shared_ptr<UIView> view);
+    ~YGLayout();
 
     void layoutIfNeeded();
     void applyLayoutPreservingOrigin(bool preserveOrigin);
