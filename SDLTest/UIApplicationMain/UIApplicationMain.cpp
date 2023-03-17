@@ -25,24 +25,20 @@ void setupRenderAndRunLoop() {
 }
 
 int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate) {
-    auto application = new_shared<UIApplication>();
-    UIApplication::shared = application;
+    UIApplication::shared = new_shared<UIApplication>();
     UIRenderer::_main = new_shared<UIRenderer>();
 
-    application->delegate = appDelegate;
+    UIApplication::shared->delegate = appDelegate;
 
-    appDelegate->applicationNeedsXIBRegistration(application.get());
-    if (!appDelegate->applicationDidFinishLaunchingWithOptions(application.get(), {})) {
+    appDelegate->applicationNeedsXIBRegistration(UIApplication::shared.get());
+    if (!appDelegate->applicationDidFinishLaunchingWithOptions(UIApplication::shared.get(), {})) {
         return 1;
     }
 
     setupRenderAndRunLoop();
 
-    DispatchQueue::quit();
     UIApplication::shared = nullptr;
     UIRenderer::_main = nullptr;
-    application = nullptr;
-    appDelegate = nullptr;
     
     return 0;
 };

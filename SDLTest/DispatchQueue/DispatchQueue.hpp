@@ -27,8 +27,6 @@ public:
     static std::shared_ptr<DispatchQueue> main();
     static std::shared_ptr<DispatchQueue> global();
 
-    static void quit();
-
     std::string tag() const { return _tag; }
     void async(std::function<void()> task);
 

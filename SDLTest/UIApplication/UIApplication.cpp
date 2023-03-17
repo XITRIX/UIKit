@@ -226,10 +226,15 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
 
 void UIApplication::handleSDLQuit() {
     if (delegate) delegate->applicationWillTerminate(this);
+
     UIEvent::activeEvents.clear();
+    UIApplication::delegate->window = nullptr;
     UIApplication::shared = nullptr;
+    UIRenderer::_main = nullptr;
+
+    
     SDL_Quit();
-//    exit(0);
+    exit(0);
 }
 
 void UIApplication::sendEvent(std::shared_ptr<UIEvent> event) {

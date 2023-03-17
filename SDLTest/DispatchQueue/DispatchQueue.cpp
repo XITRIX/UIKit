@@ -24,11 +24,6 @@ std::shared_ptr<DispatchQueue> DispatchQueue::global() {
     return _global;
 }
 
-void DispatchQueue::quit() {
-    _main = nullptr;
-    _global = nullptr;
-}
-
 DispatchQueue::DispatchQueue(std::string tag): _tag(tag) {
     if (tag != "main") {
         pthread_create(&_task_loop_thread, NULL, task_loop, this);
