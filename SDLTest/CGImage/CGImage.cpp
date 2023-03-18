@@ -36,6 +36,7 @@ CGImage::CGImage(Data sourceData) {
 }
 
 CGImage::~CGImage() {
+    GPU_FreeTarget(pointee->target);
     GPU_FreeImage(pointee);
 }
 
