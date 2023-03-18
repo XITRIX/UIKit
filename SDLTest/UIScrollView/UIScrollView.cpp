@@ -65,8 +65,8 @@ Point UIScrollView::getBoundsCheckedContentOffset(Point newContentOffset) {
     auto contentHeight = fmaxf(contentSize.height, bounds().height());
     auto contentWidth = fmaxf(contentSize.width, bounds().width());
     return Point(
-        fminf(fmaxf(newContentOffset.x, -_contentInset.left), (contentWidth + _contentInset.right) - bounds().width()),
-        fminf(fmaxf(newContentOffset.y, -_contentInset.top), (contentHeight + _contentInset.bottom) - bounds().height())
+        fminf(fmaxf(newContentOffset.x, -_contentInset.left - layoutMargins().left), (contentWidth + _contentInset.right + layoutMargins().right) - bounds().width()),
+        fminf(fmaxf(newContentOffset.y, -_contentInset.top - layoutMargins().top), (contentHeight + _contentInset.bottom + layoutMargins().bottom) - bounds().height())
     );
 }
 

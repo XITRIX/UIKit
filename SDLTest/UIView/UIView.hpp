@@ -184,7 +184,7 @@ private:
     bool _needsLayout = true;
     bool _needsDisplay = true;
     bool _needsUpdateSafeAreaInsets = true;
-    bool _needsUpdateLayoutMargins = false;
+    bool _needsUpdateLayoutMargins = true;
 
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();

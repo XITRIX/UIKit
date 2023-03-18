@@ -236,9 +236,6 @@ void UIView::updateSafeAreaInsets() {
         else return setSafeAreaInsets(UIEdgeInsets::zero);
     }
 
-    if (_superview.lock()->_safeAreaInsets == UIEdgeInsets::zero)
-        return setSafeAreaInsets(UIEdgeInsets::zero);
-
     auto parentSafeArea = _superview.lock()->_safeAreaInsets;
     auto parentSize = _superview.lock()->bounds().size;
 

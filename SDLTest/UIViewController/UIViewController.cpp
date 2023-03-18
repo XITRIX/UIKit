@@ -93,8 +93,7 @@ void UIViewController::removeFromParent() {
 void UIViewController::setAdditionalSafeAreaInsets(UIEdgeInsets additionalSafeAreaInsets) {
     if (_additionalSafeAreaInsets == additionalSafeAreaInsets) return;
     _additionalSafeAreaInsets = additionalSafeAreaInsets;
-    view()->updateSafeAreaInsets();
-    view()->setNeedsLayout();
+    view()->setNeedsUpdateSafeAreaInsets();
 }
 
 }
