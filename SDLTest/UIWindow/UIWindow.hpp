@@ -15,6 +15,8 @@ class UIWindow: public UIView {
 public:
     UIWindow();
 
+    std::shared_ptr<UIWindow> window() override;
+
     void setRootViewController(std::shared_ptr<UIViewController> controller);
     std::shared_ptr<UIViewController> rootViewController() { return _rootViewController; }
 

@@ -84,6 +84,8 @@ public:
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
     void removeFromSuperview();
 
+    virtual std::shared_ptr<UIWindow> window();
+
     std::vector<std::shared_ptr<UIView>> subviews() const { return _subviews; }
     std::weak_ptr<UIView> superview() const { return _superview; }
 

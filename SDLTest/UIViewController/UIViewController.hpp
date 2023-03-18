@@ -30,10 +30,10 @@ public:
     // Most of these methods are designed to be overriden in `UIViewController` subclasses
     virtual void loadView();
     virtual void viewDidLoad() {}
-    virtual void viewWillAppear(bool animated) {}
-    virtual void viewDidAppear(bool animated) {}
-    virtual void viewWillDisappear(bool animated) {}
-    virtual void viewDidDisappear(bool animated) {}
+    virtual void viewWillAppear(bool animated);
+    virtual void viewDidAppear(bool animated);
+    virtual void viewWillDisappear(bool animated);
+    virtual void viewDidDisappear(bool animated);
 
     virtual void viewWillLayoutSubviews() {}
     virtual void viewDidLayoutSubviews() {}

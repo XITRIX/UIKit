@@ -232,7 +232,6 @@ void UIApplication::handleSDLQuit() {
     UIApplication::shared = nullptr;
     UIRenderer::_main = nullptr;
 
-    
     SDL_Quit();
     exit(0);
 }

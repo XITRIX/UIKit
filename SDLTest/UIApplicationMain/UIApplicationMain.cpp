@@ -16,11 +16,8 @@ void setupRenderAndRunLoop() {
     while (true) {
         auto currentTime = Timer();
         UIApplication::shared->handleEventsIfNeeded();
-        if (!UIApplication::shared) break;
         DispatchQueue::main()->performAll(); // TODO: May be need to be after rendering loop
-        auto window = UIApplication::shared->keyWindow;
-        if (window.expired()) break;
-        UIRenderer::main()->render(window.lock(), currentTime);
+        UIRenderer::main()->render(UIApplication::shared->keyWindow.lock(), currentTime);
     }
 }
 

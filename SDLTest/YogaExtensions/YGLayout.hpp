@@ -181,6 +181,7 @@ public:
     Size calculateLayoutWithSize(Size size);
 
     bool isLeaf();
+    bool isRoot();
 
 private:
     YGNodeRef _node = nullptr;

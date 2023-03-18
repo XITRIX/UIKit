@@ -120,7 +120,7 @@ YGLayout::~YGLayout() {
 }
 
 void YGLayout::layoutIfNeeded() {
-    if (!isEnabled() || isLeaf()) return;
+    if (!isEnabled() || !isRoot()) return;
     applyLayoutPreservingOrigin(false);
 }
 
@@ -164,8 +164,6 @@ void YGLayout::YGApplyLayoutToViewHierarchy(std::shared_ptr<UIView>view, bool pr
             YGApplyLayoutToViewHierarchy(view->subviews()[i], false);
         }
     }
-
-    view->_needsLayout = false;
 }
 
 float YGLayout::YGRoundPixelValue(float value) {
@@ -200,6 +198,14 @@ bool YGLayout::isLeaf() {
     }
 
     return true;
+}
+
+bool YGLayout::isRoot() {
+    if (_isEnabled) {
+        return YGNodeGetParent(_node) == nullptr;
+    }
+
+    return false;
 }
 
 }

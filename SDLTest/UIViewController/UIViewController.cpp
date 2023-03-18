@@ -6,6 +6,7 @@
 //
 
 #include <UIViewController/UIViewController.hpp>
+#include <DispatchQueue/DispatchQueue.hpp>
 
 namespace UIKit {
 
@@ -42,10 +43,33 @@ void UIViewController::loadView() {
     setView(new_shared<UIView>());
 }
 
+void UIViewController::viewWillAppear(bool animated) {
+    for (auto& child: _children) {
+        DispatchQueue::main()->async([child, animated]() { child->viewWillAppear(animated); });
+    }
+}
+
+void UIViewController::viewDidAppear(bool animated) {
+    for (auto& child: _children) {
+        DispatchQueue::main()->async([child, animated]() { child->viewDidAppear(animated); });
+    }
+}
+
+void UIViewController::viewWillDisappear(bool animated) {
+    for (auto& child: _children) {
+        DispatchQueue::main()->async([child, animated]() { child->viewWillDisappear(animated); });
+    }
+}
+
+void UIViewController::viewDidDisappear(bool animated) {
+    for (auto& child: _children) {
+        DispatchQueue::main()->async([child, animated]() { child->viewDidDisappear(animated); });
+    }
+}
+
 void UIViewController::addChild(std::shared_ptr<UIViewController> child) {
     _children.push_back(child);
     child->willMoveToParent(weak_from_this().lock());
-    child->viewWillAppear(true);
 }
 
 void UIViewController::willMoveToParent(std::shared_ptr<UIViewController> parent) {
@@ -54,7 +78,8 @@ void UIViewController::willMoveToParent(std::shared_ptr<UIViewController> parent
 }
 
 void UIViewController::didMoveToParent(std::shared_ptr<UIViewController> parent) {
-    viewDidAppear(true);
+    if (parent->view()->window())
+        viewDidAppear(true);
 }
 
 void UIViewController::removeFromParent() {

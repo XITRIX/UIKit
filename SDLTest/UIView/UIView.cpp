@@ -227,17 +227,34 @@ void UIView::setContentMode(UIViewContentMode mode) {
 }
 
 void UIView::addSubview(std::shared_ptr<UIView> view) {
-    setNeedsLayout();
-    _layer->addSublayer(view->_layer);
+    bool needToNotifyViewController = false;
+    if (!view->_parentController.expired()) {
+        auto window = this->window();
+        if (window) {
+            needToNotifyViewController = true;
+        }
+    }
 
+    setNeedsLayout();
     view->removeFromSuperview();
+
+    if (needToNotifyViewController)
+        view->_parentController.lock()->viewWillAppear(true);
+    
+    _layer->addSublayer(view->_layer);
     _subviews.push_back(view);
     view->setSuperview(this->shared_from_this());
+    view->setNeedsUpdateSafeAreaInsets();
 }
 
 void UIView::addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer) {
     gestureRecognizer->_view = weak_from_this();
     _gestureRecognizers.push_back(gestureRecognizer);
+}
+
+std::shared_ptr<UIWindow> UIView::window() {
+    if (!_superview.expired()) return _superview.lock()->window();
+    return nullptr;
 }
 
 void UIView::setSuperview(std::shared_ptr<UIView> superview) {

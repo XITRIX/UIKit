@@ -28,6 +28,10 @@ UIWindow::UIWindow() {
     yoga->setEnabled(false);
 }
 
+std::shared_ptr<UIWindow> UIWindow::window() {
+    return shared_from_base<UIWindow>();
+}
+
 void UIWindow::setRootViewController(std::shared_ptr<UIViewController> rootViewController) {
     _rootViewController = rootViewController;
 }
