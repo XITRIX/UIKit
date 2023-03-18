@@ -22,7 +22,9 @@ struct UIEdgeInsets {
 
     bool operator==(const UIEdgeInsets& rhs) const;
     UIEdgeInsets operator+(const UIEdgeInsets& rhs) const;
+    UIEdgeInsets operator-(const UIEdgeInsets& rhs) const;
     UIEdgeInsets& operator+=(const UIEdgeInsets& rhs);
+    UIEdgeInsets& operator-=(const UIEdgeInsets& rhs);
 
     static UIEdgeInsets zero;
 };

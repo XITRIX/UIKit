@@ -18,5 +18,10 @@ public:
     void loadView() override;
     void viewDidLoad() override;
 
+    void viewDidLayoutSubviews() override;
+
+private:
     IBOutlet(UIView, container)
+    IBOutlet(UIView, header)
+    IBOutlet(UIView, footer)
 };

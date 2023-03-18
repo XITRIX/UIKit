@@ -51,6 +51,12 @@ void UIScrollView::setContentOffset(Point offset, bool animated) {
     CATransaction::commit();
 }
 
+void UIScrollView::layoutMarginsDidChange() {
+    auto delta = _lastLayoutMargins - layoutMargins();
+    _lastLayoutMargins = layoutMargins();
+    setContentOffset(contentOffset() + Point(delta.left, delta.top), false);
+}
+
 Point UIScrollView::visibleContentOffset() {
     return (layer()->presentationOrSelf())->bounds().origin;
 }

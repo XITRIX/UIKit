@@ -18,14 +18,16 @@
         justifyContent="spaceBetween"
         isTransparentTouch="true">
         <UIView
+            id="header"
             width="100%"
-            height="88"
+            height="44"
             backgroundColor="#FF000090">
 
         </UIView>
         <UIView
+            id="footer"
             width="100%"
-            height="73"
+            height="44"
             backgroundColor="#FF000090">
 
         </UIView>

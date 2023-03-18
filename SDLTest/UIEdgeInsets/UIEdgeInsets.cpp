@@ -24,11 +24,23 @@ UIEdgeInsets UIEdgeInsets::operator+(const UIEdgeInsets& rhs) const {
     return UIEdgeInsets(top + rhs.top, left + rhs.left, bottom + rhs.bottom, right + rhs.right);
 }
 
+UIEdgeInsets UIEdgeInsets::operator-(const UIEdgeInsets& rhs) const {
+    return UIEdgeInsets(top - rhs.top, left - rhs.left, bottom - rhs.bottom, right - rhs.right);
+}
+
 UIEdgeInsets& UIEdgeInsets::operator+=(const UIEdgeInsets& rhs) {
     this->top += rhs.top;
     this->left += rhs.left;
     this->bottom += rhs.bottom;
     this->right += rhs.right;
+    return *this;
+}
+
+UIEdgeInsets& UIEdgeInsets::operator-=(const UIEdgeInsets& rhs) {
+    this->top -= rhs.top;
+    this->left -= rhs.left;
+    this->bottom -= rhs.bottom;
+    this->right -= rhs.right;
     return *this;
 }
 

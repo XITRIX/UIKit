@@ -25,5 +25,8 @@ void NavigationViewController::viewDidLoad() {
     addChild(vc);
     vc->didMoveToParent(shared_from_this());
 
-    setAdditionalSafeAreaInsets(UIEdgeInsets(88, 0, 73, 0));
+}
+
+void NavigationViewController::viewDidLayoutSubviews() {
+    setAdditionalSafeAreaInsets(UIEdgeInsets(header()->frame().size.height, 0, footer()->frame().size.height, 0));
 }

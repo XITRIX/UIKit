@@ -31,6 +31,8 @@ public:
     virtual void addSubview(std::shared_ptr<UIView> view) override;
     bool applyXMLAttribute(std::string name, std::string value) override;
 
+    void layoutMarginsDidChange() override;
+
     Point contentOffset() { return bounds().origin; }
     void setContentOffset(Point offset, bool animated);
 
@@ -45,6 +47,7 @@ private:
     bool _isDecelerating = false;
     Point weightedAverageVelocity;
 
+    UIEdgeInsets _lastLayoutMargins;
     UIEdgeInsets _contentInset;
 //    Size _contentSize;
 
