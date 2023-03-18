@@ -26,6 +26,8 @@
 namespace UIKit {
 
 class UIViewController;
+class UIWindow;
+
 class UIView: public UIResponder, public CALayerDelegate, public enable_shared_from_this<UIView> {
 public:
     static std::shared_ptr<UIView> init();
@@ -76,6 +78,20 @@ public:
 
     bool isTransparentTouch() { return _isTransparentTouch; }
     void setTransparentTouch(bool isTransparentTouch) { _isTransparentTouch = isTransparentTouch; }
+
+    UIEdgeInsets layoutMargins();
+    void setLayoutMargins(UIEdgeInsets layoutMargins);
+
+    UIEdgeInsets safeAreaInsets() { return _safeAreaInsets; }
+
+    virtual void safeAreaInsetsDidChange() {}
+    virtual void layoutMarginsDidChange() {}
+
+    bool insetsLayoutMarginsFromSafeArea() { return _insetsLayoutMarginsFromSafeArea; }
+    void setInsetsLayoutMarginsFromSafeArea(bool insetsLayoutMarginsFromSafeArea);
+
+    bool preservesSuperviewLayoutMargins() { return _preservesSuperviewLayoutMargins; }
+    void setPreservesSuperviewLayoutMargins(bool preservesSuperviewLayoutMargins);
 
     std::vector<std::shared_ptr<UIGestureRecognizer>>* gestureRecognizers() { return &_gestureRecognizers; }
     void addGestureRecognizer(std::shared_ptr<UIGestureRecognizer> gestureRecognizer);
@@ -150,8 +166,25 @@ private:
     std::weak_ptr<UIViewController> _parentController;
     bool _isTransparentTouch = false;
 
+    UIEdgeInsets _layoutMargins;
+    UIEdgeInsets _calculatedLayoutMargins;
+    UIEdgeInsets _safeAreaInsets;
+    bool _insetsLayoutMarginsFromSafeArea = true;
+    bool _preservesSuperviewLayoutMargins = false;
+
+    void setSafeAreaInsets(UIEdgeInsets safeAreaInsets);
+    void updateSafeAreaInsetsInChilds();
+    void updateSafeAreaInsetsIfNeeded();
+    void updateSafeAreaInsets();
+    void updateLayoutMarginIfNeeded();
+    void updateLayoutMargin();
+    void setNeedsUpdateSafeAreaInsets() { _needsUpdateSafeAreaInsets = true; }
+    void setNeedsUpdateLayoutMargins() { _needsUpdateLayoutMargins = true; }
+
     bool _needsLayout = true;
     bool _needsDisplay = true;
+    bool _needsUpdateSafeAreaInsets = true;
+    bool _needsUpdateLayoutMargins = false;
 
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();
@@ -160,6 +193,7 @@ private:
     static std::shared_ptr<UIView> instantiateFromXib(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage = nullptr);
 
     friend class UIViewController;
+    friend class UIWindow;
     friend class UINib;
     friend class YGLayout;
 };

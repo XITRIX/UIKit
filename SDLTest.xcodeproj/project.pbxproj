@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C0798282993F25C004E8EC8 /* CGImage.cpp */; };
 		7C20BD5229A4F08300646CD7 /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C429A3D45F00A20694 /* glew.c */; };
+		7C44C0AC29C4B35F0027DB31 /* TextViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C44C0AA29C4B35F0027DB31 /* TextViewController.cpp */; };
+		7C44C0AD29C4B35F0027DB31 /* TextViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C44C0AA29C4B35F0027DB31 /* TextViewController.cpp */; };
 		7C4DC82129BA95FF00F13A6D /* UITapGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC81F29BA95FF00F13A6D /* UITapGestureRecognizer.cpp */; };
 		7C4DC82229BA960100F13A6D /* UITapGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC81F29BA95FF00F13A6D /* UITapGestureRecognizer.cpp */; };
 		7C4DC82629BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DC82429BA971000F13A6D /* UIPanGestureRecognizer.cpp */; };
@@ -127,8 +129,8 @@
 		7CA6967B29C06DA1008DB110 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6957329C06DA0008DB110 /* tinyxml2.cpp */; };
 		7CA6976F29C06E82008DB110 /* Fatal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6976D29C06E82008DB110 /* Fatal.cpp */; };
 		7CA6977029C06E82008DB110 /* Fatal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6976D29C06E82008DB110 /* Fatal.cpp */; };
-		7CA6977429C07886008DB110 /* IBTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* IBTestViewController.cpp */; };
-		7CA6977529C07886008DB110 /* IBTestViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* IBTestViewController.cpp */; };
+		7CA6977429C07886008DB110 /* NavigationViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* NavigationViewController.cpp */; };
+		7CA6977529C07886008DB110 /* NavigationViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977229C07886008DB110 /* NavigationViewController.cpp */; };
 		7CA6977829C08F32008DB110 /* IBTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977629C08F32008DB110 /* IBTools.cpp */; };
 		7CA6977929C08F32008DB110 /* IBTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6977629C08F32008DB110 /* IBTools.cpp */; };
 		7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4C229A3D45F00A20694 /* stb_image_write.c */; };
@@ -302,6 +304,8 @@
 		7C0798252993F1E4004E8EC8 /* CALayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CALayer.hpp; sourceTree = "<group>"; };
 		7C0798282993F25C004E8EC8 /* CGImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGImage.cpp; sourceTree = "<group>"; };
 		7C0798292993F25C004E8EC8 /* CGImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGImage.hpp; sourceTree = "<group>"; };
+		7C44C0AA29C4B35F0027DB31 /* TextViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextViewController.cpp; sourceTree = "<group>"; };
+		7C44C0AB29C4B35F0027DB31 /* TextViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextViewController.hpp; sourceTree = "<group>"; };
 		7C4DC81229BA2C9500F13A6D /* UIKit.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIKit.hpp; sourceTree = "<group>"; };
 		7C4DC81F29BA95FF00F13A6D /* UITapGestureRecognizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UITapGestureRecognizer.cpp; sourceTree = "<group>"; };
 		7C4DC82029BA95FF00F13A6D /* UITapGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UITapGestureRecognizer.hpp; sourceTree = "<group>"; };
@@ -421,8 +425,8 @@
 		7CA6966429C06DA1008DB110 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		7CA6976D29C06E82008DB110 /* Fatal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fatal.cpp; sourceTree = "<group>"; };
 		7CA6976E29C06E82008DB110 /* Fatal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fatal.hpp; sourceTree = "<group>"; };
-		7CA6977229C07886008DB110 /* IBTestViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IBTestViewController.cpp; sourceTree = "<group>"; };
-		7CA6977329C07886008DB110 /* IBTestViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBTestViewController.hpp; sourceTree = "<group>"; };
+		7CA6977229C07886008DB110 /* NavigationViewController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NavigationViewController.cpp; sourceTree = "<group>"; };
+		7CA6977329C07886008DB110 /* NavigationViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NavigationViewController.hpp; sourceTree = "<group>"; };
 		7CA6977629C08F32008DB110 /* IBTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IBTools.cpp; sourceTree = "<group>"; };
 		7CA6977729C08F32008DB110 /* IBTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBTools.hpp; sourceTree = "<group>"; };
 		7CB7F3D829A3D45F00A20694 /* SDL_gpu_RendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_gpu_RendererImpl.h; sourceTree = "<group>"; };
@@ -654,6 +658,15 @@
 				7C0798282993F25C004E8EC8 /* CGImage.cpp */,
 			);
 			path = CGImage;
+			sourceTree = "<group>";
+		};
+		7C44C09E29C4B34F0027DB31 /* TextViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7C44C0AB29C4B35F0027DB31 /* TextViewController.hpp */,
+				7C44C0AA29C4B35F0027DB31 /* TextViewController.cpp */,
+			);
+			path = TextViewController;
 			sourceTree = "<group>";
 		};
 		7C4DC81E29BA95F700F13A6D /* UITapGestureRecognizer */ = {
@@ -1082,13 +1095,13 @@
 			path = tinyxml2;
 			sourceTree = "<group>";
 		};
-		7CA6977129C07876008DB110 /* IBTestViewController */ = {
+		7CA6977129C07876008DB110 /* NavigationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				7CA6977329C07886008DB110 /* IBTestViewController.hpp */,
-				7CA6977229C07886008DB110 /* IBTestViewController.cpp */,
+				7CA6977329C07886008DB110 /* NavigationViewController.hpp */,
+				7CA6977229C07886008DB110 /* NavigationViewController.cpp */,
 			);
-			path = IBTestViewController;
+			path = NavigationViewController;
 			sourceTree = "<group>";
 		};
 		7CB7F3CA29A3D45F00A20694 /* extern */ = {
@@ -1422,7 +1435,8 @@
 		7CD7DAFB29B62DB600C9637C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				7CA6977129C07876008DB110 /* IBTestViewController */,
+				7C44C09E29C4B34F0027DB31 /* TextViewController */,
+				7CA6977129C07876008DB110 /* NavigationViewController */,
 				7C4DCE7429BD3DA700F13A6D /* YogaTestViewController */,
 				7CD7DB1529B67E8000C9637C /* TestViewController */,
 				7CD7DB1029B67C1300C9637C /* Runner */,
@@ -1770,10 +1784,11 @@
 				7CB7F54829A3D89C00A20694 /* renderer_OpenGL_1.c in Sources */,
 				7C4DCE5529BB950B00F13A6D /* YGLayout.cpp in Sources */,
 				7CD13F2629AE6AFC00D0FFF5 /* Shader.cpp in Sources */,
-				7CA6977429C07886008DB110 /* IBTestViewController.cpp in Sources */,
+				7CA6977429C07886008DB110 /* NavigationViewController.cpp in Sources */,
 				7CD7DB4429B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
 				7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */,
 				7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
+				7C44C0AC29C4B35F0027DB31 /* TextViewController.cpp in Sources */,
 				7CD13F1B29AB6DD900D0FFF5 /* ContentsGravityTransformation.cpp in Sources */,
 				7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */,
 				7CD7DAE929B6156B00C9637C /* UIWindow.cpp in Sources */,
@@ -1861,10 +1876,11 @@
 				7C82D5BE29AEC422005079B8 /* Data.cpp in Sources */,
 				7C4DCE5129BB950B00F13A6D /* log.cpp in Sources */,
 				7CD7DAFA29B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */,
-				7CA6977529C07886008DB110 /* IBTestViewController.cpp in Sources */,
+				7CA6977529C07886008DB110 /* NavigationViewController.cpp in Sources */,
 				7C4DCE5329BB950B00F13A6D /* Utils.cpp in Sources */,
 				7C82D6BD29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
+				7C44C0AD29C4B35F0027DB31 /* TextViewController.cpp in Sources */,
 				7CD7DB0829B6332400C9637C /* main.cpp in Sources */,
 				7C4DC82C29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,

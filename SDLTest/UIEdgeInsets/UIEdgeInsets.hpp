@@ -21,6 +21,10 @@ struct UIEdgeInsets {
     UIEdgeInsets(): UIEdgeInsets(0, 0, 0, 0) {}
 
     bool operator==(const UIEdgeInsets& rhs) const;
+    UIEdgeInsets operator+(const UIEdgeInsets& rhs) const;
+    UIEdgeInsets& operator+=(const UIEdgeInsets& rhs);
+
+    static UIEdgeInsets zero;
 };
 
 }

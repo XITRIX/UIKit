@@ -60,7 +60,7 @@ void* DispatchQueue::task_loop(void* a) {
     auto self = (DispatchQueue*) a;
     while (self->_task_loop_active) {
         self->performAll();
-        retro_sleep(500);
+        retro_sleep(50);
     }
     return NULL;
 }

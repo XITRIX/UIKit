@@ -9,14 +9,30 @@
 
 using namespace UIKit;
 
+class TestView: public UIView {
+    void safeAreaInsetsDidChange() override {
+//        auto a = safeAreaInsets();
+//        printf("Changed %f %f %f %f\n", a.top, a.left, a.bottom, a.right);
+    }
+
+    void layoutMarginsDidChange() override {
+        auto a = layoutMargins();
+        printf("Changed %f %f %f %f\n", a.top, a.left, a.bottom, a.right);
+    }
+};
+
 void TestViewController::loadView() {
     auto view = new_shared<UIView>();
+    view->yoga->setEnabled(false);
 
     rotationView = new_shared<UIView>(Rect(60, 200, 188, 188));
+    rotationView->yoga->setEnabled(false);
     rotationView->setBackgroundColor(UIColor::orange);
 //    rotationView->layer()->setCornerRadius(8);
 
-    view1 = new_shared<UIKit::UIView>();
+    view1 = new_shared<TestView>();
+    view1->setLayoutMargins(UIEdgeInsets(8, 8, 8, 8));
+    view1->yoga->setEnabled(false);
     view1->tag = "View 1";
 //    layer1->anchorPoint = Point(0, 0);
     view1->setFrame(Rect(44, 44, 280, 280));
@@ -27,6 +43,7 @@ void TestViewController::loadView() {
 //    layer1->transform = NXTransform3D::rotationBy(45, 0, 0, 1);// * NXTransform3D::translationBy(180, 180, 0);
 
     view2 = new_shared<UIKit::UIView>();
+    view2->yoga->setEnabled(false);
     view2->tag = "View 2";
 //    layer2->anchorPoint = Point(0.5f, 0.5f);
     view2->setFrame(Rect(40, 40, 80, 80));
@@ -38,6 +55,7 @@ void TestViewController::loadView() {
 
 
     view3 = new_shared<UIKit::UIImageView>(UIImage::fromPath("amogus.png"));
+    view3->yoga->setEnabled(false);
     view3->tag = "View 3";
     view3->setFrame(Rect(0, 0, 80, 80));
     view3->setBackgroundColor(UIColor::black);//.withAlphaComponent(0.5f);
@@ -51,6 +69,7 @@ void TestViewController::loadView() {
     view2->addSubview(view3);
 
     label = new_shared<UILabel>();
+    label->yoga->setEnabled(false);
     label->tag = "View Label";
     label->setFrame(Rect(480, 90, 300, 44));
     label->setBackgroundColor(UIColor::green);
@@ -61,6 +80,7 @@ void TestViewController::loadView() {
     label->sizeToFit();
 
     button = new_shared<UILabel>();
+    button->yoga->setEnabled(false);
     button->tag = "Button";
     button->setFrame(Rect(300, 90, 300, 44));
     button->setBackgroundColor(UIColor::green);
@@ -78,11 +98,16 @@ void TestViewController::loadView() {
 
 bool scaled = false;
 void TestViewController::viewDidLoad() {
+    setAdditionalSafeAreaInsets(UIEdgeInsets(88, 88, 88, 88));
+
     startRotate();
 
     auto tap = new_shared<UITapGestureRecognizer>();
     tap->onStateChanged = [this](auto state) {
         if (state == UIGestureRecognizerState::ended) {
+            auto v = view();
+            auto a = v->safeAreaInsets();
+
             UIView::animate(0.3f, [this]() {
                 if (!scaled) {
                     label->setText("Hell");

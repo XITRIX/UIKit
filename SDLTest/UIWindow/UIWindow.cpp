@@ -42,6 +42,8 @@ void UIWindow::makeKeyAndVisible() {
     window->setBounds(UIRenderer::main()->bounds());
     UIApplication::shared->keyWindow = window;
 
+    setSafeAreaInsets(UIEdgeInsets(40, 0, 30, 0));
+
     auto viewController = _rootViewController;
     if (viewController) {
         viewController->loadViewIfNeeded();

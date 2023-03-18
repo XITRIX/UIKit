@@ -46,10 +46,14 @@ public:
     virtual void didMoveToParent(std::shared_ptr<UIViewController> parent);
     void removeFromParent();
 
+    UIEdgeInsets additionalSafeAreaInsets() { return _additionalSafeAreaInsets; }
+    void setAdditionalSafeAreaInsets(UIEdgeInsets additionalSafeAreaInsets);
+
 private:
     std::shared_ptr<UIView> _view;
     std::weak_ptr<UIViewController> _parent;
     std::vector<std::shared_ptr<UIViewController>> _children;
+    UIEdgeInsets _additionalSafeAreaInsets;
 };
 
 }

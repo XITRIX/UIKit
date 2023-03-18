@@ -8,6 +8,7 @@
 #include <UIView/UIView.hpp>
 #include <Tools/Tools.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <UIWindow/UIWindow.hpp>
 #include <UIViewController/UIViewController.hpp>
 #include <CASpringAnimationPrototype/CASpringAnimationPrototype.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
@@ -144,11 +145,13 @@ void UIView::setFrame(Rect frame) {
         setNeedsLayout();
     }
     _layer->setFrame(frame);
+    setNeedsUpdateSafeAreaInsets();
 }
 
 void UIView::setBounds(Rect bounds) {
     if (this->bounds().size != bounds.size) {
         setNeedsLayout();
+        setNeedsUpdateSafeAreaInsets();
     }
     _layer->setBounds(bounds);
 }
@@ -179,6 +182,113 @@ void UIView::setMask(std::shared_ptr<UIView> mask) {
         mask->setSuperview(shared_from_this());
     } else {
         _layer->setMask(nullptr);
+    }
+}
+
+void UIView::setInsetsLayoutMarginsFromSafeArea(bool insetsLayoutMarginsFromSafeArea) {
+    if (_insetsLayoutMarginsFromSafeArea == insetsLayoutMarginsFromSafeArea) return;
+    _insetsLayoutMarginsFromSafeArea = insetsLayoutMarginsFromSafeArea;
+    setNeedsLayout();
+}
+
+void UIView::setPreservesSuperviewLayoutMargins(bool preservesSuperviewLayoutMargins) {
+    if (_preservesSuperviewLayoutMargins == preservesSuperviewLayoutMargins) return;
+    _preservesSuperviewLayoutMargins = preservesSuperviewLayoutMargins;
+    setNeedsLayout();
+}
+
+UIEdgeInsets UIView::layoutMargins() {
+    return _calculatedLayoutMargins;
+}
+
+void UIView::setLayoutMargins(UIEdgeInsets layoutMargins) {
+    if (_layoutMargins == layoutMargins) return;
+    _layoutMargins = layoutMargins;
+    setNeedsUpdateLayoutMargins();
+    setNeedsLayout();
+}
+
+void UIView::setSafeAreaInsets(UIEdgeInsets safeAreaInsets) {
+    if (_safeAreaInsets == safeAreaInsets) return;
+    _safeAreaInsets = safeAreaInsets;
+    setNeedsUpdateLayoutMargins();
+    updateSafeAreaInsetsInChilds();
+    safeAreaInsetsDidChange();
+    setNeedsLayout();
+}
+
+void UIView::updateSafeAreaInsetsInChilds() {
+    for (auto& subview: _subviews) {
+        subview->setNeedsUpdateSafeAreaInsets();
+    }
+}
+
+void UIView::updateSafeAreaInsetsIfNeeded() {
+    if (_needsUpdateSafeAreaInsets) {
+        _needsUpdateSafeAreaInsets = false;
+        updateSafeAreaInsets();
+    }
+}
+
+void UIView::updateSafeAreaInsets() {
+    if (_superview.expired()) {
+        if (shared_from_base<UIWindow>() != nullptr) return;
+        else return setSafeAreaInsets(UIEdgeInsets::zero);
+    }
+
+    if (_superview.lock()->_safeAreaInsets == UIEdgeInsets::zero)
+        return setSafeAreaInsets(UIEdgeInsets::zero);
+
+    auto parentSafeArea = _superview.lock()->_safeAreaInsets;
+    auto parentSize = _superview.lock()->bounds().size;
+
+    layoutIfNeeded();
+    auto frame = this->frame();
+
+
+    auto newSafeArea = UIEdgeInsets(fmaxf(0, parentSafeArea.top - fmaxf(0, frame.minY())),
+                                    fmaxf(0, parentSafeArea.left - fmaxf(0, frame.minX())),
+                                    fmaxf(0, parentSafeArea.bottom - fmaxf(0, (parentSize.height - frame.maxY()))),
+                                    fmaxf(0, parentSafeArea.right - fmaxf(0, (parentSize.width - frame.maxX()))));
+
+    if (!_parentController.expired()) {
+        newSafeArea += _parentController.lock()->additionalSafeAreaInsets();
+    }
+
+    setSafeAreaInsets(newSafeArea);
+}
+
+void UIView::updateLayoutMarginIfNeeded() {
+    if (_needsUpdateLayoutMargins) {
+        _needsUpdateLayoutMargins = false;
+        updateLayoutMargin();
+    }
+}
+
+void UIView::updateLayoutMargin() {
+    auto margins = _layoutMargins;
+
+    bool needsSuperviewMargins = _preservesSuperviewLayoutMargins && !superview().expired();
+    if (needsSuperviewMargins && _insetsLayoutMarginsFromSafeArea) {
+        auto superviewMargins = superview().lock()->layoutMargins();
+        auto maxCombination = UIEdgeInsets(fmaxf(_safeAreaInsets.top, superviewMargins.top),
+                                           fmaxf(_safeAreaInsets.left, superviewMargins.left),
+                                           fmaxf(_safeAreaInsets.bottom, superviewMargins.bottom),
+                                           fmaxf(_safeAreaInsets.right, superviewMargins.right));
+        margins += maxCombination;
+    } else {
+        if (_insetsLayoutMarginsFromSafeArea) {
+            margins += _safeAreaInsets;
+        }
+
+        if (needsSuperviewMargins) {
+            margins += superview().lock()->layoutMargins();
+        }
+    }
+
+    if (_calculatedLayoutMargins != margins) {
+        _calculatedLayoutMargins = margins;
+        layoutMarginsDidChange();
     }
 }
 
@@ -433,13 +543,9 @@ void UIView::layoutSubviews() {
     if (!_parentController.expired()) {
         _parentController.lock()->viewWillLayoutSubviews();
     }
-    
-    yoga->layoutIfNeeded();
 
-    for (auto& subview: _subviews) {
-        if (!subview->yoga->isIncludedInLayout())
-            subview->setNeedsLayout();
-    }
+    yoga->layoutIfNeeded();
+    updateSafeAreaInsets();
 
     if (!_parentController.expired()) {
         _parentController.lock()->viewDidLayoutSubviews();
@@ -477,6 +583,8 @@ void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
         _needsDisplay = false;
     }
 
+    updateSafeAreaInsetsIfNeeded();
+    updateLayoutMarginIfNeeded();
     layoutIfNeeded();
 
     for (auto& subview: _subviews) {
