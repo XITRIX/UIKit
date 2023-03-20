@@ -9,6 +9,7 @@
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UITouch/UITouch.hpp>
+#include <Platform/Platform.hpp>
 
 namespace UIKit {
 
@@ -42,8 +43,6 @@ void UIWindow::makeKeyAndVisible() {
     window->setBounds(UIRenderer::main()->bounds());
     UIApplication::shared->keyWindow = window;
 
-    setSafeAreaInsets(UIEdgeInsets(47, 0, 34, 0));
-//    setSafeAreaInsets(UIEdgeInsets(1, 0, 1, 0));
 
     auto viewController = _rootViewController;
     if (viewController) {
@@ -104,6 +103,8 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
 }
 
 void UIWindow::layoutSubviews() {
+    setSafeAreaInsets(getPlatfromSafeArea());
+    
     UIView::layoutSubviews();
 
     if (_rootViewController) {

@@ -53,6 +53,8 @@
 		7C4DCE9329BFF1F500F13A6D /* ViewBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */; };
 		7C4DCE9729BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
 		7C4DCE9829BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
+		7C76CE4B29C8A3E40056DF7E /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4929C8A3E40056DF7E /* Platform.mm */; };
+		7C76CE4E29C8A64E0056DF7E /* DefaultPaltform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
 		7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */; };
 		7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7F4D429A3D45F00A20694 /* renderer_OpenGL_2.c */; };
@@ -355,6 +357,9 @@
 		7C4DCE9129BFF1F500F13A6D /* ViewBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ViewBuilder.hpp; sourceTree = "<group>"; };
 		7C4DCE9529BFF36400F13A6D /* UINib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UINib.cpp; sourceTree = "<group>"; };
 		7C4DCE9629BFF36400F13A6D /* UINib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UINib.hpp; sourceTree = "<group>"; };
+		7C76CE4829C8A38E0056DF7E /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
+		7C76CE4929C8A3E40056DF7E /* Platform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
+		7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultPaltform.cpp; sourceTree = "<group>"; };
 		7C82D56629AEC01C005079B8 /* SDLTest-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDLTest-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C82D57429AEC01E005079B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C82D57729AEC01E005079B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -595,6 +600,7 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C76CE3C29C8A37F0056DF7E /* Platform */,
 				7C4DCE9429BFF35700F13A6D /* UINib */,
 				7C4DCE8F29BFF1E600F13A6D /* ViewBuilder */,
 				7C4DCE7E29BE76AB00F13A6D /* UIEdgeInsets */,
@@ -795,12 +801,22 @@
 			path = UINib;
 			sourceTree = "<group>";
 		};
+		7C76CE3C29C8A37F0056DF7E /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				7C76CE4829C8A38E0056DF7E /* Platform.hpp */,
+				7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
 		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
 			isa = PBXGroup;
 			children = (
 				7C82D57429AEC01E005079B8 /* Assets.xcassets */,
 				7C82D57629AEC01E005079B8 /* LaunchScreen.storyboard */,
 				7C82D57929AEC01E005079B8 /* Info.plist */,
+				7C76CE4929C8A3E40056DF7E /* Platform.mm */,
 			);
 			path = "SDLTest-iOS";
 			sourceTree = "<group>";
@@ -1822,6 +1838,7 @@
 				7CD7DB2329B6909E00C9637C /* UIImageView.cpp in Sources */,
 				7CD7DAF929B6270E00C9637C /* UIApplicationDelegateImpl.cpp in Sources */,
 				7CA6967A29C06DA1008DB110 /* tinyxml2.cpp in Sources */,
+				7C76CE4E29C8A64E0056DF7E /* DefaultPaltform.cpp in Sources */,
 				7C82D69129B38DCA005079B8 /* CATransaction.cpp in Sources */,
 				7C07982A2993F25C004E8EC8 /* CGImage.cpp in Sources */,
 				7CD7DAF329B615E200C9637C /* UIResponder.cpp in Sources */,
@@ -1910,6 +1927,7 @@
 				7C82D5AF29AEC28B005079B8 /* SDL_gpu_matrix.c in Sources */,
 				7C82D67829B2B950005079B8 /* encoding_utf.c in Sources */,
 				7C82D5B629AEC28B005079B8 /* SDL_gpu_renderer.c in Sources */,
+				7C76CE4B29C8A3E40056DF7E /* Platform.mm in Sources */,
 				7C4DCE5C29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
 				7CD7DAFE29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7C82D6A929B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,

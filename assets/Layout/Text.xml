@@ -4,9 +4,55 @@
     height="100%"
     bounceVertically="true">
 
-    <UILabel
-        id="text"
-        text="Test text"
-        fontSize="17"/>
+    <UIView
+        preservesSuperviewLayoutMargins="true">
 
+        <UIView
+            leftEdgeRespects="layoutMargin"
+            rightEdgeRespects="layoutMargin"
+            preservesSuperviewLayoutMargins="true"
+            marginTop="16"
+            marginBottom="16"
+            gap="16">
+
+
+            <UIView
+                backgroundColor="#FFFFFF90"
+                cornerRadius="12">
+
+                <UILabel
+                    id="text"
+                    text="Test text"
+                    fontSize="17"
+                    marginTop="16"
+                    marginBottom="16"
+                    marginLeft="16"
+                    marginRight="16"/>
+
+            </UIView>
+
+            <UIView
+                id="button"
+                width="100%"
+                height="48"
+                cornerRadius="12"
+                backgroundColor="#0055A6"
+                justifyContent="center"
+                alignItems="center">
+                <UIView
+                    justifyContent="center"
+                    alignItems="center">
+                    <UILabel
+                        marginLeft="16"
+                        marginRight="16"
+                        text="Продолжить"
+                        fontSize="17"
+                        textColor="#FFFFFF"
+                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                </UIView>
+            </UIView>
+
+        </UIView>
+
+    </UIView>
 </UIScrollView>

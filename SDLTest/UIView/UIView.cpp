@@ -81,6 +81,7 @@ REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
     REGISTER_XIB_ATTRIBUTE(clipsToBounds, valueToBool, setClipsToBounds)
     REGISTER_XIB_ATTRIBUTE(positionType, valueToPositionType, yoga->setPositionType)
     REGISTER_XIB_ATTRIBUTE(isTransparentTouch, valueToBool, setTransparentTouch)
+    REGISTER_XIB_ATTRIBUTE(preservesSuperviewLayoutMargins, valueToBool, setPreservesSuperviewLayoutMargins)
 
     REGISTER_XIB_ATTRIBUTE(cornerRadius, valueToFloat, layer()->setCornerRadius)
     REGISTER_XIB_ATTRIBUTE(backgroundColor, valueToColor, setBackgroundColor)
@@ -104,6 +105,9 @@ REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
     REGISTER_XIB_EDGE_ATTRIBUTE(margin, valueToMetric, yoga->setMargin)
 
     REGISTER_XIB_ATTRIBUTE(topEdgeRespects, valueToEdgeRespects, setTopEdgeRespects)
+    REGISTER_XIB_ATTRIBUTE(leftEdgeRespects, valueToEdgeRespects, setLeftEdgeRespects)
+    REGISTER_XIB_ATTRIBUTE(rightEdgeRespects, valueToEdgeRespects, setRightEdgeRespects)
+    REGISTER_XIB_ATTRIBUTE(bottomEdgeRespects, valueToEdgeRespects, setBottomEdgeRespects)
 
     return false;
 }

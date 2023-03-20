@@ -21,7 +21,6 @@ public:
 };
 
 enum class UIScrollViewContentInsetAdjustmentBehavior {
-    automatic,
     scrollableAxes,
     never,
     always
@@ -37,6 +36,7 @@ public:
 
     virtual void addSubview(std::shared_ptr<UIView> view) override;
     bool applyXMLAttribute(std::string name, std::string value) override;
+    void layoutSubviews() override;
 
     void layoutMarginsDidChange() override;
 
@@ -65,7 +65,7 @@ private:
 
     bool _bounceHorizontally = false;
     bool _bounceVertically = false;
-    UIScrollViewContentInsetAdjustmentBehavior _contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior::automatic;
+    UIScrollViewContentInsetAdjustmentBehavior _contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes;
 
     UIEdgeInsets _lastLayoutMargins;
     UIEdgeInsets _contentInset;

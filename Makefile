@@ -56,6 +56,7 @@ SOURCES  := $(SOURCES) \
 			Demo \
 			Demo/Runner \
 			Demo/TestViewController \
+			Demo/TextViewController \
 			Demo/YogaTestViewController \
 			Demo/IBTestViewController \
 			Demo/NavigationViewController \
@@ -97,6 +98,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
+			SDLTest/Platform \
 			SDLTest/Renderer \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \

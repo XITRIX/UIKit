@@ -18,4 +18,5 @@ public:
     void viewDidAppear(bool animated) override;
 
     IBOutlet(UILabel, text)
+    IBOutlet(UIView, button)
 };

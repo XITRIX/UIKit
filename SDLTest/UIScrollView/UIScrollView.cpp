@@ -96,7 +96,6 @@ Point UIScrollView::getBoundsCheckedContentOffset(Point newContentOffset) {
     bool contentHeightGreaterThenScrollBounds = contentHeight > bounds().height() - _contentInset.top - _contentInset.bottom;
 
     switch (_contentInsetAdjustmentBehavior) {
-        case UIScrollViewContentInsetAdjustmentBehavior::automatic:
         case UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes: {
             if (contentWidthGreaterThenScrollBounds || _bounceHorizontally) {
                 allInsects += UIEdgeInsets(0, layoutMargins().left, 0, layoutMargins().right);
@@ -257,6 +256,11 @@ bool UIScrollView::applyXMLAttribute(std::string name, std::string value) {
     }
 
     return false;
+}
+
+void UIScrollView::layoutSubviews() {
+    UIView::layoutSubviews();
+    setContentOffset(getBoundsCheckedContentOffset(contentOffset()), false);
 }
 
 }
