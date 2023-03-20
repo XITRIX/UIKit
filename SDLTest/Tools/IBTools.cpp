@@ -13,6 +13,10 @@
 
 namespace UIKit {
 
+std::optional<std::string> valueToString(std::string value) {
+    return value;
+}
+
 std::optional<bool> valueToBool(std::string value) {
     if (value == "true") {
         return true;

@@ -58,25 +58,6 @@ void UIView::applyXMLAttributes(tinyxml2::XMLElement* element, std::map<std::str
 }
 
 bool UIView::applyXMLAttribute(std::string name, std::string value) {
-#define REGISTER_XIB_ATTRIBUTE(strname, parcer, setter) \
-if (name == #strname) { \
-auto strname = parcer(value); \
-if (!strname.has_value()) return false; \
-setter(strname.value()); \
-return true;\
-}
-
-#define REGISTER_XIB_EDGE_ATTRIBUTE(strname, parcer, setter) \
-REGISTER_XIB_ATTRIBUTE(strname, parcer, setter) \
-REGISTER_XIB_ATTRIBUTE(strname##Left, parcer, setter##Left) \
-REGISTER_XIB_ATTRIBUTE(strname##Top, parcer, setter##Top) \
-REGISTER_XIB_ATTRIBUTE(strname##Right, parcer, setter##Right) \
-REGISTER_XIB_ATTRIBUTE(strname##Bottom, parcer, setter##Bottom) \
-REGISTER_XIB_ATTRIBUTE(strname##Start, parcer, setter##Start) \
-REGISTER_XIB_ATTRIBUTE(strname##End, parcer, setter##End) \
-REGISTER_XIB_ATTRIBUTE(strname##Horizontal, parcer, setter##Horizontal) \
-REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
-
     REGISTER_XIB_ATTRIBUTE(contentMode, valueToContentMode, setContentMode)
     REGISTER_XIB_ATTRIBUTE(clipsToBounds, valueToBool, setClipsToBounds)
     REGISTER_XIB_ATTRIBUTE(positionType, valueToPositionType, yoga->setPositionType)

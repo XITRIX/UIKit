@@ -75,31 +75,10 @@ void UILabel::sizeToFit() {
 bool UILabel::applyXMLAttribute(std::string name, std::string value) {
     if (UIView::applyXMLAttribute(name, value)) return true;
 
-    if (name == "text") {
-        setText(value);
-        return true;
-    }
-
-    if (name == "textColor") {
-        auto color = valueToColor(value);
-        if (!color.has_value()) return false;
-        setTextColor(color.value());
-        return true;
-    }
-
-    if (name == "fontSize") {
-        auto size = valueToFloat(value);
-        if (!size.has_value()) return false;
-        font()->pointSize = size.value();
-        return true;
-    }
-
-    if (name == "textAlignment") {
-        auto alignment = valueToTextAlignment(value);
-        if (!alignment.has_value()) return false;
-        setTextAlignment(alignment.value());
-        return true;
-    }
+    REGISTER_XIB_ATTRIBUTE(text, valueToString, setText)
+    REGISTER_XIB_ATTRIBUTE(textColor, valueToColor, setTextColor)
+    REGISTER_XIB_ATTRIBUTE(fontSize, valueToFloat, font()->setPointSize)
+    REGISTER_XIB_ATTRIBUTE(textAlignment, valueToTextAlignment, setTextAlignment)
 
     if (name == "font") {
         auto fontPath = valueToPath(value);

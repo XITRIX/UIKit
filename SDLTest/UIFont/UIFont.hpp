@@ -26,6 +26,8 @@ public:
     Size sizeForText(std::string text, uint wrapLength);
     std::shared_ptr<CGImage> createContentsFor(std::shared_ptr<UILabel> label);
 
+    void setPointSize(float size) { pointSize = size; }
+
     static std::shared_ptr<UIFont> systemFont(float size);
 
     

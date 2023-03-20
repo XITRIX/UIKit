@@ -17,9 +17,11 @@
 namespace UIKit {
 
 class UIColor;
+class UIFont;
 enum class NSTextAlignment;
 enum class UIViewEdgeRespects;
 
+std::optional<std::string> valueToString(std::string value);
 std::optional<bool> valueToBool(std::string value);
 std::optional<YGValue> valueToMetric(std::string value);
 std::optional<UIColor> valueToColor(std::string value);

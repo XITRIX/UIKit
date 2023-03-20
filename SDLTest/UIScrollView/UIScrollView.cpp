@@ -241,19 +241,8 @@ void UIScrollView::cancelDecelerationAnimations() {
 bool UIScrollView::applyXMLAttribute(std::string name, std::string value) {
     if (UIView::applyXMLAttribute(name, value)) { return true; }
 
-    if (name == "bounceVertically") {
-        auto res = valueToBool(value);
-        if (!res.has_value()) return false;
-        setBounceVertically(res.value());
-        return true;
-    }
-
-    if (name == "bounceHorizontally") {
-        auto res = valueToBool(value);
-        if (!res.has_value()) return false;
-        setBounceHorizontally(res.value());
-        return true;
-    }
+    REGISTER_XIB_ATTRIBUTE(bounceVertically, valueToBool, setBounceVertically)
+    REGISTER_XIB_ATTRIBUTE(bounceHorizontally, valueToBool, setBounceHorizontally)
 
     return false;
 }

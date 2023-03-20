@@ -57,12 +57,7 @@ Size UIImageView::sizeThatFits(Size size) {
 bool UIImageView::applyXMLAttribute(std::string name, std::string value) {
     if (UIView::applyXMLAttribute(name, value)) return true;
 
-    if (name == "image") {
-        auto image = valueToImage(value);
-        if (!image.has_value()) return false;
-        setImage(image.value());
-        return true;
-    }
+    REGISTER_XIB_ATTRIBUTE(image, valueToImage, setImage)
 
     return false;
 }
