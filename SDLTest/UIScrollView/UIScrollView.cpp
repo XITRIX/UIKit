@@ -51,10 +51,29 @@ void UIScrollView::setContentOffset(Point offset, bool animated) {
     CATransaction::commit();
 }
 
+void UIScrollView::setContentInsetAdjustmentBehavior(UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior) {
+    if (_contentInsetAdjustmentBehavior == contentInsetAdjustmentBehavior) return;
+    _contentInsetAdjustmentBehavior = contentInsetAdjustmentBehavior;
+    setNeedsLayout();
+}
+
+void UIScrollView::setBounceHorizontally(bool bounceHorizontally) {
+    if (_bounceHorizontally == bounceHorizontally) return;
+    _bounceHorizontally = bounceHorizontally;
+    setNeedsLayout();
+}
+
+void UIScrollView::setBounceVertically(bool bounceVertically) {
+    if (_bounceVertically == bounceVertically) return;
+    _bounceVertically = bounceVertically;
+    setNeedsLayout();
+}
+
 void UIScrollView::layoutMarginsDidChange() {
     auto delta = _lastLayoutMargins - layoutMargins();
     _lastLayoutMargins = layoutMargins();
-    setContentOffset(contentOffset() + Point(delta.left, delta.top), false);
+    auto target = getBoundsCheckedContentOffset(contentOffset() + Point(delta.left, delta.top));
+    setContentOffset(target, false);
 }
 
 Point UIScrollView::visibleContentOffset() {
@@ -68,12 +87,51 @@ Size UIScrollView::contentSize() {
 
 Point UIScrollView::getBoundsCheckedContentOffset(Point newContentOffset) {
     auto contentSize = this->contentSize();
-    auto contentHeight = fmaxf(contentSize.height, bounds().height());
-    auto contentWidth = fmaxf(contentSize.width, bounds().width());
-    return Point(
-        fminf(fmaxf(newContentOffset.x, -_contentInset.left - layoutMargins().left), (contentWidth + _contentInset.right + layoutMargins().right) - bounds().width()),
-        fminf(fmaxf(newContentOffset.y, -_contentInset.top - layoutMargins().top), (contentHeight + _contentInset.bottom + layoutMargins().bottom) - bounds().height())
-    );
+    auto contentHeight = contentSize.height;// fmaxf(contentSize.height, bounds().height());
+    auto contentWidth = contentSize.width;// fmaxf(contentSize.width, bounds().width());
+
+    auto allInsects = _contentInset;// + layoutMargins();
+
+    bool contentWidthGreaterThenScrollBounds = contentWidth > bounds().width() -_contentInset.left - _contentInset.right;
+    bool contentHeightGreaterThenScrollBounds = contentHeight > bounds().height() - _contentInset.top - _contentInset.bottom;
+
+    switch (_contentInsetAdjustmentBehavior) {
+        case UIScrollViewContentInsetAdjustmentBehavior::automatic:
+        case UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes: {
+            if (contentWidthGreaterThenScrollBounds || _bounceHorizontally) {
+                allInsects += UIEdgeInsets(0, layoutMargins().left, 0, layoutMargins().right);
+            }
+            if (contentHeightGreaterThenScrollBounds || _bounceVertically) {
+                allInsects += UIEdgeInsets(layoutMargins().top, 0, layoutMargins().bottom, 0);
+            }
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::always: {
+            allInsects += layoutMargins();
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::never: {
+            break;
+        }
+    }
+
+    bool contentWidthGreaterThenScrollSafeArea = contentWidth > bounds().width() -allInsects.left - allInsects.right;
+    bool contentHeightGreaterThenScrollSafeArea = contentHeight > bounds().height() - allInsects.top - allInsects.bottom;
+
+    Point target;
+    if (!contentWidthGreaterThenScrollSafeArea) {
+        target.x = - allInsects.left;
+    } else {
+        target.x = fminf(fmaxf(newContentOffset.x, -allInsects.left), (contentWidth + allInsects.right) - bounds().width());
+    }
+
+    if (!contentHeightGreaterThenScrollSafeArea) {
+        target.y = - allInsects.top;
+    } else {
+        target.y = fminf(fmaxf(newContentOffset.y, -allInsects.top), (contentHeight + allInsects.bottom) - bounds().height());
+    }
+
+    return target;
 }
 
 void UIScrollView::onPan() {
@@ -183,6 +241,20 @@ void UIScrollView::cancelDecelerationAnimations() {
 
 bool UIScrollView::applyXMLAttribute(std::string name, std::string value) {
     if (UIView::applyXMLAttribute(name, value)) { return true; }
+
+    if (name == "bounceVertically") {
+        auto res = valueToBool(value);
+        if (!res.has_value()) return false;
+        setBounceVertically(res.value());
+        return true;
+    }
+
+    if (name == "bounceHorizontally") {
+        auto res = valueToBool(value);
+        if (!res.has_value()) return false;
+        setBounceHorizontally(res.value());
+        return true;
+    }
 
     return false;
 }

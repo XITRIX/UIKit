@@ -24,9 +24,13 @@ void NavigationViewController::viewDidLoad() {
     container()->addSubview(vc->view());
     addChild(vc);
     vc->didMoveToParent(shared_from_this());
-
 }
 
 void NavigationViewController::viewDidLayoutSubviews() {
-    setAdditionalSafeAreaInsets(UIEdgeInsets(header()->frame().size.height, 0, footer()->frame().size.height, 0));
+    setAdditionalSafeAreaInsets(UIEdgeInsets(navigationBar()->bounds().size.height, 0, tabBar()->bounds().size.height, 0));
+    if (!view()->superview().expired()) {
+        auto safeArea = view()->superview().lock()->safeAreaInsets();
+        navigationBar()->yoga->setMarginTop(YGValue { safeArea.top, YGUnitPoint });
+        tabBar()->yoga->setMarginBottom(YGValue { safeArea.bottom, YGUnitPoint });
+    }
 }

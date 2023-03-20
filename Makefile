@@ -58,6 +58,7 @@ SOURCES  := $(SOURCES) \
 			Demo/TestViewController \
 			Demo/YogaTestViewController \
 			Demo/IBTestViewController \
+			Demo/NavigationViewController \
 
 # - UIKit
 INCLUDES := $(INCLUDES) \

@@ -101,6 +101,13 @@ bool UILabel::applyXMLAttribute(std::string name, std::string value) {
         return true;
     }
 
+    if (name == "font") {
+        auto fontPath = valueToPath(value);
+        if (!fontPath.has_value()) return false;
+        setFont(new_shared<UIFont>(fontPath.value(), this->font()->pointSize));
+        return true;
+    }
+
     return false;
 }
 

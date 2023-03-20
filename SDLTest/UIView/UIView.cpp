@@ -52,7 +52,7 @@ void UIView::applyXMLAttributes(tinyxml2::XMLElement* element, std::map<std::str
 
         if (!this->applyXMLAttribute(name, value)) {
             printf("Error XML attribute parsing Name: %s with Value%s\n", name.c_str(), value.c_str());
-//            this->printXMLAttributeErrorMessage(element, name, value);
+            //            this->printXMLAttributeErrorMessage(element, name, value);
         }
     }
 }
@@ -61,9 +61,9 @@ bool UIView::applyXMLAttribute(std::string name, std::string value) {
 #define REGISTER_XIB_ATTRIBUTE(strname, parcer, setter) \
 if (name == #strname) { \
 auto strname = parcer(value); \
-    if (!strname.has_value()) return false; \
-    setter(strname.value()); \
-    return true;\
+if (!strname.has_value()) return false; \
+setter(strname.value()); \
+return true;\
 }
 
 #define REGISTER_XIB_EDGE_ATTRIBUTE(strname, parcer, setter) \
@@ -102,6 +102,8 @@ REGISTER_XIB_ATTRIBUTE(strname##Vertical, parcer, setter##Vertical)
 
     REGISTER_XIB_EDGE_ATTRIBUTE(padding, valueToMetric, yoga->setPadding)
     REGISTER_XIB_EDGE_ATTRIBUTE(margin, valueToMetric, yoga->setMargin)
+
+    REGISTER_XIB_ATTRIBUTE(topEdgeRespects, valueToEdgeRespects, setTopEdgeRespects)
 
     return false;
 }
@@ -283,6 +285,14 @@ void UIView::updateLayoutMargin() {
         }
     }
 
+    if (!_parentController.expired() && _parentController.lock()->viewRespectsSystemMinimumLayoutMargins()) {
+        auto minMargins = _parentController.lock()->systemMinimumLayoutMargins();
+        margins = UIEdgeInsets(fmaxf(margins.top, minMargins.top),
+                               fmaxf(margins.left, minMargins.left),
+                               fmaxf(margins.bottom, minMargins.bottom),
+                               fmaxf(margins.right, minMargins.right));
+    }
+
     if (_calculatedLayoutMargins != margins) {
         _calculatedLayoutMargins = margins;
         layoutMarginsDidChange();
@@ -369,7 +379,7 @@ void UIView::setSuperview(std::shared_ptr<UIView> superview) {
 }
 
 void UIView::insertSubviewAt(std::shared_ptr<UIView> view, int index) {
- // TODO: Need to implement
+    // TODO: Need to implement
 }
 
 void UIView::removeFromSuperview() {
@@ -387,6 +397,22 @@ void UIView::removeFromSuperview() {
     }
     this->setSuperview(nullptr);
     superview->setNeedsLayout();
+}
+
+std::shared_ptr<UIView> UIView::layoutRoot() {
+    auto view = shared_from_this();
+    while (view && !view->yoga->isRoot()) {
+        view = view->superview().lock();
+    }
+    return view;
+}
+
+void UIView::setNeedsLayout() {
+    setNeedsDisplay();
+    // Needs to recalculate Yoga from root
+    auto layoutRoot = this->layoutRoot();
+    if (layoutRoot) layoutRoot->_needsLayout = true;
+    _needsLayout = true;
 }
 
 // MARK: - Touch
@@ -504,7 +530,7 @@ void UIView::completePendingAnimations() {
         gettimeofday(&now, nullptr);
         // FIXME: incorrect logic
         layer->animateAt(Timer(timevalInMilliseconds(now) + 1000000000));
-//        $0.animate(at: Timer(startingAt: NSDate.distantFuture.timeIntervalSinceNow));
+        //        $0.animate(at: Timer(startingAt: NSDate.distantFuture.timeIntervalSinceNow));
     }
 }
 
@@ -529,10 +555,10 @@ std::shared_ptr<CABasicAnimation> UIView::actionForKey(std::string event) {
 void UIView::display(std::shared_ptr<CALayer> layer) { }
 
 void UIView::layoutIfNeeded() {
-   if (_needsLayout) {
-       _needsLayout = false;
-       layoutSubviews();
-   }
+    if (_needsLayout) {
+        _needsLayout = false;
+        layoutSubviews();
+    }
 }
 
 void UIView::layoutSubviews() {
@@ -541,6 +567,7 @@ void UIView::layoutSubviews() {
         _parentController.lock()->viewWillLayoutSubviews();
     }
 
+    updateEdgeInsets();
     yoga->layoutIfNeeded();
     updateSafeAreaInsets();
 
@@ -593,6 +620,88 @@ void UIView::sdlDrawAndLayoutTreeIfNeeded(float parentAlpha) {
 void UIView::configureLayout(std::function<void(std::shared_ptr<YGLayout>)> block) {
     yoga->setEnabled(true);
     block(yoga);
+}
+
+void UIView::updateEdgeInsets() {
+    yoga->setPaddingTop(YGValue { topEdgeInsetAccordingToEdgeRespection(), YGUnitPoint });
+    yoga->setPaddingLeft(YGValue { leftEdgeInsetAccordingToEdgeRespection(), YGUnitPoint });
+    yoga->setPaddingBottom(YGValue { bottomEdgeInsetAccordingToEdgeRespection(), YGUnitPoint });
+    yoga->setPaddingRight(YGValue { rightEdgeInsetAccordingToEdgeRespection(), YGUnitPoint });
+}
+
+void UIView::setTopEdgeRespects(UIViewEdgeRespects topEdgeRespects) {
+    if (_topEdgeRespects == topEdgeRespects) return;
+    _topEdgeRespects = topEdgeRespects;
+    setNeedsLayout();
+}
+
+void UIView::setLeftEdgeRespects(UIViewEdgeRespects leftEdgeRespects) {
+    if (_leftEdgeRespects == leftEdgeRespects) return;
+    _leftEdgeRespects = leftEdgeRespects;
+    setNeedsLayout();
+}
+
+void UIView::setBottomEdgeRespects(UIViewEdgeRespects bottomEdgeRespects) {
+    if (_bottomEdgeRespects == bottomEdgeRespects) return;
+    _bottomEdgeRespects = bottomEdgeRespects;
+    setNeedsLayout();
+}
+
+void UIView::setRightEdgeRespects(UIViewEdgeRespects rightEdgeRespects) {
+    if (_rightEdgeRespects == rightEdgeRespects) return;
+    _rightEdgeRespects = rightEdgeRespects;
+    setNeedsLayout();
+}
+
+float UIView::topEdgeInsetAccordingToEdgeRespection() {
+    switch (_topEdgeRespects) {
+        case UIViewEdgeRespects::layoutMargin:
+            return layoutMargins().top;
+        case UIViewEdgeRespects::safeArea:
+            return safeAreaInsets().top;
+        case UIViewEdgeRespects::none:
+            return 0;
+    }
+}
+
+float UIView::leftEdgeInsetAccordingToEdgeRespection() {
+    switch (_leftEdgeRespects) {
+        case UIViewEdgeRespects::layoutMargin:
+            return layoutMargins().left;
+        case UIViewEdgeRespects::safeArea:
+            return safeAreaInsets().left;
+        case UIViewEdgeRespects::none:
+            return 0;
+    }
+}
+
+float UIView::bottomEdgeInsetAccordingToEdgeRespection() {
+    switch (_bottomEdgeRespects) {
+        case UIViewEdgeRespects::layoutMargin:
+            return layoutMargins().bottom;
+        case UIViewEdgeRespects::safeArea:
+            return safeAreaInsets().bottom;
+        case UIViewEdgeRespects::none:
+            return 0;
+    }
+}
+
+float UIView::rightEdgeInsetAccordingToEdgeRespection() {
+    switch (_rightEdgeRespects) {
+        case UIViewEdgeRespects::layoutMargin:
+            return layoutMargins().right;
+        case UIViewEdgeRespects::safeArea:
+            return safeAreaInsets().right;
+        case UIViewEdgeRespects::none:
+            return 0;
+    }
+}
+
+UIEdgeInsets UIView::edgeInsetsAccordingToEdgeRespection() {
+    return UIEdgeInsets(topEdgeInsetAccordingToEdgeRespection(),
+                        leftEdgeInsetAccordingToEdgeRespection(),
+                        bottomEdgeInsetAccordingToEdgeRespection(),
+                        rightEdgeInsetAccordingToEdgeRespection());
 }
     
 }

@@ -24,7 +24,7 @@ bool FontRenderer::initialize() {
 }
 
 FontRenderer::FontRenderer(std::string path) {
-    fontFace = nvgCreateFont(Renderer::shared()->getContext(), "regular", path.c_str());
+    fontFace = nvgCreateFont(Renderer::shared()->getContext(), path.c_str(), path.c_str());
 }
 
 FontRenderer::~FontRenderer() { }

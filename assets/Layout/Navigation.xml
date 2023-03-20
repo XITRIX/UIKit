@@ -20,16 +20,31 @@
         <UIView
             id="header"
             width="100%"
-            height="44"
             backgroundColor="#FF000090">
 
+            <UIView
+                id="navigationBar"
+                width="100%"
+                height="44"
+                justifyContent="center"
+                alignItems="center"
+                backgroundColor="#00FF0090">
+                <UILabel
+                    text="Настройки"
+                    font="@path/Fonts/SFProDisplay-Semibold.ttf"
+                    fontSize="17"/>
+            </UIView>
         </UIView>
         <UIView
             id="footer"
             width="100%"
-            height="44"
             backgroundColor="#FF000090">
-
+            <UIView
+                id="tabBar"
+                width="100%"
+                height="44"
+                backgroundColor="#00FF0090">
+            </UIView>
         </UIView>
 
     </UIView>

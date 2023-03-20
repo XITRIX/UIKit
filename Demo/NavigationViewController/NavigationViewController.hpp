@@ -23,5 +23,8 @@ public:
 private:
     IBOutlet(UIView, container)
     IBOutlet(UIView, header)
+    IBOutlet(UIView, navigationBar)
     IBOutlet(UIView, footer)
+    IBOutlet(UIView, tabBar)
+
 };

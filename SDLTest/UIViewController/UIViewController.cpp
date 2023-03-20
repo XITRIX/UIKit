@@ -96,4 +96,10 @@ void UIViewController::setAdditionalSafeAreaInsets(UIEdgeInsets additionalSafeAr
     view()->setNeedsUpdateSafeAreaInsets();
 }
 
+void UIViewController::setViewRespectsSystemMinimumLayoutMargins(bool viewRespectsSystemMinimumLayoutMargins) {
+    if (_viewRespectsSystemMinimumLayoutMargins == viewRespectsSystemMinimumLayoutMargins) return;
+    _viewRespectsSystemMinimumLayoutMargins = viewRespectsSystemMinimumLayoutMargins;
+    view()->setNeedsUpdateLayoutMargins();
+}
+
 }

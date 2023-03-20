@@ -9,6 +9,7 @@
 #include <Tools/Tools.hpp>
 #include <UIColor/UIColor.hpp>
 #include <UILabel/UILabel.hpp>
+#include <UIView/UIView.hpp>
 
 namespace UIKit {
 
@@ -177,6 +178,14 @@ std::optional<YGWrap> valueToWrap(std::string value) {
     return std::nullopt;
 }
 
+std::optional<std::string> valueToPath(std::string value) {
+    if (startsWith(value, "@path/")) {
+        std::string resPath = value.substr(6); // length of "@path/"
+        return Utils::resourcePath + resPath;
+    }
+    return std::nullopt;
+}
+
 std::optional<Data> valueToRes(std::string value) {
     if (startsWith(value, "@res/")) {
         std::string resPath = value.substr(5); // length of "@res/"
@@ -260,6 +269,19 @@ std::optional<NSTextAlignment> valueToTextAlignment(std::string value) {
     }
     if (value == "right") {
         return NSTextAlignment::right;
+    }
+    return std::nullopt;
+}
+
+std::optional<UIViewEdgeRespects> valueToEdgeRespects(std::string value) {
+    if (value == "none") {
+        return UIViewEdgeRespects::none;
+    }
+    if (value == "layoutMargin") {
+        return UIViewEdgeRespects::layoutMargin;
+    }
+    if (value == "safeArea") {
+        return UIViewEdgeRespects::safeArea;
     }
     return std::nullopt;
 }

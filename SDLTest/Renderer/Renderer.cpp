@@ -51,10 +51,10 @@ Renderer::Renderer() {
 #endif
 
 //    auto path = Utils::resourcePath + "Fonts/switch_font.ttf";
-    auto path = Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf";
-    printf("Path: -> %s\n", path.c_str());
-    primaryFont = nvgCreateFont(_vg, "regular", path.c_str());
-    nvgFontFaceId(_vg, primaryFont);
+//    auto path = Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf";
+//    printf("Path: -> %s\n", path.c_str());
+//    primaryFont = nvgCreateFont(_vg, "regular", path.c_str());
+//    nvgFontFaceId(_vg, primaryFont);
 }
 
 Renderer::~Renderer() {

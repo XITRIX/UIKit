@@ -20,6 +20,13 @@ public:
     virtual void scrollViewDidEndDragging(std::shared_ptr<UIScrollView> scrollView, bool willDecelerate) {}
 };
 
+enum class UIScrollViewContentInsetAdjustmentBehavior {
+    automatic,
+    scrollableAxes,
+    never,
+    always
+};
+
 class UIScrollView: public UIView {
 public:
     static std::shared_ptr<UIScrollView> init();
@@ -39,6 +46,15 @@ public:
     UIEdgeInsets contentInset() { return _contentInset; }
     void setContentInset(UIEdgeInsets contentInset) { _contentInset = contentInset; }
 
+    bool bounceHorizontally() { return _bounceHorizontally; }
+    void setBounceHorizontally(bool bounceHorizontally);
+
+    bool bounceVertically() { return _bounceVertically; }
+    void setBounceVertically(bool bounceVertically);
+
+    UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior() { return _contentInsetAdjustmentBehavior; }
+    void setContentInsetAdjustmentBehavior(UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior);
+
     Size contentSize();
 //    void setContentSize(Size size) { _contentSize = size; }
 
@@ -46,6 +62,10 @@ private:
     std::shared_ptr<UIPanGestureRecognizer> _panGestureRecognizer;
     bool _isDecelerating = false;
     Point weightedAverageVelocity;
+
+    bool _bounceHorizontally = false;
+    bool _bounceVertically = false;
+    UIScrollViewContentInsetAdjustmentBehavior _contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior::automatic;
 
     UIEdgeInsets _lastLayoutMargins;
     UIEdgeInsets _contentInset;

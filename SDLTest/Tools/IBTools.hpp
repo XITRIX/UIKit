@@ -18,6 +18,7 @@ namespace UIKit {
 
 class UIColor;
 enum class NSTextAlignment;
+enum class UIViewEdgeRespects;
 
 std::optional<bool> valueToBool(std::string value);
 std::optional<YGValue> valueToMetric(std::string value);
@@ -28,11 +29,13 @@ std::optional<YGAlign> valueToAlign(std::string value);
 std::optional<YGDirection> valueToDirection(std::string value);
 std::optional<YGFlexDirection> valueToFlexDirection(std::string value);
 std::optional<YGWrap> valueToWrap(std::string value);
+std::optional<std::string> valueToPath(std::string value);
 std::optional<Data> valueToRes(std::string value);
 std::optional<std::shared_ptr<UIImage>> valueToImage(std::string value);
 std::optional<UIViewContentMode> valueToContentMode(std::string value);
 std::optional<YGPositionType> valueToPositionType(std::string value);
 std::optional<NSTextAlignment> valueToTextAlignment(std::string value);
 std::optional<UIEdgeInsets> valueToEdgeInsets(std::string value);
+std::optional<UIViewEdgeRespects> valueToEdgeRespects(std::string value);
 
 }

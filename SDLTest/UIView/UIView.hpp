@@ -28,6 +28,12 @@ namespace UIKit {
 class UIViewController;
 class UIWindow;
 
+enum class UIViewEdgeRespects {
+    none,
+    layoutMargin,
+    safeArea
+};
+
 class UIView: public UIResponder, public CALayerDelegate, public enable_shared_from_this<UIView> {
 public:
     static std::shared_ptr<UIView> init();
@@ -107,7 +113,7 @@ public:
 
     // Layout
     void setNeedsDisplay() { _needsDisplay = true; }
-    void setNeedsLayout() { setNeedsDisplay(); _needsLayout = true; }
+    void setNeedsLayout();// { setNeedsDisplay(); _needsLayout = true; }
 
     void layoutIfNeeded();
     virtual void layoutSubviews();
@@ -156,6 +162,16 @@ public:
     std::shared_ptr<YGLayout> yoga;
     void configureLayout(std::function<void(std::shared_ptr<YGLayout>)> block);
 
+    UIViewEdgeRespects topEdgeRespects() { return _topEdgeRespects; }
+    UIViewEdgeRespects leftEdgeRespects() { return _leftEdgeRespects; }
+    UIViewEdgeRespects bottomEdgeRespects() { return _bottomEdgeRespects; }
+    UIViewEdgeRespects rightEdgeRespects() { return _rightEdgeRespects; }
+
+    void setTopEdgeRespects(UIViewEdgeRespects topEdgeRespects);
+    void setLeftEdgeRespects(UIViewEdgeRespects leftEdgeRespects);
+    void setBottomEdgeRespects(UIViewEdgeRespects bottomEdgeRespects);
+    void setRightEdgeRespects(UIViewEdgeRespects rightEdgeRespects);
+
 private:
     std::vector<std::shared_ptr<UIGestureRecognizer>> _gestureRecognizers;
     std::vector<std::shared_ptr<UIView>> _subviews;
@@ -185,6 +201,19 @@ private:
     bool _needsDisplay = true;
     bool _needsUpdateSafeAreaInsets = true;
     bool _needsUpdateLayoutMargins = true;
+
+    UIViewEdgeRespects _topEdgeRespects = UIViewEdgeRespects::none;
+    UIViewEdgeRespects _leftEdgeRespects = UIViewEdgeRespects::none;
+    UIViewEdgeRespects _bottomEdgeRespects = UIViewEdgeRespects::none;
+    UIViewEdgeRespects _rightEdgeRespects = UIViewEdgeRespects::none;
+    std::shared_ptr<UIView> layoutRoot();
+
+    float topEdgeInsetAccordingToEdgeRespection();
+    float leftEdgeInsetAccordingToEdgeRespection();
+    float bottomEdgeInsetAccordingToEdgeRespection();
+    float rightEdgeInsetAccordingToEdgeRespection();
+    UIEdgeInsets edgeInsetsAccordingToEdgeRespection();
+    void updateEdgeInsets();
 
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();
