@@ -1,14 +1,13 @@
 <UIView
     width="100%"
     height="100%"
-    backgroundColor="#FFFFFF">
+    backgroundColor="#000000">
 
     <UIView
         id="container"
         width="100%"
         height="100%"
-        positionType="absolute"
-        backgroundColor="#00FFFF90">
+        positionType="absolute">
     </UIView>
 
     <UIView
@@ -20,30 +19,49 @@
         <UIView
             id="header"
             width="100%"
-            backgroundColor="#FF000090">
+            backgroundColor="#151516E0">
 
             <UIView
                 id="navigationBar"
                 width="100%"
                 height="44"
                 justifyContent="center"
-                alignItems="center"
-                backgroundColor="#00FF0090">
+                alignItems="center">
                 <UILabel
                     text="Настройки"
                     font="@path/Fonts/SFProDisplay-Semibold.ttf"
-                    fontSize="17"/>
+                    fontSize="17"
+                    textColor="#FFFFFF"/>
             </UIView>
         </UIView>
         <UIView
             id="footer"
             width="100%"
-            backgroundColor="#FF000090">
+            backgroundColor="#151516E0">
             <UIView
                 id="tabBar"
                 width="100%"
-                height="44"
-                backgroundColor="#00FF0090">
+                height="48"
+                justifyContent="center"
+                alignItems="center">
+
+                <UIView
+                    gap="2"
+                    justifyContent="center"
+                    alignItems="center">
+
+                    <UIImageView
+                        width="28"
+                        height="28"
+                        image="@image/Icon.png"/>
+
+                    <UILabel
+                        text="Настройки"
+                        font="@path/Fonts/SFProDisplay-Medium.ttf"
+                        fontSize="10"
+                        textColor="#FFFFFF"/>
+                </UIView>
+
             </UIView>
         </UIView>
 

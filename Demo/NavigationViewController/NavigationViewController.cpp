@@ -17,8 +17,6 @@ void NavigationViewController::loadView() {
 }
 
 void NavigationViewController::viewDidLoad() {
-    view()->setBackgroundColor(UIColor::cyan);
-
     auto vc = new_shared<TextViewController>();
 
     container()->addSubview(vc->view());
