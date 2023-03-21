@@ -2122,9 +2122,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/include,
+					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				OTHER_CFLAGS = (
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
@@ -2143,9 +2142,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/include,
+					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
 				OTHER_CFLAGS = (
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
