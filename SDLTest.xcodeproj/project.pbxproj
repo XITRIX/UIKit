@@ -582,7 +582,6 @@
 				7CB7F3CA29A3D45F00A20694 /* extern */,
 				7CD7DAFB29B62DB600C9637C /* Demo */,
 				7C07981A2993E916004E8EC8 /* SDLTest */,
-				7C82D56729AEC01C005079B8 /* SDLTest-iOS */,
 				7C0798192993E916004E8EC8 /* Products */,
 				7CB7F52629A3D5F400A20694 /* Frameworks */,
 			);
@@ -804,13 +803,14 @@
 		7C76CE3C29C8A37F0056DF7E /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				7C82D56729AEC01C005079B8 /* iOS */,
 				7C76CE4829C8A38E0056DF7E /* Platform.hpp */,
 				7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
 		};
-		7C82D56729AEC01C005079B8 /* SDLTest-iOS */ = {
+		7C82D56729AEC01C005079B8 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				7C82D57429AEC01E005079B8 /* Assets.xcassets */,
@@ -818,7 +818,7 @@
 				7C82D57929AEC01E005079B8 /* Info.plist */,
 				7C76CE4929C8A3E40056DF7E /* Platform.mm */,
 			);
-			path = "SDLTest-iOS";
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		7C82D58629AEC253005079B8 /* Products */ = {
@@ -2168,7 +2168,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
-				INFOPLIST_FILE = "SDLTest-iOS/Info.plist";
+				INFOPLIST_FILE = SDLTest/Platform/iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2207,7 +2207,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
 				);
-				INFOPLIST_FILE = "SDLTest-iOS/Info.plist";
+				INFOPLIST_FILE = SDLTest/Platform/iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
