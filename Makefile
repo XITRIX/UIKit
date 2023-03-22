@@ -98,7 +98,7 @@ SOURCES  := $(SOURCES) \
 			SDLTest/Geometry \
 			SDLTest/NXAffineTransform \
 			SDLTest/NXTransform3D \
-			SDLTest/Platform \
+			SDLTest/Platform/Default \
 			SDLTest/Renderer \
 			SDLTest/Shader \
 			SDLTest/ShaderProgram \

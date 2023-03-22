@@ -617,7 +617,6 @@
 				7CB7F55529A3F1B500A20694 /* NXAffineTransform */,
 				7CB7F55829A3F1B500A20694 /* NXTransform3D */,
 				7C82D65129AFE128005079B8 /* Renderer */,
-				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
 				7CD13F2329AE6AE000D0FFF5 /* Shader */,
 				7CD13F1F29AE6A5C00D0FFF5 /* ShaderProgram */,
 				7C82D69329B3ED42005079B8 /* Timer */,
@@ -803,11 +802,26 @@
 		7C76CE3C29C8A37F0056DF7E /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				7C82D56729AEC01C005079B8 /* iOS */,
 				7C76CE4829C8A38E0056DF7E /* Platform.hpp */,
-				7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */,
+				7C76CEA829C9F2B50056DF7E /* Default */,
+				7C82D56729AEC01C005079B8 /* iOS */,
 			);
 			path = Platform;
+			sourceTree = "<group>";
+		};
+		7C76CEA829C9F2B50056DF7E /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */,
+			);
+			path = Default;
+			sourceTree = "<group>";
+		};
+		7C76CEAD29CAFB860056DF7E /* SDLFontRenderer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SDLFontRenderer;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* iOS */ = {
@@ -1451,6 +1465,7 @@
 		7CD7DAFB29B62DB600C9637C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				7C0798222993EE53004E8EC8 /* SDLTest.entitlements */,
 				7C44C09E29C4B34F0027DB31 /* TextViewController */,
 				7CA6977129C07876008DB110 /* NavigationViewController */,
 				7C4DCE7429BD3DA700F13A6D /* YogaTestViewController */,
@@ -1536,6 +1551,7 @@
 		7CD7DB2F29B6AD3000C9637C /* FontRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				7C76CEAD29CAFB860056DF7E /* SDLFontRenderer */,
 				7CD7DB3129B6AD3700C9637C /* FontRenderer.hpp */,
 				7CD7DB3029B6AD3700C9637C /* FontRenderer.cpp */,
 			);
@@ -2116,7 +2132,7 @@
 		7C0798202993E916004E8EC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SDLTest/SDLTest.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Demo/SDLTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2128,7 +2144,10 @@
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
 				);
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lSDL_ttf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2136,7 +2155,7 @@
 		7C0798212993E916004E8EC8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SDLTest/SDLTest.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Demo/SDLTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2148,7 +2167,10 @@
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
 				);
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lSDL_ttf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
