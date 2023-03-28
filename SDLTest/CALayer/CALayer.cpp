@@ -254,6 +254,29 @@ void CALayer::setFrame(Rect frame) {
     setBounds(bounds);
 }
 
+Rect CALayer::getLayoutFrame() {
+    auto bounds = _bounds;
+
+    auto anchorPointOffset = Point(
+        bounds.width() * _anchorPoint.x,
+        bounds.height() * _anchorPoint.y
+                                   );
+
+    return Rect(_position.x - anchorPointOffset.x,
+                _position.y - anchorPointOffset.y,
+                bounds.width(),
+                bounds.height());
+}
+
+void CALayer::setLayoutFrame(Rect frame) {
+    setPosition(Point(frame.origin.x + (frame.width() * _anchorPoint.x),
+                     frame.origin.y + (frame.height() * _anchorPoint.y)));
+
+    auto bounds = _bounds;
+    bounds.size = frame.size;
+    setBounds(bounds);
+}
+
 void CALayer::setAnchorPoint(Point anchorPoint) {
     if (_anchorPoint == anchorPoint) return;
     onWillSet("anchorPoint");

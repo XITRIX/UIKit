@@ -135,6 +135,14 @@ void UIView::setFrame(Rect frame) {
     setNeedsUpdateSafeAreaInsets();
 }
 
+void UIView::setLayoutFrame(Rect frame) {
+    if (this->layoutFrame().size != frame.size) {
+        setNeedsLayout();
+    }
+    _layer->setLayoutFrame(frame);
+    setNeedsUpdateSafeAreaInsets();
+}
+
 void UIView::setBounds(Rect bounds) {
     if (this->bounds().size != bounds.size) {
         setNeedsLayout();

@@ -172,6 +172,10 @@ private:
 
     void drawNVG(std::function<void(NVGcontext*)> draw);
 
+    Rect getLayoutFrame();
+    void setLayoutFrame(Rect frame);
+
+    friend class YGLayout;
     friend class UIView;
 };
 

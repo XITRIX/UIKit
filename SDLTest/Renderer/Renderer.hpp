@@ -22,12 +22,12 @@ public:
     int primaryFont = 0;
     static Renderer* shared();
 
-    void draw(std::function<void(NVGcontext*)> draw);
+    void draw(std::function<void(NVGcontext*)> draw) const;
     std::shared_ptr<CGImage> drawFBO(Size size, float scale, std::function<void(NVGcontext*)> draw);
 
     void drawRectangleFilled(Rect rect, UIColor color, float cornerRadius = 0);
 
-    NVGcontext* getContext() const { return _vg; }
+    NVGcontext* getContext() const;
 private:
     static Renderer* _shared;
     Renderer();

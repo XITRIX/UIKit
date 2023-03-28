@@ -207,6 +207,9 @@ private:
     bool _insetsLayoutMarginsFromSafeArea = true;
     bool _preservesSuperviewLayoutMargins = false;
 
+    void setLayoutFrame(Rect frame);
+    Rect layoutFrame() const { return _layer->getLayoutFrame(); }
+
     void setSafeAreaInsets(UIEdgeInsets safeAreaInsets);
     void updateSafeAreaInsetsInChilds();
     void updateSafeAreaInsetsIfNeeded();

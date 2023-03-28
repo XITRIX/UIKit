@@ -35,6 +35,8 @@ UIRenderer::UIRenderer() {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
 
     rawPointer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    GPU_SetActiveTarget(rawPointer);
+    
     if (!rawPointer) {
         printf("%s\n", GPU_PopErrorCode().details);
         printf("%s\n", SDL_GetError());

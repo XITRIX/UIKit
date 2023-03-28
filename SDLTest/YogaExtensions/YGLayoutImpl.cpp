@@ -147,8 +147,8 @@ void YGLayout::YGApplyLayoutToViewHierarchy(std::shared_ptr<UIView>view, bool pr
       topLeft.y + YGNodeLayoutGetHeight(node),
     };
 
-    const Point origin = preserveOrigin ? view->frame().origin : Point();
-    view->setFrame( Rect(
+    const Point origin = preserveOrigin ? view->layoutFrame().origin : Point();
+    view->setLayoutFrame( Rect(
       Point (
         YGRoundPixelValue(topLeft.x + origin.x),
         YGRoundPixelValue(topLeft.y + origin.y)

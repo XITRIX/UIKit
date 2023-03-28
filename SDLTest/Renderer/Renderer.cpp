@@ -65,8 +65,13 @@ Renderer::~Renderer() {
 #endif
 }
 
+NVGcontext* Renderer::getContext() const {
+    draw([](auto){});
+    return _vg;
+}
+
 // Create a GPU_Image from a NanoVG Framebuffer
-void Renderer::draw(std::function<void(NVGcontext*)> draw) {
+void Renderer::draw(std::function<void(NVGcontext*)> draw) const {
     auto renderer = GPU_GetActiveTarget();
     bool needHFlip = renderer != UIRenderer::main()->rawPointer;
 
