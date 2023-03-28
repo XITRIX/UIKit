@@ -83,41 +83,52 @@ NXTransform3D NXTransform3D::operator*(const float& b) const {
     );
 }
 
-NXTransform3D NXTransform3D::interpolateTo(const NXTransform3D& matrix, const float& progress) const {
-    auto thisInverce = NXTransform3DGetAffineTransform(*this).inverted().value();
-    auto difference = NXTransform3DGetAffineTransform(matrix) * thisInverce;
-
-    auto a = float(difference.m11);
-    auto b = float(difference.m12);
-    auto c = float(difference.m21);
-    auto d = float(difference.m22);
-    auto e = float(difference.tX);
-    auto f = float(difference.tY);
+void getPartsFromMatrix(const NXAffineTransform& matrix, float* angle, Point* translation, Point* scale) {
+    auto a = float(matrix.m11);
+    auto b = float(matrix.m12);
+    auto c = float(matrix.m21);
+    auto d = float(matrix.m22);
+    auto e = float(matrix.tX);
+    auto f = float(matrix.tY);
 
     auto delta = a * d - b * c;
 
-    float angle = 0;
-    Point translation(e, f);
-    Point scale(1, 1);
+    *angle = 0;
+    *translation = Point(e, f);
+    *scale = Point(1, 1);
 
     // Apply the QR-like decomposition.
     if (a != 0 || b != 0) {
         auto r = sqrtf(a * a + b * b);
-        angle = b > 0 ? acosf(a / r) : -acosf(a / r);
-        scale = Point(r, delta / r);
+        *angle = b > 0 ? acosf(a / r) : -acosf(a / r);
+        *scale = Point(r, delta / r);
     } else if (c != 0 || d != 0) {
         auto s = sqrtf(c * c + d * d);
-        angle = M_PI / 2 - (d > 0 ? acosf(-c / s) : -acosf(c / s));
-        scale = Point(delta / s, s);
+        *angle = M_PI / 2 - (d > 0 ? acosf(-c / s) : -acosf(c / s));
+        *scale = Point(delta / s, s);
     } else { }
 
-    angle = angle / RAD_PER_DEG;
-//
-    angle *= progress;
-    scale = (scale - Point(1, 1)) * progress + Point(1, 1);
-    translation = translation * progress;
+    *angle = *angle / RAD_PER_DEG;
+}
 
-    return (*this) * NXTransform3D::translationBy(translation.x, translation.y, 0) * NXTransform3D::scaleBy(scale.x, scale.y, 1) * NXTransform3D::rotationBy(angle, 0, 0, 1);
+NXTransform3D NXTransform3D::interpolateTo(const NXTransform3D& matrix, const float& progress) const {
+    auto currentM = NXTransform3DGetAffineTransform(*this);
+    auto newM = NXTransform3DGetAffineTransform(matrix);
+
+    float angle;
+    Point translation, scale;
+
+    float dAngle;
+    Point dTranslation, dScale;
+
+    getPartsFromMatrix(currentM, &angle, &translation, &scale);
+    getPartsFromMatrix(newM, &dAngle, &dTranslation, &dScale);
+//
+    angle = angle + (dAngle - angle) * progress;
+    scale = scale + (dScale - scale) * progress;// (scale - Point(1, 1)) * progress + Point(1, 1);
+    translation = translation + (dTranslation - translation) * progress;
+
+    return NXTransform3D::translationBy(translation.x, translation.y, 0) * NXTransform3D::scaleBy(scale.x, scale.y, 1) * NXTransform3D::rotationBy(angle, 0, 0, 1);
 }
 
 Vector3 NXTransform3D::transformingVector(float x, float y, float z) const {
