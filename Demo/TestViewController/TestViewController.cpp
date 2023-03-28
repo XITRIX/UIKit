@@ -110,7 +110,7 @@ void TestViewController::viewDidLoad() {
 
             UIView::animate(0.3f, [this]() {
                 if (!scaled) {
-                    label->setText("Hell");
+                    label->setText("Press me!");
                     label->layer()->setCornerRadius(0);
                 } else {
                     label->setText("Helloooo!\nHelloooo!\nHell!");

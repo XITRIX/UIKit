@@ -19,4 +19,5 @@ public:
 
     IBOutlet(UILabel, text)
     IBOutlet(UIView, button)
+    IBOutlet(UIView, dismissButton)
 };

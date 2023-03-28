@@ -54,6 +54,13 @@ public:
     bool viewRespectsSystemMinimumLayoutMargins() { return _viewRespectsSystemMinimumLayoutMargins; }
     void setViewRespectsSystemMinimumLayoutMargins(bool viewRespectsSystemMinimumLayoutMargins);
 
+    void present(std::shared_ptr<UIViewController> otherViewController, bool animated, std::function<void()> completion = [](){});
+    void dismiss(bool animated, std::function<void()> completion = [](){});
+
+protected:
+    virtual void makeViewAppear(bool animated, std::shared_ptr<UIViewController> presentingViewController, std::function<void()> completion = [](){});
+    virtual void makeViewDisappear(bool animated, std::function<void(bool)> completion);
+    
 private:
     std::shared_ptr<UIView> _view;
     std::weak_ptr<UIViewController> _parent;
@@ -61,6 +68,12 @@ private:
     UIEdgeInsets _additionalSafeAreaInsets;
     UIEdgeInsets _systemMinimumLayoutMargins = UIEdgeInsets(0, 16, 0, 16);
     bool _viewRespectsSystemMinimumLayoutMargins = true;
+    float _animationTime = 0.4;
+
+    std::shared_ptr<UIViewController> _presentedViewController;
+    std::weak_ptr<UIViewController> _presentingViewController;
+
+    std::shared_ptr<UIViewController> rootVC();
 };
 
 }

@@ -19,7 +19,7 @@
         <UIView
             id="header"
             width="100%"
-            backgroundColor="#151516E0">
+            backgroundColor="#151516F0">
 
             <UIView
                 id="navigationBar"
@@ -37,7 +37,7 @@
         <UIView
             id="footer"
             width="100%"
-            backgroundColor="#151516E0">
+            backgroundColor="#151516F0">
             <UIView
                 id="tabBar"
                 width="100%"

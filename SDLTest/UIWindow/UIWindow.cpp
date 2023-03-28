@@ -29,6 +29,10 @@ UIWindow::UIWindow() {
     yoga->setEnabled(false);
 }
 
+UIWindow::~UIWindow() {
+    _presentedViewControllers.clear();
+}
+
 std::shared_ptr<UIWindow> UIWindow::window() {
     return shared_from_base<UIWindow>();
 }
@@ -110,6 +114,18 @@ void UIWindow::layoutSubviews() {
     if (_rootViewController) {
         _rootViewController->view()->setFrame(this->bounds());
     }
+
+    for(auto& vc: _presentedViewControllers) {
+        vc->view()->setFrame(this->bounds());
+    }
+}
+
+void UIWindow::addPresentedViewController(std::shared_ptr<UIViewController> controller) {
+    _presentedViewControllers.push_back(controller);
+}
+
+void UIWindow::removePresentedViewController(std::shared_ptr<UIViewController> controller) {
+    _presentedViewControllers.erase(std::remove(_presentedViewControllers.begin(), _presentedViewControllers.end(), controller), _presentedViewControllers.end());
 }
 
 }

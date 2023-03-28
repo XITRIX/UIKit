@@ -6,6 +6,7 @@
 //
 
 #include <UIViewController/UIViewController.hpp>
+#include <UIWindow/UIWindow.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
 
 namespace UIKit {
@@ -100,6 +101,104 @@ void UIViewController::setViewRespectsSystemMinimumLayoutMargins(bool viewRespec
     if (_viewRespectsSystemMinimumLayoutMargins == viewRespectsSystemMinimumLayoutMargins) return;
     _viewRespectsSystemMinimumLayoutMargins = viewRespectsSystemMinimumLayoutMargins;
     view()->setNeedsUpdateLayoutMargins();
+}
+
+void UIViewController::present(std::shared_ptr<UIViewController> otherViewController, bool animated, std::function<void()> completion) {
+    if (!parent().expired()) {
+        return parent().lock()->present(otherViewController, animated, completion);
+    }
+
+    if (_presentedViewController != nullptr) {
+        printf("Warning: attempted to present \(otherViewController), but \(self) is already presenting another view controller. Ignoring request.");
+        return;
+    }
+
+    if (!otherViewController->_presentingViewController.expired()) {
+        printf("Tried to present \(otherViewController) but it is already being presented by \(otherViewController.presentingViewController!)");
+        return;
+    }
+
+    _presentedViewController = otherViewController;
+    otherViewController->_presentingViewController = shared_from_this();
+
+    otherViewController->view()->setFrame(view()->window()->bounds());
+    otherViewController->viewWillAppear(animated);
+    otherViewController->makeViewAppear(animated, shared_from_this());
+    otherViewController->viewDidAppear(animated);
+
+    otherViewController->view()->layoutSubviews();
+
+    completion();
+}
+
+void UIViewController::dismiss(bool animated, std::function<void()> completion) {
+    if (!parent().expired()) {
+        return parent().lock()->dismiss(animated, completion);
+    }
+
+    if (_presentingViewController.expired()) return;
+
+//    if let navigationController = navigationController {
+//        navigationController.dismiss(animated: animated, completion: completion)
+//        return
+//    }
+
+    viewWillDisappear(animated);
+
+    // This comes before completion because we may want to check if any presentedViewControllers are present before the animation is completed. In that case we're not really "presenting" anything anymore so we should return `nil`. This is particularly important for a `UIAlertController` that presents another UIViewController after dismissing itself.
+    _presentingViewController.lock()->_presentedViewController = nullptr;
+
+    makeViewDisappear(animated, [this, animated, completion](auto) {
+//        _presentingViewController.lock()->_presentedViewController = nullptr;
+        auto window = view()->window();
+        view()->removeFromSuperview();
+        viewDidDisappear(animated);
+        completion();
+        _presentingViewController.reset();
+        window->removePresentedViewController(shared_from_this());
+    });
+}
+
+void UIViewController::makeViewAppear(bool animated, std::shared_ptr<UIViewController> presentingViewController, std::function<void()> completion) {
+    auto window = presentingViewController->view()->window();
+    window->addSubview(view());
+    window->addPresentedViewController(shared_from_this());
+
+    view()->yoga->setIncludedInLayout(false);
+    view()->setTransform(NXAffineTransform::translationBy(0, window->bounds().maxY()));
+
+    UIView::animate(animated ? _animationTime : 0, 0, curveEaseOut, [this]() {
+//        _presentingViewController.lock()->view()->setTransform(NXAffineTransform::scaleBy(0.9f, 1));
+        view()->setTransform(NXAffineTransform::identity);
+    }, [completion](auto) {
+        completion();
+    });
+}
+
+void UIViewController::makeViewDisappear(bool animated, std::function<void(bool)> completion) {
+    UIView::animate(
+        animated ? _animationTime : 0.0,
+        0,
+        curveEaseIn,
+        [this]() {
+//            _presentingViewController.lock()->view()->setTransform(NXAffineTransform::identity);
+
+            float yOffset = 0;
+            if (!view()->superview().expired()) {
+                yOffset = view()->superview().lock()->bounds().height();
+            } else {
+                yOffset = view()->frame().height();
+            }
+            view()->setTransform(NXAffineTransform::translationBy(0, yOffset));
+    }, completion);
+}
+
+std::shared_ptr<UIViewController> UIViewController::rootVC() {
+    auto root = shared_from_this();
+    while (!root->parent().expired()) {
+        root = root->parent().lock();
+    }
+    return root;
 }
 
 }

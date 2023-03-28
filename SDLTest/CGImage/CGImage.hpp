@@ -22,6 +22,7 @@ public:
 
     CGImage(Size size);
     CGImage(Data sourceData);
+    CGImage(SDL_Surface* surface);
     CGImage(GPU_Image* image, std::optional<Data> sourceData);
     CGImage(GPU_Image* image): CGImage(image, std::nullopt) {}
     ~CGImage();

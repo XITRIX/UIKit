@@ -35,6 +35,13 @@ CGImage::CGImage(Data sourceData) {
     new (this) CGImage(gpuImagePtr, data);
 }
 
+CGImage::CGImage(SDL_Surface* surface) {
+    auto pointer = GPU_CopyImageFromSurface(surface);
+    if (!pointer) { return; }
+
+    new (this) CGImage(pointer, std::nullopt);
+}
+
 CGImage::~CGImage() {
     GPU_FreeTarget(pointee->target);
     GPU_FreeImage(pointee);

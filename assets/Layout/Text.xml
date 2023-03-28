@@ -5,6 +5,7 @@
     bounceVertically="true">
 
     <UIView
+        width="100%"
         preservesSuperviewLayoutMargins="true">
 
         <UIView
@@ -15,6 +16,48 @@
             marginBottom="16"
             gap="16">
 
+
+            <UIView
+                id="button"
+                width="100%"
+                height="48"
+                justifyContent="center"
+                alignItems="center"
+                cornerRadius="12"
+                backgroundColor="#0055A6">
+                <UIView
+                    justifyContent="center"
+                    alignItems="center">
+                    <UILabel
+                        marginLeft="16"
+                        marginRight="16"
+                        text="Продолжить"
+                        fontSize="17"
+                        textColor="#FFFFFF"
+                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                </UIView>
+            </UIView>
+
+            <UIView
+                id="dismissButton"
+                width="100%"
+                height="48"
+                justifyContent="center"
+                alignItems="center"
+                cornerRadius="12"
+                backgroundColor="#0055A6">
+                <UIView
+                    justifyContent="center"
+                    alignItems="center">
+                    <UILabel
+                        marginLeft="16"
+                        marginRight="16"
+                        text="Назад"
+                        fontSize="17"
+                        textColor="#FFFFFF"
+                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                </UIView>
+            </UIView>
 
             <UIView
                 backgroundColor="#1C1C1E"
@@ -30,27 +73,6 @@
                     marginRight="16"
                     textColor="#FFFFFF"/>
 
-            </UIView>
-
-            <UIView
-                id="button"
-                width="100%"
-                height="48"
-                cornerRadius="12"
-                backgroundColor="#0055A6"
-                justifyContent="center"
-                alignItems="center">
-                <UIView
-                    justifyContent="center"
-                    alignItems="center">
-                    <UILabel
-                        marginLeft="16"
-                        marginRight="16"
-                        text="Продолжить"
-                        fontSize="17"
-                        textColor="#FFFFFF"
-                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
-                </UIView>
             </UIView>
 
         </UIView>

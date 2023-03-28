@@ -14,6 +14,7 @@ namespace UIKit {
 class UIWindow: public UIView {
 public:
     UIWindow();
+    ~UIWindow();
 
     std::shared_ptr<UIWindow> window() override;
 
@@ -26,6 +27,11 @@ public:
     void layoutSubviews() override;
 private:
     std::shared_ptr<UIViewController> _rootViewController;
+    std::vector<std::shared_ptr<UIViewController>> _presentedViewControllers;
+
+    friend class UIViewController;
+    void addPresentedViewController(std::shared_ptr<UIViewController> controller);
+    void removePresentedViewController(std::shared_ptr<UIViewController> controller);
 };
 
 }
