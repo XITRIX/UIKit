@@ -7,11 +7,12 @@
 
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <UITouch/UITouch.hpp>
+#include <UIPress/UIPress.hpp>
 
 namespace UIKit {
 
 UIGestureRecognizer::UIGestureRecognizer(std::function<void(UIGestureRecognizerState)> onStateChanged):
-    onStateChanged(onStateChanged)
+onStateChanged(onStateChanged)
 { }
 
 UIGestureRecognizer::~UIGestureRecognizer() {
@@ -46,9 +47,14 @@ void UIGestureRecognizer::touchesMoved(std::vector<std::shared_ptr<UITouch>> tou
 void UIGestureRecognizer::touchesEnded(std::vector<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {}
 void UIGestureRecognizer::touchesCancelled(std::vector<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {}
 
+void UIGestureRecognizer::pressesBegan(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
+void UIGestureRecognizer::pressesMoved(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
+void UIGestureRecognizer::pressesEnded(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
+void UIGestureRecognizer::pressesCancelled(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
+
 bool UIGestureRecognizer::recognitionCondition() {
     return _state != UIGestureRecognizerState::failed &&
-           _state != UIGestureRecognizerState::cancelled;
+    _state != UIGestureRecognizerState::cancelled;
 }
 
 void UIGestureRecognizer::_touchesBegan(std::vector<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {
@@ -91,9 +97,29 @@ void UIGestureRecognizer::_touchesCancelled(std::vector<std::shared_ptr<UITouch>
     for (auto touch : touches)
         removeTouch(touch);
 
-//    if (!recognitionCondition()) return;
+    //    if (!recognitionCondition()) return;
 
     touchesCancelled(touches, event);
+}
+
+void UIGestureRecognizer::_pressesBegan(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
+    if (!recognitionCondition()) return;
+    pressesBegan(presses, event);
+}
+
+void UIGestureRecognizer::_pressesMoved(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
+    if (!recognitionCondition()) return;
+    pressesMoved(presses, event);
+}
+
+void UIGestureRecognizer::_pressesEnded(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
+    if (!recognitionCondition()) return;
+    pressesEnded(presses, event);
+}
+
+void UIGestureRecognizer::_pressesCancelled(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
+    if (!recognitionCondition()) return;
+    pressesCancelled(presses, event);
 }
 
 void UIGestureRecognizer::addTouch(std::shared_ptr<UITouch> touch) {

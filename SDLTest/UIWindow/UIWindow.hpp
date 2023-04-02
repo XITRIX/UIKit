@@ -32,6 +32,9 @@ private:
     friend class UIViewController;
     void addPresentedViewController(std::shared_ptr<UIViewController> controller);
     void removePresentedViewController(std::shared_ptr<UIViewController> controller);
+
+    void sendTouchEvent(std::shared_ptr<UIEvent> event);
+    void sendPressEvent(std::shared_ptr<UIPressesEvent> event);
 };
 
 }

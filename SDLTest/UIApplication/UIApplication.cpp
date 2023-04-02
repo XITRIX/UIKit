@@ -5,10 +5,12 @@
 //  Created by Даниил Виноградов on 08.02.2023.
 //
 
+#include <UIPressesEvent/UIPressesEvent.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
 #include <UIRenderer/UIRenderer.hpp>
 #include <UITouch/UITouch.hpp>
+#include <UIPress/UIPress.hpp>
 #include <Tools/Tools.hpp>
 
 namespace UIKit {
@@ -162,9 +164,46 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             if (e.key.keysym.sym == SDLK_q) {
                 handleSDLQuit();
             }
+
+            auto press = new_shared<UIPress>();
+            auto key = UIKey();
+            key._keyCode = (UIKeyboardHIDUsage) e.key.keysym.scancode;
+            key._modifierFlags = OptionSet<UIKeyModifierFlags>(e.key.keysym.mod);
+            press->_key = key;
+            press->_phase = UIPressPhase::began;
+            press->setForWindow(delegate->window);
+
+            auto event = std::shared_ptr<UIPressesEvent>(new UIPressesEvent(press));
+            UIPressesEvent::activePressesEvents.push_back(event);
+            sendEvent(event);
+
             break;
         }
         case SDL_KEYUP: {
+            std::shared_ptr<UIPressesEvent> event;
+            std::shared_ptr<UIPress> press;
+
+            for (auto& levent: UIPressesEvent::activePressesEvents) {
+                for (auto& lpress: levent->allPresses()) {
+                    if (!lpress->_key.has_value()) continue;
+
+                    if ((int) lpress->_key->_keyCode == (int) e.key.keysym.scancode) {
+                        event = levent;
+                        press = lpress;
+                    }
+                }
+            }
+
+            if (!event || !press) return;
+
+            press->_timestamp = getCPUTimeUsec();
+            press->_phase = UIPressPhase::ended;
+
+            sendEvent(event);
+            UIPressesEvent::activePressesEvents.erase(std::remove(UIPressesEvent::activePressesEvents.begin(), UIPressesEvent::activePressesEvents.end(), event), UIPressesEvent::activePressesEvents.end());
+
+            break;
+
 //#if DEBUG
 //                let keyModifier = SDL_Keymod(UInt32(e.key.keysym.mod))
 //                if keyModifier.contains(KMOD_LSHIFT) || keyModifier.contains(KMOD_RSHIFT) {

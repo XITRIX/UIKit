@@ -159,6 +159,10 @@ void UIViewController::dismiss(bool animated, std::function<void()> completion) 
     });
 }
 
+std::shared_ptr<UIFocusEnvironment> UIViewController::parentFocusEnvironment() {
+    return std::dynamic_pointer_cast<UIFocusEnvironment>(next());
+}
+
 void UIViewController::makeViewAppear(bool animated, std::shared_ptr<UIViewController> presentingViewController, std::function<void()> completion) {
     auto window = presentingViewController->view()->window();
     window->addSubview(view());
@@ -170,12 +174,14 @@ void UIViewController::makeViewAppear(bool animated, std::shared_ptr<UIViewContr
     UIView::animate(animated ? _animationTime : 0, 0, curveEaseOut, [this]() {
 //        _presentingViewController.lock()->view()->setTransform(NXAffineTransform::scaleBy(0.9f, 1));
         view()->setTransform(NXAffineTransform::identity);
-    }, [completion](auto) {
+    }, [this, completion](auto) {
+        _presentingViewController.lock()->view()->setHidden(true);
         completion();
     });
 }
 
 void UIViewController::makeViewDisappear(bool animated, std::function<void(bool)> completion) {
+    _presentingViewController.lock()->view()->setHidden(false);
     UIView::animate(
         animated ? _animationTime : 0.0,
         0,
@@ -190,7 +196,9 @@ void UIViewController::makeViewDisappear(bool animated, std::function<void(bool)
                 yOffset = view()->frame().height();
             }
             view()->setTransform(NXAffineTransform::translationBy(0, yOffset));
-    }, completion);
+        }, [this, completion](bool res) {
+            completion(res);
+        });
 }
 
 std::shared_ptr<UIViewController> UIViewController::rootVC() {

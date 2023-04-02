@@ -30,4 +30,24 @@ void UIResponder::touchesCancelled(std::set<std::shared_ptr<UITouch>> touches, s
     if (next) next->touchesCancelled(touches, event);
 }
 
+void UIResponder::pressesBegan(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    auto next = this->next();
+    if (next) next->pressesBegan(pressees, event);
+}
+
+void UIResponder::pressesChanged(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    auto next = this->next();
+    if (next) next->pressesChanged(pressees, event);
+}
+
+void UIResponder::pressesEnded(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    auto next = this->next();
+    if (next) next->pressesEnded(pressees, event);
+}
+
+void UIResponder::pressesCancelled(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    auto next = this->next();
+    if (next) next->pressesCancelled(pressees, event);
+}
+
 }

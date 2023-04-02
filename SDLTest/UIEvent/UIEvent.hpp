@@ -19,6 +19,7 @@ public:
     Time timestamp() { return _timestamp; }
 
     UIEvent();
+    virtual ~UIEvent() {}
 private:
     UIEvent(std::shared_ptr<UITouch> touch);
 

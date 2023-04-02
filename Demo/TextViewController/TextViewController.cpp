@@ -53,3 +53,7 @@ void TextViewController::viewDidAppear(bool animated) {
     auto a = view()->safeAreaInsets();
     printf("");
 }
+
+void TextViewController::pressesBegan(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    UIViewController::pressesBegan(pressees, event);
+}

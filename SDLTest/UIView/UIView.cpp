@@ -463,6 +463,11 @@ bool UIView::point(Point insidePoint, UIEvent* withEvent) {
     return bounds().contains(insidePoint);
 }
 
+// MARK: - Focus
+std::shared_ptr<UIFocusEnvironment> UIView::parentFocusEnvironment() {
+    return std::dynamic_pointer_cast<UIFocusEnvironment>(next());
+}
+
 // MARK: - Animations
 std::set<std::shared_ptr<CALayer>> UIView::layersWithAnimations;
 std::shared_ptr<CABasicAnimationPrototype> UIView::currentAnimationPrototype;

@@ -16,6 +16,7 @@
 #include <CABasicAnimationPrototype/CABasicAnimationPrototype.hpp>
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <YogaExtensions/YogaExtensions.hpp>
+#include <UIFocus/UIFocus.hpp>
 #include <Tools/Tools.hpp>
 #include <tinyxml2.h>
 #include <functional>
@@ -53,7 +54,7 @@ enum class UIViewEdgeRespects {
     safeArea
 };
 
-class UIView: public UIResponder, public CALayerDelegate, public enable_shared_from_this<UIView> {
+class UIView: public UIResponder, public CALayerDelegate, public UIFocusItem, public enable_shared_from_this<UIView> {
 public:
     static std::shared_ptr<UIView> init();
     std::string getClassString() const;
@@ -145,6 +146,9 @@ public:
     Point convertFromView(Point point, std::shared_ptr<UIView> fromView);
     virtual std::shared_ptr<UIView> hitTest(Point point, UIEvent* withEvent);
     virtual bool point(Point insidePoint, UIEvent* withEvent);
+
+    // Focus
+    virtual std::shared_ptr<UIFocusEnvironment> parentFocusEnvironment() override;
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;

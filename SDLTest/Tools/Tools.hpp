@@ -22,6 +22,7 @@
 #include <Tools/SharedBase.hpp>
 #include <Tools/Fatal.hpp>
 #include <Tools/IBTools.hpp>
+#include <Tools/OptionSet/OptionSet.hpp>
 
 #pragma once
 

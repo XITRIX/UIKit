@@ -16,7 +16,7 @@ std::shared_ptr<type> name() {                                  \
     return std::static_pointer_cast<type>(idStorage[#name]);    \
 }
 
-class UIViewController: public UIResponder, public enable_shared_from_this<UIViewController> {
+class UIViewController: public UIResponder, public UIFocusEnvironment, public enable_shared_from_this<UIViewController> {
 public:
     std::map<std::string, std::shared_ptr<UIView>> idStorage;
 
@@ -56,6 +56,9 @@ public:
 
     void present(std::shared_ptr<UIViewController> otherViewController, bool animated, std::function<void()> completion = [](){});
     void dismiss(bool animated, std::function<void()> completion = [](){});
+
+    // Focus
+    virtual std::shared_ptr<UIFocusEnvironment> parentFocusEnvironment() override;
 
 protected:
     virtual void makeViewAppear(bool animated, std::shared_ptr<UIViewController> presentingViewController, std::function<void()> completion = [](){});

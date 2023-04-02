@@ -8,6 +8,8 @@
 #include <UIWindow/UIWindow.hpp>
 #include <UIApplication/UIApplication.hpp>
 #include <UIRenderer/UIRenderer.hpp>
+#include <UIPressesEvent/UIPressesEvent.hpp>
+#include <UIPress/UIPress.hpp>
 #include <UITouch/UITouch.hpp>
 #include <Platform/Platform.hpp>
 
@@ -59,6 +61,14 @@ void UIWindow::makeKeyAndVisible() {
 }
 
 void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
+    if (auto pevent = std::dynamic_pointer_cast<UIPressesEvent>(event)) {
+        sendPressEvent(pevent);
+    } else {
+        sendTouchEvent(event);
+    }
+}
+
+void UIWindow::sendTouchEvent(std::shared_ptr<UIEvent> event) {
     for (auto& touch: event->allTouches()) {
         auto wHitView = touch->view();
         if (wHitView.expired()) wHitView = hitTest(touch->locationIn(nullptr), nullptr);
@@ -102,6 +112,25 @@ void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
                 }
                 break;
             }
+        }
+    }
+}
+
+void UIWindow::sendPressEvent(std::shared_ptr<UIPressesEvent> event) {
+    for (auto& press: event->allPresses()) {
+        if (press->responder().expired()) continue;
+
+        switch (press->phase()) {
+            case UIPressPhase::began: {
+                press->responder().lock()->pressesBegan({ press }, event);
+                break;
+            }
+            case UIPressPhase::ended: {
+                press->responder().lock()->pressesEnded({ press }, event);
+                break;
+            }
+            default:
+                break;
         }
     }
 }

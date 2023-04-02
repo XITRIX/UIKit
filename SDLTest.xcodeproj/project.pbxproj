@@ -53,6 +53,18 @@
 		7C4DCE9329BFF1F500F13A6D /* ViewBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9029BFF1F500F13A6D /* ViewBuilder.cpp */; };
 		7C4DCE9729BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
 		7C4DCE9829BFF36400F13A6D /* UINib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DCE9529BFF36400F13A6D /* UINib.cpp */; };
+		7C5FEADC29D5ED140053368A /* UIPress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEADA29D5ED140053368A /* UIPress.cpp */; };
+		7C5FEADD29D5ED140053368A /* UIPress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEADA29D5ED140053368A /* UIPress.cpp */; };
+		7C5FEAE329D64F4F0053368A /* UIKey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAE129D64F4F0053368A /* UIKey.cpp */; };
+		7C5FEAE429D64F4F0053368A /* UIKey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAE129D64F4F0053368A /* UIKey.cpp */; };
+		7C5FEAE829D653050053368A /* OptionSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAE629D653050053368A /* OptionSet.cpp */; };
+		7C5FEAE929D653050053368A /* OptionSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAE629D653050053368A /* OptionSet.cpp */; };
+		7C5FEAEF29D6F3F60053368A /* UIPressesEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAED29D6F3F60053368A /* UIPressesEvent.cpp */; };
+		7C5FEAF029D6F3F60053368A /* UIPressesEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAED29D6F3F60053368A /* UIPressesEvent.cpp */; };
+		7C5FEAF429D9FBA70053368A /* UIFocus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF229D9FBA70053368A /* UIFocus.cpp */; };
+		7C5FEAF529D9FBA70053368A /* UIFocus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF229D9FBA70053368A /* UIFocus.cpp */; };
+		7C5FEAF929DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */; };
+		7C5FEAFA29DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */; };
 		7C76CE4B29C8A3E40056DF7E /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4929C8A3E40056DF7E /* Platform.mm */; };
 		7C76CE4E29C8A64E0056DF7E /* DefaultPaltform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
@@ -357,6 +369,19 @@
 		7C4DCE9129BFF1F500F13A6D /* ViewBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ViewBuilder.hpp; sourceTree = "<group>"; };
 		7C4DCE9529BFF36400F13A6D /* UINib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UINib.cpp; sourceTree = "<group>"; };
 		7C4DCE9629BFF36400F13A6D /* UINib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UINib.hpp; sourceTree = "<group>"; };
+		7C5FEADA29D5ED140053368A /* UIPress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIPress.cpp; sourceTree = "<group>"; };
+		7C5FEADB29D5ED140053368A /* UIPress.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIPress.hpp; sourceTree = "<group>"; };
+		7C5FEAE129D64F4F0053368A /* UIKey.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIKey.cpp; sourceTree = "<group>"; };
+		7C5FEAE229D64F4F0053368A /* UIKey.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIKey.hpp; sourceTree = "<group>"; };
+		7C5FEAE629D653050053368A /* OptionSet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OptionSet.cpp; sourceTree = "<group>"; };
+		7C5FEAE729D653050053368A /* OptionSet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OptionSet.hpp; sourceTree = "<group>"; };
+		7C5FEAEB29D6571F0053368A /* UIKeyboardHIDUsage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIKeyboardHIDUsage.hpp; sourceTree = "<group>"; };
+		7C5FEAED29D6F3F60053368A /* UIPressesEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIPressesEvent.cpp; sourceTree = "<group>"; };
+		7C5FEAEE29D6F3F60053368A /* UIPressesEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIPressesEvent.hpp; sourceTree = "<group>"; };
+		7C5FEAF229D9FBA70053368A /* UIFocus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIFocus.cpp; sourceTree = "<group>"; };
+		7C5FEAF329D9FBA70053368A /* UIFocus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocus.hpp; sourceTree = "<group>"; };
+		7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIFocusAnimationCoordinator.cpp; sourceTree = "<group>"; };
+		7C5FEAF829DA1AD10053368A /* UIFocusAnimationCoordinator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocusAnimationCoordinator.hpp; sourceTree = "<group>"; };
 		7C76CE4829C8A38E0056DF7E /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
 		7C76CE4929C8A3E40056DF7E /* Platform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
 		7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultPaltform.cpp; sourceTree = "<group>"; };
@@ -599,6 +624,11 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C5FEAF629DA1AC90053368A /* UIFocusAnimationCoordinator */,
+				7C5FEAF129D9FB9F0053368A /* UIFocus */,
+				7C5FEAEC29D6F3ED0053368A /* UIPressesEvent */,
+				7C5FEAE029D64F450053368A /* UIKey */,
+				7C5FEAD929D5ED050053368A /* UIPress */,
 				7C76CE3C29C8A37F0056DF7E /* Platform */,
 				7C4DCE9429BFF35700F13A6D /* UINib */,
 				7C4DCE8F29BFF1E600F13A6D /* ViewBuilder */,
@@ -799,6 +829,61 @@
 			path = UINib;
 			sourceTree = "<group>";
 		};
+		7C5FEAD929D5ED050053368A /* UIPress */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEADB29D5ED140053368A /* UIPress.hpp */,
+				7C5FEADA29D5ED140053368A /* UIPress.cpp */,
+			);
+			path = UIPress;
+			sourceTree = "<group>";
+		};
+		7C5FEAE029D64F450053368A /* UIKey */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAEB29D6571F0053368A /* UIKeyboardHIDUsage.hpp */,
+				7C5FEAE229D64F4F0053368A /* UIKey.hpp */,
+				7C5FEAE129D64F4F0053368A /* UIKey.cpp */,
+			);
+			path = UIKey;
+			sourceTree = "<group>";
+		};
+		7C5FEAE529D652F50053368A /* OptionSet */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAE729D653050053368A /* OptionSet.hpp */,
+				7C5FEAE629D653050053368A /* OptionSet.cpp */,
+			);
+			path = OptionSet;
+			sourceTree = "<group>";
+		};
+		7C5FEAEC29D6F3ED0053368A /* UIPressesEvent */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAEE29D6F3F60053368A /* UIPressesEvent.hpp */,
+				7C5FEAED29D6F3F60053368A /* UIPressesEvent.cpp */,
+			);
+			path = UIPressesEvent;
+			sourceTree = "<group>";
+		};
+		7C5FEAF129D9FB9F0053368A /* UIFocus */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAF329D9FBA70053368A /* UIFocus.hpp */,
+				7C5FEAF229D9FBA70053368A /* UIFocus.cpp */,
+			);
+			path = UIFocus;
+			sourceTree = "<group>";
+		};
+		7C5FEAF629DA1AC90053368A /* UIFocusAnimationCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAF829DA1AD10053368A /* UIFocusAnimationCoordinator.hpp */,
+				7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */,
+			);
+			path = UIFocusAnimationCoordinator;
+			sourceTree = "<group>";
+		};
 		7C76CE3C29C8A37F0056DF7E /* Platform */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,13 +900,6 @@
 				7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */,
 			);
 			path = Default;
-			sourceTree = "<group>";
-		};
-		7C76CEAD29CAFB860056DF7E /* SDLFontRenderer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SDLFontRenderer;
 			sourceTree = "<group>";
 		};
 		7C82D56729AEC01C005079B8 /* iOS */ = {
@@ -1551,7 +1629,6 @@
 		7CD7DB2F29B6AD3000C9637C /* FontRenderer */ = {
 			isa = PBXGroup;
 			children = (
-				7C76CEAD29CAFB860056DF7E /* SDLFontRenderer */,
 				7CD7DB3129B6AD3700C9637C /* FontRenderer.hpp */,
 				7CD7DB3029B6AD3700C9637C /* FontRenderer.cpp */,
 			);
@@ -1615,6 +1692,7 @@
 		7CEB96A0299509B8007483C0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				7C5FEAE529D652F50053368A /* OptionSet */,
 				7CEB96A2299509C5007483C0 /* Tools.hpp */,
 				7CEB96A1299509C5007483C0 /* Tools.cpp */,
 				7C4DCE7329BC8A4700F13A6D /* SharedBase.hpp */,
@@ -1805,6 +1883,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA6977829C08F32008DB110 /* IBTools.cpp in Sources */,
+				7C5FEAE829D653050053368A /* OptionSet.cpp in Sources */,
 				7CD7DB3229B6AD3700C9637C /* FontRenderer.cpp in Sources */,
 				7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */,
 				7C82D6A129B3F50D005079B8 /* UIViewAnimationGroup.cpp in Sources */,
@@ -1829,6 +1908,7 @@
 				7C4DC82B29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */,
 				7CD7DAFD29B62DCD00C9637C /* UIApplicationDelegate.cpp in Sources */,
 				7CD7DB2D29B6ACE000C9637C /* UIFont.cpp in Sources */,
+				7C5FEADC29D5ED140053368A /* UIPress.cpp in Sources */,
 				7C82D67729B2B950005079B8 /* encoding_utf.c in Sources */,
 				7CEB96A3299509C5007483C0 /* Tools.cpp in Sources */,
 				7C4DCE8129BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
@@ -1844,6 +1924,7 @@
 				7C4DCE9729BFF36400F13A6D /* UINib.cpp in Sources */,
 				7C4DCE6B29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7C4DCE6329BB950B00F13A6D /* YGNode.cpp in Sources */,
+				7C5FEAF929DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */,
 				7C4DCE5B29BB950B00F13A6D /* YGNodePrint.cpp in Sources */,
 				7C4DCE7C29BE70B900F13A6D /* UIScrollView.cpp in Sources */,
 				7C82D65729AFF5D9005079B8 /* Renderer.cpp in Sources */,
@@ -1860,6 +1941,7 @@
 				7CD7DAF329B615E200C9637C /* UIResponder.cpp in Sources */,
 				7CB7F55029A3D89C00A20694 /* renderer_OpenGL_1_BASE.c in Sources */,
 				7C82D6A829B3F971005079B8 /* CAMediaTimingFunction.cpp in Sources */,
+				7C5FEAE329D64F4F0053368A /* UIKey.cpp in Sources */,
 				7CD7DB0929B6332500C9637C /* main.cpp in Sources */,
 				7CB7F54D29A3D89C00A20694 /* renderer_GLES_3.c in Sources */,
 				7C82D6B729B55E4B005079B8 /* CASpringAnimationPrototype.cpp in Sources */,
@@ -1875,8 +1957,10 @@
 				7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */,
 				7CB7F54E29A3D89C00A20694 /* renderer_GLES_2.c in Sources */,
 				7CD13F2229AE6A6E00D0FFF5 /* ShaderProgram.cpp in Sources */,
+				7C5FEAF429D9FBA70053368A /* UIFocus.cpp in Sources */,
 				7C82D6BC29B55F89005079B8 /* CASpringAnimation.cpp in Sources */,
 				7CD7DB3F29B8E74F00C9637C /* UIEvent.cpp in Sources */,
+				7C5FEAEF29D6F3F60053368A /* UIPressesEvent.cpp in Sources */,
 				7CB7F55B29A3F1B500A20694 /* NXAffineTransform.cpp in Sources */,
 				7C82D67929B2B950005079B8 /* compat_strl.c in Sources */,
 				7CB7F55C29A3F1B500A20694 /* NXTransform3D.cpp in Sources */,
@@ -1898,6 +1982,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA6977929C08F32008DB110 /* IBTools.cpp in Sources */,
+				7C5FEAE929D653050053368A /* OptionSet.cpp in Sources */,
 				7C82D5C429AEC422005079B8 /* UILabel.cpp in Sources */,
 				7C82D5B429AEC28B005079B8 /* renderer_GLES_3.c in Sources */,
 				7CD7DB2429B6909E00C9637C /* UIImageView.cpp in Sources */,
@@ -1922,6 +2007,7 @@
 				7C82D5BA29AEC28B005079B8 /* SDL_gpu_shapes.c in Sources */,
 				7C4DCE6629BB950B00F13A6D /* event.cpp in Sources */,
 				7C82D5BD29AEC422005079B8 /* CGImage.cpp in Sources */,
+				7C5FEADD29D5ED140053368A /* UIPress.cpp in Sources */,
 				7C4DCE5629BB950B00F13A6D /* YGLayout.cpp in Sources */,
 				7C82D5C129AEC422005079B8 /* Tools.cpp in Sources */,
 				7C4DCE8229BE76B200F13A6D /* UIEdgeInsets.cpp in Sources */,
@@ -1937,6 +2023,7 @@
 				7C4DCE9829BFF36400F13A6D /* UINib.cpp in Sources */,
 				7C4DCE6C29BBB31E00F13A6D /* YogaExtensions.cpp in Sources */,
 				7CD7DB3B29B8E23300C9637C /* UITouch.cpp in Sources */,
+				7C5FEAFA29DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */,
 				7C82D5B529AEC28B005079B8 /* renderer_GLES_1.c in Sources */,
 				7C4DCE7D29BE70B900F13A6D /* UIScrollView.cpp in Sources */,
 				7C82D5B129AEC28B005079B8 /* renderer_OpenGL_1.c in Sources */,
@@ -1953,6 +2040,7 @@
 				7C82D67C29B2B950005079B8 /* features_cpu.c in Sources */,
 				7C82D5C329AEC422005079B8 /* ShaderProgram.cpp in Sources */,
 				7C82D5B229AEC28B005079B8 /* stb_image_write.c in Sources */,
+				7C5FEAE429D64F4F0053368A /* UIKey.cpp in Sources */,
 				7C4DC82729BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */,
 				7C4DCE6229BB950B00F13A6D /* YGConfig.cpp in Sources */,
 				7C4DC82229BA960100F13A6D /* UITapGestureRecognizer.cpp in Sources */,
@@ -1968,8 +2056,10 @@
 				7C82D5AC29AEC28A005079B8 /* renderer_OpenGL_2.c in Sources */,
 				7CD7DB1429B67C2500C9637C /* Runner.cpp in Sources */,
 				7CD7DB4529B8F46D00C9637C /* UIGestureRecognizer.cpp in Sources */,
+				7C5FEAF529D9FBA70053368A /* UIFocus.cpp in Sources */,
 				7C82D5C729AEC422005079B8 /* UIColor.cpp in Sources */,
 				7C82D6B329B440F4005079B8 /* UIView.cpp in Sources */,
+				7C5FEAF029D6F3F60053368A /* UIPressesEvent.cpp in Sources */,
 				7C82D5B829AEC28B005079B8 /* renderer_OpenGL_1_BASE.c in Sources */,
 				7CD7DAEA29B6156B00C9637C /* UIWindow.cpp in Sources */,
 				7C82D5BC29AEC422005079B8 /* NXTransform3D.cpp in Sources */,
@@ -2144,10 +2234,7 @@
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
 				);
-				OTHER_LDFLAGS = (
-					"-lSDL2",
-					"-lSDL_ttf",
-				);
+				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2167,10 +2254,7 @@
 					"-DSDL_GPU_DISABLE_GLES",
 					"-DRESIZABLE_SCREEN",
 				);
-				OTHER_LDFLAGS = (
-					"-lSDL2",
-					"-lSDL_ttf",
-				);
+				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
