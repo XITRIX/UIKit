@@ -11,7 +11,7 @@
 
 namespace UIKit {
 
-UIEdgeInsets getPlatfromSafeArea() {
+UIEdgeInsets Platform::getPlatfromSafeArea() {
     auto var = [[[UIApplication sharedApplication]keyWindow] safeAreaInsets];
     return UIEdgeInsets(var.top, var.left, var.bottom, var.right);
 }

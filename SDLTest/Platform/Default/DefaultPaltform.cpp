@@ -9,7 +9,7 @@
 
 namespace UIKit {
 
-UIEdgeInsets getPlatfromSafeArea() {
+UIEdgeInsets Platform::getPlatfromSafeArea() {
     return UIEdgeInsets();
 }
 

@@ -27,6 +27,9 @@ std::vector<std::weak_ptr<UIGestureRecognizer>> getRecognizerHierachyFromView(st
 }
 
 UIWindow::UIWindow() {
+    _focusSystem = new_shared<UIFocusSystem>();
+    _focusSystem->_rootWindow = weak_from_base<UIWindow>();
+    
     setBackgroundColor(UIColor::systemBackground);
     yoga->setEnabled(false);
 }
@@ -40,6 +43,10 @@ std::shared_ptr<UIWindow> UIWindow::window() {
 }
 
 void UIWindow::setRootViewController(std::shared_ptr<UIViewController> rootViewController) {
+    if (_rootViewController) {
+        _rootViewController->view()->removeFromSuperview();
+    }
+
     _rootViewController = rootViewController;
 }
 
@@ -49,7 +56,6 @@ void UIWindow::makeKeyAndVisible() {
     window->setBounds(UIRenderer::main()->bounds());
     UIApplication::shared->keyWindow = window;
 
-
     auto viewController = _rootViewController;
     if (viewController) {
         viewController->loadViewIfNeeded();
@@ -57,6 +63,7 @@ void UIWindow::makeKeyAndVisible() {
         viewController->viewWillAppear(false);
         addSubview(viewController->view());
         viewController->viewDidAppear(false);
+        _focusSystem->updateFocus();
     }
 }
 
@@ -136,7 +143,7 @@ void UIWindow::sendPressEvent(std::shared_ptr<UIPressesEvent> event) {
 }
 
 void UIWindow::layoutSubviews() {
-    setSafeAreaInsets(getPlatfromSafeArea());
+    setSafeAreaInsets(Platform::getPlatfromSafeArea());
     
     UIView::layoutSubviews();
 
@@ -155,6 +162,26 @@ void UIWindow::addPresentedViewController(std::shared_ptr<UIViewController> cont
 
 void UIWindow::removePresentedViewController(std::shared_ptr<UIViewController> controller) {
     _presentedViewControllers.erase(std::remove(_presentedViewControllers.begin(), _presentedViewControllers.end(), controller), _presentedViewControllers.end());
+}
+
+void UIWindow::pressesBegan(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    UIView::pressesBegan(pressees, event);
+    focusSystem()->sendEvent(event);
+}
+
+void UIWindow::pressesChanged(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    UIView::pressesChanged(pressees, event);
+    focusSystem()->sendEvent(event);
+}
+
+void UIWindow::pressesEnded(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    UIView::pressesEnded(pressees, event);
+    focusSystem()->sendEvent(event);
+}
+
+void UIWindow::pressesCancelled(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) {
+    UIView::pressesCancelled(pressees, event);
+    focusSystem()->sendEvent(event);
 }
 
 }

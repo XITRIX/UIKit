@@ -128,7 +128,7 @@ public:
 
     virtual std::shared_ptr<UIWindow> window();
 
-    std::vector<std::shared_ptr<UIView>> subviews() const { return _subviews; }
+    const std::vector<std::shared_ptr<UIView>>& subviews() const { return _subviews; }
     std::weak_ptr<UIView> superview() const { return _superview; }
 
     // Layout
@@ -149,6 +149,8 @@ public:
 
     // Focus
     virtual std::shared_ptr<UIFocusEnvironment> parentFocusEnvironment() override;
+    virtual std::shared_ptr<UIView> getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading);
+    virtual bool isFocused() override;
 
     // Animations
     static std::set<std::shared_ptr<CALayer>> layersWithAnimations;

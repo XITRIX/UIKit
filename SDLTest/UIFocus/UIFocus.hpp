@@ -14,6 +14,7 @@
 namespace UIKit {
 
 enum class UIFocusHeading {
+    none,
     up,
     down,
     left,
@@ -40,19 +41,20 @@ public:
     /// Asks whether the system should allow a focus update to occur.
     virtual bool shouldUpdateFocusIn(UIFocusUpdateContext context);
 
-    virtual void didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator coordinator);
+    virtual void didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator);
 
 private:
     std::vector<std::shared_ptr<UIFocusEnvironment>> _preferredFocusEnvironments;
 };
 
 class UIFocusItem: public UIFocusEnvironment {
-
+public:
+    
     /// Indicates whether or not this item is currently allowed to become focused.
     /// Returning NO restricts the item from being focusable, even if it is visible in the user interface. For example, UIControls return NO if they are disabled.
     virtual bool canBecomeFocused() { return false; }
 
-    virtual bool isFocused() { return false; }
+    virtual bool isFocused() = 0;
 };
 
 class UIFocusUpdateContext {
@@ -69,6 +71,8 @@ private:
     std::weak_ptr<UIFocusItem> _previouslyFocusedItem;
     std::weak_ptr<UIFocusItem> _nextFocusedItem;
     UIFocusHeading _focusHeading;
+
+    friend class UIFocusSystem;
 };
 
 }

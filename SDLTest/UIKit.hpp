@@ -14,6 +14,7 @@
 #include <UIImageView/UIImageView.hpp>
 #include <UITouch/UITouch.hpp>
 #include <UILabel/UILabel.hpp>
+#include <UIControl/UIControl.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
 #include <UINib/UINib.hpp>
 

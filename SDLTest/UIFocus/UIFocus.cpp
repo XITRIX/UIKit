@@ -13,6 +13,6 @@ bool UIFocusEnvironment::shouldUpdateFocusIn(UIFocusUpdateContext context) {
     return true;
 }
 
-void UIFocusEnvironment::didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator coordinator) { }
+void UIFocusEnvironment::didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator) { }
 
 }

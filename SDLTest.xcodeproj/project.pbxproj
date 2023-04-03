@@ -65,6 +65,10 @@
 		7C5FEAF529D9FBA70053368A /* UIFocus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF229D9FBA70053368A /* UIFocus.cpp */; };
 		7C5FEAF929DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */; };
 		7C5FEAFA29DA1AD10053368A /* UIFocusAnimationCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */; };
+		7C5FEAFE29DA300D0053368A /* UIFocusSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAFC29DA300D0053368A /* UIFocusSystem.cpp */; };
+		7C5FEAFF29DA300D0053368A /* UIFocusSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAFC29DA300D0053368A /* UIFocusSystem.cpp */; };
+		7C5FEB0329DB46360053368A /* UIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0129DB46360053368A /* UIControl.cpp */; };
+		7C5FEB0429DB46360053368A /* UIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0129DB46360053368A /* UIControl.cpp */; };
 		7C76CE4B29C8A3E40056DF7E /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4929C8A3E40056DF7E /* Platform.mm */; };
 		7C76CE4E29C8A64E0056DF7E /* DefaultPaltform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
@@ -382,6 +386,10 @@
 		7C5FEAF329D9FBA70053368A /* UIFocus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocus.hpp; sourceTree = "<group>"; };
 		7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIFocusAnimationCoordinator.cpp; sourceTree = "<group>"; };
 		7C5FEAF829DA1AD10053368A /* UIFocusAnimationCoordinator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocusAnimationCoordinator.hpp; sourceTree = "<group>"; };
+		7C5FEAFC29DA300D0053368A /* UIFocusSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIFocusSystem.cpp; sourceTree = "<group>"; };
+		7C5FEAFD29DA300D0053368A /* UIFocusSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocusSystem.hpp; sourceTree = "<group>"; };
+		7C5FEB0129DB46360053368A /* UIControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIControl.cpp; sourceTree = "<group>"; };
+		7C5FEB0229DB46360053368A /* UIControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIControl.hpp; sourceTree = "<group>"; };
 		7C76CE4829C8A38E0056DF7E /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
 		7C76CE4929C8A3E40056DF7E /* Platform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
 		7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultPaltform.cpp; sourceTree = "<group>"; };
@@ -624,6 +632,8 @@
 		7C07981A2993E916004E8EC8 /* SDLTest */ = {
 			isa = PBXGroup;
 			children = (
+				7C5FEB0029DB46210053368A /* UIControl */,
+				7C5FEAFB29DA30060053368A /* UIFocusSystem */,
 				7C5FEAF629DA1AC90053368A /* UIFocusAnimationCoordinator */,
 				7C5FEAF129D9FB9F0053368A /* UIFocus */,
 				7C5FEAEC29D6F3ED0053368A /* UIPressesEvent */,
@@ -882,6 +892,24 @@
 				7C5FEAF729DA1AD10053368A /* UIFocusAnimationCoordinator.cpp */,
 			);
 			path = UIFocusAnimationCoordinator;
+			sourceTree = "<group>";
+		};
+		7C5FEAFB29DA30060053368A /* UIFocusSystem */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEAFD29DA300D0053368A /* UIFocusSystem.hpp */,
+				7C5FEAFC29DA300D0053368A /* UIFocusSystem.cpp */,
+			);
+			path = UIFocusSystem;
+			sourceTree = "<group>";
+		};
+		7C5FEB0029DB46210053368A /* UIControl */ = {
+			isa = PBXGroup;
+			children = (
+				7C5FEB0229DB46360053368A /* UIControl.hpp */,
+				7C5FEB0129DB46360053368A /* UIControl.cpp */,
+			);
+			path = UIControl;
 			sourceTree = "<group>";
 		};
 		7C76CE3C29C8A37F0056DF7E /* Platform */ = {
@@ -1901,6 +1929,7 @@
 				7C82D68C29B387C1005079B8 /* CABasicAnimation.cpp in Sources */,
 				7C44C0AC29C4B35F0027DB31 /* TextViewController.cpp in Sources */,
 				7CD13F1B29AB6DD900D0FFF5 /* ContentsGravityTransformation.cpp in Sources */,
+				7C5FEAFE29DA300D0053368A /* UIFocusSystem.cpp in Sources */,
 				7CB7F51C29A3D45F00A20694 /* stb_image_write.c in Sources */,
 				7CD7DAE929B6156B00C9637C /* UIWindow.cpp in Sources */,
 				7CB7F54B29A3D89C00A20694 /* renderer_OpenGL_4.c in Sources */,
@@ -1950,6 +1979,7 @@
 				7C4DCE7129BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */,
 				7C82D67B29B2B950005079B8 /* features_cpu.c in Sources */,
 				7C4DC82629BA971000F13A6D /* UIPanGestureRecognizer.cpp in Sources */,
+				7C5FEB0329DB46360053368A /* UIControl.cpp in Sources */,
 				7C4DCE5D29BB950B00F13A6D /* YGEnums.cpp in Sources */,
 				7CD7DB1D29B686A800C9637C /* UIImage.cpp in Sources */,
 				7C4DCE5229BB950B00F13A6D /* Utils.cpp in Sources */,
@@ -2000,6 +2030,7 @@
 				7C82D65029AFE08D005079B8 /* nanovg.c in Sources */,
 				7C44C0AD29C4B35F0027DB31 /* TextViewController.cpp in Sources */,
 				7CD7DB0829B6332400C9637C /* main.cpp in Sources */,
+				7C5FEAFF29DA300D0053368A /* UIFocusSystem.cpp in Sources */,
 				7C4DC82C29BB1D0F00F13A6D /* DispatchQueue.cpp in Sources */,
 				7C82D5C529AEC422005079B8 /* Geometry.cpp in Sources */,
 				7CD7DB4029B8E74F00C9637C /* UIEvent.cpp in Sources */,
@@ -2049,6 +2080,7 @@
 				7C4DCE7229BBCE1F00F13A6D /* YGLayoutImpl.cpp in Sources */,
 				7C4DCE5A29BB950B00F13A6D /* YGStyle.cpp in Sources */,
 				7C82D5B029AEC28B005079B8 /* glew.c in Sources */,
+				7C5FEB0429DB46360053368A /* UIControl.cpp in Sources */,
 				7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */,
 				7C4DCE5E29BB950B00F13A6D /* YGEnums.cpp in Sources */,
 				7C82D5AE29AEC28B005079B8 /* renderer_GLES_2.c in Sources */,

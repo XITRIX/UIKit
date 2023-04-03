@@ -468,6 +468,82 @@ std::shared_ptr<UIFocusEnvironment> UIView::parentFocusEnvironment() {
     return std::dynamic_pointer_cast<UIFocusEnvironment>(next());
 }
 
+bool UIView::isFocused() {
+    auto currentFocus = window()->focusSystem()->focusedItem();
+    if (currentFocus.expired()) return false;
+    
+    return currentFocus.lock() == shared_from_base<UIFocusItem>();
+}
+
+std::shared_ptr<UIView> UIView::getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading) {
+    auto itr = std::find(subviews().cbegin(), subviews().cend(), current);
+
+    if (itr == subviews().cend()) {
+        if (superview().expired()) return nullptr;
+        return superview().lock()->getNextFocusItem(shared_from_this(), focusHeading);
+    }
+
+    auto index = itr - subviews().cbegin();
+
+    // UIFocusHeading - previous
+    if (focusHeading == UIFocusHeading::previous) {
+        while (--index >= 0) {
+            if (subviews()[index]->canBecomeFocused()) {
+                return subviews()[index];
+            }
+        }
+    }
+
+    // UIFocusHeading - next
+    if (focusHeading == UIFocusHeading::next) {
+        while (++index < subviews().size()) {
+            if (subviews()[index]->canBecomeFocused()) {
+                return subviews()[index];
+            }
+        }
+    }
+
+    // UIFocusHeading - up / down
+    if (yoga->flexDirection() == YGFlexDirectionColumn) {
+        if (focusHeading == UIFocusHeading::up) {
+            while (--index >= 0) {
+                if (subviews()[index]->canBecomeFocused()) {
+                    return subviews()[index];
+                }
+            }
+        }
+
+        if (focusHeading == UIFocusHeading::down) {
+            while (++index < subviews().size()) {
+                if (subviews()[index]->canBecomeFocused()) {
+                    return subviews()[index];
+                }
+            }
+        }
+    }
+
+    // UIFocusHeading - left / right
+    if (yoga->flexDirection() == YGFlexDirectionRow) {
+        if (focusHeading == UIFocusHeading::left) {
+            while (--index >= 0) {
+                if (subviews()[index]->canBecomeFocused()) {
+                    return subviews()[index];
+                }
+            }
+        }
+
+        if (focusHeading == UIFocusHeading::right) {
+            while (++index < subviews().size()) {
+                if (subviews()[index]->canBecomeFocused()) {
+                    return subviews()[index];
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
 // MARK: - Animations
 std::set<std::shared_ptr<CALayer>> UIView::layersWithAnimations;
 std::shared_ptr<CABasicAnimationPrototype> UIView::currentAnimationPrototype;

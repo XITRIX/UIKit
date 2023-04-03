@@ -11,6 +11,10 @@
 
 namespace UIKit {
 
-UIEdgeInsets getPlatfromSafeArea();
+class Platform {
+public:
+    static UIEdgeInsets getPlatfromSafeArea();
+};
+
 
 }
