@@ -28,7 +28,6 @@ private:
     void applyFocusToItem(std::shared_ptr<UIFocusItem> item, UIFocusUpdateContext context);
 
     UIFocusHeading makeFocusHeadingFromEvent(std::shared_ptr<UIEvent> event);
-    std::shared_ptr<UIFocusItem> searchForFocusInView(std::shared_ptr<UIView> view);
 
     friend class UIWindow;
 };

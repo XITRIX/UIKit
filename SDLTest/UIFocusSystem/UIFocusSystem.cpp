@@ -15,7 +15,6 @@ namespace UIKit {
 UIFocusSystem::UIFocusSystem() { }
 
 void UIFocusSystem::sendEvent(std::shared_ptr<UIEvent> event) {
-    printf("Key pressed\n");
 
 
 
@@ -26,19 +25,28 @@ void UIFocusSystem::sendEvent(std::shared_ptr<UIEvent> event) {
     if (context._focusHeading == UIFocusHeading::none) return;
 
     std::weak_ptr<UIFocusItem> nextItem;
-    if (focusedItem().expired()) nextItem = searchForFocusInView(_rootWindow.lock());
+    if (focusedItem().expired()) nextItem = _rootWindow.lock()->searchForFocus();
     else {
         auto current = std::dynamic_pointer_cast<UIView>(focusedItem().lock());
         if (current->superview().expired()) {
-            nextItem = searchForFocusInView(_rootWindow.lock());
+            nextItem = _rootWindow.lock()->searchForFocus();
         } else {
-            std::shared_ptr<UIView> potencianNextItem = current;
-            while (potencianNextItem) {
-                potencianNextItem = current->superview().lock()->getNextFocusItem(potencianNextItem, context._focusHeading);
+            std::shared_ptr<UIFocusItem> potencianNextItem;
+            while (true) {
+                potencianNextItem = current->superview().lock()->getNextFocusItem(current, context._focusHeading);
+                if (!potencianNextItem) { // if no next item to focus
+                    if (!current->superview().lock()->superview().expired()) { // but item has parent, check parent
+                        current = current->superview().lock();
+                        continue;
+                    } else { // else stop searching
+                        break;
+                    }
+                }
+
                 context._nextFocusedItem = potencianNextItem;
 
-                bool currentIsFine = !current || current->shouldUpdateFocusIn(context);
-                bool nextIsFine = !potencianNextItem || potencianNextItem->shouldUpdateFocusIn(context);
+                bool currentIsFine = context.previouslyFocusedItem().expired() || context.previouslyFocusedItem().lock()->shouldUpdateFocusIn(context);
+                bool nextIsFine = context.nextFocusedItem().expired() || context.nextFocusedItem().lock()->shouldUpdateFocusIn(context);
 
                 if (currentIsFine && nextIsFine) { break; }
             }
@@ -53,7 +61,7 @@ void UIFocusSystem::sendEvent(std::shared_ptr<UIEvent> event) {
 }
 
 void UIFocusSystem::updateFocus() {
-    auto item = searchForFocusInView(_rootWindow.lock());
+    auto item = _rootWindow.lock()->searchForFocus();
 
     UIFocusUpdateContext context;
     context._previouslyFocusedItem = _focusedItem;
@@ -116,17 +124,6 @@ UIFocusHeading UIFocusSystem::makeFocusHeadingFromEvent(std::shared_ptr<UIEvent>
     }
 
     return UIFocusHeading::none;
-}
-
-std::shared_ptr<UIFocusItem> UIFocusSystem::searchForFocusInView(std::shared_ptr<UIView> view) {
-    if (view->canBecomeFocused()) { return view; }
-
-    for (auto& child: view->subviews()) {
-        auto res = searchForFocusInView(child);
-        if (res) return res;
-    }
-
-    return nullptr;
 }
 
 

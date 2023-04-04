@@ -13,6 +13,20 @@ bool UIFocusEnvironment::shouldUpdateFocusIn(UIFocusUpdateContext context) {
     return true;
 }
 
-void UIFocusEnvironment::didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator) { }
+std::vector<std::shared_ptr<UIFocusEnvironment>> UIFocusEnvironment::preferredFocusEnvironments() {
+    if (!_lastFocusEnvironment.expired()) return { _lastFocusEnvironment.lock() };
+    return {};
+
+}
+
+void UIFocusEnvironment::didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator) {
+    if (!context.nextFocusedItem().expired() && context.nextFocusedItem().lock().get() == this) {
+        if (parentFocusEnvironment()) {
+            parentFocusEnvironment()->_lastFocusEnvironment = context.nextFocusedItem();
+        }
+    }
+    
+    if (parentFocusEnvironment()) parentFocusEnvironment()->didUpdateFocusIn(context, coordinator);
+}
 
 }

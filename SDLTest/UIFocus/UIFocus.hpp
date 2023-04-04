@@ -32,7 +32,7 @@ public:
     /// The preferred focus environments define where to search for the default focused item in an environment, such as when focus updates programmatically.
     /// Starting from the target environment, each preferred focus environment is recursively searched in the order of the array until an eligible, focusable item is found.
     /// Preferred focus environments can include focusable and non-focusable items, in addition to non-item environments. Returning an empty array is equivalent to returning an array containing only 'self'.
-    std::vector<std::shared_ptr<UIFocusEnvironment>> preferredFocusEnvironments() { return _preferredFocusEnvironments; }
+    virtual std::vector<std::shared_ptr<UIFocusEnvironment>> preferredFocusEnvironments();
 
     /// The parent focus environment of this environment, or nil if no parent exists.
     /// NOTE: If you implement this method, you must return a non-nil value for parent focus environment, otherwise your focus environment will not participate in focus interactions.
@@ -43,8 +43,8 @@ public:
 
     virtual void didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator);
 
-private:
-    std::vector<std::shared_ptr<UIFocusEnvironment>> _preferredFocusEnvironments;
+protected:
+    std::weak_ptr<UIFocusEnvironment> _lastFocusEnvironment;
 };
 
 class UIFocusItem: public UIFocusEnvironment {

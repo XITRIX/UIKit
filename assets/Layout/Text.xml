@@ -16,48 +16,81 @@
             marginBottom="16"
             gap="16">
 
-
-            <UIControl
-                id="button"
+            <UIView
                 width="100%"
-                height="48"
-                justifyContent="center"
-                alignItems="center"
-                cornerRadius="12"
-                backgroundColor="#0055A6">
-                <UIView
-                    justifyContent="center"
-                    alignItems="center">
-                    <UILabel
-                        marginLeft="16"
-                        marginRight="16"
-                        text="Продолжить"
-                        fontSize="17"
-                        textColor="#FFFFFF"
-                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
-                </UIView>
-            </UIControl>
+                flexDirection="column"
+                leftEdgeRespects="layoutMargin"
+                rightEdgeRespects="layoutMargin"
+                gap="16">
 
-            <UIControl
-                id="dismissButton"
-                width="100%"
-                height="48"
-                justifyContent="center"
-                alignItems="center"
-                cornerRadius="12"
-                backgroundColor="#0055A6">
                 <UIView
-                    justifyContent="center"
-                    alignItems="center">
-                    <UILabel
-                        marginLeft="16"
-                        marginRight="16"
-                        text="Назад"
-                        fontSize="17"
-                        textColor="#FFFFFF"
-                        font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                    width="100%"
+                    flexDirection="row"
+                    leftEdgeRespects="layoutMargin"
+                    rightEdgeRespects="layoutMargin"
+                    gap="16">
+
+                    <UIControl
+                        id="button"
+                        height="48"
+                        grow="1"
+                        justifyContent="center"
+                        alignItems="center"
+                        cornerRadius="12">
+                        <UIView
+                            justifyContent="center"
+                            alignItems="center">
+                            <UILabel
+                                marginLeft="16"
+                                marginRight="16"
+                                text="Продолжить"
+                                fontSize="17"
+                                textColor="#FFFFFF"
+                                font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                        </UIView>
+                    </UIControl>
+
+                    <UIControl
+                        id="dismissButton"
+                        height="48"
+                        grow="1"
+                        justifyContent="center"
+                        alignItems="center"
+                        cornerRadius="12">
+                        <UIView
+                            justifyContent="center"
+                            alignItems="center">
+                            <UILabel
+                                marginLeft="16"
+                                marginRight="16"
+                                text="Назад"
+                                fontSize="17"
+                                textColor="#FFFFFF"
+                                font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                        </UIView>
+                    </UIControl>
                 </UIView>
-            </UIControl>
+
+                <UIControl
+                    id="button3"
+                    height="48"
+                    grow="1"
+                    justifyContent="center"
+                    alignItems="center"
+                    cornerRadius="12">
+                    <UIView
+                        justifyContent="center"
+                        alignItems="center">
+                        <UILabel
+                            marginLeft="16"
+                            marginRight="16"
+                            text="Продолжить"
+                            fontSize="17"
+                            textColor="#FFFFFF"
+                            font="@path/Fonts/SFProDisplay-Semibold.ttf"/>
+                    </UIView>
+                </UIControl>
+            </UIView>
 
             <UIView
                 backgroundColor="#1C1C1E"

@@ -475,7 +475,23 @@ bool UIView::isFocused() {
     return currentFocus.lock() == shared_from_base<UIFocusItem>();
 }
 
-std::shared_ptr<UIView> UIView::getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading) {
+std::shared_ptr<UIFocusItem> UIView::searchForFocus() {
+    if (canBecomeFocused()) { return shared_from_this(); }
+
+    if (!preferredFocusEnvironments().empty()) {
+        auto res = std::dynamic_pointer_cast<UIFocusItem>(preferredFocusEnvironments().front());
+        if (res) return res;
+    }
+
+    for (auto& child: subviews()) {
+        auto res = child->searchForFocus();
+        if (res) return res;
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIFocusItem> UIView::getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading) {
     auto itr = std::find(subviews().cbegin(), subviews().cend(), current);
 
     if (itr == subviews().cend()) {
@@ -488,18 +504,16 @@ std::shared_ptr<UIView> UIView::getNextFocusItem(std::shared_ptr<UIView> current
     // UIFocusHeading - previous
     if (focusHeading == UIFocusHeading::previous) {
         while (--index >= 0) {
-            if (subviews()[index]->canBecomeFocused()) {
-                return subviews()[index];
-            }
+            auto focus = subviews()[index]->searchForFocus();
+            if (focus) { return focus; }
         }
     }
 
     // UIFocusHeading - next
     if (focusHeading == UIFocusHeading::next) {
         while (++index < subviews().size()) {
-            if (subviews()[index]->canBecomeFocused()) {
-                return subviews()[index];
-            }
+            auto focus = subviews()[index]->searchForFocus();
+            if (focus) { return focus; }
         }
     }
 
@@ -507,17 +521,15 @@ std::shared_ptr<UIView> UIView::getNextFocusItem(std::shared_ptr<UIView> current
     if (yoga->flexDirection() == YGFlexDirectionColumn) {
         if (focusHeading == UIFocusHeading::up) {
             while (--index >= 0) {
-                if (subviews()[index]->canBecomeFocused()) {
-                    return subviews()[index];
-                }
+                auto focus = subviews()[index]->searchForFocus();
+                if (focus) { return focus; }
             }
         }
 
         if (focusHeading == UIFocusHeading::down) {
             while (++index < subviews().size()) {
-                if (subviews()[index]->canBecomeFocused()) {
-                    return subviews()[index];
-                }
+                auto focus = subviews()[index]->searchForFocus();
+                if (focus) { return focus; }
             }
         }
     }
@@ -526,17 +538,15 @@ std::shared_ptr<UIView> UIView::getNextFocusItem(std::shared_ptr<UIView> current
     if (yoga->flexDirection() == YGFlexDirectionRow) {
         if (focusHeading == UIFocusHeading::left) {
             while (--index >= 0) {
-                if (subviews()[index]->canBecomeFocused()) {
-                    return subviews()[index];
-                }
+                auto focus = subviews()[index]->searchForFocus();
+                if (focus) { return focus; }
             }
         }
 
         if (focusHeading == UIFocusHeading::right) {
             while (++index < subviews().size()) {
-                if (subviews()[index]->canBecomeFocused()) {
-                    return subviews()[index];
-                }
+                auto focus = subviews()[index]->searchForFocus();
+                if (focus) { return focus; }
             }
         }
     }

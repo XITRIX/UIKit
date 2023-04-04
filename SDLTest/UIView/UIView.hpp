@@ -149,7 +149,7 @@ public:
 
     // Focus
     virtual std::shared_ptr<UIFocusEnvironment> parentFocusEnvironment() override;
-    virtual std::shared_ptr<UIView> getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading);
+    virtual std::shared_ptr<UIFocusItem> getNextFocusItem(std::shared_ptr<UIView> current, UIFocusHeading focusHeading);
     virtual bool isFocused() override;
 
     // Animations
@@ -246,10 +246,13 @@ private:
     void setSuperview(std::shared_ptr<UIView> superview);
     bool anyCurrentlyRunningAnimationsAllowUserInteraction();
 
+    std::shared_ptr<UIFocusItem> searchForFocus();
+
     virtual void applyXMLAttributes(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage);
     static std::shared_ptr<UIView> instantiateFromXib(tinyxml2::XMLElement* element, std::map<std::string, std::shared_ptr<UIView>>* idStorage = nullptr);
 
     friend class UIViewController;
+    friend class UIFocusSystem;
     friend class UIWindow;
     friend class UINib;
     friend class YGLayout;
