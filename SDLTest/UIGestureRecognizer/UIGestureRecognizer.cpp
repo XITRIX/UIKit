@@ -48,7 +48,7 @@ void UIGestureRecognizer::touchesEnded(std::vector<std::shared_ptr<UITouch>> tou
 void UIGestureRecognizer::touchesCancelled(std::vector<std::shared_ptr<UITouch>> touches, std::shared_ptr<UIEvent> event) {}
 
 void UIGestureRecognizer::pressesBegan(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
-void UIGestureRecognizer::pressesMoved(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
+void UIGestureRecognizer::pressesChanged(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
 void UIGestureRecognizer::pressesEnded(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
 void UIGestureRecognizer::pressesCancelled(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {}
 
@@ -107,9 +107,9 @@ void UIGestureRecognizer::_pressesBegan(std::vector<std::shared_ptr<UIPress>> pr
     pressesBegan(presses, event);
 }
 
-void UIGestureRecognizer::_pressesMoved(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
+void UIGestureRecognizer::_pressesChanged(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {
     if (!recognitionCondition()) return;
-    pressesMoved(presses, event);
+    pressesChanged(presses, event);
 }
 
 void UIGestureRecognizer::_pressesEnded(std::vector<std::shared_ptr<UIPress>> presses, std::shared_ptr<UIPressesEvent> event) {

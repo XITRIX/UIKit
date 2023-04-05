@@ -69,6 +69,8 @@
 		7C5FEAFF29DA300D0053368A /* UIFocusSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEAFC29DA300D0053368A /* UIFocusSystem.cpp */; };
 		7C5FEB0329DB46360053368A /* UIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0129DB46360053368A /* UIControl.cpp */; };
 		7C5FEB0429DB46360053368A /* UIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0129DB46360053368A /* UIControl.cpp */; };
+		7C5FEB0729DD90780053368A /* UIControlGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0529DD90780053368A /* UIControlGestureRecognizer.cpp */; };
+		7C5FEB0829DD90780053368A /* UIControlGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FEB0529DD90780053368A /* UIControlGestureRecognizer.cpp */; };
 		7C76CE4B29C8A3E40056DF7E /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4929C8A3E40056DF7E /* Platform.mm */; };
 		7C76CE4E29C8A64E0056DF7E /* DefaultPaltform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */; };
 		7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D57429AEC01E005079B8 /* Assets.xcassets */; };
@@ -390,6 +392,8 @@
 		7C5FEAFD29DA300D0053368A /* UIFocusSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIFocusSystem.hpp; sourceTree = "<group>"; };
 		7C5FEB0129DB46360053368A /* UIControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIControl.cpp; sourceTree = "<group>"; };
 		7C5FEB0229DB46360053368A /* UIControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIControl.hpp; sourceTree = "<group>"; };
+		7C5FEB0529DD90780053368A /* UIControlGestureRecognizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIControlGestureRecognizer.cpp; sourceTree = "<group>"; };
+		7C5FEB0629DD90780053368A /* UIControlGestureRecognizer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIControlGestureRecognizer.hpp; sourceTree = "<group>"; };
 		7C76CE4829C8A38E0056DF7E /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
 		7C76CE4929C8A3E40056DF7E /* Platform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
 		7C76CE4C29C8A64E0056DF7E /* DefaultPaltform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultPaltform.cpp; sourceTree = "<group>"; };
@@ -908,6 +912,8 @@
 			children = (
 				7C5FEB0229DB46360053368A /* UIControl.hpp */,
 				7C5FEB0129DB46360053368A /* UIControl.cpp */,
+				7C5FEB0629DD90780053368A /* UIControlGestureRecognizer.hpp */,
+				7C5FEB0529DD90780053368A /* UIControlGestureRecognizer.cpp */,
 			);
 			path = UIControl;
 			sourceTree = "<group>";
@@ -1946,6 +1952,7 @@
 				7CD7DB3A29B8E23300C9637C /* UITouch.cpp in Sources */,
 				7CD7DAEE29B615D300C9637C /* UIViewController.cpp in Sources */,
 				7CB7F54729A3D83F00A20694 /* SDL_gpu_matrix.c in Sources */,
+				7C5FEB0729DD90780053368A /* UIControlGestureRecognizer.cpp in Sources */,
 				7CD7DB0229B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
 				7C82D69629B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C4DCE7729BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,
@@ -2047,6 +2054,7 @@
 				7C82D69729B3ED4C005079B8 /* Timer.cpp in Sources */,
 				7C4DCE6429BB950B00F13A6D /* YGNode.cpp in Sources */,
 				7CD7DB0329B62E8E00C9637C /* UIApplicationMain.cpp in Sources */,
+				7C5FEB0829DD90780053368A /* UIControlGestureRecognizer.cpp in Sources */,
 				7CD7DAF429B615E200C9637C /* UIResponder.cpp in Sources */,
 				7C4DCE5829BB950B00F13A6D /* Yoga.cpp in Sources */,
 				7C4DCE7829BD3DB800F13A6D /* YogaTestViewController.cpp in Sources */,

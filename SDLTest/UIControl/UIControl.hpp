@@ -13,6 +13,8 @@ namespace UIKit {
 
 class UIControl: public UIView {
 public:
+    UIControl();
+
     virtual bool canBecomeFocused() override;
     virtual void didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator) override;
 

@@ -6,8 +6,13 @@
 //
 
 #include <UIControl/UIControl.hpp>
+#include <UIControl/UIControlGestureRecognizer.hpp>
 
 namespace UIKit {
+
+UIControl::UIControl() {
+    addGestureRecognizer(new_shared<UIControlGestureRecognizer>(this));
+}
 
 bool UIControl::canBecomeFocused() {
     return true;

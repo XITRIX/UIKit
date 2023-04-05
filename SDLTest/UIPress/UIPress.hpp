@@ -42,11 +42,16 @@ private:
     Time _timestamp;
 
     std::vector<std::weak_ptr<UIGestureRecognizer>> _gestureRecognizers;
+    bool _hasBeenCancelledByAGestureRecognizer = false;
     std::optional<UIKey> _key;
 
     void setForWindow(std::shared_ptr<UIWindow> window);
+    void runPressActionOnRecognizerHierachy(std::function<void(std::shared_ptr<UIGestureRecognizer>)> action);
+    bool hasBeenCancelledByAGestureRecognizer() const { return _hasBeenCancelledByAGestureRecognizer; }
 
     friend class UIApplication;
+    friend class UIGestureRecognizer;
+    friend class UIWindow;
 };
 
 }
