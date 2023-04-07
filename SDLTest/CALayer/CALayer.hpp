@@ -36,7 +36,7 @@ public:
     float zPosition = 0;
 
     bool allowsGroupOpacity = true;
-    CALayerDelegate* delegate;
+    std::weak_ptr<CALayerDelegate> delegate;
 
     /// Defaults to 1.0 but if the layer is associated with a view,
     /// the view sets this value to match the screen.
@@ -87,6 +87,8 @@ public:
 
     bool masksToBounds() { return _masksToBounds; }
     void setMasksToBounds(bool newValue) { _masksToBounds = newValue; }
+
+    std::vector<std::shared_ptr<CALayer>> sublayers() { return _sublayers; }
 
     void addSublayer(std::shared_ptr<CALayer> layer);
     void insertSublayerAt(std::shared_ptr<CALayer> layer, int index);
@@ -150,7 +152,7 @@ private:
     std::shared_ptr<CGImage> _contents;
 
     std::weak_ptr<CALayer> superlayer;
-    std::vector<std::shared_ptr<CALayer>> sublayers;
+    std::vector<std::shared_ptr<CALayer>> _sublayers;
     std::shared_ptr<CALayer> mask;
     GPU_Image* groupingFBO = nullptr;
     std::shared_ptr<CGImage> maskFBO;

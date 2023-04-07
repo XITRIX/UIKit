@@ -15,7 +15,7 @@ UIControl::UIControl() {
 }
 
 bool UIControl::canBecomeFocused() {
-    return true;
+    return !isHidden() && alpha() > 0 && isUserInteractionEnabled;
 }
 
 void UIControl::didUpdateFocusIn(UIFocusUpdateContext context, UIFocusAnimationCoordinator* coordinator) {

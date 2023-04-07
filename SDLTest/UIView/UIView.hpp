@@ -124,6 +124,7 @@ public:
 
     virtual void addSubview(std::shared_ptr<UIView> view);
     void insertSubviewAt(std::shared_ptr<UIView> view, int index);
+    void insertSubviewBelow(std::shared_ptr<UIView> view, std::shared_ptr<UIView> belowSubview);
     void removeFromSuperview();
 
     virtual std::shared_ptr<UIWindow> window();

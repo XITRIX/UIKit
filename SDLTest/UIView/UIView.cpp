@@ -104,7 +104,7 @@ UIView::UIView(Rect frame) {
     _layer = initLayer();
     _layer->contentsScale = UIRenderer::main()->scale();
 
-    _layer->delegate = this;
+    _layer->delegate = weak_from_this();
     setFrame(frame);
 }
 
@@ -375,6 +375,30 @@ void UIView::insertSubviewAt(std::shared_ptr<UIView> view, int index) {
     // TODO: Need to implement
 }
 
+void UIView::insertSubviewBelow(std::shared_ptr<UIView> view, std::shared_ptr<UIView> belowSubview) {
+    auto itr = std::find(subviews().cbegin(), subviews().cend(), belowSubview);
+    if (itr == subviews().cend()) { return; }
+
+    bool needToNotifyViewController = false;
+    if (!view->_parentController.expired()) {
+        auto window = this->window();
+        if (window) {
+            needToNotifyViewController = true;
+        }
+    }
+
+    setNeedsLayout();
+    view->removeFromSuperview();
+
+    if (needToNotifyViewController)
+        view->_parentController.lock()->viewWillAppear(true);
+
+    _layer->insertSublayerBelow(view->_layer, belowSubview->layer());
+    _subviews.insert(itr, view);
+    view->setSuperview(this->shared_from_this());
+    view->setNeedsUpdateSafeAreaInsets();
+}
+
 void UIView::removeFromSuperview() {
     auto superview = this->_superview.lock();
     if (!superview) return;
@@ -480,7 +504,8 @@ std::shared_ptr<UIFocusItem> UIView::searchForFocus() {
 
     if (!preferredFocusEnvironments().empty()) {
         auto res = std::dynamic_pointer_cast<UIFocusItem>(preferredFocusEnvironments().front());
-        if (res) return res;
+        auto view = std::dynamic_pointer_cast<UIView>(res);
+        if (view) return view->searchForFocus();
     }
 
     for (auto& child: subviews()) {

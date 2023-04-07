@@ -63,8 +63,12 @@ void UIWindow::makeKeyAndVisible() {
         viewController->viewWillAppear(false);
         addSubview(viewController->view());
         viewController->viewDidAppear(false);
-        _focusSystem->updateFocus();
+        updateFocus();
     }
+}
+
+void UIWindow::updateFocus() {
+    _focusSystem->updateFocus();
 }
 
 void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {

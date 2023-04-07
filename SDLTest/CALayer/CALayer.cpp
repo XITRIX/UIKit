@@ -45,7 +45,7 @@ CALayer::CALayer(CALayer* layer) {
     _contents = layer->_contents; // XXX: we should make a copy here
     contentsScale = layer->contentsScale;
     superlayer = layer->superlayer;
-    sublayers = layer->sublayers;
+    _sublayers = layer->_sublayers;
     contentsGravity = layer->contentsGravity;
 }
 
@@ -200,7 +200,7 @@ void CALayer::render(GPU_Target* renderer) {
 
     // Apply transform for subviews
     transformAtSelfOrigin.setAsSDLgpuMatrix();
-    for (auto sublayer: sublayers) {
+    for (auto sublayer: _sublayers) {
         sublayer->presentationOrSelf()->render(localRenderer);
     }
 
@@ -343,14 +343,14 @@ std::shared_ptr<CALayer> CALayer::getMask() const {
 
 void CALayer::addSublayer(std::shared_ptr<CALayer> layer) {
     layer->removeFromSuperlayer();
-    sublayers.push_back(layer);
+    _sublayers.push_back(layer);
     layer->superlayer = this->shared_from_this();
     CALayer::layerTreeIsDirty = true;
 }
 
 void CALayer::insertSublayerAt(std::shared_ptr<CALayer> layer, int index) {
     layer->removeFromSuperlayer();
-    sublayers.insert(sublayers.begin() + index, layer);
+    _sublayers.insert(_sublayers.begin() + index, layer);
     layer->superlayer = this->shared_from_this();
     CALayer::layerTreeIsDirty = true;
 }
@@ -360,7 +360,13 @@ void CALayer::insertSublayerAbove(std::shared_ptr<CALayer> layer, std::shared_pt
 }
 
 void CALayer::insertSublayerBelow(std::shared_ptr<CALayer> layer, std::shared_ptr<CALayer> sibling) {
-    // TODO: Need to implement
+    auto itr = std::find(_sublayers.cbegin(), _sublayers.cend(), sibling);
+    if (itr == _sublayers.cend()) { return; }
+
+    layer->removeFromSuperlayer();
+    _sublayers.insert(itr, layer);
+    layer->superlayer = this->shared_from_this();
+    CALayer::layerTreeIsDirty = true;
 }
 
 void CALayer::removeFromSuperlayer() {
@@ -374,7 +380,7 @@ void CALayer::removeFromSuperlayer() {
     }
 
     // Find and remove this from superlayer
-    super->sublayers.erase(std::remove(super->sublayers.begin(), super->sublayers.end(), shared_from_this()), super->sublayers.end());
+    super->_sublayers.erase(std::remove(super->_sublayers.begin(), super->_sublayers.end(), shared_from_this()), super->_sublayers.end());
     CALayer::layerTreeIsDirty = true;
 }
 
@@ -410,7 +416,7 @@ CALayer* CALayer::copy() {
 }
 
 std::shared_ptr<CAAction> CALayer::actionForKey(std::string event) {
-    if (delegate) return delegate->actionForKey(event);
+    if (!delegate.expired()) return delegate.lock()->actionForKey(event);
     return CALayer::defaultActionForKey(event);
 }
 
@@ -421,7 +427,7 @@ std::shared_ptr<CALayer> CALayer::createPresentation() {
 }
 
 void CALayer::display() {
-    if (delegate) delegate->display(shared_from_this());
+    if (!delegate.expired()) delegate.lock()->display(shared_from_this());
 }
 
 Rect CALayer::getRenderedBoundsRelativeToAnchorPoint() {

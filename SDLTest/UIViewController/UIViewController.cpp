@@ -123,7 +123,9 @@ void UIViewController::present(std::shared_ptr<UIViewController> otherViewContro
 
     otherViewController->view()->setFrame(view()->window()->bounds());
     otherViewController->viewWillAppear(animated);
-    otherViewController->makeViewAppear(animated, shared_from_this());
+    otherViewController->makeViewAppear(animated, shared_from_this(), [otherViewController]() {
+        otherViewController->view()->window()->updateFocus();
+    });
     otherViewController->viewDidAppear(animated);
 
     otherViewController->view()->layoutSubviews();
@@ -154,6 +156,7 @@ void UIViewController::dismiss(bool animated, std::function<void()> completion) 
         view()->removeFromSuperview();
         viewDidDisappear(animated);
         completion();
+        window->updateFocus();
         _presentingViewController.reset();
         window->removePresentedViewController(shared_from_this());
     });
@@ -175,13 +178,13 @@ void UIViewController::makeViewAppear(bool animated, std::shared_ptr<UIViewContr
 //        _presentingViewController.lock()->view()->setTransform(NXAffineTransform::scaleBy(0.9f, 1));
         view()->setTransform(NXAffineTransform::identity);
     }, [this, completion](auto) {
-        _presentingViewController.lock()->view()->setHidden(true);
+        _presentingViewController.lock()->view()->removeFromSuperview();
         completion();
     });
 }
 
 void UIViewController::makeViewDisappear(bool animated, std::function<void(bool)> completion) {
-    _presentingViewController.lock()->view()->setHidden(false);
+    view()->window()->insertSubviewBelow(_presentingViewController.lock()->view(), view());
     UIView::animate(
         animated ? _animationTime : 0.0,
         0,

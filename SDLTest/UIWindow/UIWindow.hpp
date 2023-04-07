@@ -27,6 +27,7 @@ public:
     void sendEvent(std::shared_ptr<UIEvent> event);
 
     void layoutSubviews() override;
+    void updateFocus();
 
     virtual void pressesBegan(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) override;
     virtual void pressesChanged(std::set<std::shared_ptr<UIPress>> pressees, std::shared_ptr<UIPressesEvent> event) override;
