@@ -47,7 +47,18 @@ UIRenderer::UIRenderer() {
         printf("%s\n", SDL_GetError());
         exit(-1);
     }
-    refreshScreenResolution(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    SDL_Rect gScreenRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+#if !defined(RESIZABLE_SCREEN)
+    //Get device display mode
+    SDL_DisplayMode displayMode;
+    if( SDL_GetCurrentDisplayMode( 0, &displayMode ) == 0 )
+    {
+        gScreenRect.w = displayMode.w;
+        gScreenRect.h = displayMode.h;
+    }
+#endif
+    refreshScreenResolution(gScreenRect.w, gScreenRect.h);
     // TODO: Remove int rounding when initial screen resolution will be fixed
     _scale = int(float(rawPointer->base_h) / float(rawPointer->h));
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
