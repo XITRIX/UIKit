@@ -3,7 +3,7 @@
 	url = https://github.com/grimfang4/sdl-gpu.git
 [submodule "extern/SDL"]
 	path = extern/SDL
-	url = https://github.com/libsdl-org/SDL.git
+	url = https://github.com/XITRIX/SDL.git
 [submodule "extern/nanovg"]
 	path = extern/nanovg
 	url = https://github.com/memononen/nanovg.git

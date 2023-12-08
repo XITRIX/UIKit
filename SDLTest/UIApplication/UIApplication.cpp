@@ -46,12 +46,6 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             handleSDLQuit();
             return;
         }
-        case SDL_CONTROLLERBUTTONDOWN: {
-            if (e.cbutton.button == SDL_CONTROLLER_BUTTON_START) {
-                handleSDLQuit();
-            }
-            break;
-        }
         case SDL_FINGERDOWN: {
             auto renderSize = UIRenderer::_main->bounds().size;
             auto fingerPoint = Point(renderSize.width * e.tfinger.x, renderSize.height * e.tfinger.y);
@@ -158,6 +152,12 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             touchEvent.tfinger.fingerId = -1;
 
             handleSDLEvent(touchEvent);
+            break;
+        }
+        case SDL_CONTROLLERBUTTONDOWN: {
+            if (e.cbutton.button == SDL_CONTROLLER_BUTTON_START) {
+                handleSDLQuit();
+            }
             break;
         }
         case SDL_KEYDOWN: {

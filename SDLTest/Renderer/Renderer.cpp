@@ -15,11 +15,7 @@
 #elif SDL_GPU_DISABLE_OPENGL
 #define NANOVG_GLES2_IMPLEMENTATION
 
-#if __APPLE__
-#include <OpenGLES/ES2/glext.h>
-#else
 #include <GLES2/gl2.h>
-#endif
 #endif
 
 #include <nanovg_gl.h>

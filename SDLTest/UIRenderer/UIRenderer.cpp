@@ -36,7 +36,12 @@ UIRenderer::UIRenderer() {
 
     rawPointer = GPU_Init(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     GPU_SetActiveTarget(rawPointer);
-    
+    if (SDL_GL_SetSwapInterval(-1) == -1) {
+        if (SDL_GL_SetSwapInterval(1) == -1) {
+            printf("FAILED\n");
+        }
+    }
+
     if (!rawPointer) {
         printf("%s\n", GPU_PopErrorCode().details);
         printf("%s\n", SDL_GetError());
