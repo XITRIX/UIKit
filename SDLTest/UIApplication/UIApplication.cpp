@@ -154,6 +154,10 @@ void UIApplication::handleSDLEvent(SDL_Event e) {
             handleSDLEvent(touchEvent);
             break;
         }
+        case SDL_CONTROLLERDEVICEADDED: {
+            printf("Controller added\n");
+            break;
+        }
         case SDL_CONTROLLERBUTTONDOWN: {
             if (e.cbutton.button == SDL_CONTROLLER_BUTTON_START) {
                 handleSDLQuit();

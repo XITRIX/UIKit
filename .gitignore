@@ -2,3 +2,5 @@ build
 SDLTest.elf
 SDLTest.nacp
 SDLTest.nro
+cmake-build-debug
+SDLTest.xcodeproj/xcuserdata

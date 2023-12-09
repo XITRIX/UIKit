@@ -64,8 +64,10 @@ void UIPanGestureRecognizer::touchesMoved(std::vector<std::shared_ptr<UITouch>> 
             Point diff = initialTouchPoint - trackingTouch->locationIn(nullptr);
 //            printf("x %f, y %f\n", diff.x, diff.y);
             if (abs(diff.x) >= THRESHOLD || abs(diff.y) >= THRESHOLD) {
-                previousTouchesMovedTimestamp = touchesMovedTimestamp;
+                // Reset initial touch point to remove "jiggle" effect after start of recognition
+                initialTouchPoint = trackingTouch->locationIn(nullptr);
                 touchesMovedTimestamp = trackingTouch->timestamp();
+                previousTouchesMovedTimestamp = trackingTouch->timestamp();
                 setState(UIGestureRecognizerState::began);
                 setState(UIGestureRecognizerState::changed);
             }
