@@ -111,7 +111,6 @@
 		7C82D5E329AEC838005079B8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E229AEC838005079B8 /* AVFoundation.framework */; };
 		7C82D5E629AEC86A005079B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */; };
 		7C82D5E829AEC892005079B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D5E729AEC892005079B8 /* QuartzCore.framework */; };
-		7C82D5EC29AECC85005079B8 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7C82D5E929AEC8C1005079B8 /* assets */; };
 		7C82D64F29AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
 		7C82D65029AFE08D005079B8 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D62529AFE08D005079B8 /* nanovg.c */; };
 		7C82D65529AFE13D005079B8 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C82D65229AFE13D005079B8 /* Renderer.cpp */; };
@@ -225,6 +224,7 @@
 		7CE0755C2B23BFBA00CBA660 /* MetalANGLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE0755B2B23BFBA00CBA660 /* MetalANGLE.framework */; };
 		7CE0755D2B23BFBA00CBA660 /* MetalANGLE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE0755B2B23BFBA00CBA660 /* MetalANGLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7CE0756F2B23D44800CBA660 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C82D59E29AEC253005079B8 /* libSDL2.a */; };
+		7CE0758D2B262D9700CBA660 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0758C2B262D8800CBA660 /* assets */; };
 		7CEB96892993F5DB007483C0 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB96872993F5DB007483C0 /* Geometry.cpp */; };
 		7CEB968D2993F799007483C0 /* UIColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB968B2993F799007483C0 /* UIColor.cpp */; };
 		7CEB969E29943993007483C0 /* UIApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB969D29943993007483C0 /* UIApplication.cpp */; };
@@ -444,7 +444,6 @@
 		7C82D5E229AEC838005079B8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E529AEC86A005079B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7C82D5E729AEC892005079B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		7C82D5E929AEC8C1005079B8 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		7C82D61F29AFE08D005079B8 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg_gl.h; sourceTree = "<group>"; };
 		7C82D62029AFE08D005079B8 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanovg.h; sourceTree = "<group>"; };
 		7C82D62129AFE08D005079B8 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
@@ -621,6 +620,7 @@
 		7CE0754F2B23B56400CBA660 /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = extern/angle/mac/libEGL.dylib; sourceTree = "<group>"; };
 		7CE075502B23B56400CBA660 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = extern/angle/mac/libGLESv2.dylib; sourceTree = "<group>"; };
 		7CE0755B2B23BFBA00CBA660 /* MetalANGLE.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalANGLE.framework; path = extern/angle/ios/MetalANGLE.framework; sourceTree = "<group>"; };
+		7CE0758C2B262D8800CBA660 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = Demo/assets; sourceTree = "<group>"; };
 		7CEB96872993F5DB007483C0 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		7CEB96882993F5DB007483C0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		7CEB968B2993F799007483C0 /* UIColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIColor.cpp; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 		7C07980F2993E916004E8EC8 = {
 			isa = PBXGroup;
 			children = (
-				7C82D5E929AEC8C1005079B8 /* assets */,
+				7CE0758C2B262D8800CBA660 /* assets */,
 				7CB7F3CA29A3D45F00A20694 /* extern */,
 				7CD7DAFB29B62DB600C9637C /* Demo */,
 				7C07981A2993E916004E8EC8 /* SDLTest */,
@@ -1988,9 +1988,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CE0758D2B262D9700CBA660 /* assets in Resources */,
 				7C82D57829AEC01E005079B8 /* LaunchScreen.storyboard in Resources */,
 				7C82D57529AEC01E005079B8 /* Assets.xcassets in Resources */,
-				7C82D5EC29AECC85005079B8 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2354,7 +2354,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
-					"\"$(SRCROOT)/extern/angle/include\"",
+					"\"$(SRCROOT)/extern/angle/mac/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2380,7 +2380,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
-					"\"$(SRCROOT)/extern/angle/include\"",
+					"\"$(SRCROOT)/extern/angle/mac/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2415,7 +2415,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
-					"\"$(SRCROOT)/extern/angle/include\"",
+					"\"$(SRCROOT)/extern/angle/ios/MetalANGLE.framework/Headers\"",
 				);
 				INFOPLIST_FILE = SDLTest/Platform/iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2460,7 +2460,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/extern/SDL-Headers\"",
-					"\"$(SRCROOT)/extern/angle/include\"",
+					"\"$(SRCROOT)/extern/angle/ios/MetalANGLE.framework/Headers\"",
 				);
 				INFOPLIST_FILE = SDLTest/Platform/iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

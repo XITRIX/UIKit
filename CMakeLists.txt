@@ -19,28 +19,10 @@ target_include_directories(${PROJECT_NAME}
         SDLTest/Animations
 )
 
+# SDL_Gpu
 target_include_directories(${PROJECT_NAME}
         PUBLIC
-        extern/SDL/include
-        extern/SDL-Headers
         extern/sdl-gpu/include
-        extern/nanovg/src
-        extern/libretro/include
-        extern/yoga
-        extern/tinyxml2
-)
-
-target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        extern/angle/include
-)
-
-#file(GLOB_RECURSE SDL_GPU_SRC
-#        extern/sdl-gpu/src/*.c)
-
-
-target_include_directories(${PROJECT_NAME}
-        PRIVATE
         extern/sdl-gpu/src/externals/stb_image_write
         extern/sdl-gpu/src
 )
@@ -51,8 +33,21 @@ target_sources(${PROJECT_NAME}
         extern/sdl-gpu/src/SDL_gpu_matrix.c
         extern/sdl-gpu/src/SDL_gpu_renderer.c
         extern/sdl-gpu/src/SDL_gpu_shapes.c
+        extern/sdl-gpu/src/renderer_GLES_1.c
         extern/sdl-gpu/src/renderer_GLES_2.c
+        extern/sdl-gpu/src/renderer_GLES_3.c
+        extern/sdl-gpu/src/renderer_OpenGL_1.c
+        extern/sdl-gpu/src/renderer_OpenGL_1_BASE.c
+        extern/sdl-gpu/src/renderer_OpenGL_2.c
+        extern/sdl-gpu/src/renderer_OpenGL_3.c
+        extern/sdl-gpu/src/renderer_OpenGL_4.c
         extern/sdl-gpu/src/externals/stb_image_write/stb_image_write.c
+)
+
+# YOGA
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/yoga
 )
 
 file(GLOB_RECURSE YOGA_SRC
@@ -63,14 +58,32 @@ target_sources(${PROJECT_NAME}
         ${YOGA_SRC}
 )
 
+# NanoVG
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/nanovg/src
+)
+
 target_sources(${PROJECT_NAME}
         PRIVATE
         extern/nanovg/src/nanovg.c
 )
 
+# TinyXML
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/tinyxml2
+)
+
 target_sources(${PROJECT_NAME}
         PRIVATE
         extern/tinyxml2/tinyxml2.cpp
+)
+
+# LibRetro
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/libretro/include
 )
 
 file(GLOB_RECURSE LIB_RETRO_SRC
@@ -81,9 +94,48 @@ target_sources(${PROJECT_NAME}
         ${LIB_RETRO_SRC}
 )
 
+# SDL
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/SDL/include
+        extern/SDL-Headers
+)
+
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 target_link_libraries(${PROJECT_NAME} SDL2-static SDL2main)
+
+# Angle
+if (PLATFORM_MAC)
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        extern/angle/mac/include
+)
 
 target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extern/angle/mac)
 target_link_libraries(${PROJECT_NAME} EGL)
 target_link_libraries(${PROJECT_NAME} GLESv2)
+elseif (PLATFORM_IOS)
+    target_include_directories(SDL2-static
+            PUBLIC
+            extern/angle/ios/MetalANGLE.framework/Headers
+    )
+    target_include_directories(${PROJECT_NAME}
+            PUBLIC
+            extern/angle/ios/MetalANGLE.framework/Headers
+    )
+
+#    set_target_properties(${PROJECT_NAME} PROPERTIES
+#            FRAMEWORK TRUE
+#            FRAMEWORK_VERSION A
+#            MACOSX_FRAMEWORK_IDENTIFIER "com.example.extra_lib"
+#    )
+
+    set_property(TARGET ${PROJECT_NAME} PROPERTY XCODE_EMBED_FRAMEWORKS
+            "${CMAKE_CURRENT_SOURCE_DIR}/extern/angle/ios/MetalANGLE.framework"
+            ${PROJECT_NAME})
+    set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_PATH "my_subdir")
+    set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY ON)
+    set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY ON)
+
+
+endif ()

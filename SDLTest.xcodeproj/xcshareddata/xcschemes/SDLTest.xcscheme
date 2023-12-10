@@ -37,7 +37,7 @@
       enableASanStackUseAfterReturn = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/xitrix/Documents/Dev/iOS/SDLTest/assets"
+      customWorkingDirectory = "/Users/xitrix/Documents/Dev/iOS/SDLTest/Demo/assets"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
