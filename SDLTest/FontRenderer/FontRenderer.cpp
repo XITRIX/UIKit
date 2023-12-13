@@ -5,11 +5,16 @@
 //  Created by Даниил Виноградов on 07.03.2023.
 //
 
+#include <cfloat>
 #include <FontRenderer/FontRenderer.hpp>
 #include <Renderer/Renderer.hpp>
 #include <UILabel/UILabel.hpp>
 #include <Tools/Tools.hpp>
 #include <nanovg.h>
+
+#ifdef USE_LIBROMFS
+#include <romfs/romfs.hpp>
+#endif
 
 namespace UIKit {
 
@@ -23,11 +28,16 @@ bool FontRenderer::initialize() {
     return true;
 }
 
-FontRenderer::FontRenderer(std::string path) {
-    fontFace = nvgCreateFont(Renderer::shared()->getContext(), path.c_str(), path.c_str());
+FontRenderer::FontRenderer(const std::string& path) {
+#ifdef USE_LIBROMFS
+    auto file = romfs::get(path);
+    fontFace = nvgCreateFontMem(Renderer::shared()->getContext(), path.c_str(), (unsigned char *) file.data(), (int) file.size(), false);
+#else
+    fontFace = nvgCreateFont(Renderer::shared()->getContext(), path.c_str(), (Utils::resourcePath + path).c_str());
+#endif
 }
 
-FontRenderer::~FontRenderer() { }
+FontRenderer::~FontRenderer() = default;
 
 std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel> label) {
     auto size = label->bounds().size;
@@ -69,7 +79,7 @@ bool charIsDelimiter(char ch) {
     return strchr(wrappingDelimiters, ch) != nullptr;
 }
 
-Size FontRenderer::sizeForText(std::string text, float textSize, uint wrapLength, float lineHeight) {
+Size FontRenderer::sizeForText(const std::string& text, float textSize, uint32_t wrapLength, float lineHeight) {
     auto vg = Renderer::shared()->getContext();
     
     // Setup nvg state for the measurements
@@ -81,7 +91,7 @@ Size FontRenderer::sizeForText(std::string text, float textSize, uint wrapLength
 
     // Measure the needed width for the fullText
     float bounds[4];
-    nvgTextBoxBounds(vg, 0, 0, wrapLength == 0 ? MAXFLOAT : wrapLength, text.c_str(), nullptr, bounds);
+    nvgTextBoxBounds(vg, 0, 0, wrapLength == 0 ? FLT_MAX : wrapLength, text.c_str(), nullptr, bounds);
 
     float requiredWidth = bounds[2] - bounds[0];
     float requiredHeight = bounds[3] - bounds[1];

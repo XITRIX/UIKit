@@ -24,20 +24,20 @@ std::shared_ptr<DispatchQueue> DispatchQueue::global() {
     return _global;
 }
 
-DispatchQueue::DispatchQueue(std::string tag): _tag(tag) {
+DispatchQueue::DispatchQueue(const std::string& tag): _tag(tag) {
     if (tag != "main") {
-        pthread_create(&_task_loop_thread, NULL, task_loop, this);
+        pthread_create(&_task_loop_thread, nullptr, task_loop, this);
     }
 }
 
 DispatchQueue::~DispatchQueue() {
     _task_loop_active = false;
     if (_tag != "main") {
-        pthread_join(_task_loop_thread, NULL);
+        pthread_join(_task_loop_thread, nullptr);
     }
 }
 
-void DispatchQueue::async(std::function<void()> task) {
+void DispatchQueue::async(const std::function<void()>& task) {
     std::lock_guard<std::mutex> guard(_m_async_mutex);
     _queue.push(task);
 }
@@ -62,7 +62,7 @@ void* DispatchQueue::task_loop(void* a) {
         self->performAll();
         retro_sleep(50);
     }
-    return NULL;
+    return nullptr;
 }
 
 }

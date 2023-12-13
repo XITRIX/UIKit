@@ -21,12 +21,12 @@ public:
     static void cleanupSession();
     static bool initialize();
 
-    FontRenderer(std::string path);
+    FontRenderer(const std::string& path);
     ~FontRenderer();
 
     std::shared_ptr<CGImage> createContentsFor(std::shared_ptr<UILabel> label);
 
-    Size sizeForText(std::string text, float textSize, uint wrapLength, float lineHeight);
+    Size sizeForText(const std::string& text, float textSize, uint32_t wrapLength, float lineHeight);
 private:
     int fontFace = -1;
 };

@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(UIKit)
 
-add_definitions(-DSDL_GPU_DISABLE_OPENGL -DSDL_GPU_DISABLE_GLES_1 -DSDL_GPU_DISABLE_GLES_3)
-
 add_library(${PROJECT_NAME} STATIC)
 
 file(GLOB_RECURSE UIKIT_SRC
@@ -104,16 +102,23 @@ target_include_directories(${PROJECT_NAME}
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 target_link_libraries(${PROJECT_NAME} SDL2-static SDL2main)
 
+# libromfs
+if(USE_LIBROMFS)
+    add_subdirectory(extern/libromfs EXCLUDE_FROM_ALL)
+#    list(APPEND BRLS_PLATFORM_LIBS ${LIBROMFS_LIBRARY})
+    target_link_libraries(${PROJECT_NAME} ${LIBROMFS_LIBRARY})
+endif()
+
 # Angle
 if (PLATFORM_MAC)
-target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        extern/angle/mac/include
-)
+    target_include_directories(${PROJECT_NAME}
+            PUBLIC
+            extern/angle/mac/include
+    )
 
-target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extern/angle/mac)
-target_link_libraries(${PROJECT_NAME} EGL)
-target_link_libraries(${PROJECT_NAME} GLESv2)
+    target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extern/angle/mac)
+    target_link_libraries(${PROJECT_NAME} EGL)
+    target_link_libraries(${PROJECT_NAME} GLESv2)
 elseif (PLATFORM_IOS)
     target_include_directories(SDL2-static
             PUBLIC
@@ -124,16 +129,6 @@ elseif (PLATFORM_IOS)
             extern/angle/ios/MetalANGLE.framework/Headers
     )
 
-#    set_target_properties(${PROJECT_NAME} PROPERTIES
-#            FRAMEWORK TRUE
-#            FRAMEWORK_VERSION A
-#            MACOSX_FRAMEWORK_IDENTIFIER "com.example.extra_lib"
-#    )
-
-    set_property(TARGET ${PROJECT_NAME} PROPERTY XCODE_EMBED_FRAMEWORKS
-            "${CMAKE_CURRENT_SOURCE_DIR}/extern/angle/ios/MetalANGLE.framework"
-            ${PROJECT_NAME})
-    set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_PATH "my_subdir")
     set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY ON)
     set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY ON)
 

@@ -7,7 +7,10 @@
 
 #include <Data/Data.hpp>
 #include <Tools/Tools.hpp>
-#include <cstring>
+
+#ifdef USE_LIBROMFS
+#include <romfs/romfs.hpp>
+#endif
 
 namespace UIKit {
 
@@ -19,7 +22,7 @@ Data::Data(Uint8 bytes[], int count, bool freeSource) {
         delete[] bytes;
 }
 
-Data::~Data() {}
+Data::~Data() = default;
 
 int Data::count() const {
     return (int) _data.size();
@@ -29,11 +32,17 @@ Uint8* Data::data() const {
     return (Uint8*) _data.data();
 }
 
-std::optional<Data> Data::fromPath(std::string path) {
+std::optional<Data> Data::fromPath(const std::string& path) {
+#ifdef USE_LIBROMFS
+    auto file = romfs::get(path);
+    auto fileReader = SDL_RWFromConstMem(file.data(), (int) file.size());
+#else
     auto fileReader = SDL_RWFromFile((Utils::resourcePath + path).c_str(), "r");
+#endif
+
     auto fileSize = int(fileReader->size(fileReader));
 
-    Uint8* buffer = new Uint8[fileSize];
+    auto buffer = new Uint8[fileSize];
 
     auto bytesRead = int(fileReader->read(fileReader, buffer, 1, fileSize));
 

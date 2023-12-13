@@ -23,7 +23,7 @@ public:
     Data(Uint8* bytes, int count, bool freeSource = false);
     ~Data();
 
-    static std::optional<Data> fromPath(std::string path);
+    static std::optional<Data> fromPath(const std::string& path);
 private:
     std::vector<Uint8> _data;
 };

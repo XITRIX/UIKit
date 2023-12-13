@@ -21,10 +21,10 @@ public:
     float pointSize;
     float lineHeight = 1.f; // TODO: Implement
 
-    UIFont(std::string path, float size);
+    UIFont(const std::string& path, float size);
 
-    Size sizeForText(std::string text, uint wrapLength);
-    std::shared_ptr<CGImage> createContentsFor(std::shared_ptr<UILabel> label);
+    Size sizeForText(const std::string& text, uint32_t wrapLength);
+    std::shared_ptr<CGImage> createContentsFor(const std::shared_ptr<UILabel>& label);
 
     void setPointSize(float size) { pointSize = size; }
 

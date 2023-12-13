@@ -12,7 +12,7 @@ namespace UIKit {
 
 std::map<std::string, std::shared_ptr<FontRenderer>> UIFont::cachedFontFiles;
 
-UIFont::UIFont(std::string name, float size): fontName(name), pointSize(size) {
+UIFont::UIFont(const std::string& name, float size): fontName(name), pointSize(size) {
     if (!cachedFontFiles.count(name)) {
         cachedFontFiles[name] = new_shared<FontRenderer>(name);
     }
@@ -20,17 +20,17 @@ UIFont::UIFont(std::string name, float size): fontName(name), pointSize(size) {
     renderer = cachedFontFiles[name];
 }
 
-Size UIFont::sizeForText(std::string text, uint wrapLength) {
+Size UIFont::sizeForText(const std::string& text, uint wrapLength) {
     return renderer->sizeForText(text, pointSize, wrapLength, lineHeight);
 }
 
-std::shared_ptr<CGImage> UIFont::createContentsFor(std::shared_ptr<UILabel> label) {
+std::shared_ptr<CGImage> UIFont::createContentsFor(const std::shared_ptr<UILabel>& label) {
     return renderer->createContentsFor(label);
 }
 
 std::shared_ptr<UIFont> UIFont::systemFont(float size) {
 //    return new_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
-    return new_shared<UIFont>(Utils::resourcePath + "Fonts/SFProDisplay-Regular.ttf", size);
+    return new_shared<UIFont>("Fonts/SFProDisplay-Regular.ttf", size);
 }
 
 }

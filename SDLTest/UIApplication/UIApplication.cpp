@@ -19,7 +19,9 @@ std::shared_ptr<UIApplication> UIApplication::shared = nullptr;
 
 UIApplication::UIApplication() {
     // TODO: Replace with Bunbles
-#ifdef __SWITCH__
+#ifdef USE_LIBROMFS
+    Utils::resourcePath = "";
+#elif __SWITCH__
     Utils::resourcePath = "romfs:/";
 #elif __APPLE__
 #include <TargetConditionals.h>
