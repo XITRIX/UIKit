@@ -19,7 +19,7 @@ UILabel::UILabel(): UIView() {
     setContentMode(UIViewContentMode::left);
 }
 
-void UILabel::setText(std::string text) {
+void UILabel::setText(const std::string& text) {
     if (_text == text) return ;
     _text = text;
 
@@ -41,7 +41,7 @@ void UILabel::setTextAlignment(NSTextAlignment textAlignment) {
     setNeedsDisplay();
 }
 
-void UILabel::setFont(std::shared_ptr<UIFont> font) {
+void UILabel::setFont(const std::shared_ptr<UIFont>& font) {
     if (_font == font) return;
     _font = font;
     setNeedsDisplay();

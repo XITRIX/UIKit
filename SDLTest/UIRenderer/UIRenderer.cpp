@@ -60,13 +60,13 @@ UIRenderer::UIRenderer() {
 #endif
     refreshScreenResolution(gScreenRect.w, gScreenRect.h);
     // TODO: Remove int rounding when initial screen resolution will be fixed
-    _scale = int(float(rawPointer->base_h) / float(rawPointer->h));
+    _scale = float(rawPointer->base_h) / float(rawPointer->h);
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
     SDL_GameControllerOpen(0); // TODO: Move to another place
 }
 
-void UIRenderer::render(std::shared_ptr<UIWindow> window, Timer frameTimer) {
+void UIRenderer::render(const std::shared_ptr<UIWindow>& window, Timer frameTimer) {
     UIView::animateIfNeeded(frameTimer);
 
     // TODO: Remove refreshing every frame

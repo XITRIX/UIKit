@@ -21,13 +21,13 @@ public:
     GPU_Image* pointee;
 
     CGImage(Size size);
-    CGImage(Data sourceData);
+    CGImage(const Data& sourceData);
     CGImage(SDL_Surface* surface);
     CGImage(GPU_Image* image, std::optional<Data> sourceData);
     CGImage(GPU_Image* image): CGImage(image, std::nullopt) {}
     ~CGImage();
 
-    Size size();
+    [[nodiscard]] Size size() const;
 private:
     std::optional<Data> sourceData;
 };

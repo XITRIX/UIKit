@@ -11,7 +11,7 @@
 #include <Geometry/Geometry.hpp>
 #include <UIGestureRecognizer/UIGestureRecognizer.hpp>
 #include <vector>
-#include <time.h>
+#include <ctime>
 
 namespace UIKit {
 
@@ -26,16 +26,16 @@ public:
     UITouch(): UITouch(0, Point(), getCPUTimeUsec()) {}
     UITouch(unsigned long touchId, Point point, Time timestamp);
 
-    constexpr unsigned long touchId() const { return _touchId; }
+    [[nodiscard]] constexpr unsigned long touchId() const { return _touchId; }
 
-    std::weak_ptr<UIView> view() const { return _view; }
-    std::weak_ptr<UIWindow> window() const { return _window; }
+    [[nodiscard]] std::weak_ptr<UIView> view() const { return _view; }
+    [[nodiscard]] std::weak_ptr<UIWindow> window() const { return _window; }
 
-    UITouchPhase phase() const { return _phase; }
-    Time timestamp() const { return _timestamp; }
+    [[nodiscard]] UITouchPhase phase() const { return _phase; }
+    [[nodiscard]] Time timestamp() const { return _timestamp; }
 
-    Point absoluteLocation() const { return _absoluteLocation; }
-    Point previousAbsoluteLocation() const { return _previousAbsoluteLocation; }
+    [[nodiscard]] Point absoluteLocation() const { return _absoluteLocation; }
+    [[nodiscard]] Point previousAbsoluteLocation() const { return _previousAbsoluteLocation; }
 
     std::vector<std::weak_ptr<UIGestureRecognizer>> gestureRecognizers() { return _gestureRecognizers; };
 
@@ -44,9 +44,9 @@ public:
     Point locationIn(std::shared_ptr<UIView> view);
     Point previousLocationIn(std::shared_ptr<UIView> view);
 
-    void runTouchActionOnRecognizerHierachy(std::function<void(std::shared_ptr<UIGestureRecognizer>)> action);
+    void runTouchActionOnRecognizerHierachy(const std::function<void(std::shared_ptr<UIGestureRecognizer>)>& action);
 
-    bool hasBeenCancelledByAGestureRecognizer() const { return _hasBeenCancelledByAGestureRecognizer; }
+    [[nodiscard]] bool hasBeenCancelledByAGestureRecognizer() const { return _hasBeenCancelledByAGestureRecognizer; }
 
 private:
     unsigned long _touchId;

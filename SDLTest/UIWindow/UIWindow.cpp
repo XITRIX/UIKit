@@ -12,13 +12,14 @@
 #include <UIPress/UIPress.hpp>
 #include <UITouch/UITouch.hpp>
 #include <Platform/Platform.hpp>
+#include <utility>
 
 namespace UIKit {
 
 std::vector<std::weak_ptr<UIGestureRecognizer>> getRecognizerHierachyFromView(std::shared_ptr<UIView> view) {
     std::vector<std::weak_ptr<UIGestureRecognizer>> recognizers;
     while (view) {
-        for (auto recognizer : *view->gestureRecognizers())
+        for (const auto& recognizer : *view->gestureRecognizers())
             recognizers.push_back(recognizer);
         view = view->superview().lock();
     }
@@ -47,7 +48,7 @@ void UIWindow::setRootViewController(std::shared_ptr<UIViewController> rootViewC
         _rootViewController->view()->removeFromSuperview();
     }
 
-    _rootViewController = rootViewController;
+    _rootViewController = std::move(rootViewController);
 }
 
 void UIWindow::makeKeyAndVisible() {
@@ -71,7 +72,7 @@ void UIWindow::updateFocus() {
     _focusSystem->updateFocus();
 }
 
-void UIWindow::sendEvent(std::shared_ptr<UIEvent> event) {
+void UIWindow::sendEvent(const std::shared_ptr<UIEvent>& event) {
     if (auto pevent = std::dynamic_pointer_cast<UIPressesEvent>(event)) {
         sendPressEvent(pevent);
     } else {
@@ -127,7 +128,7 @@ void UIWindow::sendTouchEvent(std::shared_ptr<UIEvent> event) {
     }
 }
 
-void UIWindow::sendPressEvent(std::shared_ptr<UIPressesEvent> event) {
+void UIWindow::sendPressEvent(const std::shared_ptr<UIPressesEvent>& event) {
     for (auto& press: event->allPresses()) {
         if (press->responder().expired()) continue;
 
@@ -160,11 +161,11 @@ void UIWindow::layoutSubviews() {
     }
 }
 
-void UIWindow::addPresentedViewController(std::shared_ptr<UIViewController> controller) {
+void UIWindow::addPresentedViewController(const std::shared_ptr<UIViewController>& controller) {
     _presentedViewControllers.push_back(controller);
 }
 
-void UIWindow::removePresentedViewController(std::shared_ptr<UIViewController> controller) {
+void UIWindow::removePresentedViewController(const std::shared_ptr<UIViewController>& controller) {
     _presentedViewControllers.erase(std::remove(_presentedViewControllers.begin(), _presentedViewControllers.end(), controller), _presentedViewControllers.end());
 }
 

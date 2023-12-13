@@ -30,13 +30,13 @@ public:
     void sizeToFit() override;
 
     std::string text() const { return _text; }
-    void setText(std::string text);
+    void setText(const std::string& text);
 
     int numberOfLines() { return _numberOfLines; }
     void setNumberOfLines(int numberOfLines);
 
     std::shared_ptr<UIFont> font() const { return _font; }
-    void setFont(std::shared_ptr<UIFont> font);
+    void setFont(const std::shared_ptr<UIFont>& font);
 
     UIColor textColor() { return _textColor; }
     void setTextColor(UIColor color);

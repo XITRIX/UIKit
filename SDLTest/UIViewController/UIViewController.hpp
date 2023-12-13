@@ -41,8 +41,8 @@ public:
     std::vector<std::shared_ptr<UIViewController>> children() { return _children; }
     std::weak_ptr<UIViewController> parent() { return _parent; }
 
-    void addChild(std::shared_ptr<UIViewController> child);
-    virtual void willMoveToParent(std::shared_ptr<UIViewController> parent);
+    void addChild(const std::shared_ptr<UIViewController>& child);
+    virtual void willMoveToParent(const std::shared_ptr<UIViewController>& parent);
     virtual void didMoveToParent(std::shared_ptr<UIViewController> parent);
     void removeFromParent();
 
@@ -71,7 +71,7 @@ private:
     UIEdgeInsets _additionalSafeAreaInsets;
     UIEdgeInsets _systemMinimumLayoutMargins = UIEdgeInsets(0, 16, 0, 16);
     bool _viewRespectsSystemMinimumLayoutMargins = true;
-    float _animationTime = 0.4;
+    float _animationTime = 0.3;
 
     std::shared_ptr<UIViewController> _presentedViewController;
     std::weak_ptr<UIViewController> _presentingViewController;

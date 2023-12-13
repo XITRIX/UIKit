@@ -7,6 +7,7 @@
 
 #include <CGImage/CGImage.hpp>
 #include <UIApplication/UIApplication.hpp>
+#include <utility>
 
 namespace UIKit {
 
@@ -17,7 +18,7 @@ CGImage::CGImage(Size size) {
 }
 
 CGImage::CGImage(GPU_Image* image, std::optional<Data> sourceData) {
-    this->sourceData = sourceData;
+    this->sourceData = std::move(sourceData);
     pointee = image;
 
     GPU_SetSnapMode(pointee, GPU_SNAP_POSITION_AND_DIMENSIONS);
@@ -25,7 +26,7 @@ CGImage::CGImage(GPU_Image* image, std::optional<Data> sourceData) {
     GPU_SetImageFilter(pointee, GPU_FILTER_LINEAR);
 }
 
-CGImage::CGImage(Data sourceData) {
+CGImage::CGImage(const Data& sourceData) {
     auto data = sourceData;
     auto dataCount = data.count();
 
@@ -47,7 +48,7 @@ CGImage::~CGImage() {
     GPU_FreeImage(pointee);
 }
 
-Size CGImage::size() {
+Size CGImage::size() const {
     return Size(pointee->w, pointee->h);
 }
 

@@ -24,7 +24,7 @@ public:
     FontRenderer(const std::string& path);
     ~FontRenderer();
 
-    std::shared_ptr<CGImage> createContentsFor(std::shared_ptr<UILabel> label);
+    std::shared_ptr<CGImage> createContentsFor(const std::shared_ptr<UILabel>& label);
 
     Size sizeForText(const std::string& text, float textSize, uint32_t wrapLength, float lineHeight);
 private:

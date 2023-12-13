@@ -29,7 +29,7 @@ public:
     Rect bounds() { return _bounds; }
     float scale()  { return _scale; }
 
-    void render(std::shared_ptr<UIWindow> window, Timer frameTimer);
+    void render(const std::shared_ptr<UIWindow>& window, Timer frameTimer);
 
     std::optional<Rect> clippingRect() { return _clippingRect; }
     void setClippingRect(std::optional<Rect> newValue);

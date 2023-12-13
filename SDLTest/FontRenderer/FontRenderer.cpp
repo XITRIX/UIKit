@@ -31,15 +31,15 @@ bool FontRenderer::initialize() {
 FontRenderer::FontRenderer(const std::string& path) {
 #ifdef USE_LIBROMFS
     auto file = romfs::get(path);
-    fontFace = nvgCreateFontMem(Renderer::shared()->getContext(), path.c_str(), (unsigned char *) file.data(), (int) file.size(), false);
+    fontFace = nvgCreateFontMem(Renderer::shared()->getContext(), path.c_str(), (unsigned char *) file.data(), (int) file.size(), true);
 #else
-    fontFace = nvgCreateFont(Renderer::shared()->getContext(), path.c_str(), (Utils::resourcePath + path).c_str());
+    fontFace = nvgCreateFont(Renderer::shared()->getContext(), path.c_str(), path.c_str());
 #endif
 }
 
 FontRenderer::~FontRenderer() = default;
 
-std::shared_ptr<CGImage> FontRenderer::createContentsFor(std::shared_ptr<UILabel> label) {
+std::shared_ptr<CGImage> FontRenderer::createContentsFor(const std::shared_ptr<UILabel>& label) {
     auto size = label->bounds().size;
     float scale = UIRenderer::main()->scale();
 

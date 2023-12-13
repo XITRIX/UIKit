@@ -24,7 +24,7 @@ public:
     std::shared_ptr<UIViewController> rootViewController() { return _rootViewController; }
 
     void makeKeyAndVisible();
-    void sendEvent(std::shared_ptr<UIEvent> event);
+    void sendEvent(const std::shared_ptr<UIEvent>& event);
 
     void layoutSubviews() override;
     void updateFocus();
@@ -38,11 +38,11 @@ private:
     std::vector<std::shared_ptr<UIViewController>> _presentedViewControllers;
 
     friend class UIViewController;
-    void addPresentedViewController(std::shared_ptr<UIViewController> controller);
-    void removePresentedViewController(std::shared_ptr<UIViewController> controller);
+    void addPresentedViewController(const std::shared_ptr<UIViewController>& controller);
+    void removePresentedViewController(const std::shared_ptr<UIViewController>& controller);
 
     void sendTouchEvent(std::shared_ptr<UIEvent> event);
-    void sendPressEvent(std::shared_ptr<UIPressesEvent> event);
+    void sendPressEvent(const std::shared_ptr<UIPressesEvent>& event);
 
     std::shared_ptr<UIFocusSystem> _focusSystem;
 };

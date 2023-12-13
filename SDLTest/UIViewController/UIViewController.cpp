@@ -8,6 +8,7 @@
 #include <UIViewController/UIViewController.hpp>
 #include <UIWindow/UIWindow.hpp>
 #include <DispatchQueue/DispatchQueue.hpp>
+#include <utility>
 
 namespace UIKit {
 
@@ -25,7 +26,7 @@ std::shared_ptr<UIView> UIViewController::view() {
 
 void UIViewController::setView(std::shared_ptr<UIView> view) {
     if (_view) _view->_parentController.reset();
-    _view = view;
+    _view = std::move(view);
     _view->_parentController = weak_from_this();
     viewDidLoad();
 }
@@ -68,12 +69,12 @@ void UIViewController::viewDidDisappear(bool animated) {
     }
 }
 
-void UIViewController::addChild(std::shared_ptr<UIViewController> child) {
+void UIViewController::addChild(const std::shared_ptr<UIViewController>& child) {
     _children.push_back(child);
     child->willMoveToParent(weak_from_this().lock());
 }
 
-void UIViewController::willMoveToParent(std::shared_ptr<UIViewController> parent) {
+void UIViewController::willMoveToParent(const std::shared_ptr<UIViewController>& parent) {
     if (parent)
         this->_parent = parent;
 }
@@ -188,7 +189,7 @@ void UIViewController::makeViewDisappear(bool animated, std::function<void(bool)
     UIView::animate(
         animated ? _animationTime : 0.0,
         0,
-        curveEaseIn,
+        curveEaseOut,
         [this]() {
 //            _presentingViewController.lock()->view()->setTransform(NXAffineTransform::identity);
 
