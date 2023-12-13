@@ -6,6 +6,20 @@ add_library(${PROJECT_NAME} STATIC)
 file(GLOB_RECURSE UIKIT_SRC
         SDLTest/*.cpp)
 
+set (EXCLUDE_DIR "SDLTest/Platform")
+foreach (TMP_PATH ${UIKIT_SRC})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM UIKIT_SRC ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+
+if (PLATFORM_IOS)
+    list(APPEND UIKIT_SRC SDLTest/Platform/iOS/Platform.mm)
+else ()
+    list(APPEND UIKIT_SRC SDLTest/Platform/Default/DefaultPaltform.cpp)
+endif ()
+
 target_sources(${PROJECT_NAME}
         PRIVATE
         ${UIKIT_SRC}
