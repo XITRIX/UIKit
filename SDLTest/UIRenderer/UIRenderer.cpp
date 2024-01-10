@@ -64,6 +64,21 @@ UIRenderer::UIRenderer() {
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
     SDL_GameControllerOpen(0); // TODO: Move to another place
+
+#if defined(RESIZABLE_SCREEN)
+    SDL_AddEventWatch(resizingEventWatcher, nullptr);
+#endif
+}
+
+int UIRenderer::resizingEventWatcher(void* data, SDL_Event* event) {
+    if (event->type == SDL_WINDOWEVENT &&
+        event->window.event == SDL_WINDOWEVENT_RESIZED)
+    {
+        auto currentTime = Timer();
+        UIRenderer::main()->refreshScreenResolution(event->window.data1, event->window.data2);
+        UIRenderer::main()->render(UIApplication::shared->keyWindow.lock(), currentTime);
+    }
+    return 0;
 }
 
 void UIRenderer::render(const std::shared_ptr<UIWindow>& window, Timer frameTimer) {
@@ -74,10 +89,10 @@ void UIRenderer::render(const std::shared_ptr<UIWindow>& window, Timer frameTime
 
     window->sdlDrawAndLayoutTreeIfNeeded();
 
-    if (!CALayer::layerTreeIsDirty) {
-        SDL_Delay(1);
-        return;
-    }
+//    if (!CALayer::layerTreeIsDirty) {
+//        SDL_Delay(1);
+//        return;
+//    }
 
     CALayer::layerTreeIsDirty = false;
 

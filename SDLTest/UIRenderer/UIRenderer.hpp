@@ -49,6 +49,8 @@ private:
     friend class UIApplication;
     friend class Renderer;
     friend int UIApplicationMain(std::shared_ptr<UIApplicationDelegate> appDelegate);
+
+    static int resizingEventWatcher(void* data, SDL_Event* event);
 };
 
 }
