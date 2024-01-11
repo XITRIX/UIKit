@@ -21,6 +21,7 @@ void UIRenderer::refreshScreenResolution(Uint16 width, Uint16 height) {
 
     GPU_SetWindowResolution(width, height);
     GPU_SetVirtualResolution(rawPointer, width, height);
+    _scale = float(rawPointer->base_h) / float(rawPointer->h);
 
     _bounds.size = Size(rawPointer->w, rawPointer->h);
     if (UIApplication::shared && !UIApplication::shared->keyWindow.expired()) {
@@ -49,7 +50,7 @@ UIRenderer::UIRenderer() {
     }
 
     SDL_Rect gScreenRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-#if !defined(RESIZABLE_SCREEN)
+#if !defined(RESIZABLE_SCREEN) && !defined(__SWITCH__)
     //Get device display mode
     SDL_DisplayMode displayMode;
     if( SDL_GetCurrentDisplayMode( 0, &displayMode ) == 0 )
@@ -58,9 +59,9 @@ UIRenderer::UIRenderer() {
         gScreenRect.h = displayMode.h;
     }
 #endif
-    refreshScreenResolution(gScreenRect.w, gScreenRect.h);
     // TODO: Remove int rounding when initial screen resolution will be fixed
-    _scale = float(rawPointer->base_h) / float(rawPointer->h);
+    refreshScreenResolution(gScreenRect.w, gScreenRect.h);
+
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
     SDL_GameControllerOpen(0); // TODO: Move to another place

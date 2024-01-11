@@ -6,3 +6,5 @@ cmake-build-debug
 SDLTest.xcodeproj/xcuserdata
 Demo/libromfs-generator
 .DS_Store
+Demo/build-ios
+Demo/build-switch

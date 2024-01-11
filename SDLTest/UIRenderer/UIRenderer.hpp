@@ -22,12 +22,11 @@ class UIWindow;
 class UIApplicationDelegate;
 class UIRenderer {
 public:
-
     UIRenderer();
 
     static std::shared_ptr<UIRenderer> main() { return _main; }
     Rect bounds() { return _bounds; }
-    float scale()  { return _scale; }
+    [[nodiscard]] float scale() const { return _scale; }
 
     void render(const std::shared_ptr<UIWindow>& window, Timer frameTimer);
 
@@ -38,7 +37,7 @@ private:
     GPU_Target* rawPointer;
 
     Rect _bounds;
-    float _scale;
+    float _scale = 1;
     std::optional<Rect> _clippingRect;
 
     static std::shared_ptr<UIRenderer> _main;

@@ -63,10 +63,14 @@ target_sources(${PROJECT_NAME} PRIVATE
         SDLTest/YogaExtensions/YogaExtensions.cpp
 )
 
+# Platform Specific
 if (PLATFORM_IOS)
     target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/iOS/Platform.mm)
+elseif (PLATFORM_SWITCH)
+    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/Default/DefaultPlatform.cpp)
+    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/Switch/switch_wrapper.c)
 else ()
-    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/Default/DefaultPaltform.cpp)
+    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/Default/DefaultPlatform.cpp)
 endif ()
 
 target_include_directories(${PROJECT_NAME}
@@ -166,7 +170,6 @@ else ()
     add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
     target_link_libraries(${PROJECT_NAME} SDL2-static SDL2main)
 endif()
-
 
 # libromfs
 if(USE_LIBROMFS)

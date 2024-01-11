@@ -99,6 +99,8 @@ elseif (PLATFORM_SWITCH)
     set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
     include(${DEVKITPRO}/cmake/Switch.cmake REQUIRED)
     message("${DEVKITPRO}/portlibs/switch/include")
+    set(USE_LIBROMFS ON)
+    check_libromfs_generator()
 endif ()
 
 function(add_libromfs app res)
