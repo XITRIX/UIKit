@@ -3,27 +3,71 @@ project(UIKit)
 
 add_library(${PROJECT_NAME} STATIC)
 
-file(GLOB_RECURSE UIKIT_SRC
-        SDLTest/*.cpp)
-
-set (EXCLUDE_DIR "SDLTest/Platform")
-foreach (TMP_PATH ${UIKIT_SRC})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM UIKIT_SRC ${TMP_PATH})
-    endif ()
-endforeach(TMP_PATH)
+target_sources(${PROJECT_NAME} PRIVATE
+        SDLTest/Animations/CABasicAnimation/CABasicAnimation.cpp
+        SDLTest/Animations/CABasicAnimationPrototype/CABasicAnimationPrototype.cpp
+        SDLTest/Animations/CAMediaTimingFunction/CAMediaTimingFunction.cpp
+        SDLTest/Animations/CASpringAnimation/CASpringAnimation.cpp
+        SDLTest/Animations/CASpringAnimationPrototype/CASpringAnimationPrototype.cpp
+        SDLTest/Animations/UIViewAnimationGroup/UIViewAnimationGroup.cpp
+        SDLTest/Animations/UIViewAnimationOptions/UIViewAnimationOptions.cpp
+        SDLTest/CALayer/CALayer.cpp
+        SDLTest/CATransaction/CATransaction.cpp
+        SDLTest/CGImage/CGImage.cpp
+        SDLTest/ContentsGravityTransformation/ContentsGravityTransformation.cpp
+        SDLTest/Data/Data.cpp
+        SDLTest/DispatchQueue/DispatchQueue.cpp
+        SDLTest/FontRenderer/FontRenderer.cpp
+        SDLTest/Geometry/Geometry.cpp
+        SDLTest/NXAffineTransform/NXAffineTransform.cpp
+        SDLTest/NXTransform3D/NXTransform3D.cpp
+        SDLTest/Renderer/Renderer.cpp
+        SDLTest/Shader/Shader.cpp
+        SDLTest/ShaderProgram/ShaderProgram.cpp
+        SDLTest/Timer/Timer.cpp
+        SDLTest/Tools/OptionSet/OptionSet.cpp
+        SDLTest/Tools/Fatal.cpp
+        SDLTest/Tools/IBTools.cpp
+        SDLTest/Tools/Tools.cpp
+        SDLTest/UIApplication/UIApplication.cpp
+        SDLTest/UIApplicationDelegate/UIApplicationDelegateImpl.cpp
+        SDLTest/UIApplicationMain/UIApplicationMain.cpp
+        SDLTest/UIColor/UIColor.cpp
+        SDLTest/UIControl/UIControl.cpp
+        SDLTest/UIControl/UIControlGestureRecognizer.cpp
+        SDLTest/UIEdgeInsets/UIEdgeInsets.cpp
+        SDLTest/UIEvent/UIEvent.cpp
+        SDLTest/UIFocus/UIFocus.cpp
+        SDLTest/UIFocusAnimationCoordinator/UIFocusAnimationCoordinator.cpp
+        SDLTest/UIFocusSystem/UIFocusSystem.cpp
+        SDLTest/UIFont/UIFont.cpp
+        SDLTest/UIGestureRecognizer/UIGestureRecognizer.cpp
+        SDLTest/UIImage/UIImage.cpp
+        SDLTest/UIImageView/UIImageView.cpp
+        SDLTest/UIKey/UIKey.cpp
+        SDLTest/UILabel/UILabel.cpp
+        SDLTest/UINib/UINib.cpp
+        SDLTest/UIPanGestureRecognizer/UIPanGestureRecognizer.cpp
+        SDLTest/UIPress/UIPress.cpp
+        SDLTest/UIPressesEvent/UIPressesEvent.cpp
+        SDLTest/UIRenderer/UIRenderer.cpp
+        SDLTest/UIResponder/UIResponder.cpp
+        SDLTest/UIScrollView/UIScrollView.cpp
+        SDLTest/UITapGestureRecognizer/UITapGestureRecognizer.cpp
+        SDLTest/UITouch/UITouch.cpp
+        SDLTest/UIView/UIView.cpp
+        SDLTest/UIViewController/UIViewController.cpp
+        SDLTest/UIWindow/UIWindow.cpp
+        SDLTest/ViewBuilder/ViewBuilder.cpp
+        SDLTest/YogaExtensions/YGLayoutImpl.cpp
+        SDLTest/YogaExtensions/YogaExtensions.cpp
+)
 
 if (PLATFORM_IOS)
-    list(APPEND UIKIT_SRC SDLTest/Platform/iOS/Platform.mm)
+    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/iOS/Platform.mm)
 else ()
-    list(APPEND UIKIT_SRC SDLTest/Platform/Default/DefaultPaltform.cpp)
+    target_sources(${PROJECT_NAME} PRIVATE SDLTest/Platform/Default/DefaultPaltform.cpp)
 endif ()
-
-target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${UIKIT_SRC}
-)
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC
