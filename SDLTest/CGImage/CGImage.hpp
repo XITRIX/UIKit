@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <SDL_gpu.h>
 #include <optional>
 #include <memory>

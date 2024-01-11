@@ -107,14 +107,22 @@ target_sources(${PROJECT_NAME}
 )
 
 # SDL
-target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        extern/SDL/include
-        extern/SDL-Headers
-)
+if(USE_SYSTEM_SDL)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SDL2 REQUIRED sdl2)
+    message(STATUS "SDL2 Path: \"${SDL2_INCLUDE_DIRS}\"")
+    target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+    target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIRS})
+else ()
+    target_include_directories(${PROJECT_NAME}
+            PUBLIC
+            extern/SDL/include
+            extern/SDL-Headers
+    )
+    add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
+    target_link_libraries(${PROJECT_NAME} SDL2-static SDL2main)
+endif()
 
-add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
-target_link_libraries(${PROJECT_NAME} SDL2-static SDL2main)
 
 # libromfs
 if(USE_LIBROMFS)
@@ -123,7 +131,7 @@ if(USE_LIBROMFS)
     target_link_libraries(${PROJECT_NAME} ${LIBROMFS_LIBRARY})
 endif()
 
-# Angle
+# Angle / GL
 if (PLATFORM_MAC)
     target_include_directories(${PROJECT_NAME}
             PUBLIC
@@ -145,6 +153,6 @@ elseif (PLATFORM_IOS)
 
     set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY ON)
     set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY ON)
-
-
+elseif (PLATFORM_SWITCH)
+    target_link_libraries(${PROJECT_NAME} EGL glapi GLESv2 drm_nouveau nx)
 endif ()

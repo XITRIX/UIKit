@@ -6,7 +6,7 @@
 //
 
 #ifndef __SWITCH__
-#include <SDL2/SDL_main.h>
+#include <SDL_main.h>
 #endif
 #include "Runner/Runner.hpp"
 
