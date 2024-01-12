@@ -9,7 +9,7 @@
 
 namespace UIKit {
 
-    class TimerAnimation {
+    class TimerAnimation: enable_shared_from_this_pointer_holder {
     public:
         TimerAnimation(double duration, std::function<void(float, double)> animations, std::function<void(bool)> completion = [](bool _){});
         ~TimerAnimation();

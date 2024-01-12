@@ -73,9 +73,13 @@ private:
 
     bool _bounceHorizontally = false;
     bool _bounceVertically = false;
+
+    bool shouldBounceHorizontally();
+    bool shouldBounceVertically();
+
     UIScrollViewContentInsetAdjustmentBehavior _contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes;
 
-    TimerAnimation* _timerAnimation = nullptr;
+    std::shared_ptr<TimerAnimation> _timerAnimation;
     UIEdgeInsets _lastLayoutMargins;
     UIEdgeInsets _contentInset;
 //    Size _contentSize;
@@ -86,6 +90,8 @@ private:
     Point visibleContentOffset();
     Point getBoundsCheckedContentOffset(Point newContentOffset);
 
+    Rect contentOffsetBounds();
+
     void layoutScrollIndicatorsIfNeeded();
     void showScrollIndicators();
     void hideScrollIndicators();
@@ -93,6 +99,8 @@ private:
     void startDeceleratingIfNecessary();
     void cancelDeceleratingIfNeccessary();
     void cancelDecelerationAnimations();
+
+    void bounceWithVelocity(Point velocity);
 };
 
 }

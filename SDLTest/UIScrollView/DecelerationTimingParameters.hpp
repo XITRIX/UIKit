@@ -21,8 +21,12 @@ namespace UIKit {
             decelerationRate(decelerationRate),
             threshold(threshold) { }
 
-        Point destination() const;
-        float duration() const;
-        Point valueAt(float time) const;
+        [[nodiscard]] Point destination() const;
+        [[nodiscard]] float duration() const;
+        [[nodiscard]] Point valueAt(float time) const;
+
+
+        float durationTo(Point value) const;
+        Point velocityAt(float time) const;
     };
 }

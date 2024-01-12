@@ -27,7 +27,8 @@ struct Point {
     Point operator/(const float& rhs) const;
     Point operator*(const float& rhs) const;
 
-    Point applying(NXAffineTransform transform);
+    Point applying(NXAffineTransform transform) const;
+    float distanceToSegment(Point v, Point w) const;
     float magnitude() const;
 
     static Point zero;
@@ -97,6 +98,11 @@ struct Rect {
 
     bool isNull() const;
     static Rect null;
+};
+
+struct Geometry {
+    static float rubberBandClamp(float x, float coeff, float dim);
+    static float rubberBandClamp(float x, float coeff, float dim, float limitStart, float limitEnd);
 };
 
 }

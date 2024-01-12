@@ -73,10 +73,40 @@ Point Point::operator*(const float& rhs) const {
     return res;
 }
 
-Point Point::applying(NXAffineTransform t) {
+Point Point::applying(NXAffineTransform t) const {
     return Point(x * t.m11 + y * t.m21 + t.tX,
                  x * t.m12 + y * t.m22 + t.tY);
 
+}
+
+float Point::distanceToSegment(Point v, Point w) const {
+    auto pv_dx = x - v.x;
+    auto pv_dy = y - v.y;
+    auto wv_dx = w.x - v.x;
+    auto wv_dy = w.y - v.y;
+
+    auto dot = pv_dx * wv_dx + pv_dy * wv_dy;
+    auto len_sq = wv_dx * wv_dx + wv_dy * wv_dy;
+    auto param = dot / len_sq;
+
+    float int_x, int_y; /* intersection of normal to vw that goes through p */
+
+    if (param < 0 || (v.x == w.x && v.y == w.y)) {
+        int_x = v.x;
+        int_y = v.y;
+    } else if (param > 1) {
+        int_x = w.x;
+        int_y = w.y;
+    } else {
+        int_x = v.x + param * wv_dx;
+        int_y = v.y + param * wv_dy;
+    }
+
+    /* Components of normal */
+    auto dx = x - int_x;
+    auto dy = y - int_y;
+
+    return sqrt(dx * dx + dy * dy);
 }
 
 float Point::magnitude() const {
@@ -265,5 +295,17 @@ bool Rect::isNull() const {
 }
 
 Rect Rect::null = Rect(INFINITY, INFINITY, 0, 0);
+
+float Geometry::rubberBandClamp(float x, float coeff, float dim) {
+    return (1.0f - (1.0f / ((x * coeff / dim) + 1.0f))) * dim;
+}
+
+float Geometry::rubberBandClamp(float x, float coeff, float dim, float limitStart, float limitEnd) {
+    auto clampedX = fminf(fmaxf(x, limitStart), limitEnd);
+    auto diff = abs(x - clampedX);
+    float sign = clampedX > x ? -1 : 1;
+
+    return clampedX + sign * rubberBandClamp(diff, coeff, dim);
+}
 
 }

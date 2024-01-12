@@ -27,4 +27,15 @@ namespace UIKit {
         return res;
     }
 
+    float DecelerationTimingParameters::durationTo(Point value) const {
+        if (value.distanceToSegment(initialValue, destination()) >= threshold) { return 0; }
+
+        auto dCoeff = 1000 * log(decelerationRate);
+        auto res = log(1.0f + dCoeff * (value - initialValue).magnitude() / initialVelocity.magnitude()) / dCoeff;
+        return res;
+    }
+
+    Point DecelerationTimingParameters::velocityAt(float time) const {
+        return initialVelocity * pow(decelerationRate, float(1000 * time));
+    }
 }

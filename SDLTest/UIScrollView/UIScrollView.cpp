@@ -7,6 +7,8 @@
 
 #include <UIScrollView/UIScrollView.hpp>
 #include <CATransaction/CATransaction.hpp>
+#include <UIScrollView/SpringTimingParameters.hpp>
+#include <UIScrollView/RubberBand.hpp>
 
 namespace UIKit {
 
@@ -133,6 +135,107 @@ Point UIScrollView::getBoundsCheckedContentOffset(Point newContentOffset) {
     return target;
 }
 
+Rect UIScrollView::contentOffsetBounds() {
+    auto contentSize = this->contentSize();
+    auto contentHeight = contentSize.height;// fmaxf(contentSize.height, bounds().height());
+    auto contentWidth = contentSize.width;// fmaxf(contentSize.width, bounds().width());
+
+    auto allInsects = _contentInset;// + layoutMargins();
+
+    bool contentWidthGreaterThenScrollBounds = contentWidth > bounds().width() -_contentInset.left - _contentInset.right;
+    bool contentHeightGreaterThenScrollBounds = contentHeight > bounds().height() - _contentInset.top - _contentInset.bottom;
+
+    switch (_contentInsetAdjustmentBehavior) {
+        case UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes: {
+            if (contentWidthGreaterThenScrollBounds || _bounceHorizontally) {
+                allInsects += UIEdgeInsets(0, layoutMargins().left, 0, layoutMargins().right);
+            }
+            if (contentHeightGreaterThenScrollBounds || _bounceVertically) {
+                allInsects += UIEdgeInsets(layoutMargins().top, 0, layoutMargins().bottom, 0);
+            }
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::always: {
+            allInsects += layoutMargins();
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::never: {
+            break;
+        }
+    }
+
+    bool contentWidthGreaterThenScrollSafeArea = contentWidth > bounds().width() -allInsects.left - allInsects.right;
+    bool contentHeightGreaterThenScrollSafeArea = contentHeight > bounds().height() - allInsects.top - allInsects.bottom;
+
+    Rect resBounds;
+    if (!contentWidthGreaterThenScrollSafeArea) {
+        resBounds.origin.x = - allInsects.left;
+        resBounds.size.width = 0;
+    } else {
+        resBounds.origin.x = - allInsects.left;
+        resBounds.size.width = (contentWidth + allInsects.left + allInsects.right) - bounds().width();
+    }
+
+    if (!contentHeightGreaterThenScrollSafeArea) {
+        resBounds.origin.y = - allInsects.top;
+        resBounds.size.height = 0;
+    } else {
+        resBounds.origin.y = - allInsects.top;
+        resBounds.size.height = (contentHeight + allInsects.top + allInsects.bottom) - bounds().height();
+    }
+
+    return resBounds;
+}
+
+bool UIScrollView::shouldBounceHorizontally() {
+    auto contentSize = this->contentSize();
+    bool contentWidthGreaterThenScrollBounds = contentSize.width > bounds().width() -_contentInset.left - _contentInset.right;
+
+    auto allInsects = _contentInset;// + layoutMargins();
+    switch (_contentInsetAdjustmentBehavior) {
+        case UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes: {
+            if (contentWidthGreaterThenScrollBounds || _bounceHorizontally) {
+                allInsects += UIEdgeInsets(0, layoutMargins().left, 0, layoutMargins().right);
+            }
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::always: {
+            allInsects += layoutMargins();
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::never: {
+            break;
+        }
+    }
+
+    bool contentWidthGreaterThenScrollSafeArea = contentSize.width > bounds().width() -allInsects.left - allInsects.right;
+    return contentWidthGreaterThenScrollSafeArea && _bounceHorizontally;
+}
+
+bool UIScrollView::shouldBounceVertically() {
+    auto contentSize = this->contentSize();
+    bool contentHeightGreaterThenScrollBounds = contentSize.height > bounds().height() - _contentInset.top - _contentInset.bottom;
+
+    auto allInsects = _contentInset;// + layoutMargins();
+    switch (_contentInsetAdjustmentBehavior) {
+        case UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes: {
+            if (contentHeightGreaterThenScrollBounds || _bounceVertically) {
+                allInsects += UIEdgeInsets(layoutMargins().top, 0, layoutMargins().bottom, 0);
+            }
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::always: {
+            allInsects += layoutMargins();
+            break;
+        }
+        case UIScrollViewContentInsetAdjustmentBehavior::never: {
+            break;
+        }
+    }
+    bool contentHeightGreaterThenScrollSafeArea = contentSize.height > bounds().height() - allInsects.top - allInsects.bottom;
+    return contentHeightGreaterThenScrollSafeArea && _bounceVertically;
+}
+
 void UIScrollView::onPan() {
     auto translation = _panGestureRecognizer->translationInView(shared_from_this());
 //    _panGestureRecognizer->setTranslation(Point(), shared_from_this());
@@ -140,8 +243,23 @@ void UIScrollView::onPan() {
     auto panGestureVelocity = _panGestureRecognizer->velocityIn(shared_from_this());
     weightedAverageVelocity = weightedAverageVelocity * 0.2 + panGestureVelocity * 0.8;
 
-    auto newOffset = getBoundsCheckedContentOffset(_initialContentOffset - translation);
-    setContentOffset(newOffset, false);
+    auto offset = contentOffsetBounds();
+    auto rubberBand = RubberBand(0.55f, frame().size, contentOffsetBounds());
+
+    Point clamped = getBoundsCheckedContentOffset(_initialContentOffset - translation);
+    Point target = rubberBand.clamp(_initialContentOffset - translation);
+
+    if (!shouldBounceHorizontally()) {
+        target.x = clamped.x;
+    }
+    if (!shouldBounceVertically()) {
+        target.y = clamped.y;
+    }
+
+    setContentOffset(target, false);
+
+//    auto newOffset = getBoundsCheckedContentOffset(_initialContentOffset - translation);
+//    setContentOffset(newOffset, false);
 }
 
 void UIScrollView::onPanGestureStateChanged() {
@@ -190,23 +308,41 @@ void UIScrollView::hideScrollIndicators() {
 void UIScrollView::startDeceleratingIfNecessary() {
     // Only animate if instantaneous velocity is large enough
     // Otherwise we could animate after scrolling quickly, pausing for a few seconds, then letting go
-//    auto velocity = _panGestureRecognizer->velocityIn(shared_from_this());
+    // TODO: Need to check velocity, it's too weak
     auto velocity = Point(-weightedAverageVelocity.x * 10, -weightedAverageVelocity.y * 10);
-//    velocity = Point(-velocity.x * 0.3f, -velocity.y * 0.3f);
-//    velocity = Point(-velocity.x * 5, -velocity.y * 5);
+    if (!shouldBounceVertically()) {
+        velocity.y = 0;
+    }
+    if (!shouldBounceHorizontally()) {
+        velocity.x = 0;
+    }
 
     auto decelerationRate = _decelerationRate.rawValue();
     auto threshold = 0.5f / layer()->contentsScale;
 
     auto parameters = DecelerationTimingParameters(contentOffset(),velocity, decelerationRate, threshold);
 
+    auto destination = parameters.destination();
+    auto clippedDestination = getBoundsCheckedContentOffset(destination);
+    bool isClipped = destination != clippedDestination;
+
+    float duration;
+    if (isClipped) {
+        duration = parameters.durationTo(clippedDestination);
+    } else {
+        duration = parameters.duration();
+    }
+
     _isDecelerating = true;
-    _timerAnimation = new TimerAnimation(parameters.duration(), [this, parameters](float, double time) {
-        setContentOffset(getBoundsCheckedContentOffset(parameters.valueAt(time)), false);
-    }, [this](bool) {
-        delete _timerAnimation;
-        _timerAnimation = nullptr;
-        _isDecelerating = false;
+    _timerAnimation = std::make_shared<TimerAnimation>(duration, [this, parameters](float, double time) {
+        setContentOffset(parameters.valueAt(time), false);
+    }, [this, parameters, duration, isClipped](bool) {
+        _isDecelerating = isClipped;
+
+        if (isClipped) {
+            auto velocity = parameters.velocityAt(duration);
+            bounceWithVelocity(velocity);
+        }
     });
 //    auto nonBoundsCheckedScrollAnimationDistance = weightedAverageVelocity * dampingFactor; // hand-tuned
 //    auto targetOffset = contentOffset() - nonBoundsCheckedScrollAnimationDistance;// getBoundsCheckedContentOffset(contentOffset() - nonBoundsCheckedScrollAnimationDistance);
@@ -240,6 +376,23 @@ void UIScrollView::startDeceleratingIfNecessary() {
 //                        _isDecelerating = false;
 //                    }
 //    );
+}
+
+
+void UIScrollView::bounceWithVelocity(Point velocity) {
+    auto restOffset = getBoundsCheckedContentOffset(contentOffset());
+    auto displacement = contentOffset() - restOffset;
+    auto threshold = 0.5f / layer()->contentsScale;
+    auto spring = Spring(1, 100, 1);
+
+    auto parameters = SpringTimingParameters(spring, displacement,velocity, threshold);
+
+    auto duration = parameters.duration();
+    _timerAnimation = std::make_shared<TimerAnimation>(duration, [this, duration, restOffset, parameters](auto, float time){
+        setContentOffset(restOffset + parameters.valueAt(time), false);
+    }, [this](bool) {
+        _isDecelerating = false;
+    });
 }
 
 void UIScrollView::cancelDeceleratingIfNeccessary() {

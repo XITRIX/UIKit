@@ -2,13 +2,6 @@ cmake_minimum_required(VERSION 3.24)
 project(UIKit)
 
 add_library(${PROJECT_NAME} STATIC
-        SDLTest/UIScrollView/DecelerationTimingParameters.cpp
-        SDLTest/CADisplayLink/CADisplayLink.cpp
-        SDLTest/CADisplayLink/CADisplayLink.hpp
-        SDLTest/UIScrollView/TimerAnimation.cpp
-        SDLTest/UIScrollView/TimerAnimation.hpp)
-
-target_sources(${PROJECT_NAME} PRIVATE
         SDLTest/Animations/CABasicAnimation/CABasicAnimation.cpp
         SDLTest/Animations/CABasicAnimationPrototype/CABasicAnimationPrototype.cpp
         SDLTest/Animations/CAMediaTimingFunction/CAMediaTimingFunction.cpp
@@ -16,6 +9,7 @@ target_sources(${PROJECT_NAME} PRIVATE
         SDLTest/Animations/CASpringAnimationPrototype/CASpringAnimationPrototype.cpp
         SDLTest/Animations/UIViewAnimationGroup/UIViewAnimationGroup.cpp
         SDLTest/Animations/UIViewAnimationOptions/UIViewAnimationOptions.cpp
+        SDLTest/CADisplayLink/CADisplayLink.cpp
         SDLTest/CALayer/CALayer.cpp
         SDLTest/CATransaction/CATransaction.cpp
         SDLTest/CGImage/CGImage.cpp
@@ -57,6 +51,10 @@ target_sources(${PROJECT_NAME} PRIVATE
         SDLTest/UIPressesEvent/UIPressesEvent.cpp
         SDLTest/UIRenderer/UIRenderer.cpp
         SDLTest/UIResponder/UIResponder.cpp
+        SDLTest/UIScrollView/DecelerationTimingParameters.cpp
+        SDLTest/UIScrollView/RubberBand.cpp
+        SDLTest/UIScrollView/SpringTimingParameters.cpp
+        SDLTest/UIScrollView/TimerAnimation.cpp
         SDLTest/UIScrollView/UIScrollView.cpp
         SDLTest/UITapGestureRecognizer/UITapGestureRecognizer.cpp
         SDLTest/UITouch/UITouch.cpp
