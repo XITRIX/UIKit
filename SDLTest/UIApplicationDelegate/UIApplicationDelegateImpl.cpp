@@ -16,6 +16,7 @@ void UIApplicationDelegate::applicationNeedsXIBRegistration(UIApplication* appli
     REGISTER_NIB(UIControl)
     REGISTER_NIB(UIImageView)
     REGISTER_NIB(UIScrollView)
+    REGISTER_NIB(UIBlurView)
 }
 
 }

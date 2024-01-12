@@ -12,6 +12,7 @@
 #include <UIViewController/UIViewController.hpp>
 #include <UIScrollView/UIScrollView.hpp>
 #include <UIImageView/UIImageView.hpp>
+#include <UIBlurView/UIBlurView.hpp>
 #include <UITouch/UITouch.hpp>
 #include <UILabel/UILabel.hpp>
 #include <UIControl/UIControl.hpp>

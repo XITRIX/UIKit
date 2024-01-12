@@ -49,7 +49,7 @@ public:
     ~CALayer();
 
     virtual void draw(NVGcontext* context);
-    void render(GPU_Target* renderer);
+    virtual void render(GPU_Target* renderer);
 //    void render(GPU_Target* renderer, Point globalOffset);
 
     Rect getFrame();

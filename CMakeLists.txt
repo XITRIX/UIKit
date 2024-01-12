@@ -31,6 +31,7 @@ add_library(${PROJECT_NAME} STATIC
         SDLTest/UIApplication/UIApplication.cpp
         SDLTest/UIApplicationDelegate/UIApplicationDelegateImpl.cpp
         SDLTest/UIApplicationMain/UIApplicationMain.cpp
+        SDLTest/UIBlurView/UIBlurView.cpp
         SDLTest/UIColor/UIColor.cpp
         SDLTest/UIControl/UIControl.cpp
         SDLTest/UIControl/UIControlGestureRecognizer.cpp
@@ -64,6 +65,10 @@ add_library(${PROJECT_NAME} STATIC
         SDLTest/ViewBuilder/ViewBuilder.cpp
         SDLTest/YogaExtensions/YGLayoutImpl.cpp
         SDLTest/YogaExtensions/YogaExtensions.cpp
+        SDLTest/UIBlurView/UIBlurLayer.cpp
+        SDLTest/UIBlurView/UIBlurLayer.hpp
+        SDLTest/UIBlurView/BlurShaderProgram.cpp
+        SDLTest/UIBlurView/BlurShaderProgram.hpp
 )
 
 # Platform Specific

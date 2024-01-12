@@ -30,7 +30,6 @@ public:
     static VertexShader* getCommon();
 private:
     static VertexShader* _common;
-
 };
 
 class FragmentShader: public Shader {
