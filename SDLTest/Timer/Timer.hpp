@@ -23,6 +23,15 @@ struct Timer {
     double getElapsedTimeInSeconds();
 
     double operator-(const Timer& rhs) const;
+
+    friend bool operator== (const Timer& c1, const Timer& c2);
+    friend bool operator!= (const Timer& c1, const Timer& c2);
+
+    friend bool operator< (const Timer& c1, const Timer& c2);
+    friend bool operator> (const Timer& c1, const Timer& c2);
+
+    friend bool operator<= (const Timer& c1, const Timer& c2);
+    friend bool operator>= (const Timer& c1, const Timer& c2);
 };
 
 }

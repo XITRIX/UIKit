@@ -24,11 +24,11 @@ struct Point {
     Point operator-(const Point& first) const;
     Point& operator+=(const Point& rhs);
     Point& operator-=(const Point& rhs);
-    Point operator/(const float& rhs);
-    Point operator*(const float& rhs);
+    Point operator/(const float& rhs) const;
+    Point operator*(const float& rhs) const;
 
     Point applying(NXAffineTransform transform);
-    float magnitude();
+    float magnitude() const;
 
     static Point zero;
 };

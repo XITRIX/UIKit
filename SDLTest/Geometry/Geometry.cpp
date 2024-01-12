@@ -59,14 +59,14 @@ Point& Point::operator-=(const Point& rhs) {
     return *this;
 }
 
-Point Point::operator/(const float& rhs) {
+Point Point::operator/(const float& rhs) const {
     auto res = *this;
     res.x /= rhs;
     res.y /= rhs;
     return res;
 }
 
-Point Point::operator*(const float& rhs) {
+Point Point::operator*(const float& rhs) const {
     auto res = *this;
     res.x *= rhs;
     res.y *= rhs;
@@ -79,7 +79,7 @@ Point Point::applying(NXAffineTransform t) {
 
 }
 
-float Point::magnitude() {
+float Point::magnitude() const {
     return sqrtf(x * x + y * y);
 }
 

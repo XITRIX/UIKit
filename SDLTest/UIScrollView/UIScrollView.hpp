@@ -9,6 +9,9 @@
 
 #include <UIView/UIView.hpp>
 #include <UIPanGestureRecognizer/UIPanGestureRecognizer.hpp>
+#include <UIScrollView/DecelerationTimingParameters.hpp>
+#include <UIScrollView/TimerAnimation.hpp>
+#include <UIScrollView/UIScrollViewDecelerationRate.hpp>
 
 namespace UIKit {
 
@@ -46,11 +49,14 @@ public:
     UIEdgeInsets contentInset() { return _contentInset; }
     void setContentInset(UIEdgeInsets contentInset) { _contentInset = contentInset; }
 
-    bool bounceHorizontally() { return _bounceHorizontally; }
+    bool bounceHorizontally() const { return _bounceHorizontally; }
     void setBounceHorizontally(bool bounceHorizontally);
 
-    bool bounceVertically() { return _bounceVertically; }
+    bool bounceVertically() const { return _bounceVertically; }
     void setBounceVertically(bool bounceVertically);
+
+    UIScrollViewDecelerationRate decelerationRate() const { return _decelerationRate; }
+    void setDecelerationRate(UIScrollViewDecelerationRate decelerationRate) { _decelerationRate = decelerationRate; }
 
     UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior() { return _contentInsetAdjustmentBehavior; }
     void setContentInsetAdjustmentBehavior(UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior);
@@ -62,11 +68,14 @@ private:
     std::shared_ptr<UIPanGestureRecognizer> _panGestureRecognizer;
     bool _isDecelerating = false;
     Point weightedAverageVelocity;
+    Point _initialContentOffset;
+    UIScrollViewDecelerationRate _decelerationRate = UIScrollViewDecelerationRate::normal;
 
     bool _bounceHorizontally = false;
     bool _bounceVertically = false;
     UIScrollViewContentInsetAdjustmentBehavior _contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior::scrollableAxes;
 
+    TimerAnimation* _timerAnimation = nullptr;
     UIEdgeInsets _lastLayoutMargins;
     UIEdgeInsets _contentInset;
 //    Size _contentSize;

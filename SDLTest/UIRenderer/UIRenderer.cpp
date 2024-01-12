@@ -21,7 +21,6 @@ void UIRenderer::refreshScreenResolution(Uint16 width, Uint16 height) {
 
     GPU_SetWindowResolution(width, height);
     GPU_SetVirtualResolution(rawPointer, width, height);
-    _scale = float(rawPointer->base_h) / float(rawPointer->h);
 
     _bounds.size = Size(rawPointer->w, rawPointer->h);
     if (UIApplication::shared && !UIApplication::shared->keyWindow.expired()) {
@@ -60,6 +59,7 @@ UIRenderer::UIRenderer() {
     }
 #endif
     // TODO: Remove int rounding when initial screen resolution will be fixed
+    _scale = float(rawPointer->base_h) / float(rawPointer->h);
     refreshScreenResolution(gScreenRect.w, gScreenRect.h);
 
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);

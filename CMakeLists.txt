@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.24)
 project(UIKit)
 
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME} STATIC
+        SDLTest/UIScrollView/DecelerationTimingParameters.cpp
+        SDLTest/CADisplayLink/CADisplayLink.cpp
+        SDLTest/CADisplayLink/CADisplayLink.hpp
+        SDLTest/UIScrollView/TimerAnimation.cpp
+        SDLTest/UIScrollView/TimerAnimation.hpp)
 
 target_sources(${PROJECT_NAME} PRIVATE
         SDLTest/Animations/CABasicAnimation/CABasicAnimation.cpp

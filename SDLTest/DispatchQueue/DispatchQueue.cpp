@@ -8,6 +8,7 @@
 #include <DispatchQueue/DispatchQueue.hpp>
 #include <Tools/Tools.hpp>
 #include <libretro-common/retro_timers.h>
+#include <CADisplayLink/CADisplayLink.hpp>
 
 namespace UIKit {
 
@@ -43,6 +44,12 @@ void DispatchQueue::async(const std::function<void()>& task) {
 }
 
 void DispatchQueue::performAll() {
+    std::vector<CADisplayLink*> linksCopy = CADisplayLink::activeLinks;
+    for (auto link: linksCopy) {
+        if (link->isRunning)
+            link->func();
+    }
+
     std::queue<std::function<void()>> copy;
     {
         std::lock_guard<std::mutex> guard(_m_async_mutex);
