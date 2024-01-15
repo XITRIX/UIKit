@@ -71,7 +71,7 @@ private:
     UIEdgeInsets _additionalSafeAreaInsets;
     UIEdgeInsets _systemMinimumLayoutMargins = UIEdgeInsets(0, 16, 0, 16);
     bool _viewRespectsSystemMinimumLayoutMargins = true;
-    float _animationTime = 0.3;
+    float _animationTime = 0.5;
 
     std::shared_ptr<UIViewController> _presentedViewController;
     std::weak_ptr<UIViewController> _presentingViewController;

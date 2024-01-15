@@ -51,8 +51,8 @@
                     alignItems="center">
 
                     <UIImageView
-                        width="28"
-                        height="28"
+                        width="30"
+                        height="30"
                         image="@image/Icon.png"/>
 
                     <UILabel

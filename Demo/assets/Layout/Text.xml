@@ -105,6 +105,50 @@
                     marginLeft="16"
                     marginRight="16"
                     textColor="#FFFFFF"/>
+            </UIView>
+
+            <UIView
+                    backgroundColor="#1C1C1E"
+                    cornerRadius="12">
+                <UILabel
+                        id="text1"
+                        text="Test text"
+                        fontSize="17"
+                        marginTop="16"
+                        marginBottom="16"
+                        marginLeft="16"
+                        marginRight="16"
+                        textColor="#FFFFFF"/>
+
+            </UIView>
+
+            <UIView
+                    backgroundColor="#1C1C1E"
+                    cornerRadius="12">
+                <UILabel
+                        id="text2"
+                        text="Test text"
+                        fontSize="17"
+                        marginTop="16"
+                        marginBottom="16"
+                        marginLeft="16"
+                        marginRight="16"
+                        textColor="#FFFFFF"/>
+
+            </UIView>
+
+            <UIView
+                    backgroundColor="#1C1C1E"
+                    cornerRadius="12">
+                <UILabel
+                        id="text3"
+                        text="Test text"
+                        fontSize="17"
+                        marginTop="16"
+                        marginBottom="16"
+                        marginLeft="16"
+                        marginRight="16"
+                        textColor="#FFFFFF"/>
 
             </UIView>
 

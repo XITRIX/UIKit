@@ -19,7 +19,7 @@ public:
     const std::string fontName;
 
     float pointSize;
-    float lineHeight = 1.f; // TODO: Implement
+    float lineHeight = 1.3f; // TODO: Implement
 
     UIFont(const std::string& path, float size);
 

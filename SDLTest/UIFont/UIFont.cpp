@@ -30,7 +30,7 @@ std::shared_ptr<CGImage> UIFont::createContentsFor(const std::shared_ptr<UILabel
 
 std::shared_ptr<UIFont> UIFont::systemFont(float size) {
 //    return new_shared<UIFont>(Utils::resourcePath + "Fonts/switch_font.ttf", size);
-    return new_shared<UIFont>("Fonts/SFProDisplay-Regular.ttf", size);
+    return new_shared<UIFont>("Fonts/SFPro.ttf", size);
 }
 
 }

@@ -432,6 +432,25 @@ void UIView::setNeedsLayout() {
     _needsLayout = true;
 }
 
+
+void UIView::setTintColor(std::optional<UIColor> tintColor) {
+    _tintColor = tintColor;
+    tintColorDidChange();
+}
+
+UIColor UIView::tintColor() const {
+    if (_tintColor.has_value()) return _tintColor.value();
+    if (!superview().expired()) return superview().lock()->tintColor();
+    return UIColor::cyan;
+}
+
+void UIView::tintColorDidChange() {
+    for (const auto& child : subviews()) {
+        if (!child->_tintColor.has_value())
+            child->tintColorDidChange();
+    }
+}
+
 // MARK: - Touch
 Point UIView::convertFromView(Point point, std::shared_ptr<UIView> fromView) {
     if (!fromView) return point;

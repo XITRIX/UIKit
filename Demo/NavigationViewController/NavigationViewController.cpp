@@ -25,10 +25,15 @@ void NavigationViewController::viewDidLoad() {
 }
 
 void NavigationViewController::viewDidLayoutSubviews() {
-    setAdditionalSafeAreaInsets(UIEdgeInsets(navigationBar()->bounds().size.height, 0, tabBar()->bounds().size.height, 0));
+    float extraNavigationTopMargin = 0;
     if (!view()->superview().expired()) {
         auto safeArea = view()->superview().lock()->safeAreaInsets();
-        navigationBar()->yoga->setMarginTop(YGValue { safeArea.top, YGUnitPoint });
+
+        // Replicating iPhone 15 Pro Max behaviour, navigationBar's Y position is less than saveArea's top offset and equals 54
+        extraNavigationTopMargin = fmaxf(safeArea.top - 54, 0);
+
+        navigationBar()->yoga->setMarginTop(YGValue { safeArea.top - extraNavigationTopMargin, YGUnitPoint });
         tabBar()->yoga->setMarginBottom(YGValue { safeArea.bottom, YGUnitPoint });
     }
+    setAdditionalSafeAreaInsets(UIEdgeInsets(navigationBar()->bounds().size.height - extraNavigationTopMargin, 0, tabBar()->bounds().size.height, 0));
 }

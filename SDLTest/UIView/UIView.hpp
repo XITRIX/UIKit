@@ -96,6 +96,10 @@ public:
     void setBackgroundColor(std::optional<UIColor> backbroundColor) { _layer->setBackgroundColor(backbroundColor); }
     std::optional<UIColor> backgroundColor() const { return _layer->backgroundColor(); }
 
+    void setTintColor(std::optional<UIColor> tintColor);
+    UIColor tintColor() const;
+    virtual void tintColorDidChange();
+
     void setMask(std::shared_ptr<UIView> mask);
     std::shared_ptr<UIView> mask() const { return _mask; }
 
@@ -207,6 +211,8 @@ private:
     UIViewContentMode _contentMode;
     std::weak_ptr<UIViewController> _parentController;
     bool _isTransparentTouch = false;
+
+    std::optional<UIColor> _tintColor;
 
     UIEdgeInsets _layoutMargins;
     UIEdgeInsets _calculatedLayoutMargins;
