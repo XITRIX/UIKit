@@ -96,7 +96,7 @@ Size FontRenderer::sizeForText(const std::string& text, float textSize, uint32_t
     float requiredWidth = bounds[2] - bounds[0];
     float requiredHeight = bounds[3] - bounds[1];
 
-    return Size(requiredWidth, requiredHeight);
+    return Size(requiredWidth + 2, requiredHeight);
 
 
 

@@ -90,10 +90,10 @@ void UIRenderer::render(const std::shared_ptr<UIWindow>& window, Timer frameTime
 
     window->sdlDrawAndLayoutTreeIfNeeded();
 
-//    if (!CALayer::layerTreeIsDirty) {
-//        SDL_Delay(1);
-//        return;
-//    }
+    if (!CALayer::layerTreeIsDirty) {
+        SDL_Delay(1);
+        return;
+    }
 
     CALayer::layerTreeIsDirty = false;
 

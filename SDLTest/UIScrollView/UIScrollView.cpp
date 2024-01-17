@@ -241,7 +241,8 @@ void UIScrollView::onPan() {
 //    _panGestureRecognizer->setTranslation(Point(), shared_from_this());
 
     auto panGestureVelocity = _panGestureRecognizer->velocityIn(shared_from_this());
-    weightedAverageVelocity = weightedAverageVelocity * 0.2 + panGestureVelocity * 0.8;
+//    weightedAverageVelocity = weightedAverageVelocity * 0.2 + panGestureVelocity * 0.8;
+    weightedAverageVelocity = panGestureVelocity;
 
     auto offset = contentOffsetBounds();
     auto rubberBand = RubberBand(0.55f, frame().size, contentOffsetBounds());
@@ -310,6 +311,8 @@ void UIScrollView::startDeceleratingIfNecessary() {
     // Otherwise we could animate after scrolling quickly, pausing for a few seconds, then letting go
     // TODO: Need to check velocity, it's too weak
     auto velocity = Point(-weightedAverageVelocity.x * 10, -weightedAverageVelocity.y * 10);
+    if (velocity.magnitude() < 200) return;
+
     if (!shouldBounceVertically()) {
         velocity.y = 0;
     }
